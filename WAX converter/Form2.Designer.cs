@@ -27,8 +27,8 @@ namespace WAX_converter
 
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BuildWindow));
             this.listboxImages = new System.Windows.Forms.ListBox();
             this.ButtonAddImage = new System.Windows.Forms.Button();
@@ -237,21 +237,23 @@ namespace WAX_converter
             // 
             // buttonSaveWIP
             // 
-            this.buttonSaveWIP.Location = new System.Drawing.Point(530, 12);
+            this.buttonSaveWIP.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonSaveWIP.Location = new System.Drawing.Point(514, 12);
             this.buttonSaveWIP.Name = "buttonSaveWIP";
-            this.buttonSaveWIP.Size = new System.Drawing.Size(75, 30);
+            this.buttonSaveWIP.Size = new System.Drawing.Size(91, 30);
             this.buttonSaveWIP.TabIndex = 11;
-            this.buttonSaveWIP.Text = "Save WIP";
+            this.buttonSaveWIP.Text = "SAVE PROJECT";
             this.buttonSaveWIP.UseVisualStyleBackColor = true;
             this.buttonSaveWIP.Click += new System.EventHandler(this.buttonSaveWIP_Click);
             // 
             // buttonLoadWIP
             // 
+            this.buttonLoadWIP.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonLoadWIP.Location = new System.Drawing.Point(611, 12);
             this.buttonLoadWIP.Name = "buttonLoadWIP";
-            this.buttonLoadWIP.Size = new System.Drawing.Size(75, 30);
+            this.buttonLoadWIP.Size = new System.Drawing.Size(92, 30);
             this.buttonLoadWIP.TabIndex = 10;
-            this.buttonLoadWIP.Text = "Load WIP";
+            this.buttonLoadWIP.Text = "LOAD PROJECT";
             this.buttonLoadWIP.UseVisualStyleBackColor = true;
             this.buttonLoadWIP.Click += new System.EventHandler(this.buttonLoadWIP_Click);
             // 
@@ -289,7 +291,7 @@ namespace WAX_converter
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 65);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(388, 716);
+            this.panel2.Size = new System.Drawing.Size(388, 739);
             this.panel2.TabIndex = 7;
             // 
             // btnDoneAddingFrames
@@ -530,7 +532,7 @@ namespace WAX_converter
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(265, 716);
+            this.panel4.Size = new System.Drawing.Size(265, 739);
             this.panel4.TabIndex = 9;
             // 
             // panel5
@@ -548,7 +550,7 @@ namespace WAX_converter
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(0, 327);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(265, 389);
+            this.panel5.Size = new System.Drawing.Size(265, 412);
             this.panel5.TabIndex = 9;
             // 
             // buttonClearFrame
@@ -673,14 +675,14 @@ namespace WAX_converter
             this.dataGridViews.AllowUserToDeleteRows = false;
             this.dataGridViews.AllowUserToResizeColumns = false;
             this.dataGridViews.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViews.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViews.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViews.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViews.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ViewColumn,
@@ -691,14 +693,14 @@ namespace WAX_converter
             this.dataGridViews.MultiSelect = false;
             this.dataGridViews.Name = "dataGridViews";
             this.dataGridViews.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ControlDark;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViews.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.ControlDark;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViews.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridViews.RowHeadersVisible = false;
             this.dataGridViews.RowTemplate.Height = 25;
             this.dataGridViews.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -869,7 +871,7 @@ namespace WAX_converter
             this.panel7.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel7.Location = new System.Drawing.Point(265, 0);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(291, 716);
+            this.panel7.Size = new System.Drawing.Size(291, 739);
             this.panel7.TabIndex = 11;
             // 
             // checkBoxCompress
@@ -928,14 +930,15 @@ namespace WAX_converter
             // 
             // saveWIPDialog
             // 
-            this.saveWIPDialog.DefaultExt = "wwip";
-            this.saveWIPDialog.Filter = "WAX work-in-progress|*.WWIP";
+            this.saveWIPDialog.DefaultExt = "wproj";
+            this.saveWIPDialog.Filter = "WAX project file|*.wproj";
             this.saveWIPDialog.Title = "Save WAX work-in-progress";
             this.saveWIPDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.saveWIPDialog_FileOk);
             // 
             // openWIPDialog
             // 
-            this.openWIPDialog.Filter = "WAX work-in-progress file|*.WWIP";
+            this.openWIPDialog.DefaultExt = "wproj";
+            this.openWIPDialog.Filter = "WAX project file|*.wproj";
             this.openWIPDialog.Title = "Open WAX work-in-progress";
             this.openWIPDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.openWIPDialog_FileOk);
             // 
@@ -946,12 +949,12 @@ namespace WAX_converter
             this.panel8.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel8.Location = new System.Drawing.Point(388, 65);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(556, 716);
+            this.panel8.Size = new System.Drawing.Size(556, 739);
             this.panel8.TabIndex = 0;
             // 
             // BuildWindow
             // 
-            this.ClientSize = new System.Drawing.Size(944, 781);
+            this.ClientSize = new System.Drawing.Size(944, 804);
             this.ControlBox = false;
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel8);
