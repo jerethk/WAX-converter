@@ -61,6 +61,14 @@ namespace WAX_converter
                         }
                         writer.WriteLine(str);
                     }
+
+                    // write blank actions as necessary (always put 14 actions in a project file)
+                    for (int a = Actions.Count; a < 14; a++) 
+                    {
+                        writer.WriteLine("70000 70000 1");
+                        writer.WriteLine("0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0");
+                    }
+
                     writer.WriteLine("");
                 }
             }
@@ -105,7 +113,7 @@ namespace WAX_converter
                     {
                         if (!File.Exists(cellImageDirectory + "/" + i + ".png"))
                         {
-                            MessageBox.Show("Error: Image file(s) not found.");
+                            MessageBox.Show("Error: Image file(s) not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return false;
                         }
                     }
@@ -191,9 +199,9 @@ namespace WAX_converter
                     }
                 }
             }
-            catch (IOException e)
+            catch (Exception e)
             {
-                MessageBox.Show($"IOException {e.Message}");
+                MessageBox.Show($"Exception: {e.Message}");
                 return false;
             }
 
@@ -206,23 +214,32 @@ namespace WAX_converter
                 bool emptyLine = true;
                 string nextRawLine = "";
 
-                while (emptyLine)
+                try
                 {
-                    nextRawLine = reader.ReadLine();
-                    nextRawLine = nextRawLine.Trim();       // trim spaces from start and end
+                    while (emptyLine)
+                    {
+                        nextRawLine = reader.ReadLine();
+                        if (nextRawLine == null) return null;
 
-                    if (nextRawLine == "")      // empty line so skip it
-                    {
-                        emptyLine = true;
+                        nextRawLine = nextRawLine.Trim();       // trim spaces from start and end
+
+                        if (nextRawLine == "")      // empty line so skip it
+                        {
+                            emptyLine = true;
+                        }
+                        else if (nextRawLine[0] == '#')    // comment line so skip it
+                        {
+                            emptyLine = true;
+                        }
+                        else
+                        {
+                            emptyLine = false;
+                        }
                     }
-                    else if (nextRawLine[0] == '#')    // comment line so skip it
-                    {
-                        emptyLine = true;
-                    }
-                    else
-                    {
-                        emptyLine = false;
-                    }
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show($"Exception occurred: {e.Message}");
                 }
 
                 string[] result = nextRawLine.Split();

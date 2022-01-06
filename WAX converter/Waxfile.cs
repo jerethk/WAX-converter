@@ -226,24 +226,38 @@ namespace WAX_converter
 
         public bool exportToPNG(string filename)
         {
+            string dir = Path.GetDirectoryName(filename);
+            string baseFilename = Path.GetFileNameWithoutExtension(filename);
+
+            // Work out logic type
+            int logicType = 0;
+            switch(this.Actions.Count)
+            {
+                case 1:
+                    logicType = 0;  // anim
+                    break;
+                case 2:
+                    logicType = 1;  // scenery
+                    break;
+                case 4:
+                    logicType = 4;  // remote
+                    break;
+                case 13:
+                    logicType = 2;  // enemy
+                    break;
+                case 14:
+                    logicType = 3;  // dark trooper
+                    break;
+            }
+
             try
             {
-                string dir = Path.GetDirectoryName(filename);
-                string baseFilename = Path.GetFileNameWithoutExtension(filename);
+                /* save images in subdirectory */
+                Directory.CreateDirectory(dir + "/" + baseFilename);
 
                 for (int i = 0; i < this.Ncells; i++)
                 {
-                    string leadingZeroes = "";
-                    if (i < 10)
-                    {
-                        leadingZeroes = "00";
-                    }
-                    else if (i >= 10 && i < 100)
-                    {
-                        leadingZeroes = "0";
-                    }
-
-                    string saveName = dir + "/" + baseFilename + leadingZeroes + i + ".PNG";
+                    string saveName = dir + "/" + baseFilename + "/" + i + ".PNG";
                     this.Cells[i].bitmap.Save(saveName, ImageFormat.Png);
                 } 
             }
@@ -253,8 +267,26 @@ namespace WAX_converter
                 return false;
             }
 
+            // Save a project file
+            if (!WaxProject.Save($"{dir}/{baseFilename}.wproj", logicType, this.Actions, this.Sequences, this.Frames, this.Cells.Count))
+            {
+                return false;
+            }
+
             return true;
         }
+
+        /*
+        string leadingZeroes = "";
+        if (i < 10)
+        {
+            leadingZeroes = "00";
+        }
+        else if (i >= 10 && i < 100)
+        {
+            leadingZeroes = "0";
+        }
+        */
 
         public bool save(string filename, bool compress)
         {
