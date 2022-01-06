@@ -483,7 +483,7 @@ namespace WAX_converter
                     SequenceList[selectedSequence].frameIndexes[f] = -1;
                 }
 
-                listboxSeqFrames.DataSource = new int[32];   // for some reason, need to do this to update the listbox!
+                listboxSeqFrames.DataSource = new int[0];   // for some reason, need to do this to update the listbox!
                 listboxSeqFrames.DataSource = SequenceList[listboxSeqs.SelectedIndex].frameIndexes;
                 listboxSeqFrames.SelectedIndex = 0;
             }
@@ -514,7 +514,7 @@ namespace WAX_converter
                     if (SequenceList[selectedSequence].frameIndexes[i] != -1)
                     {
                         SequenceList[selectedSequence].frameIndexes[i] = -1;
-                        listboxSeqFrames.DataSource = new int[32];   // for some reason, need to do this to update the listbox!
+                        listboxSeqFrames.DataSource = new int[0];   // for some reason, need to do this to update the listbox!
                         listboxSeqFrames.DataSource = SequenceList[listboxSeqs.SelectedIndex].frameIndexes;
                         break;
                     }
