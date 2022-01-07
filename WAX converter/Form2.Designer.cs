@@ -485,7 +485,6 @@ namespace WAX_converter
             // 
             // buttonRemoveFrame
             // 
-            this.buttonRemoveFrame.Enabled = false;
             this.buttonRemoveFrame.Location = new System.Drawing.Point(87, 72);
             this.buttonRemoveFrame.Name = "buttonRemoveFrame";
             this.buttonRemoveFrame.Size = new System.Drawing.Size(132, 23);
@@ -496,7 +495,6 @@ namespace WAX_converter
             // 
             // buttonAddFrame
             // 
-            this.buttonAddFrame.Enabled = false;
             this.buttonAddFrame.Location = new System.Drawing.Point(87, 43);
             this.buttonAddFrame.Name = "buttonAddFrame";
             this.buttonAddFrame.Size = new System.Drawing.Size(132, 23);
@@ -627,7 +625,6 @@ namespace WAX_converter
             // 
             // buttonRemoveSequence
             // 
-            this.buttonRemoveSequence.Enabled = false;
             this.buttonRemoveSequence.Location = new System.Drawing.Point(87, 71);
             this.buttonRemoveSequence.Name = "buttonRemoveSequence";
             this.buttonRemoveSequence.Size = new System.Drawing.Size(132, 23);
@@ -638,7 +635,6 @@ namespace WAX_converter
             // 
             // buttonAddSequence
             // 
-            this.buttonAddSequence.Enabled = false;
             this.buttonAddSequence.Location = new System.Drawing.Point(87, 42);
             this.buttonAddSequence.Name = "buttonAddSequence";
             this.buttonAddSequence.Size = new System.Drawing.Size(132, 23);

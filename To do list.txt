@@ -7,7 +7,6 @@ Done
 - fix exceptions (event handlers)
 - progress meter
 - load FME
-
-To do
 - generate WWIP from wax (when export)
+
 

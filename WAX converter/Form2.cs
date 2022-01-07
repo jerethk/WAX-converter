@@ -155,7 +155,6 @@ namespace WAX_converter
                 listboxImages.SelectedIndex = listboxImages.Items.Count - 1;
                 labelNCells.Text = "n = " + ImageList.Count;
                 buttonAddFrame.Enabled = true;
-                if (SequenceList.Count == 0) buttonRemoveFrame.Enabled = true;
             }
             catch (Exception)
             {
@@ -166,28 +165,56 @@ namespace WAX_converter
 
         private void ButtonRemoveImage_Click(object sender, EventArgs e)
         {
-            if (ImageList.Count > 0)
+            int index = listboxImages.SelectedIndex;
+            
+            if (ImageList.Count > 0 && index >= 0)
             {
-                int index = listboxImages.SelectedIndex;
-
-                if (index > 0)
+                // Check if cell is already used with any frames
+                bool isUsed = false;
+                foreach (Frame f in FrameList)
                 {
-                    listboxImages.SelectedIndex -= 1;       // move the selection up 1 unless at position 0
+                    if (f.CellIndex == index)
+                    {
+                        isUsed = true;
+                        break;
+                    }
                 }
 
-                ImageList.RemoveAt(index);
-                listboxImages.Items.RemoveAt(listboxImages.Items.Count - 1);
-                labelNCells.Text = "n = " + ImageList.Count;
+                if (isUsed)
+                {
+                    MessageBox.Show("The selected cell has been assigned to a frame.", "Cannot remove", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                else
+                {
+                    // Prompt for confirmation first
+                    var answer = MessageBox.Show("Are you sure you want to delete this cell?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (answer == DialogResult.Yes)
+                    {
+                        if (index > 0)
+                        {
+                            listboxImages.SelectedIndex -= 1;       // move the selection up 1 unless at position 0
+                        }
 
-            }
+                        ImageList.RemoveAt(index);
+                        listboxImages.Items.RemoveAt(listboxImages.Items.Count - 1);
+                        labelNCells.Text = "n = " + ImageList.Count;
 
-            if (ImageList.Count == 0)
-            {
-                displayBox2.Image = null;
-            }
-            else
-            {
-                displayBox2.Image = ImageList[listboxImages.SelectedIndex];
+                        // Re-index frames
+                        foreach (Frame f in FrameList)
+                        {
+                            if (f.CellIndex > index) f.CellIndex -= 1;
+                        }
+
+                        if (ImageList.Count == 0)
+                        {
+                            displayBox2.Image = null;
+                        }
+                        else
+                        {
+                            displayBox2.Image = ImageList[listboxImages.SelectedIndex];
+                        }
+                    }
+                }
             }
         }
 
@@ -283,15 +310,15 @@ namespace WAX_converter
                 labelNFrames.Text = "n = " + FrameList.Count;
             }
 
-            // once Frames have been added, disable ability to move & remove cells
+            // once Frames have been added, disable ability to move cells
             if (FrameList.Count == 0)
             {
                 ButtonMoveUp.Enabled = true;
                 ButtonMoveDown.Enabled = true;
-                ButtonRemoveImage.Enabled = true;
             }
 
             ButtonAddImage.Enabled = true;
+            ButtonRemoveImage.Enabled = true;
             panel1.Enabled = true;
             panel3.Enabled = true;
             panel5.Enabled = true;
@@ -307,24 +334,60 @@ namespace WAX_converter
 
             if (FrameList.Count > 0 && index >= 0)
             {
-                if (index > 0)
+                // Check if selected frame is used in any sequences
+                bool isUsed = false;
+                foreach (Sequence s in SequenceList)
                 {
-                    listboxFrames.SelectedIndex -= 1;       // move the selection up 1 unless at position 0
+                    for (int f = 0; f < 32; f++)
+                    {
+                        if (s.frameIndexes[f] == index)
+                        {
+                            isUsed = true;
+                            break;
+                        }
+
+                        if (isUsed) break;
+                    }
                 }
 
-                FrameList.RemoveAt(index);
-                listboxFrames.Items.RemoveAt(listboxFrames.Items.Count - 1);
-                labelNFrames.Text = "n = " + FrameList.Count;
-            }
+                if (isUsed)
+                {
+                    MessageBox.Show("The selected frame is used in a Sequence.", "Cannot remove", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                else
+                {
+                    // Prompt for confirmation 
+                    var answer = MessageBox.Show("Are you sure you want to delete this frame?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (answer == DialogResult.Yes)
+                    {
+                        if (index > 0)
+                        {
+                            listboxFrames.SelectedIndex -= 1;       // move the selection up 1 unless at position 0
+                        }
 
-            if (FrameList.Count == 0)
-            {
-                ButtonMoveUp.Enabled = true;
-                ButtonMoveDown.Enabled = true;
-                ButtonRemoveImage.Enabled = true;
-                InsertX.Enabled = false;
-                InsertY.Enabled = false;
-                checkBoxFlip.Enabled = false;
+                        FrameList.RemoveAt(index);
+                        listboxFrames.Items.RemoveAt(listboxFrames.Items.Count - 1);
+                        labelNFrames.Text = "n = " + FrameList.Count;
+
+                        // Re-index frame references in sequences
+                        foreach (Sequence s in SequenceList)
+                        {
+                            for (int f = 0; f < 32; f++)
+                            {
+                                if (s.frameIndexes[f] > index) s.frameIndexes[f] -= 1;
+                            }
+                        }
+
+                        if (FrameList.Count == 0)
+                        {
+                            ButtonMoveUp.Enabled = true;
+                            ButtonMoveDown.Enabled = true;
+                            InsertX.Enabled = false;
+                            InsertY.Enabled = false;
+                            checkBoxFlip.Enabled = false;
+                        }
+                    }
+                }
             }
         }
 
@@ -375,7 +438,6 @@ namespace WAX_converter
                 listboxSeqFrames.Enabled = true;
                 buttonSetFrame.Enabled = true;
                 buttonClearFrame.Enabled = true;
-                buttonRemoveFrame.Enabled = false;
                 labelNSeqs.Text = "n = " + SequenceList.Count;
 
                 dataGridViews.Enabled = true;
@@ -392,36 +454,59 @@ namespace WAX_converter
 
             if (SequenceList.Count > 1 && index >= 0)
             {
-                DialogResult answer = MessageBox.Show("The entire selected sequence will be deleted. Are you sure?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                if (answer == DialogResult.Yes)
+                // Check if used
+                bool isUsed = false;
+                foreach (Action a in ActionList)
                 {
-                    if (index > 0)
+                    for (int v = 0; v < 32; v++)
                     {
-                        listboxSeqs.SelectedIndex -= 1;       // move the selection up 1 unless at position 0
-                    }
-
-                    SequenceList.RemoveAt(index);
-                    listboxSeqs.Items.RemoveAt(listboxSeqs.Items.Count - 1);
-
-                    labelNSeqs.Text = "n = " + SequenceList.Count;
-
-                    // Go through all the actions and re-index every sequence after the removed sequence, then update the datagrid
-                    for (int a = 0; a < 14; a++)
-                    {
-                        for (int v = 0; v < 32; v++)
+                        if (a.seqIndexes[v] == index)
                         {
-                            int value = ActionList[a].seqIndexes[v];
-                            if (value > index || value >= SequenceList.Count)
+                            isUsed = true;
+                            break;
+                        }
+
+                        if (isUsed) break;
+                    }
+                }
+
+                if (isUsed)
+                {
+                    MessageBox.Show("The selected sequence has been assigned to an action.", "Cannot remove", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                else
+                {
+                    // Confirm
+                    var answer = MessageBox.Show("The entire selected sequence will be deleted. Are you sure?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    
+                    if (answer == DialogResult.Yes)
+                    {
+                        if (index > 0)
+                        {
+                            listboxSeqs.SelectedIndex -= 1;       // move the selection up 1 unless at position 0
+                        }
+
+                        SequenceList.RemoveAt(index);
+                        listboxSeqs.Items.RemoveAt(listboxSeqs.Items.Count - 1);
+                        labelNSeqs.Text = "n = " + SequenceList.Count;
+
+                        // Go through the actions and re-index every sequence after the removed sequence, then update the datagrid
+                        foreach (Action a in ActionList)
+                        {
+                            for (int v = 0; v < 32; v++)
                             {
-                                ActionList[a].seqIndexes[v] -= 1;
+                                int value = a.seqIndexes[v];
+                                if (value > index || value >= SequenceList.Count)
+                                {
+                                    a.seqIndexes[v] -= 1;
+                                }
                             }
                         }
-                    }
 
-                    for (int i = 0; i < 32; i++)
-                    {
-                        dataGridViews.Rows[i].Cells[1].Value = ActionList[comboBoxAction.SelectedIndex].seqIndexes[i];
+                        for (int i = 0; i < 32; i++)
+                        {
+                            dataGridViews.Rows[i].Cells[1].Value = ActionList[comboBoxAction.SelectedIndex].seqIndexes[i];
+                        }
                     }
                 }
             }
@@ -483,8 +568,7 @@ namespace WAX_converter
                     SequenceList[selectedSequence].frameIndexes[f] = -1;
                 }
 
-                listboxSeqFrames.DataSource = new int[0];   // for some reason, need to do this to update the listbox!
-                listboxSeqFrames.DataSource = SequenceList[listboxSeqs.SelectedIndex].frameIndexes;
+                listboxSeqFrames.DataSource = new BindingSource(SequenceList[listboxSeqs.SelectedIndex].frameIndexes, "");
                 listboxSeqFrames.SelectedIndex = 0;
             }
 
@@ -492,7 +576,7 @@ namespace WAX_converter
             listboxFrames.SelectionMode = SelectionMode.One;
 
             buttonAddFrame.Enabled = true;
-            buttonRemoveFrame.Enabled = false;
+            buttonRemoveFrame.Enabled = true;
             InsertX.Enabled = true;
             InsertY.Enabled = true;
             checkBoxFlip.Enabled = true;
@@ -514,8 +598,7 @@ namespace WAX_converter
                     if (SequenceList[selectedSequence].frameIndexes[i] != -1)
                     {
                         SequenceList[selectedSequence].frameIndexes[i] = -1;
-                        listboxSeqFrames.DataSource = new int[0];   // for some reason, need to do this to update the listbox!
-                        listboxSeqFrames.DataSource = SequenceList[listboxSeqs.SelectedIndex].frameIndexes;
+                        listboxSeqFrames.DataSource = new BindingSource(SequenceList[listboxSeqs.SelectedIndex].frameIndexes, "");
                         break;
                     }
                 }
@@ -793,7 +876,7 @@ namespace WAX_converter
                     listboxImages.Items.Add("Cell " + i);
                 }
                 ButtonAddImage.Enabled = true;
-                ButtonRemoveImage.Enabled = false;
+                ButtonRemoveImage.Enabled = true;
                 ButtonMoveUp.Enabled = false;
                 ButtonMoveDown.Enabled = false;
 
@@ -807,7 +890,7 @@ namespace WAX_converter
                     listboxFrames.SelectedIndex = 0;
                 }
                 buttonAddFrame.Enabled = true;
-                buttonRemoveFrame.Enabled = false;
+                buttonRemoveFrame.Enabled = true;
                 InsertX.Enabled = true;
                 InsertY.Enabled = true;
                 checkBoxFlip.Enabled = true;
