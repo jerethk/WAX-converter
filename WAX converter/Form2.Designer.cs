@@ -69,7 +69,7 @@ namespace WAX_converter
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.buttonClearFrame = new System.Windows.Forms.Button();
-            this.buttonSetFrame = new System.Windows.Forms.Button();
+            this.buttonSetFrames = new System.Windows.Forms.Button();
             this.listboxSeqFrames = new System.Windows.Forms.ListBox();
             this.labelNSeqs = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -537,7 +537,7 @@ namespace WAX_converter
             // 
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel5.Controls.Add(this.buttonClearFrame);
-            this.panel5.Controls.Add(this.buttonSetFrame);
+            this.panel5.Controls.Add(this.buttonSetFrames);
             this.panel5.Controls.Add(this.listboxSeqFrames);
             this.panel5.Controls.Add(this.labelNSeqs);
             this.panel5.Controls.Add(this.label6);
@@ -554,34 +554,34 @@ namespace WAX_converter
             // buttonClearFrame
             // 
             this.buttonClearFrame.Enabled = false;
-            this.buttonClearFrame.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonClearFrame.Location = new System.Drawing.Point(87, 304);
+            this.buttonClearFrame.Font = new System.Drawing.Font("Segoe UI", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonClearFrame.Location = new System.Drawing.Point(113, 341);
             this.buttonClearFrame.Name = "buttonClearFrame";
             this.buttonClearFrame.Size = new System.Drawing.Size(132, 27);
             this.buttonClearFrame.TabIndex = 19;
-            this.buttonClearFrame.Text = "Clear Last Frame";
+            this.buttonClearFrame.Text = "Clear Last Frame (defunct)";
             this.buttonClearFrame.UseVisualStyleBackColor = true;
+            this.buttonClearFrame.Visible = false;
             this.buttonClearFrame.Click += new System.EventHandler(this.buttonClearFrame_Click);
             // 
-            // buttonSetFrame
+            // buttonSetFrames
             // 
-            this.buttonSetFrame.Enabled = false;
-            this.buttonSetFrame.Location = new System.Drawing.Point(87, 271);
-            this.buttonSetFrame.Name = "buttonSetFrame";
-            this.buttonSetFrame.Size = new System.Drawing.Size(132, 27);
-            this.buttonSetFrame.TabIndex = 18;
-            this.buttonSetFrame.Text = "CHOOSE FRAMES";
-            this.buttonSetFrame.UseVisualStyleBackColor = true;
-            this.buttonSetFrame.Click += new System.EventHandler(this.buttonSetFrame_Click);
+            this.buttonSetFrames.Location = new System.Drawing.Point(87, 71);
+            this.buttonSetFrames.Name = "buttonSetFrames";
+            this.buttonSetFrames.Size = new System.Drawing.Size(132, 27);
+            this.buttonSetFrames.TabIndex = 18;
+            this.buttonSetFrames.Text = "Edit Sequence";
+            this.buttonSetFrames.UseVisualStyleBackColor = true;
+            this.buttonSetFrames.Click += new System.EventHandler(this.buttonSetFrame_Click);
             // 
             // listboxSeqFrames
             // 
             this.listboxSeqFrames.Enabled = false;
             this.listboxSeqFrames.FormattingEnabled = true;
             this.listboxSeqFrames.ItemHeight = 15;
-            this.listboxSeqFrames.Location = new System.Drawing.Point(87, 130);
+            this.listboxSeqFrames.Location = new System.Drawing.Point(87, 177);
             this.listboxSeqFrames.Name = "listboxSeqFrames";
-            this.listboxSeqFrames.Size = new System.Drawing.Size(132, 124);
+            this.listboxSeqFrames.Size = new System.Drawing.Size(132, 154);
             this.listboxSeqFrames.TabIndex = 17;
             this.listboxSeqFrames.SelectedIndexChanged += new System.EventHandler(this.listboxSeqFrames_SelectedIndexChanged);
             // 
@@ -597,7 +597,7 @@ namespace WAX_converter
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(87, 112);
+            this.label6.Location = new System.Drawing.Point(87, 159);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(94, 15);
             this.label6.TabIndex = 16;
@@ -625,7 +625,7 @@ namespace WAX_converter
             // 
             // buttonRemoveSequence
             // 
-            this.buttonRemoveSequence.Location = new System.Drawing.Point(87, 71);
+            this.buttonRemoveSequence.Location = new System.Drawing.Point(87, 104);
             this.buttonRemoveSequence.Name = "buttonRemoveSequence";
             this.buttonRemoveSequence.Size = new System.Drawing.Size(132, 23);
             this.buttonRemoveSequence.TabIndex = 14;
@@ -1024,7 +1024,7 @@ namespace WAX_converter
         private System.Windows.Forms.Label labelNSeqs;
         private System.Windows.Forms.ListBox listboxSeqFrames;
         private System.Windows.Forms.Button buttonClearFrame;
-        private System.Windows.Forms.Button buttonSetFrame;
+        private System.Windows.Forms.Button buttonSetFrames;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox comboBoxLogic;

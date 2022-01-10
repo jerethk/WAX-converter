@@ -436,7 +436,7 @@ namespace WAX_converter
                 listboxSeqs.SelectedIndex = listboxSeqs.Items.Count - 1;
 
                 listboxSeqFrames.Enabled = true;
-                buttonSetFrame.Enabled = true;
+                buttonSetFrames.Enabled = true;
                 buttonClearFrame.Enabled = true;
                 labelNSeqs.Text = "n = " + SequenceList.Count;
 
@@ -528,6 +528,17 @@ namespace WAX_converter
 
         private void buttonSetFrame_Click(object sender, EventArgs e)
         {
+            int sequenceNumber = listboxSeqs.SelectedIndex;
+
+            if (sequenceNumber >= 0 && FrameList.Count > 0)
+            {
+                SequenceBuilderWindow SeqWindow = new SequenceBuilderWindow(this.ImageList, this.FrameList, this.SequenceList[sequenceNumber]);
+                SeqWindow.Text = $"Editing Sequence {sequenceNumber}";
+                SeqWindow.ShowDialog();
+                listboxSeqFrames.DataSource = new BindingSource(SequenceList[listboxSeqs.SelectedIndex].frameIndexes, "");
+            }
+
+            /*
             if (listboxSeqs.SelectedIndex >= 0)
             {
                 MessageBox.Show("Select the frames to assign to this sequence, then press DONE. Multiselect using CTRL and SHIFT keys. To cancel, press DONE with no frames selected.");
@@ -544,11 +555,13 @@ namespace WAX_converter
                 panel5.Enabled = false;
                 panel6.Enabled = false;
                 panel7.Enabled = false;
-            }
+            } */
         }
 
         private void btnDoneSettingFrames_Click(object sender, EventArgs e)
         {
+            // NO LONGER USED
+
             int nFrames = listboxFrames.SelectedItems.Count;
             
             if (nFrames > 0)
@@ -589,6 +602,8 @@ namespace WAX_converter
 
         private void buttonClearFrame_Click(object sender, EventArgs e)
         {
+            // NO LONGER USED
+
             int selectedSequence = listboxSeqs.SelectedIndex;
 
             if (selectedSequence >= 0)
