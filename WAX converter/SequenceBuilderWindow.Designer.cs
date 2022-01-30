@@ -39,6 +39,7 @@ namespace WAX_converter
             this.btnDone = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnClearSeq = new System.Windows.Forms.Button();
+            this.checkBoxZoom = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.displayBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -110,9 +111,9 @@ namespace WAX_converter
             // 
             this.displayBox.BackColor = System.Drawing.Color.Black;
             this.displayBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.displayBox.Location = new System.Drawing.Point(345, 36);
+            this.displayBox.Location = new System.Drawing.Point(343, 61);
             this.displayBox.Name = "displayBox";
-            this.displayBox.Size = new System.Drawing.Size(416, 437);
+            this.displayBox.Size = new System.Drawing.Size(416, 415);
             this.displayBox.TabIndex = 6;
             this.displayBox.TabStop = false;
             // 
@@ -148,11 +149,23 @@ namespace WAX_converter
             this.btnClearSeq.UseVisualStyleBackColor = true;
             this.btnClearSeq.Click += new System.EventHandler(this.btnClearSeq_Click);
             // 
+            // checkBoxZoom
+            // 
+            this.checkBoxZoom.AutoSize = true;
+            this.checkBoxZoom.Location = new System.Drawing.Point(343, 36);
+            this.checkBoxZoom.Name = "checkBoxZoom";
+            this.checkBoxZoom.Size = new System.Drawing.Size(58, 19);
+            this.checkBoxZoom.TabIndex = 10;
+            this.checkBoxZoom.Text = "Zoom";
+            this.checkBoxZoom.UseVisualStyleBackColor = true;
+            this.checkBoxZoom.CheckedChanged += new System.EventHandler(this.checkBoxZoom_CheckedChanged);
+            // 
             // SequenceBuilderWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.checkBoxZoom);
             this.Controls.Add(this.btnClearSeq);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnDone);
@@ -185,5 +198,6 @@ namespace WAX_converter
         private System.Windows.Forms.Button btnDone;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnClearSeq;
+        private System.Windows.Forms.CheckBox checkBoxZoom;
     }
 }

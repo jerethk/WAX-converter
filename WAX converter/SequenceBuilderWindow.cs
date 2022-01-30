@@ -54,6 +54,18 @@ namespace WAX_converter
             this.Close();
         }
 
+        private void checkBoxZoom_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxZoom.Checked)
+            {
+                displayBox.SizeMode = PictureBoxSizeMode.Zoom;
+            }
+            else
+            {
+                displayBox.SizeMode = PictureBoxSizeMode.Normal;
+            }
+        }
+
         // ListBox controls ----------------------------------------------------------------------------
 
         private void listBoxSeqFrames_Enter(object sender, EventArgs e)
@@ -171,5 +183,6 @@ namespace WAX_converter
                 listBoxSeqFrames.DataSource = new BindingSource(Sequence.frameIndexes, "");
             }
         }
+
     }
 }
