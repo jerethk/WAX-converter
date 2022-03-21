@@ -23,41 +23,42 @@ namespace WAX_converter
         private DFPal palette;
         private int SeqFrame = 0;       // the sequence frame currently being viewed
 
-        private void menuFile_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        // MENU 
+        private void MenuLoadPal_Click(object sender, EventArgs e)
         {
-            if (e.ClickedItem == MenuOpenWax)
-            {
-                openWaxDialog.ShowDialog();
-            }
-            else if (e.ClickedItem == MenuCloseWax)
-            {
-                closeWax();
-            }
-            else if (e.ClickedItem == MenuLoadPal)
-            {
-                openPalDialog.ShowDialog();
-            }
-            else if (e.ClickedItem == MenuSaveBMP)
-            {
-                exportDialog.ShowDialog();
-            }
-            else if (e.ClickedItem == MenuOpenFme)
-            {
-                openFmeDialog.ShowDialog();
-            }
-            else if (e.ClickedItem == MenuQuit)
-            {
-                Application.Exit();
-            }
+            openPalDialog.ShowDialog();
         }
 
-        private void menuBuildWax_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        private void MenuCloseWax_Click(object sender, EventArgs e)
         {
-            if (e.ClickedItem == MenuBuild)
-            {
-                BuildWindow buildWindow = new BuildWindow();
-                buildWindow.Show();
-            }
+            closeWax();
+        }
+
+        private void MenuOpenWax_Click(object sender, EventArgs e)
+        {
+            openWaxDialog.ShowDialog();
+        }
+
+        private void MenuOpenFme_Click(object sender, EventArgs e)
+        {
+            openFmeDialog.ShowDialog();
+        }
+
+        private void MenuQuit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void MenuSaveBMP_Click(object sender, EventArgs e)
+        {
+            exportDialog.ShowDialog();
+        }
+
+        private void MenuBuild_Click(object sender, EventArgs e)
+        {
+            BuildWindow buildWindow = new BuildWindow();
+            buildWindow.Show();
+
         }
 
         private void menuHelp_ItemClicked(object sender, ToolStripItemClickedEventArgs e)

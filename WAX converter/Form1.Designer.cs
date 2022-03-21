@@ -249,13 +249,13 @@ namespace WAX_converter
             this.MenuFile.Name = "MenuFile";
             this.MenuFile.Size = new System.Drawing.Size(37, 20);
             this.MenuFile.Text = "File";
-            this.MenuFile.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuFile_ItemClicked);
             // 
             // MenuLoadPal
             // 
             this.MenuLoadPal.Name = "MenuLoadPal";
             this.MenuLoadPal.Size = new System.Drawing.Size(149, 22);
             this.MenuLoadPal.Text = "Load PAL";
+            this.MenuLoadPal.Click += new System.EventHandler(this.MenuLoadPal_Click);
             // 
             // toolStripSeparator1
             // 
@@ -267,6 +267,7 @@ namespace WAX_converter
             this.MenuOpenWax.Name = "MenuOpenWax";
             this.MenuOpenWax.Size = new System.Drawing.Size(149, 22);
             this.MenuOpenWax.Text = "Open WAX";
+            this.MenuOpenWax.Click += new System.EventHandler(this.MenuOpenWax_Click);
             // 
             // MenuCloseWax
             // 
@@ -274,6 +275,7 @@ namespace WAX_converter
             this.MenuCloseWax.Name = "MenuCloseWax";
             this.MenuCloseWax.Size = new System.Drawing.Size(149, 22);
             this.MenuCloseWax.Text = "Close WAX";
+            this.MenuCloseWax.Click += new System.EventHandler(this.MenuCloseWax_Click);
             // 
             // MenuSaveBMP
             // 
@@ -281,6 +283,7 @@ namespace WAX_converter
             this.MenuSaveBMP.Name = "MenuSaveBMP";
             this.MenuSaveBMP.Size = new System.Drawing.Size(149, 22);
             this.MenuSaveBMP.Text = "Export to PNG";
+            this.MenuSaveBMP.Click += new System.EventHandler(this.MenuSaveBMP_Click);
             // 
             // toolStripSeparator6
             // 
@@ -292,6 +295,7 @@ namespace WAX_converter
             this.MenuOpenFme.Name = "MenuOpenFme";
             this.MenuOpenFme.Size = new System.Drawing.Size(149, 22);
             this.MenuOpenFme.Text = "Open FME";
+            this.MenuOpenFme.Click += new System.EventHandler(this.MenuOpenFme_Click);
             // 
             // toolStripSeparator2
             // 
@@ -303,6 +307,7 @@ namespace WAX_converter
             this.MenuQuit.Name = "MenuQuit";
             this.MenuQuit.Size = new System.Drawing.Size(149, 22);
             this.MenuQuit.Text = "Quit";
+            this.MenuQuit.Click += new System.EventHandler(this.MenuQuit_Click);
             // 
             // MenuBuildWax
             // 
@@ -311,13 +316,13 @@ namespace WAX_converter
             this.MenuBuildWax.Name = "MenuBuildWax";
             this.MenuBuildWax.Size = new System.Drawing.Size(75, 20);
             this.MenuBuildWax.Text = "Build WAX";
-            this.MenuBuildWax.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuBuildWax_ItemClicked);
             // 
             // MenuBuild
             // 
             this.MenuBuild.Name = "MenuBuild";
             this.MenuBuild.Size = new System.Drawing.Size(101, 22);
             this.MenuBuild.Text = "Build";
+            this.MenuBuild.Click += new System.EventHandler(this.MenuBuild_Click);
             // 
             // MenuHelp
             // 
