@@ -58,7 +58,6 @@ namespace WAX_converter
         {
             BuildWindow buildWindow = new BuildWindow();
             buildWindow.Show();
-
         }
 
         private void menuHelp_ItemClicked(object sender, ToolStripItemClickedEventArgs e)

@@ -39,14 +39,12 @@ namespace WAX_converter
 
         // -------------------------------------------------------------------
 
-        private void BuildWindow_Shown(object sender, EventArgs e)
+        private void BuildWindow_Load(object sender, EventArgs e)
         {
             for (int i = 0; i < 14; i++)    // create 14 actions, which is the maximum needed
             {
                 ActionList.Add(new Action());
             }
-
-            comboBoxLogic.SelectedIndex = 0;
 
             dataGridViews.Rows.Add(32);
             for (int i = 0; i < 32; i++)
@@ -54,8 +52,10 @@ namespace WAX_converter
                 dataGridViews.Rows[i].Cells[0].Value = i;
                 dataGridViews.Rows[i].Cells[1].Value = 0;
             }
+
+            comboBoxLogic.SelectedIndex = 0;
         }
-        
+
         private void ButtonExit_Click(object sender, EventArgs e)
         {
             DialogResult choice = MessageBox.Show("Are you sure you want to leave? Your work will be lost!", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
