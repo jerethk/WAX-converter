@@ -13,10 +13,16 @@ namespace WAX_converter
 {
     public partial class MainWindow : Form
     {
-        public MainWindow()
+        public MainWindow(string[] args)
         {
             InitializeComponent();
             palette = new DFPal();
+
+            if (args.Length > 0)
+            {
+                // Attempt to load WAX from command line argument
+                LoadWAX(args[0]);
+            }
         }
 
         private Waxfile wax;
@@ -91,11 +97,16 @@ namespace WAX_converter
 
         private void openWaxDialog_FileOk(object sender, CancelEventArgs e)
         {
+            LoadWAX(openWaxDialog.FileName);
+        }
+
+        private void LoadWAX(string path)
+        {
             Waxfile tryOpenWax = new Waxfile();
-            if (tryOpenWax.LoadFromFile(openWaxDialog.FileName, palette))
+            if (tryOpenWax.LoadFromFile(path, palette))
             {
                 this.wax = tryOpenWax;
-                exportDialog.FileName = Path.GetFileNameWithoutExtension(openWaxDialog.FileName);
+                exportDialog.FileName = Path.GetFileNameWithoutExtension(path);
 
                 // remove event handlers (to prevent exceptions when resetting values)
                 this.ActionNumber.ValueChanged -= this.ActionNumber_ValueChanged;
@@ -103,7 +114,7 @@ namespace WAX_converter
                 this.SeqNumber.ValueChanged -= this.SeqNumber_ValueChanged;
                 this.FrameNumber.ValueChanged -= this.FrameNumber_ValueChanged_1;
 
-                labelWax.Text = Path.GetFileName(openWaxDialog.FileName);
+                labelWax.Text = Path.GetFileName(path);
                 RadioGroup.Enabled = true;
                 panel1.Enabled = true;
                 SeqFrame = 0;
@@ -145,7 +156,7 @@ namespace WAX_converter
             }
             else
             {
-                MessageBox.Show("Error loading WAX file.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error loading WAX file {path}.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
