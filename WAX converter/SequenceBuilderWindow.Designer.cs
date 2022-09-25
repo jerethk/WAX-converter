@@ -29,6 +29,7 @@ namespace WAX_converter
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SequenceBuilderWindow));
             this.label1 = new System.Windows.Forms.Label();
             this.listBoxFrames = new System.Windows.Forms.ListBox();
             this.listBoxSeqFrames = new System.Windows.Forms.ListBox();
@@ -164,7 +165,8 @@ namespace WAX_converter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 561);
+            this.ClientSize = new System.Drawing.Size(784, 584);
+            this.ControlBox = false;
             this.Controls.Add(this.checkBoxZoom);
             this.Controls.Add(this.btnClearSeq);
             this.Controls.Add(this.btnCancel);
@@ -176,6 +178,7 @@ namespace WAX_converter
             this.Controls.Add(this.label2);
             this.Controls.Add(this.listBoxFrames);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "SequenceBuilderWindow";
             this.Text = "SequenceBuilderWindow";

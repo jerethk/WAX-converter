@@ -92,6 +92,7 @@ namespace WAX_converter
             this.numGreen.Name = "numGreen";
             this.numGreen.Size = new System.Drawing.Size(65, 23);
             this.numGreen.TabIndex = 4;
+            // 
             // numBlue
             // 
             this.numBlue.Location = new System.Drawing.Point(252, 16);
@@ -103,7 +104,6 @@ namespace WAX_converter
             this.numBlue.Name = "numBlue";
             this.numBlue.Size = new System.Drawing.Size(65, 23);
             this.numBlue.TabIndex = 6;
-            
             // 
             // label3
             // 
