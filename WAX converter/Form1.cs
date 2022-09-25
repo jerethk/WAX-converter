@@ -20,8 +20,20 @@ namespace WAX_converter
 
             if (args.Length > 0)
             {
-                // Attempt to load WAX from command line argument
-                LoadWAX(args[0]);
+                // Attempt to load WAX or FME from command line argument
+                string fileName = args[0];
+                string extension = Path.GetExtension(fileName).ToUpper();
+
+                switch (extension)
+                {
+                    case ".WAX":
+                        LoadWAX(fileName);
+                        break;
+
+                    case ".FME":
+                        LoadFME(fileName);
+                        break;
+                }
             }
         }
 
@@ -418,15 +430,21 @@ namespace WAX_converter
             }
         }
 
+        // -----------------------------------------------------------------------------------------------
         private void openFmeDialog_FileOk(object sender, CancelEventArgs e)
+        {
+            LoadFME(openFmeDialog.FileName);
+        }
+
+        private void LoadFME(string path)
         {
             // Load a FME file as a Waxfile object
             Waxfile tryOpenFme = new Waxfile();
 
-            if (tryOpenFme.LoadFromFME(openFmeDialog.FileName, palette))
+            if (tryOpenFme.LoadFromFME(path, palette))
             {
                 this.wax = tryOpenFme;
-                exportDialog.FileName = Path.GetFileNameWithoutExtension(openFmeDialog.FileName);
+                exportDialog.FileName = Path.GetFileNameWithoutExtension(path);
 
                 // remove event handlers (to prevent exceptions when resetting values)
                 this.ActionNumber.ValueChanged -= this.ActionNumber_ValueChanged;
@@ -446,7 +464,7 @@ namespace WAX_converter
                 FrameNumber.Maximum = 0;
                 CellNumber.Value = 0;
                 CellNumber.Maximum = 0;
-                labelWax.Text = Path.GetFileName(openFmeDialog.FileName);
+                labelWax.Text = Path.GetFileName(path);
                 ActionInfo.Text = "";
                 SeqInfo.Text = "";
                 UpdateFrame();
