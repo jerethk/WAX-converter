@@ -33,6 +33,10 @@ namespace WAX_converter
                     case ".FME":
                         LoadFME(fileName);
                         break;
+
+                    default:
+                        MessageBox.Show("Not a valid file type.", "Error", MessageBoxButtons.OK,MessageBoxIcon.Error);
+                        break;
                 }
             }
         }
