@@ -803,7 +803,7 @@ namespace WAX_converter
         {
             Waxfile newWax = WaxBuilder.BuildWax(comboBoxLogic.SelectedIndex, ActionList, SequenceList, FrameList, ImageList, palette, transparentColour, checkBoxIlluminated.Checked, checkBoxCommonColours.Checked, checkBoxCompress.Checked);
 
-            if (newWax.save(saveWaxDialog.FileName, checkBoxCompress.Checked))
+            if (newWax.Save(saveWaxDialog.FileName, checkBoxCompress.Checked))
             {
                 MessageBox.Show("Successfully saved!", "WAX saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }

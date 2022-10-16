@@ -45,7 +45,7 @@ namespace WAX_converter
         public List<Cell> Cells { get; set; }
 
         // Methods ----------------------------------------------------
-        public bool LoadFromFile(string filename, DFPal palette)
+        public bool LoadFromFile(string filename)
         {
             try
             {
@@ -192,11 +192,8 @@ namespace WAX_converter
                             }
 
                             // uncompress data
-                            Cell.uncompressImage();
+                            Cell.UncompressImage();
                         }
-
-                        // Create bitmap from cell image
-                        Cell.createBitmap(palette /*, frame.Flip */);
 
                         this.Cells.Add(Cell);
                     }
@@ -224,7 +221,7 @@ namespace WAX_converter
             return true;
         }
 
-        public bool exportToPNG(string filename)
+        public bool ExportToPNG(string filename)
         {
             string dir = Path.GetDirectoryName(filename);
             string baseFilename = Path.GetFileNameWithoutExtension(filename);
@@ -288,7 +285,7 @@ namespace WAX_converter
         }
         */
 
-        public bool save(string filename, bool compress)
+        public bool Save(string filename, bool compress)
         {
             try
             {
@@ -409,7 +406,7 @@ namespace WAX_converter
         }
 
 
-        public bool LoadFromFME(string filename, DFPal palette)
+        public bool LoadFromFME(string filename)
         {
             // a FME is a single frame and a single cell
             this.Nframes = 1;
@@ -472,11 +469,8 @@ namespace WAX_converter
                         }
 
                         // uncompress data
-                        Cell.uncompressImage();
+                        Cell.UncompressImage();
                     }
-
-                    // Create bitmap from cell image
-                    Cell.createBitmap(palette /*, frame.Flip */);
 
                     this.Cells.Add(Cell);
                 }
@@ -489,8 +483,15 @@ namespace WAX_converter
 
             return true;
         }
-    }
 
+        public void GenerateAllCellBitmaps(DFPal pal)
+        {
+            foreach (Cell cell in this.Cells)
+            {
+                cell.CreateBitmap(pal);
+            }
+        }
+    }
 
 
     public class Action

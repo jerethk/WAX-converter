@@ -104,6 +104,12 @@ namespace WAX_converter
             if (palette.LoadfromFile(openPalDialog.FileName))
             {
                 LabelPal.Text = $"{Path.GetFileName(openPalDialog.FileName)}";
+
+                if (this.wax != null)
+                {
+                    this.wax.GenerateAllCellBitmaps(this.palette);
+                    UpdateCell();
+                }
             }
             else
             {
@@ -119,9 +125,10 @@ namespace WAX_converter
         private void LoadWAX(string path)
         {
             Waxfile tryOpenWax = new Waxfile();
-            if (tryOpenWax.LoadFromFile(path, palette))
+            if (tryOpenWax.LoadFromFile(path))
             {
                 this.wax = tryOpenWax;
+                this.wax.GenerateAllCellBitmaps(this.palette);
                 exportDialog.FileName = Path.GetFileNameWithoutExtension(path);
 
                 // remove event handlers (to prevent exceptions when resetting values)
@@ -412,7 +419,7 @@ namespace WAX_converter
 
         private void exportDialog_FileOk(object sender, CancelEventArgs e)
         {
-            if (wax.exportToPNG(exportDialog.FileName))
+            if (wax.ExportToPNG(exportDialog.FileName))
             {
                 MessageBox.Show("Successfully exported images to PNGs, and created a project file.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -445,9 +452,10 @@ namespace WAX_converter
             // Load a FME file as a Waxfile object
             Waxfile tryOpenFme = new Waxfile();
 
-            if (tryOpenFme.LoadFromFME(path, palette))
+            if (tryOpenFme.LoadFromFME(path))
             {
                 this.wax = tryOpenFme;
+                this.wax.GenerateAllCellBitmaps(this.palette);
                 exportDialog.FileName = Path.GetFileNameWithoutExtension(path);
 
                 // remove event handlers (to prevent exceptions when resetting values)

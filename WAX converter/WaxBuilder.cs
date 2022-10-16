@@ -92,11 +92,11 @@ namespace WAX_converter
                 newCell.ColOffs = 0;    // always zero
 
                 newCell.Pixels = new short[newCell.SizeX, newCell.SizeY];
-                newCell.createCellImage(SourceImageList[i], palette, transparentColour, includeIlluminatedColours, onlyCommonColours);       // result is stored in the cell object's Pixels property
+                newCell.CreateCellImage(SourceImageList[i], palette, transparentColour, includeIlluminatedColours, onlyCommonColours);       // result is stored in the cell object's Pixels property
 
                 if (compress)
                 {
-                    newCell.compressCell();     // result is stored in the cell object's compressedData property (List of bytes)
+                    newCell.CompressCell();     // result is stored in the cell object's compressedData property (List of bytes)
                     newCell.Compressed = 1;
                     newCell.DataSize = 24 + (4 * newCell.SizeX) + newCell.compressedData.Count;
                 }
@@ -140,7 +140,7 @@ namespace WAX_converter
             return newWax;
         }
         
-        public static short matchPixeltoPal(Color pixelColour, DFPal palette, bool includeIlluminatedColours, bool onlyCommonColours)
+        public static short MatchPixeltoPal(Color pixelColour, DFPal palette, bool includeIlluminatedColours, bool onlyCommonColours)
         {
             // Color quantizes to the DF PAL using Euclidean distance technique
             int sourceRed = pixelColour.R;

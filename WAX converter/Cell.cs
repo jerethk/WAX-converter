@@ -22,7 +22,7 @@ namespace WAX_converter
         public Bitmap bitmap { get; set; }
 
         // Methods
-        public void uncompressImage()
+        public void UncompressImage()
         {
             // uncompress data to the pixel array, column by column
             int dataPosition = 0; 
@@ -61,7 +61,7 @@ namespace WAX_converter
             }
         }
 
-        public void createBitmap(DFPal palette)
+        public void CreateBitmap(DFPal palette)
         {
             this.bitmap = new Bitmap(this.SizeX, this.SizeY); //, System.Drawing.Imaging.PixelFormat.Format8bppIndexed);
             
@@ -91,7 +91,7 @@ namespace WAX_converter
             this.bitmap.RotateFlip(RotateFlipType.RotateNoneFlipY); // need to flip it upside down, because wax stores image data from bottom to top
         }
 
-        public void createCellImage(Bitmap bitmap, DFPal palette, Color transparentColour, bool includeIlluminatedColours, bool onlyCommonColours)
+        public void CreateCellImage(Bitmap bitmap, DFPal palette, Color transparentColour, bool includeIlluminatedColours, bool onlyCommonColours)
         {
             
             // flip upside down
@@ -107,7 +107,7 @@ namespace WAX_converter
                     }
                     else
                     {
-                        short colourIndex = WaxBuilder.matchPixeltoPal(bitmap.GetPixel(x, y), palette, includeIlluminatedColours, onlyCommonColours);
+                        short colourIndex = WaxBuilder.MatchPixeltoPal(bitmap.GetPixel(x, y), palette, includeIlluminatedColours, onlyCommonColours);
                         this.Pixels[x, y] = colourIndex;
                     }
                 }
@@ -117,7 +117,7 @@ namespace WAX_converter
             bitmap.RotateFlip(RotateFlipType.RotateNoneFlipY);
         }
 
-        public void compressCell()
+        public void CompressCell()
         {
             List<byte>[] columnData = new List<byte>[this.SizeX];   // an array of byte-lists.
 
