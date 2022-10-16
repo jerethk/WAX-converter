@@ -8,8 +8,11 @@ namespace WAX_converter
 {
     class ColourChooser : Form
     {
-        public Color chosenColour { get; set; }
-        
+        public Color FinalColour { get; set; }
+
+        private Color previousColour;
+        private Color selectedColour;
+
         private NumericUpDown numRed;
         private Label label1;
         private Label label2;
@@ -17,7 +20,8 @@ namespace WAX_converter
         private NumericUpDown numBlue;
         private Label label3;
         private PictureBox colourBox;
-        private Button button1;
+        private Button btnDone;
+        private Button btnCancel;
         private PictureBox pictureBox1;
 
         private void InitializeComponent()
@@ -31,7 +35,8 @@ namespace WAX_converter
             this.numBlue = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.colourBox = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnDone = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numGreen)).BeginInit();
@@ -122,21 +127,33 @@ namespace WAX_converter
             this.colourBox.TabIndex = 7;
             this.colourBox.TabStop = false;
             // 
-            // button1
+            // btnDone
             // 
-            this.button1.Location = new System.Drawing.Point(194, 70);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(77, 33);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "Done";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnDone.Location = new System.Drawing.Point(140, 61);
+            this.btnDone.Name = "btnDone";
+            this.btnDone.Size = new System.Drawing.Size(77, 33);
+            this.btnDone.TabIndex = 8;
+            this.btnDone.Text = "Done";
+            this.btnDone.UseVisualStyleBackColor = true;
+            this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnCancel.Location = new System.Drawing.Point(240, 61);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(77, 33);
+            this.btnCancel.TabIndex = 9;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // ColourChooser
             // 
             this.ClientSize = new System.Drawing.Size(464, 481);
             this.ControlBox = false;
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.btnDone);
             this.Controls.Add(this.colourBox);
             this.Controls.Add(this.numBlue);
             this.Controls.Add(this.label3);
@@ -163,41 +180,43 @@ namespace WAX_converter
         //-------------------------------------------------------------------------
 
         // Form constructor        
-        public ColourChooser(Bitmap sampleImage, Color existingtransparentColour)
+        public ColourChooser(Bitmap sampleImage, Color existingTransparentColour)
         {
             InitializeComponent();
 
             pictureBox1.Image = sampleImage;
-            this.chosenColour = Color.FromArgb(255, existingtransparentColour.R, existingtransparentColour.G, existingtransparentColour.B);
+            this.previousColour = existingTransparentColour;
+            this.selectedColour = Color.FromArgb(255, existingTransparentColour.R, existingTransparentColour.G, existingTransparentColour.B);
+            this.FinalColour = existingTransparentColour;
             
-            numRed.Value = chosenColour.R;
-            numGreen.Value = chosenColour.G;
-            numBlue.Value = chosenColour.B;
-            colourBox.BackColor = chosenColour;
+            numRed.Value = selectedColour.R;
+            numGreen.Value = selectedColour.G;
+            numBlue.Value = selectedColour.B;
+            colourBox.BackColor = selectedColour;
 
             // event handlers for RGB number spiners
             this.numRed.ValueChanged += new System.EventHandler(this.numRed_ValueChanged);
             this.numGreen.ValueChanged += new System.EventHandler(this.numGreen_ValueChanged);
-            this.numBlue.ValueChanged += new System.EventHandler(this.numBlue_ValueChanged);            // 
+            this.numBlue.ValueChanged += new System.EventHandler(this.numBlue_ValueChanged);
         }
 
         private void numRed_ValueChanged(object sender, EventArgs e)
         {
-            this.chosenColour = Color.FromArgb(255, (int)numRed.Value, (int)numGreen.Value, (int)numBlue.Value);
-            colourBox.BackColor = chosenColour;
+            this.selectedColour = Color.FromArgb(255, (int)numRed.Value, (int)numGreen.Value, (int)numBlue.Value);
+            colourBox.BackColor = selectedColour;
         }
 
         private void numGreen_ValueChanged(object sender, EventArgs e)
         {
-            this.chosenColour = Color.FromArgb(255, (int)numRed.Value, (int)numGreen.Value, (int)numBlue.Value);
-            colourBox.BackColor = chosenColour;
+            this.selectedColour = Color.FromArgb(255, (int)numRed.Value, (int)numGreen.Value, (int)numBlue.Value);
+            colourBox.BackColor = selectedColour;
 
         }
 
         private void numBlue_ValueChanged(object sender, EventArgs e)
         {
-            this.chosenColour = Color.FromArgb(255, (int)numRed.Value, (int)numGreen.Value, (int)numBlue.Value);
-            colourBox.BackColor = chosenColour;
+            this.selectedColour = Color.FromArgb(255, (int)numRed.Value, (int)numGreen.Value, (int)numBlue.Value);
+            colourBox.BackColor = selectedColour;
 
         }
 
@@ -208,21 +227,21 @@ namespace WAX_converter
                 if (e.X < pictureBox1.Image.Width && e.Y < pictureBox1.Image.Height)
                 {
                     Bitmap bitmap = new Bitmap(pictureBox1.Image);
-                    this.chosenColour = bitmap.GetPixel(e.X, e.Y);
+                    this.selectedColour = bitmap.GetPixel(e.X, e.Y);
 
                     // remove the event handlers to change the values, then re-add them (otherwise it stuffs up)
                     this.numRed.ValueChanged -= this.numRed_ValueChanged; 
                     this.numGreen.ValueChanged -= this.numGreen_ValueChanged; 
                     this.numBlue.ValueChanged -= this.numBlue_ValueChanged;   
 
-                    numRed.Value = chosenColour.R;
-                    numGreen.Value = chosenColour.G;
-                    numBlue.Value = chosenColour.B;
+                    numRed.Value = selectedColour.R;
+                    numGreen.Value = selectedColour.G;
+                    numBlue.Value = selectedColour.B;
 
                     this.numRed.ValueChanged += new System.EventHandler(this.numRed_ValueChanged);
                     this.numGreen.ValueChanged += new System.EventHandler(this.numGreen_ValueChanged);
                     this.numBlue.ValueChanged += new System.EventHandler(this.numBlue_ValueChanged);            
-                    colourBox.BackColor = chosenColour;
+                    colourBox.BackColor = selectedColour;
 
                     bitmap.Dispose();
                 }
@@ -230,10 +249,15 @@ namespace WAX_converter
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnDone_Click(object sender, EventArgs e)
         {
+            this.FinalColour = this.selectedColour;
             this.Close();
         }
 
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

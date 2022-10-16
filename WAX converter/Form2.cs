@@ -120,7 +120,7 @@ namespace WAX_converter
             
             ColourChooser TransparentDialog = new ColourChooser(img, this.transparentColour);
             TransparentDialog.ShowDialog();
-            this.transparentColour = TransparentDialog.chosenColour;
+            this.transparentColour = TransparentDialog.FinalColour;
             transpColourBox.BackColor = this.transparentColour;
             TransparentDialog.Dispose();
         }
