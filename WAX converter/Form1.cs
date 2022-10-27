@@ -82,6 +82,12 @@ namespace WAX_converter
             buildWindow.Show();
         }
 
+        private void enemyWizardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            WizardWindow WizardWindow = new WizardWindow();
+            WizardWindow.ShowDialog();
+        }
+
         private void menuHelp_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             if (e.ClickedItem == MenuAbout)

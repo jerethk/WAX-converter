@@ -82,6 +82,7 @@ namespace WAX_converter
             this.openPalDialog = new System.Windows.Forms.OpenFileDialog();
             this.exportDialog = new System.Windows.Forms.SaveFileDialog();
             this.openFmeDialog = new System.Windows.Forms.OpenFileDialog();
+            this.enemyWizardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2.SuspendLayout();
             this.RadioGroup.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -312,7 +313,8 @@ namespace WAX_converter
             // MenuBuildWax
             // 
             this.MenuBuildWax.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MenuBuild});
+            this.MenuBuild,
+            this.enemyWizardToolStripMenuItem});
             this.MenuBuildWax.Name = "MenuBuildWax";
             this.MenuBuildWax.Size = new System.Drawing.Size(75, 20);
             this.MenuBuildWax.Text = "Build WAX";
@@ -320,7 +322,7 @@ namespace WAX_converter
             // MenuBuild
             // 
             this.MenuBuild.Name = "MenuBuild";
-            this.MenuBuild.Size = new System.Drawing.Size(101, 22);
+            this.MenuBuild.Size = new System.Drawing.Size(180, 22);
             this.MenuBuild.Text = "Build";
             this.MenuBuild.Click += new System.EventHandler(this.MenuBuild_Click);
             // 
@@ -610,6 +612,13 @@ namespace WAX_converter
             this.openFmeDialog.Title = "Open FME file";
             this.openFmeDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.openFmeDialog_FileOk);
             // 
+            // enemyWizardToolStripMenuItem
+            // 
+            this.enemyWizardToolStripMenuItem.Name = "enemyWizardToolStripMenuItem";
+            this.enemyWizardToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.enemyWizardToolStripMenuItem.Text = "Enemy Wizard";
+            this.enemyWizardToolStripMenuItem.Click += new System.EventHandler(this.enemyWizardToolStripMenuItem_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -699,6 +708,7 @@ namespace WAX_converter
         private System.Windows.Forms.ToolStripMenuItem MenuOpenFme;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.OpenFileDialog openFmeDialog;
+        private System.Windows.Forms.ToolStripMenuItem enemyWizardToolStripMenuItem;
     }
 }
 
