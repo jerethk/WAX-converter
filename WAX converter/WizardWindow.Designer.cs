@@ -35,7 +35,19 @@
             this.btnSourceFolder = new System.Windows.Forms.Button();
             this.listBoxImages = new System.Windows.Forms.ListBox();
             this.pictureBoxPreview = new System.Windows.Forms.PictureBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnFront = new System.Windows.Forms.Button();
+            this.btnBack = new System.Windows.Forms.Button();
+            this.btnLeft = new System.Windows.Forms.Button();
+            this.btnRight = new System.Windows.Forms.Button();
+            this.btnBackRight = new System.Windows.Forms.Button();
+            this.btnFrontRight = new System.Windows.Forms.Button();
+            this.btnFrontLeft = new System.Windows.Forms.Button();
+            this.btnBackLeft = new System.Windows.Forms.Button();
+            this.btnApplyImages = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // comboBoxAction
@@ -65,7 +77,7 @@
             // 
             // btnSourceFolder
             // 
-            this.btnSourceFolder.Location = new System.Drawing.Point(344, 19);
+            this.btnSourceFolder.Location = new System.Drawing.Point(405, 19);
             this.btnSourceFolder.Name = "btnSourceFolder";
             this.btnSourceFolder.Size = new System.Drawing.Size(146, 41);
             this.btnSourceFolder.TabIndex = 3;
@@ -77,26 +89,158 @@
             // 
             this.listBoxImages.FormattingEnabled = true;
             this.listBoxImages.ItemHeight = 15;
-            this.listBoxImages.Location = new System.Drawing.Point(344, 79);
+            this.listBoxImages.Location = new System.Drawing.Point(405, 79);
             this.listBoxImages.Name = "listBoxImages";
-            this.listBoxImages.Size = new System.Drawing.Size(189, 379);
+            this.listBoxImages.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.listBoxImages.Size = new System.Drawing.Size(189, 319);
             this.listBoxImages.TabIndex = 4;
             this.listBoxImages.SelectedIndexChanged += new System.EventHandler(this.listBoxImages_SelectedIndexChanged);
             // 
             // pictureBoxPreview
             // 
             this.pictureBoxPreview.BackColor = System.Drawing.Color.Black;
-            this.pictureBoxPreview.Location = new System.Drawing.Point(559, 19);
+            this.pictureBoxPreview.Location = new System.Drawing.Point(620, 19);
             this.pictureBoxPreview.Name = "pictureBoxPreview";
             this.pictureBoxPreview.Size = new System.Drawing.Size(405, 449);
             this.pictureBoxPreview.TabIndex = 5;
             this.pictureBoxPreview.TabStop = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label2.Location = new System.Drawing.Point(22, 102);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(96, 17);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Viewing angle";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.SystemColors.Control;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.InitialImage = null;
+            this.pictureBox1.Location = new System.Drawing.Point(165, 242);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(64, 64);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 7;
+            this.pictureBox1.TabStop = false;
+            // 
+            // btnFront
+            // 
+            this.btnFront.BackColor = System.Drawing.Color.Gold;
+            this.btnFront.Location = new System.Drawing.Point(156, 395);
+            this.btnFront.Name = "btnFront";
+            this.btnFront.Size = new System.Drawing.Size(84, 32);
+            this.btnFront.TabIndex = 8;
+            this.btnFront.Text = "front";
+            this.btnFront.UseVisualStyleBackColor = false;
+            this.btnFront.Click += new System.EventHandler(this.btnFront_Click);
+            // 
+            // btnBack
+            // 
+            this.btnBack.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnBack.Location = new System.Drawing.Point(156, 133);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(84, 32);
+            this.btnBack.TabIndex = 9;
+            this.btnBack.Text = "back";
+            this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
+            // btnLeft
+            // 
+            this.btnLeft.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnLeft.Location = new System.Drawing.Point(285, 258);
+            this.btnLeft.Name = "btnLeft";
+            this.btnLeft.Size = new System.Drawing.Size(84, 32);
+            this.btnLeft.TabIndex = 10;
+            this.btnLeft.Text = "left";
+            this.btnLeft.UseVisualStyleBackColor = false;
+            this.btnLeft.Click += new System.EventHandler(this.btnLeft_Click);
+            // 
+            // btnRight
+            // 
+            this.btnRight.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnRight.Location = new System.Drawing.Point(22, 258);
+            this.btnRight.Name = "btnRight";
+            this.btnRight.Size = new System.Drawing.Size(84, 32);
+            this.btnRight.TabIndex = 11;
+            this.btnRight.Text = "right";
+            this.btnRight.UseVisualStyleBackColor = false;
+            this.btnRight.Click += new System.EventHandler(this.btnRight_Click);
+            // 
+            // btnBackRight
+            // 
+            this.btnBackRight.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnBackRight.Location = new System.Drawing.Point(48, 181);
+            this.btnBackRight.Name = "btnBackRight";
+            this.btnBackRight.Size = new System.Drawing.Size(84, 42);
+            this.btnBackRight.TabIndex = 12;
+            this.btnBackRight.Text = "back - right";
+            this.btnBackRight.UseVisualStyleBackColor = false;
+            this.btnBackRight.Click += new System.EventHandler(this.btnBackRight_Click);
+            // 
+            // btnFrontRight
+            // 
+            this.btnFrontRight.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnFrontRight.Location = new System.Drawing.Point(48, 332);
+            this.btnFrontRight.Name = "btnFrontRight";
+            this.btnFrontRight.Size = new System.Drawing.Size(84, 42);
+            this.btnFrontRight.TabIndex = 13;
+            this.btnFrontRight.Text = "front - right";
+            this.btnFrontRight.UseVisualStyleBackColor = false;
+            this.btnFrontRight.Click += new System.EventHandler(this.btnFrontRight_Click);
+            // 
+            // btnFrontLeft
+            // 
+            this.btnFrontLeft.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnFrontLeft.Location = new System.Drawing.Point(261, 332);
+            this.btnFrontLeft.Name = "btnFrontLeft";
+            this.btnFrontLeft.Size = new System.Drawing.Size(84, 42);
+            this.btnFrontLeft.TabIndex = 15;
+            this.btnFrontLeft.Text = "front - left";
+            this.btnFrontLeft.UseVisualStyleBackColor = false;
+            this.btnFrontLeft.Click += new System.EventHandler(this.btnFrontLeft_Click);
+            // 
+            // btnBackLeft
+            // 
+            this.btnBackLeft.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnBackLeft.Location = new System.Drawing.Point(261, 181);
+            this.btnBackLeft.Name = "btnBackLeft";
+            this.btnBackLeft.Size = new System.Drawing.Size(84, 42);
+            this.btnBackLeft.TabIndex = 14;
+            this.btnBackLeft.Text = "back - left";
+            this.btnBackLeft.UseVisualStyleBackColor = false;
+            this.btnBackLeft.Click += new System.EventHandler(this.btnBackLeft_Click);
+            // 
+            // btnApplyImages
+            // 
+            this.btnApplyImages.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnApplyImages.Location = new System.Drawing.Point(405, 424);
+            this.btnApplyImages.Name = "btnApplyImages";
+            this.btnApplyImages.Size = new System.Drawing.Size(189, 44);
+            this.btnApplyImages.TabIndex = 16;
+            this.btnApplyImages.Text = "<< Apply <<";
+            this.btnApplyImages.UseVisualStyleBackColor = true;
             // 
             // WizardWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1117, 557);
+            this.Controls.Add(this.btnApplyImages);
+            this.Controls.Add(this.btnFrontLeft);
+            this.Controls.Add(this.btnBackLeft);
+            this.Controls.Add(this.btnFrontRight);
+            this.Controls.Add(this.btnBackRight);
+            this.Controls.Add(this.btnRight);
+            this.Controls.Add(this.btnLeft);
+            this.Controls.Add(this.btnBack);
+            this.Controls.Add(this.btnFront);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.pictureBoxPreview);
             this.Controls.Add(this.listBoxImages);
             this.Controls.Add(this.btnSourceFolder);
@@ -107,6 +251,7 @@
             this.Text = "Wizard";
             this.Load += new System.EventHandler(this.WizardWindow_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -120,5 +265,16 @@
         private System.Windows.Forms.ListBox listBoxImages;
         private System.Windows.Forms.PictureBox pictureBoxPreview;
         public System.Windows.Forms.FolderBrowserDialog folderBrowser;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button btnFront;
+        private System.Windows.Forms.Button btnBack;
+        private System.Windows.Forms.Button btnLeft;
+        private System.Windows.Forms.Button btnRight;
+        private System.Windows.Forms.Button btnBackRight;
+        private System.Windows.Forms.Button btnFrontRight;
+        private System.Windows.Forms.Button btnFrontLeft;
+        private System.Windows.Forms.Button btnBackLeft;
+        private System.Windows.Forms.Button btnApplyImages;
     }
 }
