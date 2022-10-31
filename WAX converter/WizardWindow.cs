@@ -18,7 +18,7 @@ namespace WAX_converter
             public Bitmap Image { get; set; }
         }
 
-        // The WizardAction class is an array of 8 sequences (representing 8 viewing angles)
+        // The WizardAction class is just an array of 8 sequences (representing 8 viewing angles)
         private class WizardAction
         {
             Sequence[] sequences;
@@ -40,12 +40,15 @@ namespace WAX_converter
         private Dictionary<string, WizardAction> actionDictionary = new Dictionary<string, WizardAction>();
         private List<SourceImage> imageList = new List<SourceImage>();
         private List<Frame> frameList = new List<Frame>();
+        private string selectedAction;
         private int selectedViewAngle = 0;
 
         public WizardWindow()
         {
             InitializeComponent();
             comboBoxAction.DataSource = actionLabelList;
+            comboBoxAction.SelectedIndex = 0;
+            this.selectedAction = actionKeyList[0];
 
             // Initialise Action dictionary
             foreach (var key in actionKeyList)
@@ -58,6 +61,8 @@ namespace WAX_converter
         {
             getSourceImages();
         }
+
+        // --------------------------------------------------------------------------------------------------------------------
 
         private void btnSourceFolder_Click(object sender, EventArgs e)
         {
@@ -104,11 +109,6 @@ namespace WAX_converter
             }
         }
 
-        private void comboBoxAction_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void listBoxImages_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listBoxImages.SelectedItem != null)
@@ -117,11 +117,33 @@ namespace WAX_converter
             }
         }
 
+        private void checkBoxFlip_CheckedChanged(object sender, EventArgs e)
+        {
+            foreach (var i in imageList)
+            {
+                i.Image.RotateFlip(RotateFlipType.RotateNoneFlipX);
+            }
+
+            pictureBoxPreview.Image = imageList[listBoxImages.SelectedIndex].Image;
+        }
+
+        private void comboBoxAction_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var i = comboBoxAction.SelectedIndex;
+
+            if (i >= 0)
+            {
+                selectedAction = actionKeyList[comboBoxAction.SelectedIndex];
+                updateSelectedSequence();
+            }
+        }
+
         private void btnFront_Click(object sender, EventArgs e)
         {
             resetAllViewAngleButtons();
             btnFront.BackColor = Color.Gold;
             this.selectedViewAngle = 0;
+            updateSelectedSequence();
         }
 
         private void btnFrontLeft_Click(object sender, EventArgs e)
@@ -129,6 +151,7 @@ namespace WAX_converter
             resetAllViewAngleButtons();
             btnFrontLeft.BackColor = Color.Gold;
             this.selectedViewAngle = 1;
+            updateSelectedSequence();
         }
 
         private void btnLeft_Click(object sender, EventArgs e)
@@ -136,6 +159,7 @@ namespace WAX_converter
             resetAllViewAngleButtons();
             btnLeft.BackColor = Color.Gold;
             this.selectedViewAngle = 2;
+            updateSelectedSequence();
         }
 
         private void btnBackLeft_Click(object sender, EventArgs e)
@@ -143,34 +167,39 @@ namespace WAX_converter
             resetAllViewAngleButtons();
             btnBackLeft.BackColor = Color.Gold;
             this.selectedViewAngle = 3;
+            updateSelectedSequence();
         }
 
         private void btnBack_Click(object sender, EventArgs e)
         {
             resetAllViewAngleButtons();
             btnBack.BackColor = Color.Gold;
-            this.selectedViewAngle = 5;
+            this.selectedViewAngle = 4;
+            updateSelectedSequence();
         }
 
         private void btnBackRight_Click(object sender, EventArgs e)
         {
             resetAllViewAngleButtons();
             btnBackRight.BackColor = Color.Gold;
-            this.selectedViewAngle = 6;
+            this.selectedViewAngle = 5;
+            updateSelectedSequence();
         }
 
         private void btnRight_Click(object sender, EventArgs e)
         {
             resetAllViewAngleButtons();
             btnRight.BackColor = Color.Gold;
-            this.selectedViewAngle = 7;
+            this.selectedViewAngle = 6;
+            updateSelectedSequence();
         }
 
         private void btnFrontRight_Click(object sender, EventArgs e)
         {
             resetAllViewAngleButtons();
             btnFrontRight.BackColor = Color.Gold;
-            this.selectedViewAngle = 8;
+            this.selectedViewAngle = 7;
+            updateSelectedSequence();
         }
 
         private void resetAllViewAngleButtons()
@@ -184,5 +213,33 @@ namespace WAX_converter
             btnRight.BackColor = System.Drawing.SystemColors.ControlLight;
             btnFrontRight.BackColor = System.Drawing.SystemColors.ControlLight;
         }
+
+        private void updateSelectedSequence()
+        {
+            output.Text = $"{selectedAction} {selectedViewAngle}";
+        }
+
+        // APPLY button --------------------------------------------------------------------------------------------------
+
+        private void btnApplyImages_Click(object sender, EventArgs e)
+        {
+            int numberSelectedImages = listBoxImages.SelectedIndices.Count;
+
+            if (numberSelectedImages > 0)
+            {
+                int n = 0;
+                
+                foreach (int index in listBoxImages.SelectedIndices)
+                {
+                    var image = imageList[index];
+
+
+                    // max number of frames in a sequence is 32 so break loop if n == 31
+                    n++;
+                    if (n == 31) break;         
+                }
+            }
+        }
+
     }
 }

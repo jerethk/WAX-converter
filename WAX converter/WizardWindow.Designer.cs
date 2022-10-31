@@ -46,6 +46,8 @@
             this.btnFrontLeft = new System.Windows.Forms.Button();
             this.btnBackLeft = new System.Windows.Forms.Button();
             this.btnApplyImages = new System.Windows.Forms.Button();
+            this.output = new System.Windows.Forms.Label();
+            this.checkBoxFlip = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -101,7 +103,7 @@
             this.pictureBoxPreview.BackColor = System.Drawing.Color.Black;
             this.pictureBoxPreview.Location = new System.Drawing.Point(620, 19);
             this.pictureBoxPreview.Name = "pictureBoxPreview";
-            this.pictureBoxPreview.Size = new System.Drawing.Size(405, 449);
+            this.pictureBoxPreview.Size = new System.Drawing.Size(405, 494);
             this.pictureBoxPreview.TabIndex = 5;
             this.pictureBoxPreview.TabStop = false;
             // 
@@ -218,18 +220,41 @@
             // btnApplyImages
             // 
             this.btnApplyImages.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnApplyImages.Location = new System.Drawing.Point(405, 424);
+            this.btnApplyImages.Location = new System.Drawing.Point(405, 469);
             this.btnApplyImages.Name = "btnApplyImages";
             this.btnApplyImages.Size = new System.Drawing.Size(189, 44);
             this.btnApplyImages.TabIndex = 16;
             this.btnApplyImages.Text = "<< Apply <<";
             this.btnApplyImages.UseVisualStyleBackColor = true;
+            this.btnApplyImages.Click += new System.EventHandler(this.btnApplyImages_Click);
+            // 
+            // output
+            // 
+            this.output.AutoSize = true;
+            this.output.Location = new System.Drawing.Point(80, 453);
+            this.output.Name = "output";
+            this.output.Size = new System.Drawing.Size(38, 15);
+            this.output.TabIndex = 17;
+            this.output.Text = "label3";
+            // 
+            // checkBoxFlip
+            // 
+            this.checkBoxFlip.AutoSize = true;
+            this.checkBoxFlip.Location = new System.Drawing.Point(405, 420);
+            this.checkBoxFlip.Name = "checkBoxFlip";
+            this.checkBoxFlip.Size = new System.Drawing.Size(81, 19);
+            this.checkBoxFlip.TabIndex = 18;
+            this.checkBoxFlip.Text = "Flip image";
+            this.checkBoxFlip.UseVisualStyleBackColor = true;
+            this.checkBoxFlip.CheckedChanged += new System.EventHandler(this.checkBoxFlip_CheckedChanged);
             // 
             // WizardWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1117, 557);
+            this.Controls.Add(this.checkBoxFlip);
+            this.Controls.Add(this.output);
             this.Controls.Add(this.btnApplyImages);
             this.Controls.Add(this.btnFrontLeft);
             this.Controls.Add(this.btnBackLeft);
@@ -276,5 +301,7 @@
         private System.Windows.Forms.Button btnFrontLeft;
         private System.Windows.Forms.Button btnBackLeft;
         private System.Windows.Forms.Button btnApplyImages;
+        private System.Windows.Forms.Label output;
+        private System.Windows.Forms.CheckBox checkBoxFlip;
     }
 }
