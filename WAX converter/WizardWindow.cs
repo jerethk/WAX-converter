@@ -21,23 +21,44 @@ namespace WAX_converter
         // The WizardAction class is just an array of 8 sequences (representing 8 viewing angles)
         private class WizardAction
         {
-            Sequence[] sequences;
+            public WizardSequence[] sequences { get; set; }
 
             public WizardAction()
             {
                 // initialise the array then each of the 8 sequences in it
-                sequences = new Sequence[8];
+                this.sequences = new WizardSequence[8];
                 for (int n = 0; n < 8; n++)
                 {
-                    sequences[n] = new Sequence();
+                    sequences[n] = new WizardSequence();
                 }
             }
+        }
+
+        private class WizardSequence
+        {
+            public WizardFrame[] frames { get; set; }
+            public bool isFlipped { get; set; }
+
+            public WizardSequence()
+            {
+                this.frames = new WizardFrame[32];
+                for (int n = 0; n < 32; n++)
+                {
+                    frames[n] = new WizardFrame();
+                    frames[n].imageIndex = -1;
+                }
+            }
+        }
+
+        private class WizardFrame
+        {
+            public int imageIndex { get; set; }
         }
 
         private string[] actionLabelList = new string[] { "Stationary", "Moving", "Attack 1", "Recoil", "Attack 2", "Recoil 2", "Pain", "Dying 1", "Dying 2", "Dead", "Kell jump", "DT special" };
         private string[] actionKeyList = new string[] { "Stationary", "Moving", "Attack1", "Recoil", "Attack2", "Recoil2", "Pain", "Dying1", "Dying2", "Dead", "KellJump", "DTSpecial" };
 
-        private Dictionary<string, WizardAction> actionDictionary = new Dictionary<string, WizardAction>();
+        private Dictionary<string, WizardAction> actionDictionary;
         private List<SourceImage> imageList = new List<SourceImage>();
         private List<Frame> frameList = new List<Frame>();
         private string selectedAction;
@@ -46,15 +67,18 @@ namespace WAX_converter
         public WizardWindow()
         {
             InitializeComponent();
-            comboBoxAction.DataSource = actionLabelList;
-            comboBoxAction.SelectedIndex = 0;
-            this.selectedAction = actionKeyList[0];
 
             // Initialise Action dictionary
+            this.actionDictionary = new Dictionary<string, WizardAction>();
             foreach (var key in actionKeyList)
             {
                 actionDictionary.Add(key, new WizardAction());
             }
+
+            comboBoxAction.DataSource = actionLabelList;
+            comboBoxAction.SelectedIndex = 0;
+            this.selectedAction = actionKeyList[0];
+
         }
 
         private void WizardWindow_Load(object sender, EventArgs e)
@@ -126,6 +150,13 @@ namespace WAX_converter
 
             pictureBoxPreview.Image = imageList[listBoxImages.SelectedIndex].Image;
         }
+
+        private void checkBoxZoom_CheckedChanged(object sender, EventArgs e)
+        {
+            pictureBoxPreview.SizeMode = checkBoxZoom.Checked ? PictureBoxSizeMode.Zoom : PictureBoxSizeMode.Normal;
+        }
+
+        // --------------------------------------------------------------------------------------------------------------------
 
         private void comboBoxAction_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -217,6 +248,16 @@ namespace WAX_converter
         private void updateSelectedSequence()
         {
             output.Text = $"{selectedAction} {selectedViewAngle}";
+
+            var seq = actionDictionary[selectedAction].sequences[selectedViewAngle];
+            checkBoxFlip.Checked = seq.isFlipped;
+            listBoxImages.SelectedItems.Clear();
+
+            foreach (var frame in seq.frames)
+            {
+                var index = frame.imageIndex;
+                listBoxImages.SelectedIndices.Add(index);
+            }
         }
 
         // APPLY button --------------------------------------------------------------------------------------------------
@@ -227,19 +268,22 @@ namespace WAX_converter
 
             if (numberSelectedImages > 0)
             {
+                actionDictionary[selectedAction].sequences[selectedViewAngle].isFlipped = checkBoxFlip.Checked;
                 int n = 0;
                 
                 foreach (int index in listBoxImages.SelectedIndices)
                 {
-                    var image = imageList[index];
+                    var image = imageList[index].Image;
+                    var frame = new WizardFrame();
+                    frame.imageIndex = index;
 
-
+                    actionDictionary[selectedAction].sequences[selectedViewAngle].frames[n] = frame;
+                    
                     // max number of frames in a sequence is 32 so break loop if n == 31
                     n++;
                     if (n == 31) break;         
                 }
             }
         }
-
     }
 }

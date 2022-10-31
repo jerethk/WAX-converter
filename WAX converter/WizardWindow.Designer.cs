@@ -48,6 +48,7 @@
             this.btnApplyImages = new System.Windows.Forms.Button();
             this.output = new System.Windows.Forms.Label();
             this.checkBoxFlip = new System.Windows.Forms.CheckBox();
+            this.checkBoxZoom = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -101,9 +102,9 @@
             // pictureBoxPreview
             // 
             this.pictureBoxPreview.BackColor = System.Drawing.Color.Black;
-            this.pictureBoxPreview.Location = new System.Drawing.Point(620, 19);
+            this.pictureBoxPreview.Location = new System.Drawing.Point(620, 56);
             this.pictureBoxPreview.Name = "pictureBoxPreview";
-            this.pictureBoxPreview.Size = new System.Drawing.Size(405, 494);
+            this.pictureBoxPreview.Size = new System.Drawing.Size(405, 457);
             this.pictureBoxPreview.TabIndex = 5;
             this.pictureBoxPreview.TabStop = false;
             // 
@@ -248,11 +249,23 @@
             this.checkBoxFlip.UseVisualStyleBackColor = true;
             this.checkBoxFlip.CheckedChanged += new System.EventHandler(this.checkBoxFlip_CheckedChanged);
             // 
+            // checkBoxZoom
+            // 
+            this.checkBoxZoom.AutoSize = true;
+            this.checkBoxZoom.Location = new System.Drawing.Point(620, 19);
+            this.checkBoxZoom.Name = "checkBoxZoom";
+            this.checkBoxZoom.Size = new System.Drawing.Size(58, 19);
+            this.checkBoxZoom.TabIndex = 19;
+            this.checkBoxZoom.Text = "Zoom";
+            this.checkBoxZoom.UseVisualStyleBackColor = true;
+            this.checkBoxZoom.CheckedChanged += new System.EventHandler(this.checkBoxZoom_CheckedChanged);
+            // 
             // WizardWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1117, 557);
+            this.Controls.Add(this.checkBoxZoom);
             this.Controls.Add(this.checkBoxFlip);
             this.Controls.Add(this.output);
             this.Controls.Add(this.btnApplyImages);
@@ -303,5 +316,6 @@
         private System.Windows.Forms.Button btnApplyImages;
         private System.Windows.Forms.Label output;
         private System.Windows.Forms.CheckBox checkBoxFlip;
+        private System.Windows.Forms.CheckBox checkBoxZoom;
     }
 }

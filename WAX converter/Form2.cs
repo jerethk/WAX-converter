@@ -406,15 +406,7 @@ namespace WAX_converter
         private void checkBoxFlip_CheckedChanged(object sender, EventArgs e)
         {
             int selectedFrame = listboxFrames.SelectedIndex;
-            
-            if (checkBoxFlip.Checked)
-            {
-                FrameList[selectedFrame].Flip = 1;
-            }
-            else
-            {
-                FrameList[selectedFrame].Flip = 0;
-            } 
+            FrameList[selectedFrame].Flip = checkBoxFlip.Checked ? 1 : 0;
         }
 
 // --- SEQUENCE AREA --------------------------------------------------------------------------------------------------------------------------------------------------------------------

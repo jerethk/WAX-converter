@@ -437,14 +437,7 @@ namespace WAX_converter
 
         private void checkBoxZoom_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxZoom.Checked)
-            {
-                displayBox.SizeMode = PictureBoxSizeMode.Zoom;
-            }
-            else
-            {
-                displayBox.SizeMode = PictureBoxSizeMode.Normal;
-            }
+            displayBox.SizeMode = checkBoxZoom.Checked ? PictureBoxSizeMode.Zoom : PictureBoxSizeMode.Normal;
         }
 
         // -----------------------------------------------------------------------------------------------
