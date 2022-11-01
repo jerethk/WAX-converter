@@ -49,6 +49,8 @@
             this.output = new System.Windows.Forms.Label();
             this.checkBoxFlip = new System.Windows.Forms.CheckBox();
             this.checkBoxZoom = new System.Windows.Forms.CheckBox();
+            this.listBoxSeq = new System.Windows.Forms.ListBox();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -56,7 +58,7 @@
             // comboBoxAction
             // 
             this.comboBoxAction.FormattingEnabled = true;
-            this.comboBoxAction.Location = new System.Drawing.Point(22, 37);
+            this.comboBoxAction.Location = new System.Drawing.Point(21, 37);
             this.comboBoxAction.Name = "comboBoxAction";
             this.comboBoxAction.Size = new System.Drawing.Size(205, 23);
             this.comboBoxAction.TabIndex = 0;
@@ -65,7 +67,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(22, 19);
+            this.label1.Location = new System.Drawing.Point(21, 19);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(71, 15);
             this.label1.TabIndex = 1;
@@ -80,11 +82,11 @@
             // 
             // btnSourceFolder
             // 
-            this.btnSourceFolder.Location = new System.Drawing.Point(405, 19);
+            this.btnSourceFolder.Location = new System.Drawing.Point(410, 19);
             this.btnSourceFolder.Name = "btnSourceFolder";
             this.btnSourceFolder.Size = new System.Drawing.Size(146, 41);
             this.btnSourceFolder.TabIndex = 3;
-            this.btnSourceFolder.Text = "Image source folder";
+            this.btnSourceFolder.Text = "Source images";
             this.btnSourceFolder.UseVisualStyleBackColor = true;
             this.btnSourceFolder.Click += new System.EventHandler(this.btnSourceFolder_Click);
             // 
@@ -92,7 +94,7 @@
             // 
             this.listBoxImages.FormattingEnabled = true;
             this.listBoxImages.ItemHeight = 15;
-            this.listBoxImages.Location = new System.Drawing.Point(405, 79);
+            this.listBoxImages.Location = new System.Drawing.Point(410, 79);
             this.listBoxImages.Name = "listBoxImages";
             this.listBoxImages.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.listBoxImages.Size = new System.Drawing.Size(189, 319);
@@ -102,7 +104,7 @@
             // pictureBoxPreview
             // 
             this.pictureBoxPreview.BackColor = System.Drawing.Color.Black;
-            this.pictureBoxPreview.Location = new System.Drawing.Point(620, 56);
+            this.pictureBoxPreview.Location = new System.Drawing.Point(843, 56);
             this.pictureBoxPreview.Name = "pictureBoxPreview";
             this.pictureBoxPreview.Size = new System.Drawing.Size(405, 457);
             this.pictureBoxPreview.TabIndex = 5;
@@ -112,7 +114,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(22, 102);
+            this.label2.Location = new System.Drawing.Point(21, 102);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(96, 17);
             this.label2.TabIndex = 6;
@@ -123,7 +125,7 @@
             this.pictureBox1.BackColor = System.Drawing.SystemColors.Control;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.InitialImage = null;
-            this.pictureBox1.Location = new System.Drawing.Point(165, 242);
+            this.pictureBox1.Location = new System.Drawing.Point(164, 242);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(64, 64);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -133,7 +135,7 @@
             // btnFront
             // 
             this.btnFront.BackColor = System.Drawing.Color.Gold;
-            this.btnFront.Location = new System.Drawing.Point(156, 395);
+            this.btnFront.Location = new System.Drawing.Point(155, 395);
             this.btnFront.Name = "btnFront";
             this.btnFront.Size = new System.Drawing.Size(84, 32);
             this.btnFront.TabIndex = 8;
@@ -144,7 +146,7 @@
             // btnBack
             // 
             this.btnBack.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnBack.Location = new System.Drawing.Point(156, 133);
+            this.btnBack.Location = new System.Drawing.Point(155, 133);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(84, 32);
             this.btnBack.TabIndex = 9;
@@ -155,7 +157,7 @@
             // btnLeft
             // 
             this.btnLeft.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnLeft.Location = new System.Drawing.Point(285, 258);
+            this.btnLeft.Location = new System.Drawing.Point(284, 258);
             this.btnLeft.Name = "btnLeft";
             this.btnLeft.Size = new System.Drawing.Size(84, 32);
             this.btnLeft.TabIndex = 10;
@@ -166,7 +168,7 @@
             // btnRight
             // 
             this.btnRight.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnRight.Location = new System.Drawing.Point(22, 258);
+            this.btnRight.Location = new System.Drawing.Point(21, 258);
             this.btnRight.Name = "btnRight";
             this.btnRight.Size = new System.Drawing.Size(84, 32);
             this.btnRight.TabIndex = 11;
@@ -177,7 +179,7 @@
             // btnBackRight
             // 
             this.btnBackRight.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnBackRight.Location = new System.Drawing.Point(48, 181);
+            this.btnBackRight.Location = new System.Drawing.Point(47, 181);
             this.btnBackRight.Name = "btnBackRight";
             this.btnBackRight.Size = new System.Drawing.Size(84, 42);
             this.btnBackRight.TabIndex = 12;
@@ -188,7 +190,7 @@
             // btnFrontRight
             // 
             this.btnFrontRight.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnFrontRight.Location = new System.Drawing.Point(48, 332);
+            this.btnFrontRight.Location = new System.Drawing.Point(47, 332);
             this.btnFrontRight.Name = "btnFrontRight";
             this.btnFrontRight.Size = new System.Drawing.Size(84, 42);
             this.btnFrontRight.TabIndex = 13;
@@ -199,7 +201,7 @@
             // btnFrontLeft
             // 
             this.btnFrontLeft.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnFrontLeft.Location = new System.Drawing.Point(261, 332);
+            this.btnFrontLeft.Location = new System.Drawing.Point(260, 332);
             this.btnFrontLeft.Name = "btnFrontLeft";
             this.btnFrontLeft.Size = new System.Drawing.Size(84, 42);
             this.btnFrontLeft.TabIndex = 15;
@@ -210,7 +212,7 @@
             // btnBackLeft
             // 
             this.btnBackLeft.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnBackLeft.Location = new System.Drawing.Point(261, 181);
+            this.btnBackLeft.Location = new System.Drawing.Point(260, 181);
             this.btnBackLeft.Name = "btnBackLeft";
             this.btnBackLeft.Size = new System.Drawing.Size(84, 42);
             this.btnBackLeft.TabIndex = 14;
@@ -221,18 +223,18 @@
             // btnApplyImages
             // 
             this.btnApplyImages.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnApplyImages.Location = new System.Drawing.Point(405, 469);
+            this.btnApplyImages.Location = new System.Drawing.Point(410, 469);
             this.btnApplyImages.Name = "btnApplyImages";
             this.btnApplyImages.Size = new System.Drawing.Size(189, 44);
             this.btnApplyImages.TabIndex = 16;
-            this.btnApplyImages.Text = "<< Apply <<";
+            this.btnApplyImages.Text = ">> Apply >>";
             this.btnApplyImages.UseVisualStyleBackColor = true;
             this.btnApplyImages.Click += new System.EventHandler(this.btnApplyImages_Click);
             // 
             // output
             // 
             this.output.AutoSize = true;
-            this.output.Location = new System.Drawing.Point(80, 453);
+            this.output.Location = new System.Drawing.Point(79, 485);
             this.output.Name = "output";
             this.output.Size = new System.Drawing.Size(38, 15);
             this.output.TabIndex = 17;
@@ -241,7 +243,7 @@
             // checkBoxFlip
             // 
             this.checkBoxFlip.AutoSize = true;
-            this.checkBoxFlip.Location = new System.Drawing.Point(405, 420);
+            this.checkBoxFlip.Location = new System.Drawing.Point(410, 424);
             this.checkBoxFlip.Name = "checkBoxFlip";
             this.checkBoxFlip.Size = new System.Drawing.Size(81, 19);
             this.checkBoxFlip.TabIndex = 18;
@@ -252,7 +254,7 @@
             // checkBoxZoom
             // 
             this.checkBoxZoom.AutoSize = true;
-            this.checkBoxZoom.Location = new System.Drawing.Point(620, 19);
+            this.checkBoxZoom.Location = new System.Drawing.Point(843, 19);
             this.checkBoxZoom.Name = "checkBoxZoom";
             this.checkBoxZoom.Size = new System.Drawing.Size(58, 19);
             this.checkBoxZoom.TabIndex = 19;
@@ -260,11 +262,33 @@
             this.checkBoxZoom.UseVisualStyleBackColor = true;
             this.checkBoxZoom.CheckedChanged += new System.EventHandler(this.checkBoxZoom_CheckedChanged);
             // 
+            // listBoxSeq
+            // 
+            this.listBoxSeq.FormattingEnabled = true;
+            this.listBoxSeq.ItemHeight = 15;
+            this.listBoxSeq.Location = new System.Drawing.Point(629, 79);
+            this.listBoxSeq.Name = "listBoxSeq";
+            this.listBoxSeq.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.listBoxSeq.Size = new System.Drawing.Size(189, 319);
+            this.listBoxSeq.TabIndex = 20;
+            this.listBoxSeq.SelectedIndexChanged += new System.EventHandler(this.listBoxSeq_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(629, 56);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(111, 15);
+            this.label3.TabIndex = 21;
+            this.label3.Text = "Images in sequence";
+            // 
             // WizardWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1117, 557);
+            this.ClientSize = new System.Drawing.Size(1284, 557);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.listBoxSeq);
             this.Controls.Add(this.checkBoxZoom);
             this.Controls.Add(this.checkBoxFlip);
             this.Controls.Add(this.output);
@@ -317,5 +341,7 @@
         private System.Windows.Forms.Label output;
         private System.Windows.Forms.CheckBox checkBoxFlip;
         private System.Windows.Forms.CheckBox checkBoxZoom;
+        private System.Windows.Forms.ListBox listBoxSeq;
+        private System.Windows.Forms.Label label3;
     }
 }

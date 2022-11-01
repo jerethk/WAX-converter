@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -12,9 +13,12 @@ namespace WAX_converter
 {
     public partial class WizardWindow : Form
     {
+        // NESTED CLASSES ---------------------------------------------------------------------------------------
+
         private class SourceImage
         {
             public string Name { get; set; }
+            public int Index { get; set; }          // index in the containing collection or array
             public Bitmap Image { get; set; }
         }
 
@@ -55,12 +59,14 @@ namespace WAX_converter
             public int imageIndex { get; set; }
         }
 
+        // ---------------------------------------------------------------------------------------------
+
         private string[] actionLabelList = new string[] { "Stationary", "Moving", "Attack 1", "Recoil", "Attack 2", "Recoil 2", "Pain", "Dying 1", "Dying 2", "Dead", "Kell jump", "DT special" };
         private string[] actionKeyList = new string[] { "Stationary", "Moving", "Attack1", "Recoil", "Attack2", "Recoil2", "Pain", "Dying1", "Dying2", "Dead", "KellJump", "DTSpecial" };
 
         private Dictionary<string, WizardAction> actionDictionary;
-        private List<SourceImage> imageList = new List<SourceImage>();
-        private List<Frame> frameList = new List<Frame>();
+        private List<SourceImage> sourceImages = new List<SourceImage>();
+        private List<SourceImage> currentSequenceImages = new List<SourceImage>();
         private string selectedAction;
         private int selectedViewAngle = 0;
 
@@ -79,6 +85,10 @@ namespace WAX_converter
             comboBoxAction.SelectedIndex = 0;
             this.selectedAction = actionKeyList[0];
 
+            listBoxImages.DisplayMember = "Name";
+            listBoxImages.ValueMember = "Index";
+            listBoxSeq.DisplayMember = "Name";
+            listBoxSeq.ValueMember = "Index";
         }
 
         private void WizardWindow_Load(object sender, EventArgs e)
@@ -102,10 +112,12 @@ namespace WAX_converter
             if (result == DialogResult.OK)
             {
                 var files = Directory.EnumerateFiles(folderBrowser.SelectedPath);
-                this.imageList.Clear();
+                this.sourceImages.Clear();
 
                 if (files != null)
                 {
+                    int counter = 0;
+
                     foreach (var file in files)
                     {
                         try
@@ -116,19 +128,23 @@ namespace WAX_converter
                             {
                                 var image = new SourceImage();
                                 image.Name = Path.GetFileName(file);
+                                image.Index = counter;
                                 image.Image = new Bitmap(file);
-                                this.imageList.Add(image);
+                                this.sourceImages.Add(image);
                             }
                         }
                         catch (Exception exception)
                         {
                             MessageBox.Show($"Error loading file '{Path.GetFileName(file)}'. \n{exception.Message}");
                         }
+
+                        counter++;
                     }
 
                     listBoxImages.DataSource = null;
-                    listBoxImages.DataSource = this.imageList;
+                    listBoxImages.DataSource = this.sourceImages;
                     listBoxImages.DisplayMember = "Name";
+                    listBoxImages.ValueMember = "Index";
                 }
             }
         }
@@ -137,18 +153,28 @@ namespace WAX_converter
         {
             if (listBoxImages.SelectedItem != null)
             {
-                pictureBoxPreview.Image = imageList[listBoxImages.SelectedIndex].Image;
+                int imageIndex = (int)listBoxImages.SelectedValue;
+                pictureBoxPreview.Image = sourceImages[imageIndex].Image;
             }
         }
 
+        private void listBoxSeq_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBoxSeq.SelectedItem != null)
+            {
+                int imageIndex = (int)listBoxSeq.SelectedValue;
+                pictureBoxPreview.Image = sourceImages[imageIndex].Image;
+            }
+        }
+        
         private void checkBoxFlip_CheckedChanged(object sender, EventArgs e)
         {
-            foreach (var i in imageList)
+            foreach (var i in sourceImages)
             {
                 i.Image.RotateFlip(RotateFlipType.RotateNoneFlipX);
             }
 
-            pictureBoxPreview.Image = imageList[listBoxImages.SelectedIndex].Image;
+            pictureBoxPreview.Image = sourceImages[listBoxImages.SelectedIndex].Image;
         }
 
         private void checkBoxZoom_CheckedChanged(object sender, EventArgs e)
@@ -252,12 +278,24 @@ namespace WAX_converter
             var seq = actionDictionary[selectedAction].sequences[selectedViewAngle];
             checkBoxFlip.Checked = seq.isFlipped;
             listBoxImages.SelectedItems.Clear();
+            currentSequenceImages.Clear();
 
             foreach (var frame in seq.frames)
             {
                 var index = frame.imageIndex;
-                listBoxImages.SelectedIndices.Add(index);
+
+                if (index >= 0)
+                {
+                    listBoxImages.SelectedIndices.Add(index);           // select the item in the source listbox
+                    currentSequenceImages.Add(sourceImages[index]);
+                }
             }
+
+            listBoxSeq.DataSource = null;
+            listBoxSeq.DataSource = currentSequenceImages;
+            listBoxSeq.DisplayMember = "Name";
+            listBoxSeq.ValueMember = "Index";
+
         }
 
         // APPLY button --------------------------------------------------------------------------------------------------
@@ -273,7 +311,7 @@ namespace WAX_converter
                 
                 foreach (int index in listBoxImages.SelectedIndices)
                 {
-                    var image = imageList[index].Image;
+                    var image = sourceImages[index].Image;
                     var frame = new WizardFrame();
                     frame.imageIndex = index;
 
@@ -283,6 +321,10 @@ namespace WAX_converter
                     n++;
                     if (n == 31) break;         
                 }
+
+                updateSelectedSequence();
+
+                btnSourceFolder.Enabled = false;    // disable ability to change source folder
             }
         }
     }
