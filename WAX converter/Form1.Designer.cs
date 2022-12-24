@@ -54,6 +54,7 @@ namespace WAX_converter
             this.MenuQuit = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuBuildWax = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuBuild = new System.Windows.Forms.ToolStripMenuItem();
+            this.enemyWizardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuHelphelp = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuAbout = new System.Windows.Forms.ToolStripMenuItem();
@@ -314,15 +315,23 @@ namespace WAX_converter
             this.MenuBuildWax.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuBuild});
             this.MenuBuildWax.Name = "MenuBuildWax";
-            this.MenuBuildWax.Size = new System.Drawing.Size(75, 20);
-            this.MenuBuildWax.Text = "Build WAX";
+            this.MenuBuildWax.Size = new System.Drawing.Size(82, 20);
+            this.MenuBuildWax.Text = "Create WAX";
             // 
             // MenuBuild
             // 
             this.MenuBuild.Name = "MenuBuild";
-            this.MenuBuild.Size = new System.Drawing.Size(101, 22);
-            this.MenuBuild.Text = "Build";
+            this.MenuBuild.Size = new System.Drawing.Size(180, 22);
+            this.MenuBuild.Text = "Build manually";
             this.MenuBuild.Click += new System.EventHandler(this.MenuBuild_Click);
+            // 
+            // enemyWizardToolStripMenuItem
+            // 
+            this.enemyWizardToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.enemyWizardToolStripMenuItem.Name = "enemyWizardToolStripMenuItem";
+            this.enemyWizardToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.enemyWizardToolStripMenuItem.Text = "Enemy Wizard";
+            this.enemyWizardToolStripMenuItem.Click += new System.EventHandler(this.enemyWizardToolStripMenuItem_Click);
             // 
             // MenuHelp
             // 

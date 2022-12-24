@@ -254,7 +254,7 @@ namespace WAX_converter
 
                 for (int i = 0; i < this.Ncells; i++)
                 {
-                    var fileNum = this.GetExportFileNumber(i);
+                    var fileNum = GetExportFileNumber(i);
                     string saveName = dir + "/" + baseFilename + "/" + fileNum + ".PNG";
                     this.Cells[i].bitmap.Save(saveName, ImageFormat.Png);
                 } 
@@ -275,7 +275,7 @@ namespace WAX_converter
         }
 
         // Returns a file number as a 3 digit string, with appropriate leading zeroes
-        private string GetExportFileNumber(int i)
+        public static string GetExportFileNumber(int i)
         {
             if (i < 10)
             {

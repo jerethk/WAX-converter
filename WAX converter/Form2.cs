@@ -25,10 +25,10 @@ namespace WAX_converter
         }
 
         private DFPal palette;
-        private List<Bitmap> ImageList;
-        private List<Frame> FrameList;
-        private List<Sequence> SequenceList;
-        private List<Action> ActionList;
+        public List<Bitmap> ImageList;
+        public List<Frame> FrameList;
+        public List<Sequence> SequenceList;
+        public List<Action> ActionList;
         private Color transparentColour;
 
         private string[] logicAnim = new string[1] {"0 Animation"};
@@ -836,7 +836,8 @@ namespace WAX_converter
                 Directory.CreateDirectory(cellImageDirectory);
                 for (int i = 0; i < ImageList.Count; i++)
                 {
-                    string imageSavePath = cellImageDirectory + "/" + i + ".png";
+                    var fileNum = Waxfile.GetExportFileNumber(i);
+                    string imageSavePath = cellImageDirectory + "/" + fileNum + ".png";
                     ImageList[i].Save(imageSavePath, System.Drawing.Imaging.ImageFormat.Png);
                 }
 
