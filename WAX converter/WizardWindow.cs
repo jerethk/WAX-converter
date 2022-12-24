@@ -340,9 +340,41 @@ namespace WAX_converter
             }
         }
 
-        // DONE button --------------------------------------------------------------------------------------------------
+        private void btnApplyAllFacings_Click(object sender, EventArgs e)
+        {
+            // Apply the currently selected images to all 8 facings
+            int numberSelectedImages = listBoxImages.SelectedIndices.Count;
 
-        private void btnDone_Click(object sender, EventArgs e)
+            if (numberSelectedImages > 0)
+            {
+                actionDictionary[selectedAction].sequences[selectedViewAngle].isFlipped = checkBoxFlip.Checked;
+                int n = 0;
+
+                foreach (int index in listBoxImages.SelectedIndices)
+                {
+                    var image = sourceImages[index].Image;
+                    var frame = new WizardFrame();
+                    frame.imageIndex = index;
+
+                    foreach (var viewAngle in actionDictionary[selectedAction].sequences)
+                    {
+                        viewAngle.frames[n] = frame;
+                    }
+
+                    // max number of frames in a sequence is 32 so break loop if n == 31
+                    n++;
+                    if (n == 31) break;
+                }
+
+                updateSelectedSequence();
+
+                btnSourceFolder.Enabled = false;    // disable ability to change source folder
+            }
+        }
+
+            // DONE button --------------------------------------------------------------------------------------------------
+
+            private void btnDone_Click(object sender, EventArgs e)
         {
             var actionList = new List<Action>();
             var sequenceList = new List<Sequence>();
@@ -483,6 +515,7 @@ namespace WAX_converter
                     sequenceList[s + 80].frameIndexes[f] = actionDictionary["DTSpecial"].sequences[s].frames[f].waxFrameNumber;
                 }
             }
+
 
             return;
         }
