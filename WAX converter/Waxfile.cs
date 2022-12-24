@@ -254,7 +254,8 @@ namespace WAX_converter
 
                 for (int i = 0; i < this.Ncells; i++)
                 {
-                    string saveName = dir + "/" + baseFilename + "/" + i + ".PNG";
+                    var fileNum = this.GetExportFileNumber(i);
+                    string saveName = dir + "/" + baseFilename + "/" + fileNum + ".PNG";
                     this.Cells[i].bitmap.Save(saveName, ImageFormat.Png);
                 } 
             }
@@ -273,18 +274,23 @@ namespace WAX_converter
             return true;
         }
 
-        /*
-        string leadingZeroes = "";
-        if (i < 10)
+        // Returns a file number as a 3 digit string, with appropriate leading zeroes
+        private string GetExportFileNumber(int i)
         {
-            leadingZeroes = "00";
+            if (i < 10)
+            {
+                return $"00{i}";
+            }
+            else if (i >= 10 && i < 100) 
+            {
+                return $"0{i}";
+            }
+            else
+            {
+                return $"{i}";
+            }
         }
-        else if (i >= 10 && i < 100)
-        {
-            leadingZeroes = "0";
-        }
-        */
-
+        
         public bool Save(string filename, bool compress)
         {
             try
