@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -50,6 +51,7 @@ namespace WAX_converter
                 {
                     frames[n] = new WizardFrame();
                     frames[n].imageIndex = -1;
+                    frames[n].waxFrameNumber = -1;
                 }
             }
         }
@@ -57,12 +59,13 @@ namespace WAX_converter
         private class WizardFrame
         {
             public int imageIndex { get; set; }
+            public int waxFrameNumber { get; set; }     // the frame number in the final WAX
         }
 
         // ---------------------------------------------------------------------------------------------
 
-        private string[] actionLabelList = new string[] { "Stationary", "Moving", "Attack 1", "Recoil", "Attack 2", "Recoil 2", "Pain", "Dying 1", "Dying 2", "Dead", "Kell jump", "DT special" };
-        private string[] actionKeyList = new string[] { "Stationary", "Moving", "Attack1", "Recoil", "Attack2", "Recoil2", "Pain", "Dying1", "Dying2", "Dead", "KellJump", "DTSpecial" };
+        private string[] actionLabelList = new string[] { "Stationary", "Moving", "Attack 1", "Recoil", "Attack 2", "Recoil 2", "Pain", "Dying 1", "Dying 2", "Dead", "DT special" };
+        private string[] actionKeyList = new string[] { "Stationary", "Moving", "Attack1", "Recoil", "Attack2", "Recoil2", "Pain", "Dying1", "Dying2", "Dead", "DTSpecial" };
 
         private Dictionary<string, WizardAction> actionDictionary;
         private List<SourceImage> sourceImages = new List<SourceImage>();
@@ -156,6 +159,10 @@ namespace WAX_converter
                 int imageIndex = (int)listBoxImages.SelectedValue;
                 pictureBoxPreview.Image = sourceImages[imageIndex].Image;
             }
+            else
+            {
+                pictureBoxPreview.Image = null;
+            }
         }
 
         private void listBoxSeq_SelectedIndexChanged(object sender, EventArgs e)
@@ -174,7 +181,12 @@ namespace WAX_converter
                 i.Image.RotateFlip(RotateFlipType.RotateNoneFlipX);
             }
 
-            pictureBoxPreview.Image = sourceImages[listBoxImages.SelectedIndex].Image;
+            pictureBoxPreview.Image = null;
+            if (listBoxImages.SelectedItem != null)
+            {
+                int imageIndex = (int)listBoxImages.SelectedValue;
+                pictureBoxPreview.Image = sourceImages[imageIndex].Image;
+            }
         }
 
         private void checkBoxZoom_CheckedChanged(object sender, EventArgs e)
@@ -190,7 +202,7 @@ namespace WAX_converter
 
             if (i >= 0)
             {
-                selectedAction = actionKeyList[comboBoxAction.SelectedIndex];
+                this.selectedAction = actionKeyList[comboBoxAction.SelectedIndex];
                 updateSelectedSequence();
             }
         }
@@ -326,6 +338,198 @@ namespace WAX_converter
 
                 btnSourceFolder.Enabled = false;    // disable ability to change source folder
             }
+        }
+
+        // DONE button --------------------------------------------------------------------------------------------------
+
+        private void btnDone_Click(object sender, EventArgs e)
+        {
+            var actionList = new List<Action>();
+            var sequenceList = new List<Sequence>();
+            var frameList = new List<Frame>();
+
+            // Generate frames
+            this.GenerateFrames(actionDictionary["Moving"], frameList);
+            this.GenerateFrames(actionDictionary["Attack1"], frameList);
+            this.GenerateFrames(actionDictionary["Dying1"], frameList);
+            this.GenerateFrames(actionDictionary["Dying2"], frameList);
+            this.GenerateFrames(actionDictionary["Dead"], frameList);
+            this.GenerateFrames(actionDictionary["Stationary"], frameList);
+            this.GenerateFrames(actionDictionary["Recoil"], frameList);
+            this.GenerateFrames(actionDictionary["Attack2"], frameList);
+            this.GenerateFrames(actionDictionary["Recoil2"], frameList);
+            this.GenerateFrames(actionDictionary["Pain"], frameList);
+            this.GenerateFrames(actionDictionary["DTSpecial"], frameList);
+
+            // Initialise then create actions (11 will be used)
+            for (var a = 0; a < 14; a++)
+            {
+                actionList.Add(new Action());
+            }
+
+            this.CreateAction(actionList[0], 0);        // Moving
+            this.CreateAction(actionList[1], 8);        // Attack1
+            this.CreateAction(actionList[2], 16);       // Dying1
+            this.CreateAction(actionList[3], 24);       // Dying2
+            this.CreateAction(actionList[4], 32);       // Dead
+            this.CreateAction(actionList[5], 40);       // Stationary
+            this.CreateAction(actionList[6], 48);       // Recoil1
+            this.CreateAction(actionList[7], 56);       // Attack2
+            this.CreateAction(actionList[8], 64);       // Recoil2
+            this.CreateAction(actionList[12], 72);      // Pain
+            this.CreateAction(actionList[13], 80);      // DT Special
+
+            // Initialise 11 x 8 = 88 sequences, then create each one
+            for (var s = 0; s < 88; s++)
+            {
+                sequenceList.Add(new Sequence());
+            }
+
+            // Moving
+            for (var s = 0; s < 8; s++)
+            {
+                for (var f = 0; f < 32; f++)
+                {
+                    sequenceList[s].frameIndexes[f] = actionDictionary["Moving"].sequences[s].frames[f].waxFrameNumber;
+                }
+            }
+
+            // Attack1
+            for (var s = 0; s < 8; s++)
+            {
+                for (var f = 0; f < 32; f++)
+                {
+                    sequenceList[s + 8].frameIndexes[f] = actionDictionary["Attack1"].sequences[s].frames[f].waxFrameNumber;
+                }
+            }
+
+            // Dying1
+            for (var s = 0; s < 8; s++)
+            {
+                for (var f = 0; f < 32; f++)
+                {
+                    sequenceList[s + 16].frameIndexes[f] = actionDictionary["Dying1"].sequences[s].frames[f].waxFrameNumber;
+                }
+            }
+
+            // Dying2
+            for (var s = 0; s < 8; s++)
+            {
+                for (var f = 0; f < 32; f++)
+                {
+                    sequenceList[s + 24].frameIndexes[f] = actionDictionary["Dying2"].sequences[s].frames[f].waxFrameNumber;
+                }
+            }
+
+            // Dead
+            for (var s = 0; s < 8; s++)
+            {
+                for (var f = 0; f < 32; f++)
+                {
+                    sequenceList[s + 32].frameIndexes[f] = actionDictionary["Dead"].sequences[s].frames[f].waxFrameNumber;
+                }
+            }
+
+            // Stationary
+            for (var s = 0; s < 8; s++)
+            {
+                for (var f = 0; f < 32; f++)
+                {
+                    sequenceList[s + 40].frameIndexes[f] = actionDictionary["Stationary"].sequences[s].frames[f].waxFrameNumber;
+                }
+            }
+
+            // REcoil
+            for (var s = 0; s < 8; s++)
+            {
+                for (var f = 0; f < 32; f++)
+                {
+                    sequenceList[s + 48].frameIndexes[f] = actionDictionary["Recoil"].sequences[s].frames[f].waxFrameNumber;
+                }
+            }
+
+            // Attack2
+            for (var s = 0; s < 8; s++)
+            {
+                for (var f = 0; f < 32; f++)
+                {
+                    sequenceList[s + 56].frameIndexes[f] = actionDictionary["Attack2"].sequences[s].frames[f].waxFrameNumber;
+                }
+            }
+
+            // Recoil2
+            for (var s = 0; s < 8; s++)
+            {
+                for (var f = 0; f < 32; f++)
+                {
+                    sequenceList[s + 64].frameIndexes[f] = actionDictionary["Recoil2"].sequences[s].frames[f].waxFrameNumber;
+                }
+            }
+
+            // Pain
+            for (var s = 0; s < 8; s++)
+            {
+                for (var f = 0; f < 32; f++)
+                {
+                    sequenceList[s + 72].frameIndexes[f] = actionDictionary["Pain"].sequences[s].frames[f].waxFrameNumber;
+                }
+            }
+
+            // DTSpecial
+            for (var s = 0; s < 8; s++)
+            {
+                for (var f = 0; f < 32; f++)
+                {
+                    sequenceList[s + 80].frameIndexes[f] = actionDictionary["DTSpecial"].sequences[s].frames[f].waxFrameNumber;
+                }
+            }
+
+            return;
+        }
+
+        private void GenerateFrames(WizardAction wizardAction, List<Frame> frameList)
+        {
+            // Iterate thru each wizframe in each wizsequence; if it points to an image, create a frame for it in the frameList
+            foreach (var ws in wizardAction.sequences)
+            {
+                for (int f = 0; f < 32; f++)
+                {
+                    var imageIndex = ws.frames[f].imageIndex;
+                    
+                    // If the wizardFrame is set to an image, create a frame for it
+                    if (imageIndex != -1)
+                    {
+                        Frame newFrame = new Frame();
+                        newFrame.InsertX = 0;       // TODO
+                        newFrame.InsertY = 0;       // TODO
+                        newFrame.Flip = ws.isFlipped ? 1 : 0;          // check
+                        newFrame.CellIndex = imageIndex;
+
+                        frameList.Add(newFrame);
+                        ws.frames[f].waxFrameNumber = frameList.Count - 1;
+                    }
+                    else
+                    {
+                        ws.frames[f].waxFrameNumber = -1;
+                    }
+                }
+            }
+        }
+        
+        private void CreateAction(Action action, int firstSequence)
+        {
+            action.FrameRate = 6;       // default
+            action.Wwidth = 10000;      // TODO
+            action.Wheight = 10000;     // TODO
+
+            for (var s = 0; s < 32; s++)
+            {
+                var sPlusTwo = s + 2;
+                if (sPlusTwo >= 32) sPlusTwo -= 32;
+
+                action.seqIndexes[s] = firstSequence + (sPlusTwo / 4);
+            }
+            
         }
     }
 }

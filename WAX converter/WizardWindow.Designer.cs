@@ -51,8 +51,13 @@
             this.checkBoxZoom = new System.Windows.Forms.CheckBox();
             this.listBoxSeq = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.btnDone = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnQuit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // comboBoxAction
@@ -82,9 +87,9 @@
             // 
             // btnSourceFolder
             // 
-            this.btnSourceFolder.Location = new System.Drawing.Point(410, 19);
+            this.btnSourceFolder.Location = new System.Drawing.Point(260, 19);
             this.btnSourceFolder.Name = "btnSourceFolder";
-            this.btnSourceFolder.Size = new System.Drawing.Size(146, 41);
+            this.btnSourceFolder.Size = new System.Drawing.Size(124, 41);
             this.btnSourceFolder.TabIndex = 3;
             this.btnSourceFolder.Text = "Source images";
             this.btnSourceFolder.UseVisualStyleBackColor = true;
@@ -282,11 +287,53 @@
             this.label3.TabIndex = 21;
             this.label3.Text = "Images in sequence";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(410, 56);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(84, 15);
+            this.label4.TabIndex = 22;
+            this.label4.Text = "Source images";
+            // 
+            // btnDone
+            // 
+            this.btnDone.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnDone.Location = new System.Drawing.Point(518, 23);
+            this.btnDone.Name = "btnDone";
+            this.btnDone.Size = new System.Drawing.Size(111, 36);
+            this.btnDone.TabIndex = 23;
+            this.btnDone.Text = "DONE";
+            this.btnDone.UseVisualStyleBackColor = true;
+            this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.btnQuit);
+            this.panel1.Controls.Add(this.btnDone);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 540);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1284, 71);
+            this.panel1.TabIndex = 24;
+            // 
+            // btnQuit
+            // 
+            this.btnQuit.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnQuit.Location = new System.Drawing.Point(653, 23);
+            this.btnQuit.Name = "btnQuit";
+            this.btnQuit.Size = new System.Drawing.Size(111, 36);
+            this.btnQuit.TabIndex = 24;
+            this.btnQuit.Text = "QUIT";
+            this.btnQuit.UseVisualStyleBackColor = true;
+            // 
             // WizardWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1284, 557);
+            this.ClientSize = new System.Drawing.Size(1284, 611);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.listBoxSeq);
             this.Controls.Add(this.checkBoxZoom);
@@ -314,6 +361,7 @@
             this.Load += new System.EventHandler(this.WizardWindow_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -343,5 +391,9 @@
         private System.Windows.Forms.CheckBox checkBoxZoom;
         private System.Windows.Forms.ListBox listBoxSeq;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnDone;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnQuit;
     }
 }
