@@ -54,6 +54,7 @@ namespace WAX_converter
             this.MenuQuit = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuBuildWax = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuBuild = new System.Windows.Forms.ToolStripMenuItem();
+            this.enemyWizardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuHelphelp = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuAbout = new System.Windows.Forms.ToolStripMenuItem();
@@ -82,7 +83,6 @@ namespace WAX_converter
             this.openPalDialog = new System.Windows.Forms.OpenFileDialog();
             this.exportDialog = new System.Windows.Forms.SaveFileDialog();
             this.openFmeDialog = new System.Windows.Forms.OpenFileDialog();
-            this.enemyWizardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2.SuspendLayout();
             this.RadioGroup.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -316,15 +316,23 @@ namespace WAX_converter
             this.MenuBuild,
             this.enemyWizardToolStripMenuItem});
             this.MenuBuildWax.Name = "MenuBuildWax";
-            this.MenuBuildWax.Size = new System.Drawing.Size(75, 20);
-            this.MenuBuildWax.Text = "Build WAX";
+            this.MenuBuildWax.Size = new System.Drawing.Size(82, 20);
+            this.MenuBuildWax.Text = "Create WAX";
             // 
             // MenuBuild
             // 
             this.MenuBuild.Name = "MenuBuild";
             this.MenuBuild.Size = new System.Drawing.Size(180, 22);
-            this.MenuBuild.Text = "Build";
+            this.MenuBuild.Text = "Build manually";
             this.MenuBuild.Click += new System.EventHandler(this.MenuBuild_Click);
+            // 
+            // enemyWizardToolStripMenuItem
+            // 
+            this.enemyWizardToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.enemyWizardToolStripMenuItem.Name = "enemyWizardToolStripMenuItem";
+            this.enemyWizardToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.enemyWizardToolStripMenuItem.Text = "Enemy Wizard";
+            this.enemyWizardToolStripMenuItem.Click += new System.EventHandler(this.enemyWizardToolStripMenuItem_Click);
             // 
             // MenuHelp
             // 
@@ -611,13 +619,6 @@ namespace WAX_converter
             this.openFmeDialog.Filter = "Dark Forces FME files|*.fme";
             this.openFmeDialog.Title = "Open FME file";
             this.openFmeDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.openFmeDialog_FileOk);
-            // 
-            // enemyWizardToolStripMenuItem
-            // 
-            this.enemyWizardToolStripMenuItem.Name = "enemyWizardToolStripMenuItem";
-            this.enemyWizardToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.enemyWizardToolStripMenuItem.Text = "Enemy Wizard";
-            this.enemyWizardToolStripMenuItem.Click += new System.EventHandler(this.enemyWizardToolStripMenuItem_Click);
             // 
             // MainWindow
             // 
