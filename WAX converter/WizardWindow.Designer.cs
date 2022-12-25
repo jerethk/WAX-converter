@@ -337,6 +337,7 @@
             this.btnQuit.TabIndex = 24;
             this.btnQuit.Text = "QUIT";
             this.btnQuit.UseVisualStyleBackColor = true;
+            this.btnQuit.Click += new System.EventHandler(this.btnQuit_Click);
             // 
             // panel2
             // 
@@ -417,6 +418,7 @@
             this.MinimumSize = new System.Drawing.Size(1300, 720);
             this.Name = "WizardWindow";
             this.Text = "Wizard";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.WizardWindow_FormClosing);
             this.Load += new System.EventHandler(this.WizardWindow_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

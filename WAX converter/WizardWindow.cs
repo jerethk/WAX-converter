@@ -97,8 +97,6 @@ namespace WAX_converter
             getSourceImages();
         }
 
-        // --------------------------------------------------------------------------------------------------------------------
-
         private void btnSourceFolder_Click(object sender, EventArgs e)
         {
             // TODO check if work has already begun
@@ -150,6 +148,24 @@ namespace WAX_converter
                 }
             }
         }
+
+        // --------------------------------------------------------------------------------------------------------------------
+
+        private void btnQuit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void WizardWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            var response = MessageBox.Show("You will lose any work you have done. Are you sure you want to exit?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+            if (response == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
+        }
+
+        // --------------------------------------------------------------------------------------------------------------------
 
         private void listBoxImages_SelectedIndexChanged(object sender, EventArgs e)
         {
