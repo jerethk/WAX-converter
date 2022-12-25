@@ -97,10 +97,11 @@
             // 
             this.btnSourceFolder.Location = new System.Drawing.Point(260, 20);
             this.btnSourceFolder.Name = "btnSourceFolder";
-            this.btnSourceFolder.Size = new System.Drawing.Size(124, 41);
+            this.btnSourceFolder.Size = new System.Drawing.Size(108, 41);
             this.btnSourceFolder.TabIndex = 3;
-            this.btnSourceFolder.Text = "Source images";
+            this.btnSourceFolder.Text = "*Source images*";
             this.btnSourceFolder.UseVisualStyleBackColor = true;
+            this.btnSourceFolder.Visible = false;
             this.btnSourceFolder.Click += new System.EventHandler(this.btnSourceFolder_Click);
             // 
             // listBoxImages

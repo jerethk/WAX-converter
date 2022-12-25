@@ -71,6 +71,8 @@ namespace WAX_converter
         private string selectedAction;
         private int selectedViewAngle = 0;
 
+        private bool showCloseWindowPrompt = false;
+
         public WizardWindow()
         {
             InitializeComponent();
@@ -99,8 +101,6 @@ namespace WAX_converter
 
         private void btnSourceFolder_Click(object sender, EventArgs e)
         {
-            // TODO check if work has already begun
-            
             getSourceImages();
         }
 
@@ -112,10 +112,10 @@ namespace WAX_converter
             {
                 var dir = Path.GetDirectoryName(folderBrowser.FileName);
                 var files = Directory.EnumerateFiles(dir);
-                this.sourceImages.Clear();
-
+                
                 if (files != null)
                 {
+                    this.sourceImages.Clear();
                     int counter = 0;
 
                     foreach (var file in files)
@@ -141,11 +141,24 @@ namespace WAX_converter
                         counter++;
                     }
 
+                    if (this.sourceImages.Count == 0)
+                    {
+                        MessageBox.Show("There are no source images in this directory!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        this.Close();
+                        return;
+                    }
+
                     listBoxImages.DataSource = null;
                     listBoxImages.DataSource = this.sourceImages;
                     listBoxImages.DisplayMember = "Name";
                     listBoxImages.ValueMember = "Index";
+
+                    this.showCloseWindowPrompt = true;
                 }
+            }
+            else
+            {
+                this.Close();
             }
         }
 
@@ -158,10 +171,13 @@ namespace WAX_converter
 
         private void WizardWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
-            var response = MessageBox.Show("You will lose any work you have done. Are you sure you want to exit?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-            if (response == DialogResult.No)
+            if (this.showCloseWindowPrompt)
             {
-                e.Cancel = true;
+                var response = MessageBox.Show("You will lose any work you have done. Are you sure you want to exit?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                if (response == DialogResult.No)
+                {
+                    e.Cancel = true;
+                }
             }
         }
 
@@ -608,8 +624,8 @@ namespace WAX_converter
                     if (imageIndex != -1)
                     {
                         Frame newFrame = new Frame();
-                        newFrame.InsertX = 0;                                           // TODO
-                        newFrame.InsertY = 0;                                           // TODO
+                        newFrame.InsertX = -(this.sourceImages[imageIndex].Image.Width / 2);
+                        newFrame.InsertY = -this.sourceImages[imageIndex].Image.Height;
                         newFrame.Flip = ws.isFlipped ? 1 : 0;          // check
                         newFrame.CellIndex = imageIndex;
 
