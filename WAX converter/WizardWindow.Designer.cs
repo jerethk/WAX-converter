@@ -237,7 +237,7 @@
             // btnApplyImages
             // 
             this.btnApplyImages.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnApplyImages.Location = new System.Drawing.Point(247, 54);
+            this.btnApplyImages.Location = new System.Drawing.Point(260, 54);
             this.btnApplyImages.Name = "btnApplyImages";
             this.btnApplyImages.Size = new System.Drawing.Size(161, 44);
             this.btnApplyImages.TabIndex = 16;
@@ -379,7 +379,7 @@
             // btnApplyAllFacings
             // 
             this.btnApplyAllFacings.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnApplyAllFacings.Location = new System.Drawing.Point(431, 54);
+            this.btnApplyAllFacings.Location = new System.Drawing.Point(444, 54);
             this.btnApplyAllFacings.Name = "btnApplyAllFacings";
             this.btnApplyAllFacings.Size = new System.Drawing.Size(161, 44);
             this.btnApplyAllFacings.TabIndex = 19;
@@ -391,7 +391,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(247, 15);
+            this.label5.Location = new System.Drawing.Point(260, 15);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(151, 17);
             this.label5.TabIndex = 18;

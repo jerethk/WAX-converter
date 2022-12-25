@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Drawing.Text;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace WAX_converter
@@ -318,16 +316,13 @@ namespace WAX_converter
 
             if (numberSelectedImages > 0)
             {
+                actionDictionary[selectedAction].sequences[selectedViewAngle] = new WizardSequence();
                 actionDictionary[selectedAction].sequences[selectedViewAngle].isFlipped = checkBoxFlip.Checked;
+
                 int n = 0;
-                
                 foreach (int index in listBoxImages.SelectedIndices)
                 {
-                    var image = sourceImages[index].Image;
-                    var frame = new WizardFrame();
-                    frame.imageIndex = index;
-
-                    actionDictionary[selectedAction].sequences[selectedViewAngle].frames[n] = frame;
+                    actionDictionary[selectedAction].sequences[selectedViewAngle].frames[n].imageIndex = index;
                     
                     // max number of frames in a sequence is 32 so break loop if n == 31
                     n++;
@@ -335,7 +330,6 @@ namespace WAX_converter
                 }
 
                 updateSelectedSequence();
-
                 btnSourceFolder.Enabled = false;    // disable ability to change source folder
             }
         }
@@ -347,18 +341,18 @@ namespace WAX_converter
 
             if (numberSelectedImages > 0)
             {
-                actionDictionary[selectedAction].sequences[selectedViewAngle].isFlipped = checkBoxFlip.Checked;
-                int n = 0;
+                for (var s = 0; s < 8; s++)
+                {
+                    actionDictionary[selectedAction].sequences[s] = new WizardSequence();
+                    actionDictionary[selectedAction].sequences[s].isFlipped = this.checkBoxFlip.Checked;
+                }
 
+                int n = 0;
                 foreach (int index in listBoxImages.SelectedIndices)
                 {
-                    var image = sourceImages[index].Image;
-                    var frame = new WizardFrame();
-                    frame.imageIndex = index;
-
                     foreach (var viewAngle in actionDictionary[selectedAction].sequences)
                     {
-                        viewAngle.frames[n] = frame;
+                        viewAngle.frames[n].imageIndex = index;
                     }
 
                     // max number of frames in a sequence is 32 so break loop if n == 31
@@ -367,14 +361,19 @@ namespace WAX_converter
                 }
 
                 updateSelectedSequence();
-
                 btnSourceFolder.Enabled = false;    // disable ability to change source folder
             }
         }
 
-            // DONE button --------------------------------------------------------------------------------------------------
+        // DONE button --------------------------------------------------------------------------------------------------
 
-            private void btnDone_Click(object sender, EventArgs e)
+        /* private class Debug
+         {
+             public string key { get; set; }
+             public int framenum { get; set; }
+         }*/
+
+        private void btnDone_Click(object sender, EventArgs e)
         {
             var actionList = new List<Action>();
             var sequenceList = new List<Sequence>();
@@ -392,6 +391,23 @@ namespace WAX_converter
             this.GenerateFrames(actionDictionary["Recoil2"], frameList);
             this.GenerateFrames(actionDictionary["Pain"], frameList);
             this.GenerateFrames(actionDictionary["DTSpecial"], frameList);
+
+            //var wfl = new List<Debug>();
+            //foreach (KeyValuePair<string, WizardAction> wza in actionDictionary)
+            //{
+            //    foreach (var s in wza.Value.sequences)
+            //    {
+            //        foreach (var f in s.frames)
+            //        {
+            //            if (f.waxFrameNumber != -1)
+            //            {
+            //                var ob = new Debug() { key = wza.Key, framenum = f.waxFrameNumber };
+            //                wfl.Add(ob);
+            //            }
+            //        }
+            //    }
+            //}
+
 
             // Initialise then create actions (11 will be used)
             for (var a = 0; a < 14; a++)
@@ -516,8 +532,21 @@ namespace WAX_converter
                 }
             }
 
+            // FOR DEBUGGING
+            //WaxProject.Save("D:\\jereth\\game works\\df\\temp\\test.wproj", 2, actionList, sequenceList, frameList, this.sourceImages.Count);
 
-            return;
+            //BuildWindow newBuildWindow = new BuildWindow();
+            //newBuildWindow.FrameList = frameList;
+            //newBuildWindow.SequenceList = sequenceList;
+            //newBuildWindow.ActionList = actionList;
+            
+            
+            //foreach (var img in this.sourceImages)
+            //{
+            //    newBuildWindow.ImageList.Add(img.Image);
+            //}
+
+            //newBuildWindow.Show();
         }
 
         private void GenerateFrames(WizardAction wizardAction, List<Frame> frameList)
@@ -533,8 +562,8 @@ namespace WAX_converter
                     if (imageIndex != -1)
                     {
                         Frame newFrame = new Frame();
-                        newFrame.InsertX = 0;       // TODO
-                        newFrame.InsertY = 0;       // TODO
+                        newFrame.InsertX = 0;                                           // TODO
+                        newFrame.InsertY = 0;                                           // TODO
                         newFrame.Flip = ws.isFlipped ? 1 : 0;          // check
                         newFrame.CellIndex = imageIndex;
 
@@ -547,6 +576,8 @@ namespace WAX_converter
                     }
                 }
             }
+
+            return;
         }
         
         private void CreateAction(Action action, int firstSequence)
@@ -562,7 +593,6 @@ namespace WAX_converter
 
                 action.seqIndexes[s] = firstSequence + (sPlusTwo / 4);
             }
-            
         }
     }
 }
