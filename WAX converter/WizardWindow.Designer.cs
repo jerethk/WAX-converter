@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WizardWindow));
             this.comboBoxAction = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.folderBrowser = new System.Windows.Forms.FolderBrowserDialog();
+            this.folderBrowser2 = new System.Windows.Forms.FolderBrowserDialog();
             this.btnSourceFolder = new System.Windows.Forms.Button();
             this.listBoxImages = new System.Windows.Forms.ListBox();
             this.pictureBoxPreview = new System.Windows.Forms.PictureBox();
@@ -59,6 +59,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnApplyAllFacings = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
+            this.folderBrowser = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -84,12 +85,12 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "WAX Action";
             // 
-            // folderBrowser
+            // folderBrowser2
             // 
-            this.folderBrowser.Description = "Select folder containing images";
-            this.folderBrowser.RootFolder = System.Environment.SpecialFolder.DesktopDirectory;
-            this.folderBrowser.ShowNewFolderButton = false;
-            this.folderBrowser.UseDescriptionForTitle = true;
+            this.folderBrowser2.Description = "Select folder containing images";
+            this.folderBrowser2.RootFolder = System.Environment.SpecialFolder.DesktopDirectory;
+            this.folderBrowser2.ShowNewFolderButton = false;
+            this.folderBrowser2.UseDescriptionForTitle = true;
             // 
             // btnSourceFolder
             // 
@@ -397,6 +398,12 @@
             this.label5.TabIndex = 18;
             this.label5.Text = "Apply Selected Images:";
             // 
+            // folderBrowser
+            // 
+            this.folderBrowser.AddExtension = false;
+            this.folderBrowser.Filter = "All files|*.*|PNG images|*.PNG|BMP images|*.BMP|JPEG images|*.JPG";
+            this.folderBrowser.Title = "Select folder containing images";
+            // 
             // WizardWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -430,7 +437,7 @@
         private System.Windows.Forms.Button btnSourceFolder;
         private System.Windows.Forms.ListBox listBoxImages;
         private System.Windows.Forms.PictureBox pictureBoxPreview;
-        public System.Windows.Forms.FolderBrowserDialog folderBrowser;
+        public System.Windows.Forms.FolderBrowserDialog folderBrowser2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnFront;
@@ -455,5 +462,6 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button btnApplyAllFacings;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.OpenFileDialog folderBrowser;
     }
 }

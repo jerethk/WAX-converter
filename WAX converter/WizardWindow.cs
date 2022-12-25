@@ -112,7 +112,8 @@ namespace WAX_converter
 
             if (result == DialogResult.OK)
             {
-                var files = Directory.EnumerateFiles(folderBrowser.SelectedPath);
+                var dir = Path.GetDirectoryName(folderBrowser.FileName);
+                var files = Directory.EnumerateFiles(dir);
                 this.sourceImages.Clear();
 
                 if (files != null)
