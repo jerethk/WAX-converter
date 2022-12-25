@@ -60,6 +60,7 @@
             this.btnApplyAllFacings = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.folderBrowser = new System.Windows.Forms.OpenFileDialog();
+            this.saveProjDialog = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -405,6 +406,12 @@
             this.folderBrowser.Filter = "All files|*.*|PNG images|*.PNG|BMP images|*.BMP|JPEG images|*.JPG";
             this.folderBrowser.Title = "Select folder containing images";
             // 
+            // saveProjDialog
+            // 
+            this.saveProjDialog.DefaultExt = "wproj";
+            this.saveProjDialog.Filter = "WAX project files|*.wproj";
+            this.saveProjDialog.Title = "Save WAX Project";
+            // 
             // WizardWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -465,5 +472,6 @@
         private System.Windows.Forms.Button btnApplyAllFacings;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.OpenFileDialog folderBrowser;
+        private System.Windows.Forms.SaveFileDialog saveProjDialog;
     }
 }

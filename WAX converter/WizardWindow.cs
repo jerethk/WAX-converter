@@ -325,7 +325,7 @@ namespace WAX_converter
 
         }
 
-        // APPLY button --------------------------------------------------------------------------------------------------
+        // APPLY buttons --------------------------------------------------------------------------------------------------
 
         private void btnApplyImages_Click(object sender, EventArgs e)
         {
@@ -353,7 +353,7 @@ namespace WAX_converter
 
         private void btnApplyAllFacings_Click(object sender, EventArgs e)
         {
-            // Apply the currently selected images to all 8 facings
+            // Apply the currently selected images to all 8 facings of selected action
             int numberSelectedImages = listBoxImages.SelectedIndices.Count;
 
             if (numberSelectedImages > 0)
@@ -424,7 +424,6 @@ namespace WAX_converter
             //        }
             //    }
             //}
-
 
             // Initialise then create actions (11 will be used)
             for (var a = 0; a < 14; a++)
@@ -549,8 +548,36 @@ namespace WAX_converter
                 }
             }
 
-            // FOR DEBUGGING
-            //WaxProject.Save("D:\\jereth\\game works\\df\\temp\\test.wproj", 2, actionList, sequenceList, frameList, this.sourceImages.Count);
+            // Ask user to save as Wax project
+            var dialogResult = this.saveProjDialog.ShowDialog();
+            if (dialogResult == DialogResult.OK)
+            {
+                string FileNameNoExtension = Path.GetFileNameWithoutExtension(saveProjDialog.FileName);
+                string Dir = Path.GetDirectoryName(saveProjDialog.FileName);
+                string imageDirectory = Dir + "/" + FileNameNoExtension;
+
+                try
+                {
+                    bool success = WaxProject.Save(this.saveProjDialog.FileName, 3, actionList, sequenceList, frameList, this.sourceImages.Count);
+                    Directory.CreateDirectory(imageDirectory);
+
+                    for (int i = 0; i < this.sourceImages.Count; i++)
+                    {
+                        var fileNum = Waxfile.GetExportFileNumber(i);
+                        string imageSavePath = imageDirectory + "/" + fileNum + ".png";
+                        this.sourceImages[i].Image.Save(imageSavePath, System.Drawing.Imaging.ImageFormat.Png);
+                    }
+
+                    if (success)
+                    {
+                        MessageBox.Show("Wax project file saved.", "Project Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error while saving: {ex.Message}");
+                }
+            }
 
             // Create build window and put everything in
             BuildWindow newBuildWindow = new BuildWindow();
