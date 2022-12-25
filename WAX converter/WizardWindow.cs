@@ -535,18 +535,20 @@ namespace WAX_converter
             // FOR DEBUGGING
             //WaxProject.Save("D:\\jereth\\game works\\df\\temp\\test.wproj", 2, actionList, sequenceList, frameList, this.sourceImages.Count);
 
-            //BuildWindow newBuildWindow = new BuildWindow();
-            //newBuildWindow.FrameList = frameList;
-            //newBuildWindow.SequenceList = sequenceList;
-            //newBuildWindow.ActionList = actionList;
+            // Create build window and put everything in
+            BuildWindow newBuildWindow = new BuildWindow();
+            newBuildWindow.FrameList = frameList;
+            newBuildWindow.SequenceList = sequenceList;
+            newBuildWindow.ActionList = actionList;
             
-            
-            //foreach (var img in this.sourceImages)
-            //{
-            //    newBuildWindow.ImageList.Add(img.Image);
-            //}
+            foreach (var img in this.sourceImages)
+            {
+                newBuildWindow.ImageList.Add(img.Image);
+            }
 
-            //newBuildWindow.Show();
+            newBuildWindow.PopulateUI();
+            newBuildWindow.Show();
+            newBuildWindow.SetComboBoxLogic(3);     // Set to Dark Trooper so all 14 actions are visible
         }
 
         private void GenerateFrames(WizardAction wizardAction, List<Frame> frameList)
@@ -576,8 +578,6 @@ namespace WAX_converter
                     }
                 }
             }
-
-            return;
         }
         
         private void CreateAction(Action action, int firstSequence)
