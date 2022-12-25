@@ -62,7 +62,7 @@ namespace WAX_converter
 
         // ---------------------------------------------------------------------------------------------
 
-        private string[] actionLabelList = new string[] { "Stationary", "Moving", "Attack 1", "Recoil", "Attack 2", "Recoil 2", "Pain", "Dying 1", "Dying 2", "Dead", "DT special" };
+        private string[] actionLabelList = new string[] { "Stationary", "Moving", "Attack 1", "Recoil", "Attack 2", "Recoil 2", "Pain", "Dying 1", "Dying 2", "Dead", "Dark Trooper special" };
         private string[] actionKeyList = new string[] { "Stationary", "Moving", "Attack1", "Recoil", "Attack2", "Recoil2", "Pain", "Dying1", "Dying2", "Dead", "DTSpecial" };
 
         private Dictionary<string, WizardAction> actionDictionary;
@@ -131,14 +131,13 @@ namespace WAX_converter
                                 image.Index = counter;
                                 image.Image = new Bitmap(file);
                                 this.sourceImages.Add(image);
+                                counter++;
                             }
                         }
                         catch (Exception exception)
                         {
                             MessageBox.Show($"Error loading file '{Path.GetFileName(file)}'. \n{exception.Message}");
                         }
-
-                        counter++;
                     }
 
                     if (this.sourceImages.Count == 0)
@@ -441,10 +440,32 @@ namespace WAX_converter
             //    }
             //}
 
+            // Calculate wwidth and wheight based on height of "stationary" frame (this will hopefully give a reasonable value...)
+            int ww = 70000;
+            int wh = 70000;
+            var sampleImageIndex = this.actionDictionary["Stationary"].sequences[0].frames[0].imageIndex;
+
+            if (sampleImageIndex >= 0)
+            {
+                var sampleImage = this.sourceImages[sampleImageIndex].Image;
+                if (sampleImage != null)
+                {
+                    float scaleFactor = 70f / sampleImage.Height;
+                    ww = (int)(70000 * scaleFactor);
+                    wh = (int)(70000 * scaleFactor);
+                }
+            }
+            
             // Initialise then create actions (11 will be used)
             for (var a = 0; a < 14; a++)
             {
-                actionList.Add(new Action());
+                var newAction = new Action()
+                {
+                    Wheight = wh,
+                    Wwidth = ww,
+                    FrameRate = 6       // default
+                };
+                actionList.Add(newAction);
             }
 
             this.CreateAction(actionList[0], 0);        // Moving
@@ -642,10 +663,6 @@ namespace WAX_converter
         
         private void CreateAction(Action action, int firstSequence)
         {
-            action.FrameRate = 6;       // default
-            action.Wwidth = 10000;      // TODO
-            action.Wheight = 10000;     // TODO
-
             for (var s = 0; s < 32; s++)
             {
                 var sPlusTwo = s + 2;
