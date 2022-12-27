@@ -36,7 +36,7 @@
             this.listBoxImages = new System.Windows.Forms.ListBox();
             this.pictureBoxPreview = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.viewingAngleDiagram = new System.Windows.Forms.PictureBox();
             this.btnFront = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
             this.btnLeft = new System.Windows.Forms.Button();
@@ -62,7 +62,7 @@
             this.folderBrowser = new System.Windows.Forms.OpenFileDialog();
             this.saveProjDialog = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.viewingAngleDiagram)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -137,17 +137,17 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "Viewing angle";
             // 
-            // pictureBox1
+            // viewingAngleDiagram
             // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.Control;
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.InitialImage = null;
-            this.pictureBox1.Location = new System.Drawing.Point(164, 243);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(64, 64);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 7;
-            this.pictureBox1.TabStop = false;
+            this.viewingAngleDiagram.BackColor = System.Drawing.SystemColors.Control;
+            this.viewingAngleDiagram.Image = ((System.Drawing.Image)(resources.GetObject("viewingAngleDiagram.Image")));
+            this.viewingAngleDiagram.InitialImage = null;
+            this.viewingAngleDiagram.Location = new System.Drawing.Point(145, 215);
+            this.viewingAngleDiagram.Name = "viewingAngleDiagram";
+            this.viewingAngleDiagram.Size = new System.Drawing.Size(100, 130);
+            this.viewingAngleDiagram.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.viewingAngleDiagram.TabIndex = 7;
+            this.viewingAngleDiagram.TabStop = false;
             // 
             // btnFront
             // 
@@ -353,7 +353,7 @@
             this.panel2.Controls.Add(this.listBoxImages);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.checkBoxFlip);
-            this.panel2.Controls.Add(this.pictureBox1);
+            this.panel2.Controls.Add(this.viewingAngleDiagram);
             this.panel2.Controls.Add(this.output);
             this.panel2.Controls.Add(this.btnFront);
             this.panel2.Controls.Add(this.btnBack);
@@ -425,11 +425,11 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(1300, 720);
             this.Name = "WizardWindow";
-            this.Text = "Wizard";
+            this.Text = "Enemy WAX Wizard";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.WizardWindow_FormClosing);
             this.Load += new System.EventHandler(this.WizardWindow_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.viewingAngleDiagram)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -449,7 +449,7 @@
         private System.Windows.Forms.PictureBox pictureBoxPreview;
         public System.Windows.Forms.FolderBrowserDialog folderBrowser2;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox viewingAngleDiagram;
         private System.Windows.Forms.Button btnFront;
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnLeft;

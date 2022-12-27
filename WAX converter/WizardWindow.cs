@@ -62,7 +62,7 @@ namespace WAX_converter
 
         // ---------------------------------------------------------------------------------------------
 
-        private string[] actionLabelList = new string[] { "Stationary", "Moving", "Attack 1", "Recoil", "Attack 2", "Recoil 2", "Pain", "Dying 1", "Dying 2", "Dead", "Dark Trooper special" };
+        private string[] actionLabelList = new string[] { "Stationary", "Moving", "Attack 1", "Recoil 1", "Attack 2", "Recoil 2", "Pain", "Dying 1", "Dying 2", "Dead", "Dark Trooper special" };
         private string[] actionKeyList = new string[] { "Stationary", "Moving", "Attack1", "Recoil", "Attack2", "Recoil2", "Pain", "Dying1", "Dying2", "Dead", "DTSpecial" };
 
         private Dictionary<string, WizardAction> actionDictionary;
@@ -70,6 +70,7 @@ namespace WAX_converter
         private List<SourceImage> currentSequenceImages = new List<SourceImage>();
         private string selectedAction;
         private int selectedViewAngle = 0;
+        private Image[] viewingAngleDiagramImages = new Image[8];
 
         private bool showCloseWindowPrompt = false;
 
@@ -97,6 +98,16 @@ namespace WAX_converter
         private void WizardWindow_Load(object sender, EventArgs e)
         {
             getSourceImages();
+
+            this.viewingAngleDiagramImages[0] = new Bitmap("resource\\sprite0.png");
+            this.viewingAngleDiagramImages[1] = new Bitmap("resource\\sprite1.png");
+            this.viewingAngleDiagramImages[2] = new Bitmap("resource\\sprite2.png");
+            this.viewingAngleDiagramImages[3] = new Bitmap("resource\\sprite3.png");
+            this.viewingAngleDiagramImages[4] = new Bitmap("resource\\sprite4.png");
+            this.viewingAngleDiagramImages[5] = new Bitmap("resource\\sprite5.png");
+            this.viewingAngleDiagramImages[6] = new Bitmap("resource\\sprite6.png");
+            this.viewingAngleDiagramImages[7] = new Bitmap("resource\\sprite7.png");
+            this.viewingAngleDiagram.Image = this.viewingAngleDiagramImages[this.selectedViewAngle];
         }
 
         private void btnSourceFolder_Click(object sender, EventArgs e)
@@ -317,6 +328,7 @@ namespace WAX_converter
         {
             output.Text = $"{selectedAction} {selectedViewAngle}";
 
+            this.viewingAngleDiagram.Image = this.viewingAngleDiagramImages[this.selectedViewAngle];
             var seq = actionDictionary[selectedAction].sequences[selectedViewAngle];
             checkBoxFlip.Checked = seq.isFlipped;
             listBoxImages.SelectedItems.Clear();
