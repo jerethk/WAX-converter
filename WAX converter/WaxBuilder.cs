@@ -64,6 +64,15 @@ namespace WAX_converter
 
             // Sequences
             newWax.Sequences = SourceSequenceList;
+            foreach (var s in newWax.Sequences)
+            {
+                // Do not permit an empty sequence. If the first frame is set to -1, set it to frame 0
+                if (s.frameIndexes[0] == -1)
+                {
+                    s.frameIndexes[0] = 0;
+                }
+            }
+
             for (int s = 0; s < newWax.Nseqs; s++)
             {
                 for (int f = 0; f < 32; f++)    // calculate the frame addresses

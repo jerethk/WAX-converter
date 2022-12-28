@@ -322,7 +322,7 @@ namespace WAX_converter
             // MenuBuild
             // 
             this.MenuBuild.Name = "MenuBuild";
-            this.MenuBuild.Size = new System.Drawing.Size(180, 22);
+            this.MenuBuild.Size = new System.Drawing.Size(153, 22);
             this.MenuBuild.Text = "Build manually";
             this.MenuBuild.Click += new System.EventHandler(this.MenuBuild_Click);
             // 
@@ -330,7 +330,7 @@ namespace WAX_converter
             // 
             this.enemyWizardToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.enemyWizardToolStripMenuItem.Name = "enemyWizardToolStripMenuItem";
-            this.enemyWizardToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.enemyWizardToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.enemyWizardToolStripMenuItem.Text = "Enemy Wizard";
             this.enemyWizardToolStripMenuItem.Click += new System.EventHandler(this.enemyWizardToolStripMenuItem_Click);
             // 
@@ -347,13 +347,13 @@ namespace WAX_converter
             // MenuHelphelp
             // 
             this.MenuHelphelp.Name = "MenuHelphelp";
-            this.MenuHelphelp.Size = new System.Drawing.Size(107, 22);
+            this.MenuHelphelp.Size = new System.Drawing.Size(180, 22);
             this.MenuHelphelp.Text = "Help";
             // 
             // MenuAbout
             // 
             this.MenuAbout.Name = "MenuAbout";
-            this.MenuAbout.Size = new System.Drawing.Size(107, 22);
+            this.MenuAbout.Size = new System.Drawing.Size(180, 22);
             this.MenuAbout.Text = "About";
             // 
             // openWaxDialog
@@ -633,7 +633,7 @@ namespace WAX_converter
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(960, 720);
             this.Name = "MainWindow";
-            this.Text = "WAX Converter (version 1.2)";
+            this.Text = "WAX Converter (version 2.0 beta)";
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.RadioGroup.ResumeLayout(false);

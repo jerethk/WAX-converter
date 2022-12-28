@@ -781,6 +781,10 @@ namespace WAX_converter
             {
                 MessageBox.Show("You need to add cells!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            else if (FrameList.Count < 1)
+            {
+                MessageBox.Show("You need to add frames!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
             else if (SequenceList.Count < 1)
             {
                 MessageBox.Show("You need to add sequences!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);

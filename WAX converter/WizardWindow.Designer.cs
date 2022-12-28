@@ -256,6 +256,7 @@
             this.output.Size = new System.Drawing.Size(38, 15);
             this.output.TabIndex = 17;
             this.output.Text = "label3";
+            this.output.Visible = false;
             // 
             // checkBoxFlip
             // 
