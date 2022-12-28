@@ -99,14 +99,14 @@ namespace WAX_converter
         {
             getSourceImages();
 
-            this.viewingAngleDiagramImages[0] = new Bitmap("resource\\sprite0.png");
-            this.viewingAngleDiagramImages[1] = new Bitmap("resource\\sprite1.png");
-            this.viewingAngleDiagramImages[2] = new Bitmap("resource\\sprite2.png");
-            this.viewingAngleDiagramImages[3] = new Bitmap("resource\\sprite3.png");
-            this.viewingAngleDiagramImages[4] = new Bitmap("resource\\sprite4.png");
-            this.viewingAngleDiagramImages[5] = new Bitmap("resource\\sprite5.png");
-            this.viewingAngleDiagramImages[6] = new Bitmap("resource\\sprite6.png");
-            this.viewingAngleDiagramImages[7] = new Bitmap("resource\\sprite7.png");
+            this.viewingAngleDiagramImages[0] = this.sprite0Img.Image;
+            this.viewingAngleDiagramImages[1] = this.sprite1Img.Image;
+            this.viewingAngleDiagramImages[2] = this.sprite2Img.Image;
+            this.viewingAngleDiagramImages[3] = this.sprite3Img.Image;
+            this.viewingAngleDiagramImages[4] = this.sprite4Img.Image;
+            this.viewingAngleDiagramImages[5] = this.sprite5Img.Image;
+            this.viewingAngleDiagramImages[6] = this.sprite6Img.Image;
+            this.viewingAngleDiagramImages[7] = this.sprite7Img.Image;
             this.viewingAngleDiagram.Image = this.viewingAngleDiagramImages[this.selectedViewAngle];
         }
 
