@@ -14,6 +14,13 @@ namespace WAX_converter
         {
             this.InitializeComponent();
 
+            dataGridViews.Rows.Add(32);
+            for (int i = 0; i < 32; i++)
+            {
+                dataGridViews.Rows[i].Cells[0].Value = i;
+                dataGridViews.Rows[i].Cells[1].Value = 0;
+            }
+
             palette = new DFPal();
             ImageList = new List<Bitmap>();
             FrameList = new List<Frame>();
@@ -44,13 +51,6 @@ namespace WAX_converter
             for (int i = 0; i < 14; i++)    // create 14 actions, which is the maximum needed
             {
                 ActionList.Add(new Action());
-            }
-
-            dataGridViews.Rows.Add(32);
-            for (int i = 0; i < 32; i++)
-            {
-                dataGridViews.Rows[i].Cells[0].Value = i;
-                dataGridViews.Rows[i].Cells[1].Value = 0;
             }
 
             comboBoxLogic.SelectedIndex = 0;
@@ -406,15 +406,7 @@ namespace WAX_converter
         private void checkBoxFlip_CheckedChanged(object sender, EventArgs e)
         {
             int selectedFrame = listboxFrames.SelectedIndex;
-            
-            if (checkBoxFlip.Checked)
-            {
-                FrameList[selectedFrame].Flip = 1;
-            }
-            else
-            {
-                FrameList[selectedFrame].Flip = 0;
-            } 
+            FrameList[selectedFrame].Flip = checkBoxFlip.Checked ? 1 : 0;
         }
 
 // --- SEQUENCE AREA --------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -740,8 +732,12 @@ namespace WAX_converter
             {
                 int action = comboBoxAction.SelectedIndex;
                 int view = e.RowIndex;
-                int seq = ActionList[action].seqIndexes[view];
-                listboxSeqs.SelectedIndex = seq;
+                
+                if (action >= 0)
+                {
+                    int seq = ActionList[action].seqIndexes[view];
+                    listboxSeqs.SelectedIndex = seq;
+                }
             }
         }
 
@@ -784,6 +780,10 @@ namespace WAX_converter
             if (ImageList.Count < 1)
             {
                 MessageBox.Show("You need to add cells!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (FrameList.Count < 1)
+            {
+                MessageBox.Show("You need to add frames!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else if (SequenceList.Count < 1)
             {
@@ -891,57 +891,66 @@ namespace WAX_converter
                 SequenceList = loadedSeqs;
                 ActionList = loadedActions;
 
-                listboxImages.Items.Clear();
-                for (int i = 0; i < ImageList.Count; i++)
-                {
-                    listboxImages.Items.Add("Cell " + i);
-                }
-                ButtonAddImage.Enabled = true;
-                ButtonRemoveImage.Enabled = true;
-                ButtonMoveUp.Enabled = false;
-                ButtonMoveDown.Enabled = false;
-
-                listboxFrames.Items.Clear();
-                for (int f = 0; f < FrameList.Count; f++)
-                {
-                    listboxFrames.Items.Add(f.ToString());
-                }
-                if (FrameList.Count > 0)
-                {
-                    listboxFrames.SelectedIndex = 0;
-                }
-                buttonAddFrame.Enabled = true;
-                buttonRemoveFrame.Enabled = true;
-                InsertX.Enabled = true;
-                InsertY.Enabled = true;
-                checkBoxFlip.Enabled = true;
-
-                listboxSeqs.Items.Clear();
-                for (int s = 0; s < SequenceList.Count; s++)
-                {
-                    listboxSeqs.Items.Add(s.ToString());
-                }
-                if (SequenceList.Count > 0)
-                {
-                    listboxSeqFrames.Enabled = true;
-                }
-                buttonAddSequence.Enabled = true;
-                buttonRemoveSequence.Enabled = true;
-
-                labelNCells.Text = $"n = {ImageList.Count}";
-                labelNFrames.Text = $"n = {FrameList.Count}";
-                labelNSeqs.Text = $"n = {SequenceList.Count}";
-                comboBoxLogic.SelectedIndex = 0;    //
-                comboBoxLogic.SelectedIndex = 1;    // changing this forces an update of the controls
-                comboBoxLogic.SelectedIndex = logicType;
-                dataGridViews.Enabled = true;
-                buttonSetAllViews.Enabled = true;
-                Wwidth.Enabled = true;
-                Wheight.Enabled = true;
-                FRate.Enabled = true;
-                buttonCreateWAX.Enabled = true;
+                this.PopulateUI();
+                this.SetComboBoxLogic(logicType);
             }
         }
-    }
 
+        public void PopulateUI()
+        {
+            listboxImages.Items.Clear();
+            for (int i = 0; i < ImageList.Count; i++)
+            {
+                listboxImages.Items.Add("Cell " + i);
+            }
+            ButtonAddImage.Enabled = true;
+            ButtonRemoveImage.Enabled = true;
+            ButtonMoveUp.Enabled = false;
+            ButtonMoveDown.Enabled = false;
+
+            listboxFrames.Items.Clear();
+            for (int f = 0; f < FrameList.Count; f++)
+            {
+                listboxFrames.Items.Add(f.ToString());
+            }
+            if (FrameList.Count > 0)
+            {
+                listboxFrames.SelectedIndex = 0;
+            }
+            buttonAddFrame.Enabled = true;
+            buttonRemoveFrame.Enabled = true;
+            InsertX.Enabled = true;
+            InsertY.Enabled = true;
+            checkBoxFlip.Enabled = true;
+
+            listboxSeqs.Items.Clear();
+            for (int s = 0; s < SequenceList.Count; s++)
+            {
+                listboxSeqs.Items.Add(s.ToString());
+            }
+            if (SequenceList.Count > 0)
+            {
+                listboxSeqFrames.Enabled = true;
+            }
+            buttonAddSequence.Enabled = true;
+            buttonRemoveSequence.Enabled = true;
+
+            labelNCells.Text = $"n = {ImageList.Count}";
+            labelNFrames.Text = $"n = {FrameList.Count}";
+            labelNSeqs.Text = $"n = {SequenceList.Count}";
+            comboBoxLogic.SelectedIndex = 0;    //
+            comboBoxLogic.SelectedIndex = 1;    // changing this forces an update of the controls
+            dataGridViews.Enabled = true;
+            buttonSetAllViews.Enabled = true;
+            Wwidth.Enabled = true;
+            Wheight.Enabled = true;
+            FRate.Enabled = true;
+            buttonCreateWAX.Enabled = true;
+        }
+
+        public void SetComboBoxLogic(int logicType)
+        {
+            this.comboBoxLogic.SelectedIndex = logicType;
+        }
+    }
 }

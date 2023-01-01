@@ -82,6 +82,12 @@ namespace WAX_converter
             buildWindow.Show();
         }
 
+        private void enemyWizardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            WizardWindow WizardWindow = new WizardWindow();
+            WizardWindow.ShowDialog();
+        }
+
         private void menuHelp_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             if (e.ClickedItem == MenuAbout)
@@ -431,14 +437,7 @@ namespace WAX_converter
 
         private void checkBoxZoom_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxZoom.Checked)
-            {
-                displayBox.SizeMode = PictureBoxSizeMode.Zoom;
-            }
-            else
-            {
-                displayBox.SizeMode = PictureBoxSizeMode.Normal;
-            }
+            displayBox.SizeMode = checkBoxZoom.Checked ? PictureBoxSizeMode.Zoom : PictureBoxSizeMode.Normal;
         }
 
         // -----------------------------------------------------------------------------------------------
