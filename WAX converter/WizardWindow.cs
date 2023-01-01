@@ -62,7 +62,7 @@ namespace WAX_converter
 
         // ---------------------------------------------------------------------------------------------
 
-        private string[] actionLabelList = new string[] { "Stationary", "Moving", "Attack 1", "Recoil 1", "Attack 2", "Recoil 2", "Pain", "Dying 1", "Dying 2", "Dead", "Dark Trooper special" };
+        private string[] actionLabelList = new string[] { "Stationary", "Moving", "Attack 1", "Recoil 1", "Attack 2", "Recoil 2", "Pain", "Dying 1", "Dying 2", "Dead", "Dark Trooper block / fly" };
         private string[] actionKeyList = new string[] { "Stationary", "Moving", "Attack1", "Recoil", "Attack2", "Recoil2", "Pain", "Dying1", "Dying2", "Dead", "DTSpecial" };
 
         private Dictionary<string, WizardAction> actionDictionary;

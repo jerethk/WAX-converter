@@ -40,8 +40,8 @@ namespace WAX_converter
 
         private string[] logicAnim = new string[1] {"0 Animation"};
         private string[] logicScenery = new string[2] { "0 Start", "1 Destroyed" };
-        private string[] logicEnemy = new string[13] { "0 Moving", "1 Attack", "2 Dying1", "3 Dying2", "4 Dead", "5 Standing", "6 Recoil", "7 Attack2", "8 Recoil2", "9 Kell jump", "10 not used", "11 not used", "12 Pain" };
-        private string[] logicDT = new string[14] { "0 Moving", "1 Attack", "2 Dying1", "3 Dying2", "4 Dead", "5 Standing", "6 Recoil", "7 Attack2", "8 Recoil2", "9 not used", "10 not used", "11 not used", "12 Pain", "13 Blocking / flying" };
+        private string[] logicEnemy = new string[13] { "0 Moving", "1 Attack", "2 Dying1", "3 Dying2", "4 Dead", "5 Stationary", "6 Recoil", "7 Attack2", "8 Recoil2", "9 Kell jump", "10 not used", "11 Kell jump attack", "12 Pain" };
+        private string[] logicDT = new string[14] { "0 Moving", "1 Attack", "2 Dying1", "3 Dying2", "4 Dead", "5 Stationary", "6 Recoil", "7 not used", "8 not used", "9 not used", "10 not used", "11 not used", "12 Pain", "13 Blocking / flying" };
         private string[] logicRemote = new string[4] { "0 Searching", "1 Inactive", "2 Dying1", "3 Dying2" };
 
         // -------------------------------------------------------------------
