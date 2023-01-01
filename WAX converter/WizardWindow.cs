@@ -411,12 +411,6 @@ namespace WAX_converter
 
         // DONE button --------------------------------------------------------------------------------------------------
 
-        /* private class Debug
-         {
-             public string key { get; set; }
-             public int framenum { get; set; }
-         }*/
-
         private void btnDone_Click(object sender, EventArgs e)
         {
             var actionList = new List<Action>();
@@ -435,22 +429,6 @@ namespace WAX_converter
             this.GenerateFrames(actionDictionary["Recoil2"], frameList);
             this.GenerateFrames(actionDictionary["Pain"], frameList);
             this.GenerateFrames(actionDictionary["DTSpecial"], frameList);
-
-            //var wfl = new List<Debug>();
-            //foreach (KeyValuePair<string, WizardAction> wza in actionDictionary)
-            //{
-            //    foreach (var s in wza.Value.sequences)
-            //    {
-            //        foreach (var f in s.frames)
-            //        {
-            //            if (f.waxFrameNumber != -1)
-            //            {
-            //                var ob = new Debug() { key = wza.Key, framenum = f.waxFrameNumber };
-            //                wfl.Add(ob);
-            //            }
-            //        }
-            //    }
-            //}
 
             // Calculate wwidth and wheight based on height of "stationary" frame (this will hopefully give a reasonable value...)
             int ww = 70000;
