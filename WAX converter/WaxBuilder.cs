@@ -9,7 +9,7 @@ namespace WAX_converter
     // A static class containing static methods used to create a new WAX file //
     public static class WaxBuilder
     {
-        public static Waxfile BuildWax(int LogicType, List<Action> SourceActionList, List<Sequence> SourceSequenceList, List<Frame> SourceFrameList, List<Bitmap> SourceImageList, DFPal palette, Color transparentColour, bool includeIlluminatedColours, bool onlyCommonColours, bool compress)
+        public static Waxfile BuildWax(int LogicType, List<Action> sourceActionList, List<Sequence> sourceSequenceList, List<Frame> sourceFrameList, List<Bitmap> sourceImageList, DFPal palette, Color transparentColour, bool includeIlluminatedColours, bool onlyCommonColours, bool compress)
         {
             ProgressBarWindow progressMeter = new ProgressBarWindow();
             progressMeter.Show();
@@ -36,9 +36,9 @@ namespace WAX_converter
             }
 
             // Header
-            newWax.Nseqs = SourceSequenceList.Count;
-            newWax.Nframes = SourceFrameList.Count;
-            newWax.Ncells = SourceImageList.Count;
+            newWax.Nseqs = sourceSequenceList.Count;
+            newWax.Nframes = sourceFrameList.Count;
+            newWax.Ncells = sourceImageList.Count;
 
             newWax.actionAddresses = new int[32];
 
@@ -52,26 +52,26 @@ namespace WAX_converter
                 newWax.actionAddresses[a] = 0;
             }
 
+            // Set a default sequence - to use in place of any that have been left empty
+            var defaultSequenceIndex = sourceSequenceList.FindIndex(s => s.frameIndexes[0] != -1);
+                
             // Actions
-            newWax.Actions = SourceActionList;
+            newWax.Actions = sourceActionList;
             for (int a = 0; a < newWax.numActions; a++)
             {
                 for (int v = 0; v < 32; v++)    // calculate the address for each view (x32)
                 {
-                    newWax.Actions[a].viewAddresses[v] = 160 + newWax.numActions * 156 + (newWax.Actions[a].seqIndexes[v] * 144);
+                    // If the view has been assigned an empty sequence, use the default sequence instead
+                    var assignedSequenceIndex = newWax.Actions[a].seqIndexes[v];
+                    bool assignedSequenceIsEmpty = sourceSequenceList[assignedSequenceIndex].frameIndexes[0] == -1;
+                    newWax.Actions[a].viewAddresses[v] = assignedSequenceIsEmpty
+                        ? 160 + newWax.numActions * 156 + (defaultSequenceIndex * 144)
+                        : 160 + newWax.numActions * 156 + (newWax.Actions[a].seqIndexes[v] * 144);
                 }
             }
 
             // Sequences
-            newWax.Sequences = SourceSequenceList;
-            foreach (var s in newWax.Sequences)
-            {
-                // Do not permit an empty sequence. If the first frame is set to -1, set it to frame 0
-                if (s.frameIndexes[0] == -1)
-                {
-                    s.frameIndexes[0] = 0;
-                }
-            }
+            newWax.Sequences = sourceSequenceList;
 
             for (int s = 0; s < newWax.Nseqs; s++)
             {
@@ -89,19 +89,19 @@ namespace WAX_converter
             }
 
             // create Cells from bitmap images. Show progress meter because this can be lengthy
-            progressMeter.progressBar.Maximum = SourceImageList.Count + 1;
+            progressMeter.progressBar.Maximum = sourceImageList.Count + 1;
             progressMeter.progressBar.Value = 1;
 
             int firstCellAddress = 160 + newWax.numActions * 156 + newWax.Nseqs * 144 + newWax.Nframes * 32;
-            for (int i = 0; i < SourceImageList.Count; i++)  
+            for (int i = 0; i < sourceImageList.Count; i++)  
             {
                 Cell newCell = new Cell();
-                newCell.SizeX = SourceImageList[i].Width;
-                newCell.SizeY = SourceImageList[i].Height;
+                newCell.SizeX = sourceImageList[i].Width;
+                newCell.SizeY = sourceImageList[i].Height;
                 newCell.ColOffs = 0;    // always zero
 
                 newCell.Pixels = new short[newCell.SizeX, newCell.SizeY];
-                newCell.CreateCellImage(SourceImageList[i], palette, transparentColour, includeIlluminatedColours, onlyCommonColours);       // result is stored in the cell object's Pixels property
+                newCell.CreateCellImage(sourceImageList[i], palette, transparentColour, includeIlluminatedColours, onlyCommonColours);       // result is stored in the cell object's Pixels property
 
                 if (compress)
                 {
@@ -136,8 +136,8 @@ namespace WAX_converter
             }
 
             // Frames
-            newWax.Frames = SourceFrameList;
-            for (int f = 0; f < SourceFrameList.Count; f++)
+            newWax.Frames = sourceFrameList;
+            for (int f = 0; f < sourceFrameList.Count; f++)
             {
                 // set cell addresses
                 int cellIndex = newWax.Frames[f].CellIndex;

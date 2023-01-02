@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
@@ -773,30 +774,50 @@ namespace WAX_converter
         }
 
 
-// --- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --- CREATE WAX ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
         private void buttonCreateWAX_Click(object sender, EventArgs e)
         {
             if (ImageList.Count < 1)
             {
                 MessageBox.Show("You need to add cells!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
-            else if (FrameList.Count < 1)
+            
+            if (FrameList.Count < 1)
             {
                 MessageBox.Show("You need to add frames!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
-            else if (SequenceList.Count < 1)
+            
+            if (SequenceList.Count < 1)
             {
                 MessageBox.Show("You need to add sequences!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
-            else if (palette == null)
+            
+            if (palette == null)
             {
                 MessageBox.Show("Palette not loaded!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
-            else
+            
+            if (SequenceList.All(s => s.frameIndexes[0] == -1))
             {
-                saveWaxDialog.ShowDialog();
+                MessageBox.Show("Your sequences are all empty!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
+
+            if (SequenceList.Any(s => s.frameIndexes[0] == -1))
+            {
+                var response = MessageBox.Show("One or more sequences are empty. If you choose to continue, they will be substituted with the first available non-empty sequence.", "Info", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                if (response == DialogResult.Cancel)
+                {
+                    return;
+                }
+            }
+
+            saveWaxDialog.ShowDialog();
         }
 
         private void saveWaxDialog_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
