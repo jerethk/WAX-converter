@@ -95,7 +95,7 @@ namespace WAX_converter
         {
             if (checkBoxIlluminated.Checked)
             {
-                MessageBox.Show("Glow-in-dark colours (PAL indexes 1-31) will be included when performing colour matching.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Glow-in-dark colours (PAL indexes 1-23) will be included when performing colour matching.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

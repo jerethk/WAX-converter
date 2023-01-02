@@ -167,18 +167,12 @@ namespace WAX_converter
                 startColour = 32;
             }
 
-            /*
-            if (sourceRed == 0 && sourceGreen == 0 && sourceBlue == 0)
-            {
-                return 0;   // set black to PAL index 0 (transparent)
-            }
-            else  */
-            
             double smallestDistance = 500;
             short bestMatch = 0;
 
             for (short i = startColour; i < 256; i++)    
             {
+                if (i >= 24 && i <= 31) continue;                           // skip the special (HUD) colours
                 if (onlyCommonColours && i >= 208 && i <= 254) continue;    // colours 208-254 are different in different PALs
                 
                 int deltaRed = sourceRed - palette.Colours[i].R;
