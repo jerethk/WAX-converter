@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.IO.Compression;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -606,6 +603,8 @@ namespace WAX_converter
                 }
             }
 
+            var isDarkTrooper = this.actionDictionary["DTSpecial"].sequences.Any(ws => ws.frames[0].imageIndex != -1);
+
             // Create build window and put everything in
             BuildWindow newBuildWindow = new BuildWindow();
             newBuildWindow.FrameList = frameList;
@@ -619,7 +618,7 @@ namespace WAX_converter
 
             newBuildWindow.PopulateUI();
             newBuildWindow.Show();
-            newBuildWindow.SetComboBoxLogic(3);     // Set to Dark Trooper so all 14 actions are visible
+            newBuildWindow.SetComboBoxLogic(isDarkTrooper ? 3 : 2);     // 3 = DT, 2 = standard enemy
         }
 
         private void GenerateFrames(WizardAction wizardAction, List<Frame> frameList)
