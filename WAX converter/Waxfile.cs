@@ -116,14 +116,11 @@ namespace WAX_converter
                             }
                         }
 
-                        for (int f = 0; f < 32; f++)    // set the number of frames for this sequence by finding the first empty frame
-                        {
-                            if (seq.frameIndexes[f] == -1)
-                            {
-                                seq.numFrames = f;
-                                break;
-                            }
-                        }
+                        // set the number of frames for this sequence by finding the first empty frame (if no empty frame found, numFrames = 32)
+                        var firstEmptyFrame = Array.FindIndex(seq.frameIndexes, i => i == -1);
+                        seq.numFrames = firstEmptyFrame != -1
+                            ? firstEmptyFrame
+                            : 32;
 
                         this.Sequences.Add(seq);
                     }
