@@ -141,7 +141,7 @@ namespace WAX_converter
                 this.ActionNumber.ValueChanged -= this.ActionNumber_ValueChanged;
                 this.ViewNumber.ValueChanged -= this.ViewNumber_ValueChanged;
                 this.SeqNumber.ValueChanged -= this.SeqNumber_ValueChanged;
-                this.FrameNumber.ValueChanged -= this.FrameNumber_ValueChanged_1;
+                this.FrameNumber.ValueChanged -= this.FrameNumber_ValueChanged;
 
                 labelWax.Text = Path.GetFileName(path);
                 RadioGroup.Enabled = true;
@@ -163,7 +163,7 @@ namespace WAX_converter
                 this.ActionNumber.ValueChanged += new System.EventHandler(this.ActionNumber_ValueChanged);
                 this.ViewNumber.ValueChanged += new System.EventHandler(this.ViewNumber_ValueChanged);
                 this.SeqNumber.ValueChanged += new System.EventHandler(this.SeqNumber_ValueChanged);
-                this.FrameNumber.ValueChanged += new System.EventHandler(this.FrameNumber_ValueChanged_1);
+                this.FrameNumber.ValueChanged += new System.EventHandler(this.FrameNumber_ValueChanged);
 
                 // display Wax details
                 string[] strings = new string[9];
@@ -300,25 +300,41 @@ namespace WAX_converter
             if (wax.Sequences.Count > 0)
             {
                 int thisSequence = (int)SeqNumber.Value;
-                int thisFrame = wax.Sequences[thisSequence].frameIndexes[0];
-                FrameNumber.Value = thisFrame;
-                SeqFrame = 0;
-                labelSeqFrame.Text = SeqFrame.ToString();
 
                 string[] s = new string[3];
                 s[0] = $"This sequence has {wax.Sequences[thisSequence].numFrames} frames";
                 //s[2] = $"{wax.Sequences[thisSequence].pad1} {wax.Sequences[thisSequence].pad2} {wax.Sequences[thisSequence].pad3} {wax.Sequences[thisSequence].pad4}";
                 SeqInfo.Lines = s;
 
-                UpdateFrame();
+                if (wax.Sequences[thisSequence].numFrames > 0)
+                {
+                    int thisFrame = wax.Sequences[thisSequence].frameIndexes[0];
+                    FrameNumber.Value = thisFrame;
+                    SeqFrame = 0;
+                    labelSeqFrame.Text = SeqFrame.ToString();
+                    UpdateFrame();
+                }
+                else
+                {
+                    // empty sequence!
+                    FrameInfo.Text = "";
+                    CellInfo.Text = "";
+                    displayBox.Image = null;
+                    labelSeqFrame.Text = "";
+                }
             }
         }
 
         private void SeqNextFrame_Click(object sender, EventArgs e)
         {
             int thisSequence = (int)SeqNumber.Value;
+            
+            if (wax.Sequences[thisSequence].numFrames < 1)
+            {
+                return;     // empty sequence
+            }
+            
             int maxFrame = wax.Sequences[thisSequence].numFrames - 1;
-
             if (SeqFrame < maxFrame)
             {
                 SeqFrame++;
@@ -338,6 +354,11 @@ namespace WAX_converter
         {
             int thisSequence = (int)SeqNumber.Value;
 
+            if (wax.Sequences[thisSequence].numFrames < 1)
+            {
+                return;     // empty sequence
+            }
+
             if (SeqFrame > 0)
             {
                 SeqFrame--;
@@ -355,7 +376,7 @@ namespace WAX_converter
 
         // ---------------------------------------------------------------------------------------------------------
 
-        private void FrameNumber_ValueChanged_1(object sender, EventArgs e)
+        private void FrameNumber_ValueChanged(object sender, EventArgs e)
         {
             UpdateFrame();
         }
@@ -461,7 +482,7 @@ namespace WAX_converter
                 this.ActionNumber.ValueChanged -= this.ActionNumber_ValueChanged;
                 this.ViewNumber.ValueChanged -= this.ViewNumber_ValueChanged;
                 this.SeqNumber.ValueChanged -= this.SeqNumber_ValueChanged;
-                this.FrameNumber.ValueChanged -= this.FrameNumber_ValueChanged_1;
+                this.FrameNumber.ValueChanged -= this.FrameNumber_ValueChanged;
 
                 // display FME details
                 string[] strings = new string[2];
