@@ -51,7 +51,11 @@ namespace WAX_converter
                         dataPosition++;
                         for (int i = 0; i < numPixels; i++)
                         {
-                            this.Pixels[x, y] = this.compressedData[dataPosition];
+                            // index 0 is also transparent!
+                            this.Pixels[x, y] = this.compressedData[dataPosition] == 0
+                                ? (short) -1
+                                : this.compressedData[dataPosition];
+                            
                             y++;
                             dataPosition++;
                         }

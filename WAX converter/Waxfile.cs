@@ -166,7 +166,8 @@ namespace WAX_converter
                             {
                                 for (int y = 0; y < Cell.SizeY; y++)
                                 {
-                                    Cell.Pixels[x, y] = fileReader.ReadByte();
+                                    var colour = fileReader.ReadByte();
+                                    Cell.Pixels[x, y] = colour == 0 ? (short) -1 : colour;      // colour 0 is transparent
                                 }
                             }
                         }
@@ -449,7 +450,8 @@ namespace WAX_converter
                         {
                             for (int y = 0; y < Cell.SizeY; y++)
                             {
-                                Cell.Pixels[x, y] = FMEReader.ReadByte();
+                                var colour = FMEReader.ReadByte();
+                                Cell.Pixels[x, y] = colour == 0 ? (short) -1 : colour;
                             }
                         }
                     }
