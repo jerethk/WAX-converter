@@ -57,15 +57,18 @@ namespace WAX_converter
             comboBoxLogic.SelectedIndex = 0;
         }
 
+        private void BuildWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            var choice = MessageBox.Show("Are you sure you want to leave? Unsaved work will be lost!", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (choice == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
+        }
+
         private void ButtonExit_Click(object sender, EventArgs e)
         {
-            DialogResult choice = MessageBox.Show("Are you sure you want to leave? Your work will be lost!", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            
-            if (choice == DialogResult.Yes)
-            {
-                this.Close();
-                this.Dispose();
-            }
+            this.Close();
         }
 
         private void btnHelp_Click(object sender, EventArgs e)

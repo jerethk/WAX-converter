@@ -199,7 +199,7 @@ namespace WAX_converter
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1264, 84);
+            this.panel1.Size = new System.Drawing.Size(1424, 84);
             this.panel1.TabIndex = 6;
             // 
             // checkBoxCommonColours
@@ -291,7 +291,7 @@ namespace WAX_converter
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 84);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(544, 877);
+            this.panel2.Size = new System.Drawing.Size(704, 897);
             this.panel2.TabIndex = 7;
             // 
             // btnDoneAddingFrames
@@ -531,7 +531,7 @@ namespace WAX_converter
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(360, 877);
+            this.panel4.Size = new System.Drawing.Size(360, 897);
             this.panel4.TabIndex = 9;
             // 
             // panel5
@@ -549,7 +549,7 @@ namespace WAX_converter
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(0, 400);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(360, 477);
+            this.panel5.Size = new System.Drawing.Size(360, 497);
             this.panel5.TabIndex = 9;
             // 
             // buttonClearFrame
@@ -868,7 +868,7 @@ namespace WAX_converter
             this.panel7.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel7.Location = new System.Drawing.Point(360, 0);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(360, 877);
+            this.panel7.Size = new System.Drawing.Size(360, 897);
             this.panel7.TabIndex = 11;
             // 
             // checkBoxCompress
@@ -945,15 +945,14 @@ namespace WAX_converter
             this.panel8.Controls.Add(this.panel4);
             this.panel8.Controls.Add(this.panel7);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel8.Location = new System.Drawing.Point(544, 84);
+            this.panel8.Location = new System.Drawing.Point(704, 84);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(720, 877);
+            this.panel8.Size = new System.Drawing.Size(720, 897);
             this.panel8.TabIndex = 0;
             // 
             // BuildWindow
             // 
-            this.ClientSize = new System.Drawing.Size(1264, 961);
-            this.ControlBox = false;
+            this.ClientSize = new System.Drawing.Size(1424, 981);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel8);
             this.Controls.Add(this.panel1);
@@ -961,6 +960,7 @@ namespace WAX_converter
             this.MinimumSize = new System.Drawing.Size(1280, 1000);
             this.Name = "BuildWindow";
             this.Text = "Build WAX";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BuildWindow_FormClosing);
             this.Load += new System.EventHandler(this.BuildWindow_Load);
             ((System.ComponentModel.ISupportInitialize)(this.displayBox2)).EndInit();
             this.panel1.ResumeLayout(false);
