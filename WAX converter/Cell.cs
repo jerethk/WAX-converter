@@ -65,9 +65,9 @@ namespace WAX_converter
             }
         }
 
-        public void CreateBitmap(DFPal palette)
+        public void CreateBitmap(DFPal palette, BitmapTransparencyOption transparencyOption = BitmapTransparencyOption.Black)
         {
-            this.bitmap = new Bitmap(this.SizeX, this.SizeY); //, System.Drawing.Imaging.PixelFormat.Format8bppIndexed);
+            this.bitmap = new Bitmap(this.SizeX, this.SizeY, System.Drawing.Imaging.PixelFormat.Format32bppArgb);   //, System.Drawing.Imaging.PixelFormat.Format8bppIndexed);
             
             for (int x = 0; x < this.SizeX; x++)
             {
@@ -76,9 +76,26 @@ namespace WAX_converter
                     short n = this.Pixels[x, y];
                     Color pixelColour;
 
-                    if (n == -1)    // transparent pixel, make it black (magenta?? )
+                    if (n == -1)    // transparent pixel
                     {
-                        pixelColour = Color.FromArgb(255, 255, 0, 255);
+                        switch (transparencyOption)
+                        {
+                            case BitmapTransparencyOption.Magenta:
+                                pixelColour = Color.FromArgb(255, 255, 0, 255);
+                                break;
+
+                            case BitmapTransparencyOption.White:
+                                pixelColour = Color.FromArgb(255, 255, 255, 255);
+                                break;
+
+                            case BitmapTransparencyOption.AlphaTransparent:
+                                pixelColour = Color.FromArgb(0, 0, 0, 0);
+                                break;
+
+                            default:
+                                pixelColour = Color.FromArgb(255, 0, 0, 0);     // black
+                                break;
+                        }
                     }
                     else
                     {
@@ -105,13 +122,15 @@ namespace WAX_converter
             {
                 for (int y = 0; y < this.SizeY; y++)
                 {
-                    if (bitmap.GetPixel(x, y) == transparentColour)
+                    var colour = bitmap.GetPixel(x, y);
+
+                    if (colour == transparentColour || colour.A == 0)
                     {
                         this.Pixels[x, y] = -1;     // transparent
                     }
                     else
                     {
-                        short colourIndex = WaxBuilder.MatchPixeltoPal(bitmap.GetPixel(x, y), palette, includeIlluminatedColours, onlyCommonColours);
+                        short colourIndex = WaxBuilder.MatchPixeltoPal(colour, palette, includeIlluminatedColours, onlyCommonColours);
                         this.Pixels[x, y] = colourIndex;
                     }
                 }
@@ -195,6 +214,13 @@ namespace WAX_converter
                 }
             }
         }
+    }
 
+    public enum BitmapTransparencyOption
+    {
+        Black,
+        Magenta,
+        White,
+        AlphaTransparent
     }
 }

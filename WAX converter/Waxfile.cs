@@ -489,11 +489,11 @@ namespace WAX_converter
             return true;
         }
 
-        public void GenerateAllCellBitmaps(DFPal pal)
+        public void GenerateAllCellBitmaps(DFPal pal, BitmapTransparencyOption transparencyOption)
         {
             foreach (Cell cell in this.Cells)
             {
-                cell.CreateBitmap(pal);
+                cell.CreateBitmap(pal, transparencyOption);
             }
         }
     }

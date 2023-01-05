@@ -167,7 +167,7 @@ namespace WAX_converter
             // 
             // displayBox2
             // 
-            this.displayBox2.BackColor = System.Drawing.Color.Black;
+            this.displayBox2.BackColor = System.Drawing.Color.Gray;
             this.displayBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.displayBox2.Location = new System.Drawing.Point(167, 307);
             this.displayBox2.Name = "displayBox2";

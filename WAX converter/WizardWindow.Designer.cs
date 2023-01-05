@@ -54,6 +54,14 @@
             this.label4 = new System.Windows.Forms.Label();
             this.btnDone = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.sprite7Img = new System.Windows.Forms.PictureBox();
+            this.sprite6Img = new System.Windows.Forms.PictureBox();
+            this.sprite5Img = new System.Windows.Forms.PictureBox();
+            this.sprite4Img = new System.Windows.Forms.PictureBox();
+            this.sprite3Img = new System.Windows.Forms.PictureBox();
+            this.sprite2Img = new System.Windows.Forms.PictureBox();
+            this.sprite1Img = new System.Windows.Forms.PictureBox();
+            this.sprite0Img = new System.Windows.Forms.PictureBox();
             this.btnQuit = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -61,27 +69,19 @@
             this.label5 = new System.Windows.Forms.Label();
             this.folderBrowser = new System.Windows.Forms.OpenFileDialog();
             this.saveProjDialog = new System.Windows.Forms.SaveFileDialog();
-            this.sprite0Img = new System.Windows.Forms.PictureBox();
-            this.sprite1Img = new System.Windows.Forms.PictureBox();
-            this.sprite2Img = new System.Windows.Forms.PictureBox();
-            this.sprite3Img = new System.Windows.Forms.PictureBox();
-            this.sprite4Img = new System.Windows.Forms.PictureBox();
-            this.sprite5Img = new System.Windows.Forms.PictureBox();
-            this.sprite6Img = new System.Windows.Forms.PictureBox();
-            this.sprite7Img = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.viewingAngleDiagram)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sprite7Img)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sprite6Img)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sprite5Img)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sprite4Img)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sprite3Img)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sprite2Img)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sprite1Img)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sprite0Img)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.sprite0Img)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sprite1Img)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sprite2Img)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sprite3Img)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sprite4Img)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sprite5Img)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sprite6Img)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sprite7Img)).BeginInit();
             this.SuspendLayout();
             // 
             // comboBoxAction
@@ -136,7 +136,7 @@
             this.pictureBoxPreview.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBoxPreview.BackColor = System.Drawing.Color.Black;
+            this.pictureBoxPreview.BackColor = System.Drawing.Color.Gray;
             this.pictureBoxPreview.Location = new System.Drawing.Point(856, 56);
             this.pictureBoxPreview.Name = "pictureBoxPreview";
             this.pictureBoxPreview.Size = new System.Drawing.Size(405, 525);
@@ -355,6 +355,95 @@
             this.panel1.Size = new System.Drawing.Size(1284, 71);
             this.panel1.TabIndex = 24;
             // 
+            // sprite7Img
+            // 
+            this.sprite7Img.Image = ((System.Drawing.Image)(resources.GetObject("sprite7Img.Image")));
+            this.sprite7Img.Location = new System.Drawing.Point(209, 9);
+            this.sprite7Img.Name = "sprite7Img";
+            this.sprite7Img.Size = new System.Drawing.Size(22, 50);
+            this.sprite7Img.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.sprite7Img.TabIndex = 32;
+            this.sprite7Img.TabStop = false;
+            this.sprite7Img.Visible = false;
+            // 
+            // sprite6Img
+            // 
+            this.sprite6Img.Image = ((System.Drawing.Image)(resources.GetObject("sprite6Img.Image")));
+            this.sprite6Img.Location = new System.Drawing.Point(181, 9);
+            this.sprite6Img.Name = "sprite6Img";
+            this.sprite6Img.Size = new System.Drawing.Size(22, 50);
+            this.sprite6Img.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.sprite6Img.TabIndex = 31;
+            this.sprite6Img.TabStop = false;
+            this.sprite6Img.Visible = false;
+            // 
+            // sprite5Img
+            // 
+            this.sprite5Img.Image = ((System.Drawing.Image)(resources.GetObject("sprite5Img.Image")));
+            this.sprite5Img.Location = new System.Drawing.Point(153, 8);
+            this.sprite5Img.Name = "sprite5Img";
+            this.sprite5Img.Size = new System.Drawing.Size(22, 50);
+            this.sprite5Img.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.sprite5Img.TabIndex = 30;
+            this.sprite5Img.TabStop = false;
+            this.sprite5Img.Visible = false;
+            // 
+            // sprite4Img
+            // 
+            this.sprite4Img.Image = ((System.Drawing.Image)(resources.GetObject("sprite4Img.Image")));
+            this.sprite4Img.Location = new System.Drawing.Point(125, 9);
+            this.sprite4Img.Name = "sprite4Img";
+            this.sprite4Img.Size = new System.Drawing.Size(22, 50);
+            this.sprite4Img.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.sprite4Img.TabIndex = 29;
+            this.sprite4Img.TabStop = false;
+            this.sprite4Img.Visible = false;
+            // 
+            // sprite3Img
+            // 
+            this.sprite3Img.Image = ((System.Drawing.Image)(resources.GetObject("sprite3Img.Image")));
+            this.sprite3Img.Location = new System.Drawing.Point(97, 8);
+            this.sprite3Img.Name = "sprite3Img";
+            this.sprite3Img.Size = new System.Drawing.Size(22, 50);
+            this.sprite3Img.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.sprite3Img.TabIndex = 28;
+            this.sprite3Img.TabStop = false;
+            this.sprite3Img.Visible = false;
+            // 
+            // sprite2Img
+            // 
+            this.sprite2Img.Image = ((System.Drawing.Image)(resources.GetObject("sprite2Img.Image")));
+            this.sprite2Img.Location = new System.Drawing.Point(69, 9);
+            this.sprite2Img.Name = "sprite2Img";
+            this.sprite2Img.Size = new System.Drawing.Size(22, 50);
+            this.sprite2Img.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.sprite2Img.TabIndex = 27;
+            this.sprite2Img.TabStop = false;
+            this.sprite2Img.Visible = false;
+            // 
+            // sprite1Img
+            // 
+            this.sprite1Img.Image = ((System.Drawing.Image)(resources.GetObject("sprite1Img.Image")));
+            this.sprite1Img.Location = new System.Drawing.Point(39, 9);
+            this.sprite1Img.Name = "sprite1Img";
+            this.sprite1Img.Size = new System.Drawing.Size(22, 50);
+            this.sprite1Img.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.sprite1Img.TabIndex = 26;
+            this.sprite1Img.TabStop = false;
+            this.sprite1Img.Visible = false;
+            // 
+            // sprite0Img
+            // 
+            this.sprite0Img.Image = ((System.Drawing.Image)(resources.GetObject("sprite0Img.Image")));
+            this.sprite0Img.InitialImage = ((System.Drawing.Image)(resources.GetObject("sprite0Img.InitialImage")));
+            this.sprite0Img.Location = new System.Drawing.Point(11, 9);
+            this.sprite0Img.Name = "sprite0Img";
+            this.sprite0Img.Size = new System.Drawing.Size(22, 50);
+            this.sprite0Img.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.sprite0Img.TabIndex = 25;
+            this.sprite0Img.TabStop = false;
+            this.sprite0Img.Visible = false;
+            // 
             // btnQuit
             // 
             this.btnQuit.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -438,95 +527,6 @@
             this.saveProjDialog.Filter = "WAX project files|*.wproj";
             this.saveProjDialog.Title = "Save WAX Project";
             // 
-            // sprite0Img
-            // 
-            this.sprite0Img.Image = ((System.Drawing.Image)(resources.GetObject("sprite0Img.Image")));
-            this.sprite0Img.InitialImage = ((System.Drawing.Image)(resources.GetObject("sprite0Img.InitialImage")));
-            this.sprite0Img.Location = new System.Drawing.Point(11, 9);
-            this.sprite0Img.Name = "sprite0Img";
-            this.sprite0Img.Size = new System.Drawing.Size(22, 50);
-            this.sprite0Img.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.sprite0Img.TabIndex = 25;
-            this.sprite0Img.TabStop = false;
-            this.sprite0Img.Visible = false;
-            // 
-            // sprite1Img
-            // 
-            this.sprite1Img.Image = ((System.Drawing.Image)(resources.GetObject("sprite1Img.Image")));
-            this.sprite1Img.Location = new System.Drawing.Point(39, 9);
-            this.sprite1Img.Name = "sprite1Img";
-            this.sprite1Img.Size = new System.Drawing.Size(22, 50);
-            this.sprite1Img.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.sprite1Img.TabIndex = 26;
-            this.sprite1Img.TabStop = false;
-            this.sprite1Img.Visible = false;
-            // 
-            // sprite2Img
-            // 
-            this.sprite2Img.Image = ((System.Drawing.Image)(resources.GetObject("sprite2Img.Image")));
-            this.sprite2Img.Location = new System.Drawing.Point(69, 9);
-            this.sprite2Img.Name = "sprite2Img";
-            this.sprite2Img.Size = new System.Drawing.Size(22, 50);
-            this.sprite2Img.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.sprite2Img.TabIndex = 27;
-            this.sprite2Img.TabStop = false;
-            this.sprite2Img.Visible = false;
-            // 
-            // sprite3Img
-            // 
-            this.sprite3Img.Image = ((System.Drawing.Image)(resources.GetObject("sprite3Img.Image")));
-            this.sprite3Img.Location = new System.Drawing.Point(97, 8);
-            this.sprite3Img.Name = "sprite3Img";
-            this.sprite3Img.Size = new System.Drawing.Size(22, 50);
-            this.sprite3Img.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.sprite3Img.TabIndex = 28;
-            this.sprite3Img.TabStop = false;
-            this.sprite3Img.Visible = false;
-            // 
-            // sprite4Img
-            // 
-            this.sprite4Img.Image = ((System.Drawing.Image)(resources.GetObject("sprite4Img.Image")));
-            this.sprite4Img.Location = new System.Drawing.Point(125, 9);
-            this.sprite4Img.Name = "sprite4Img";
-            this.sprite4Img.Size = new System.Drawing.Size(22, 50);
-            this.sprite4Img.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.sprite4Img.TabIndex = 29;
-            this.sprite4Img.TabStop = false;
-            this.sprite4Img.Visible = false;
-            // 
-            // sprite5Img
-            // 
-            this.sprite5Img.Image = ((System.Drawing.Image)(resources.GetObject("sprite5Img.Image")));
-            this.sprite5Img.Location = new System.Drawing.Point(153, 8);
-            this.sprite5Img.Name = "sprite5Img";
-            this.sprite5Img.Size = new System.Drawing.Size(22, 50);
-            this.sprite5Img.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.sprite5Img.TabIndex = 30;
-            this.sprite5Img.TabStop = false;
-            this.sprite5Img.Visible = false;
-            // 
-            // sprite6Img
-            // 
-            this.sprite6Img.Image = ((System.Drawing.Image)(resources.GetObject("sprite6Img.Image")));
-            this.sprite6Img.Location = new System.Drawing.Point(181, 9);
-            this.sprite6Img.Name = "sprite6Img";
-            this.sprite6Img.Size = new System.Drawing.Size(22, 50);
-            this.sprite6Img.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.sprite6Img.TabIndex = 31;
-            this.sprite6Img.TabStop = false;
-            this.sprite6Img.Visible = false;
-            // 
-            // sprite7Img
-            // 
-            this.sprite7Img.Image = ((System.Drawing.Image)(resources.GetObject("sprite7Img.Image")));
-            this.sprite7Img.Location = new System.Drawing.Point(209, 9);
-            this.sprite7Img.Name = "sprite7Img";
-            this.sprite7Img.Size = new System.Drawing.Size(22, 50);
-            this.sprite7Img.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.sprite7Img.TabIndex = 32;
-            this.sprite7Img.TabStop = false;
-            this.sprite7Img.Visible = false;
-            // 
             // WizardWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -545,18 +545,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.viewingAngleDiagram)).EndInit();
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.sprite7Img)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sprite6Img)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sprite5Img)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sprite4Img)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sprite3Img)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sprite2Img)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sprite1Img)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sprite0Img)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.sprite0Img)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sprite1Img)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sprite2Img)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sprite3Img)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sprite4Img)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sprite5Img)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sprite6Img)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sprite7Img)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

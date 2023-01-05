@@ -31,6 +31,8 @@ namespace WAX_converter
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.panel2 = new System.Windows.Forms.Panel();
+            this.comboBoxTransparencyOptions = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.RadioGroup = new System.Windows.Forms.GroupBox();
             this.radioCell = new System.Windows.Forms.RadioButton();
@@ -99,6 +101,8 @@ namespace WAX_converter
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.comboBoxTransparencyOptions);
+            this.panel2.Controls.Add(this.label7);
             this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.RadioGroup);
             this.panel2.Controls.Add(this.LabelPal);
@@ -110,6 +114,29 @@ namespace WAX_converter
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(944, 171);
             this.panel2.TabIndex = 1;
+            // 
+            // comboBoxTransparencyOptions
+            // 
+            this.comboBoxTransparencyOptions.FormattingEnabled = true;
+            this.comboBoxTransparencyOptions.Items.AddRange(new object[] {
+            "Transparent (alpha 0)",
+            "Black",
+            "White",
+            "Magenta"});
+            this.comboBoxTransparencyOptions.Location = new System.Drawing.Point(589, 27);
+            this.comboBoxTransparencyOptions.Name = "comboBoxTransparencyOptions";
+            this.comboBoxTransparencyOptions.Size = new System.Drawing.Size(166, 23);
+            this.comboBoxTransparencyOptions.TabIndex = 10;
+            this.comboBoxTransparencyOptions.SelectedIndexChanged += new System.EventHandler(this.comboBoxTransparencyOptions_SelectedIndexChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(428, 30);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(136, 15);
+            this.label7.TabIndex = 9;
+            this.label7.Text = "Set transparent pixels to:";
             // 
             // label6
             // 
@@ -347,13 +374,13 @@ namespace WAX_converter
             // MenuHelphelp
             // 
             this.MenuHelphelp.Name = "MenuHelphelp";
-            this.MenuHelphelp.Size = new System.Drawing.Size(180, 22);
+            this.MenuHelphelp.Size = new System.Drawing.Size(107, 22);
             this.MenuHelphelp.Text = "Help";
             // 
             // MenuAbout
             // 
             this.MenuAbout.Name = "MenuAbout";
-            this.MenuAbout.Size = new System.Drawing.Size(180, 22);
+            this.MenuAbout.Size = new System.Drawing.Size(107, 22);
             this.MenuAbout.Text = "About";
             // 
             // openWaxDialog
@@ -561,7 +588,7 @@ namespace WAX_converter
             this.displayBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.displayBox.BackColor = System.Drawing.Color.Black;
+            this.displayBox.BackColor = System.Drawing.Color.Gray;
             this.displayBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.displayBox.Location = new System.Drawing.Point(216, 11);
             this.displayBox.Name = "displayBox";
@@ -710,6 +737,8 @@ namespace WAX_converter
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.OpenFileDialog openFmeDialog;
         private System.Windows.Forms.ToolStripMenuItem enemyWizardToolStripMenuItem;
+        private System.Windows.Forms.ComboBox comboBoxTransparencyOptions;
+        private System.Windows.Forms.Label label7;
     }
 }
 
