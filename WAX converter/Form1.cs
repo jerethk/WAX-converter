@@ -17,6 +17,7 @@ namespace WAX_converter
         {
             InitializeComponent();
             palette = new DFPal();
+            comboBoxTransparencyOptions.SelectedIndex = 0;
 
             if (args.Length > 0)
             {
@@ -44,6 +45,7 @@ namespace WAX_converter
         private Waxfile wax;
         private DFPal palette;
         private int SeqFrame = 0;       // the sequence frame currently being viewed
+        private BitmapTransparencyOption transparencyOption = BitmapTransparencyOption.AlphaTransparent;
 
         // MENU 
         private void MenuLoadPal_Click(object sender, EventArgs e)
@@ -113,7 +115,7 @@ namespace WAX_converter
 
                 if (this.wax != null)
                 {
-                    this.wax.GenerateAllCellBitmaps(this.palette);
+                    this.wax.GenerateAllCellBitmaps(this.palette, this.transparencyOption);
                     UpdateCell();
                 }
             }
@@ -134,7 +136,7 @@ namespace WAX_converter
             if (tryOpenWax.LoadFromFile(path))
             {
                 this.wax = tryOpenWax;
-                this.wax.GenerateAllCellBitmaps(this.palette);
+                this.wax.GenerateAllCellBitmaps(this.palette, this.transparencyOption);
                 exportDialog.FileName = Path.GetFileNameWithoutExtension(path);
 
                 // remove event handlers (to prevent exceptions when resetting values)
@@ -186,6 +188,34 @@ namespace WAX_converter
             else
             {
                 MessageBox.Show($"Error loading WAX file {path}.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void comboBoxTransparencyOptions_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (this.comboBoxTransparencyOptions.SelectedIndex)
+            {
+                case 0:
+                    this.transparencyOption = BitmapTransparencyOption.AlphaTransparent;
+                    break;
+
+                case 1:
+                    this.transparencyOption = BitmapTransparencyOption.Black;
+                    break;
+
+                case 2:
+                    this.transparencyOption = BitmapTransparencyOption.White;
+                    break;
+
+                case 3:
+                    this.transparencyOption = BitmapTransparencyOption.Magenta;
+                    break;
+            }
+
+            if (this.wax != null)
+            {
+                this.wax.GenerateAllCellBitmaps(this.palette, this.transparencyOption);
+                UpdateCell();
             }
         }
 
@@ -475,7 +505,7 @@ namespace WAX_converter
             if (tryOpenFme.LoadFromFME(path))
             {
                 this.wax = tryOpenFme;
-                this.wax.GenerateAllCellBitmaps(this.palette);
+                this.wax.GenerateAllCellBitmaps(this.palette, this.transparencyOption);
                 exportDialog.FileName = Path.GetFileNameWithoutExtension(path);
 
                 // remove event handlers (to prevent exceptions when resetting values)
