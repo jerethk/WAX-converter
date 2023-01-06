@@ -429,7 +429,7 @@
             // folderBrowser
             // 
             this.folderBrowser.AddExtension = false;
-            this.folderBrowser.Filter = "All files|*.*|PNG images|*.PNG|BMP images|*.BMP|JPEG images|*.JPG";
+            this.folderBrowser.Filter = "All files|*.*|PNG images|*.PNG|BMP images|*.BMP|GIF images|*.GIF|JPEG images|*.JPG";
             this.folderBrowser.Title = "Select folder containing images";
             // 
             // saveProjDialog

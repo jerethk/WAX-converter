@@ -132,7 +132,7 @@ namespace WAX_converter
                         {
                             var fileExt = Path.GetExtension(file).ToUpper();
 
-                            if (fileExt.Equals(".PNG") || fileExt.Equals(".JPG") || fileExt.Equals(".JPEG") || fileExt.Equals(".BMP"))
+                            if (fileExt.Equals(".PNG") || fileExt.Equals(".JPG") || fileExt.Equals(".JPEG") || fileExt.Equals(".BMP") || fileExt.Equals(".GIF"))
                             {
                                 var image = new SourceImage();
                                 image.Name = Path.GetFileName(file);

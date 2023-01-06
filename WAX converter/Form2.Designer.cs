@@ -160,7 +160,7 @@ namespace WAX_converter
             // 
             // loadImageDialog
             // 
-            this.loadImageDialog.Filter = "PNG file|*.PNG|Bitmap file|*.BMP|JPEG file|*.JPG|All files|*.*";
+            this.loadImageDialog.Filter = "PNG file|*.PNG|Bitmap file|*.BMP|GIF file|*.GIF|JPEG file|*.JPG|All files|*.*";
             this.loadImageDialog.Multiselect = true;
             this.loadImageDialog.Title = "Add Image(s)";
             this.loadImageDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.loadImageDialog_FileOk);
