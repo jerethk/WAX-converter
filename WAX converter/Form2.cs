@@ -182,17 +182,7 @@ namespace WAX_converter
             if (ImageList.Count > 0 && index >= 0)
             {
                 // Check if cell is already used with any frames
-                bool isUsed = false;
-                foreach (Frame f in FrameList)
-                {
-                    if (f.CellIndex == index)
-                    {
-                        isUsed = true;
-                        break;
-                    }
-                }
-
-                if (isUsed)
+                if (FrameList.Any(f => f.CellIndex == index))
                 {
                     MessageBox.Show("The selected cell has been assigned to a frame.", "Cannot remove", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
@@ -215,6 +205,11 @@ namespace WAX_converter
                         foreach (Frame f in FrameList)
                         {
                             if (f.CellIndex > index) f.CellIndex -= 1;
+                        }
+
+                        if (listboxFrames.SelectedIndex >= 0)
+                        {
+                            textBoxCell.Text = FrameList[listboxFrames.SelectedIndex].CellIndex.ToString();
                         }
 
                         if (ImageList.Count == 0)
@@ -347,21 +342,7 @@ namespace WAX_converter
             if (FrameList.Count > 0 && index >= 0)
             {
                 // Check if selected frame is used in any sequences
-                bool isUsed = false;
-                foreach (Sequence s in SequenceList)
-                {
-                    for (int f = 0; f < 32; f++)
-                    {
-                        if (s.frameIndexes[f] == index)
-                        {
-                            isUsed = true;
-                            break;
-                        }
-
-                        if (isUsed) break;
-                    }
-                }
-
+                bool isUsed = SequenceList.Any(s => s.frameIndexes.Any(i => i == index));
                 if (isUsed)
                 {
                     MessageBox.Show("The selected frame is used in a Sequence.", "Cannot remove", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -388,6 +369,11 @@ namespace WAX_converter
                             {
                                 if (s.frameIndexes[f] > index) s.frameIndexes[f] -= 1;
                             }
+                        }
+
+                        if (listboxSeqs.SelectedIndex >= 0)
+                        {
+                            listboxSeqFrames.DataSource = new BindingSource(SequenceList[listboxSeqs.SelectedIndex].frameIndexes, "");
                         }
 
                         if (FrameList.Count == 0)
@@ -459,21 +445,7 @@ namespace WAX_converter
             if (SequenceList.Count > 1 && index >= 0)
             {
                 // Check if used
-                bool isUsed = false;
-                foreach (Action a in ActionList)
-                {
-                    for (int v = 0; v < 32; v++)
-                    {
-                        if (a.seqIndexes[v] == index)
-                        {
-                            isUsed = true;
-                            break;
-                        }
-
-                        if (isUsed) break;
-                    }
-                }
-
+                bool isUsed = ActionList.Any(a => a.seqIndexes.Any(i => i == index));
                 if (isUsed)
                 {
                     MessageBox.Show("The selected sequence has been assigned to an action.", "Cannot remove", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
