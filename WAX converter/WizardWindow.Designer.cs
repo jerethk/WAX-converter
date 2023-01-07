@@ -541,6 +541,7 @@
             this.Name = "WizardWindow";
             this.Text = "Enemy WAX Wizard";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.WizardWindow_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.WizardWindow_FormClosed);
             this.Load += new System.EventHandler(this.WizardWindow_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.viewingAngleDiagram)).EndInit();

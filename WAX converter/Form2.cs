@@ -66,6 +66,14 @@ namespace WAX_converter
             }
         }
 
+        private void BuildWindow_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            foreach (var image in this.ImageList)
+            {
+                image.Dispose();
+            }
+        }
+
         private void ButtonExit_Click(object sender, EventArgs e)
         {
             this.Close();

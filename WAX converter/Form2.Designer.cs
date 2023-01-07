@@ -961,6 +961,7 @@ namespace WAX_converter
             this.Name = "BuildWindow";
             this.Text = "Build WAX";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BuildWindow_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.BuildWindow_FormClosed);
             this.Load += new System.EventHandler(this.BuildWindow_Load);
             ((System.ComponentModel.ISupportInitialize)(this.displayBox2)).EndInit();
             this.panel1.ResumeLayout(false);

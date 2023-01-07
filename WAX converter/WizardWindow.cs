@@ -188,6 +188,14 @@ namespace WAX_converter
             }
         }
 
+        private void WizardWindow_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            foreach (var i in this.sourceImages)
+            {
+                i.Image.Dispose();
+            }
+        }
+
         // --------------------------------------------------------------------------------------------------------------------
 
         private void listBoxImages_SelectedIndexChanged(object sender, EventArgs e)
