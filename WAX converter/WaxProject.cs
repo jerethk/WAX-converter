@@ -12,11 +12,11 @@ namespace WAX_converter
     // Class for saving and loading project files
     static class WaxProject
     {
-        public static bool Save(string FileName, int LogicType, List<Action> Actions, List<Sequence> Sequences, List<Frame> Frames, int numImages)
+        public static bool Save(string fileName, int logicType, List<Action> Actions, List<Sequence> Sequences, List<Frame> Frames, int numImages)
         {
             try
             {
-                using (StreamWriter writer = new StreamWriter(FileName, false))
+                using (StreamWriter writer = new StreamWriter(fileName, false))
                 {
                     writer.WriteLine("# WAX project file.");
                     writer.WriteLine("# Be very careful if you edit this file manually.");
@@ -48,7 +48,7 @@ namespace WAX_converter
 
                     // Write action data
                     writer.WriteLine($"Actions");
-                    writer.WriteLine($"LogicType {LogicType}");
+                    writer.WriteLine($"LogicType {logicType}");
 
                     for (int a = 0; a < Actions.Count; a++)
                     {
@@ -81,11 +81,11 @@ namespace WAX_converter
             return true;
         }
 
-        public static bool Load(string FileName, out int logicType, List<Action> Actions, List<Sequence> Sequences, List<Frame> Frames, List<Bitmap> Images)
+        public static bool Load(string fileName, out int logicType, List<Action> Actions, List<Sequence> Sequences, List<Frame> Frames, List<Bitmap> Images)
         {
-            string FileNameNoExtension = Path.GetFileNameWithoutExtension(FileName);
-            string Dir = Path.GetDirectoryName(FileName);
-            string cellImageDirectory = Dir + "/" + FileNameNoExtension;
+            string fileNameNoExtension = Path.GetFileNameWithoutExtension(fileName);
+            string dir = Path.GetDirectoryName(fileName);
+            string cellImageDirectory = dir + "/" + fileNameNoExtension + ".cells";
 
             logicType = 0;
             int numCells = 0;
@@ -95,7 +95,7 @@ namespace WAX_converter
             try
             {
                 // Read from project text file
-                using (StreamReader fileReader = new StreamReader(FileName))
+                using (StreamReader fileReader = new StreamReader(fileName))
                 {
                     string[] nextLine = new string[0];
 
@@ -108,6 +108,12 @@ namespace WAX_converter
                     }
                     numCells = Int32.Parse(nextLine[1]);
 
+                    // For compatibility- change to new directory name (suffixed with ".cells")
+                    var oldDirectoryName = dir + "/" + fileNameNoExtension;
+                    if (Directory.Exists(oldDirectoryName) && !Directory.Exists(cellImageDirectory)) {
+                        Directory.Move(oldDirectoryName, cellImageDirectory);
+                    }
+                    
                     // Check the images exist; abort if they don't (support leading zeroes and no leading zeroes for compatibility, argh...)
                     for (int i = 0; i < numCells; i++)
                     {

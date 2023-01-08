@@ -223,6 +223,7 @@ namespace WAX_converter
         {
             string dir = Path.GetDirectoryName(filename);
             string baseFilename = Path.GetFileNameWithoutExtension(filename);
+            var imageDirectory = dir + "/" + baseFilename + ".cells";
 
             // Work out logic type
             int logicType = 0;
@@ -248,18 +249,18 @@ namespace WAX_converter
             try
             {
                 /* save images in subdirectory */
-                Directory.CreateDirectory(dir + "/" + baseFilename);
+                Directory.CreateDirectory(imageDirectory);
 
                 for (int i = 0; i < this.Ncells; i++)
                 {
                     var fileNum = GetExportFileNumber(i);
-                    string saveName = dir + "/" + baseFilename + "/" + fileNum + ".PNG";
+                    string saveName = imageDirectory + "/" + fileNum + ".PNG";
                     this.Cells[i].bitmap.Save(saveName, ImageFormat.Png);
                 } 
             }
-            catch (IOException e)
+            catch (Exception e)
             {
-                MessageBox.Show($"IOException {e.Message}");
+                MessageBox.Show($"Exception {e.Message}");
                 return false;
             }
 

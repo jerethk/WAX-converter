@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -584,9 +585,9 @@ namespace WAX_converter
             var dialogResult = this.saveProjDialog.ShowDialog();
             if (dialogResult == DialogResult.OK)
             {
-                string FileNameNoExtension = Path.GetFileNameWithoutExtension(saveProjDialog.FileName);
-                string Dir = Path.GetDirectoryName(saveProjDialog.FileName);
-                string imageDirectory = Dir + "/" + FileNameNoExtension;
+                string fileNameNoExtension = Path.GetFileNameWithoutExtension(saveProjDialog.FileName);
+                string dir = Path.GetDirectoryName(saveProjDialog.FileName);
+                string imageDirectory = dir + "/" + fileNameNoExtension + ".cells";
 
                 try
                 {
@@ -597,7 +598,7 @@ namespace WAX_converter
                     {
                         var fileNum = Waxfile.GetExportFileNumber(i);
                         string imageSavePath = imageDirectory + "/" + fileNum + ".png";
-                        this.sourceImages[i].Image.Save(imageSavePath, System.Drawing.Imaging.ImageFormat.Png);
+                        this.sourceImages[i].Image.Save(imageSavePath, ImageFormat.Png);
                     }
 
                     if (success)

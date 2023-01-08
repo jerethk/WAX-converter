@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -830,19 +831,28 @@ namespace WAX_converter
         private void saveWIPDialog_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
         {
             bool success = true;
-            string FileNameNoExtension = Path.GetFileNameWithoutExtension(saveWIPDialog.FileName);
-            string Dir = Path.GetDirectoryName(saveWIPDialog.FileName);
-            string cellImageDirectory = Dir + "/" + FileNameNoExtension;
+            string fileNameNoExtension = Path.GetFileNameWithoutExtension(saveWIPDialog.FileName);
+            string dir = Path.GetDirectoryName(saveWIPDialog.FileName);
+            string cellImageDirectory = dir + "/" + fileNameNoExtension + ".cells";
 
             try
             {
-                // save images as PNG in subfolder
+                // Save images as PNG in subfolder. Clear out subfolder if it already exists (from a previous project save)
+                if (Directory.Exists(cellImageDirectory))
+                {
+                    var files = Directory.EnumerateFiles(cellImageDirectory, "*.png");
+                    foreach (var f in files)
+                    {
+                        File.Delete(f);
+                    }
+                }
+                
                 Directory.CreateDirectory(cellImageDirectory);
                 for (int i = 0; i < ImageList.Count; i++)
                 {
                     var fileNum = Waxfile.GetExportFileNumber(i);
                     string imageSavePath = cellImageDirectory + "/" + fileNum + ".png";
-                    ImageList[i].Save(imageSavePath, System.Drawing.Imaging.ImageFormat.Png);
+                    ImageList[i].Save(imageSavePath, ImageFormat.Png);
                 }
 
                 // save project file
@@ -851,7 +861,7 @@ namespace WAX_converter
                     success = false;
                 }
             }
-            catch (IOException ex)
+            catch (Exception ex)
             {
                 success = false;
                 MessageBox.Show($"Error saving project. Exception {ex} occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -859,7 +869,7 @@ namespace WAX_converter
 
             if (success)
             {
-                MessageBox.Show($"Project file saved as {Path.GetFileName(saveWIPDialog.FileName)}. Cell images have been saved in {FileNameNoExtension}\\ subdirectory.", "WIP saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Project file saved as {Path.GetFileName(saveWIPDialog.FileName)}. Cell images have been saved in {fileNameNoExtension}.cells\\ subdirectory.", "WIP saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -867,7 +877,7 @@ namespace WAX_converter
 
         private void buttonLoadWIP_Click(object sender, EventArgs e)
         {
-            DialogResult answer = MessageBox.Show("You will lose any work you have already done here.", "Are you sure?", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            var answer = MessageBox.Show("You will lose any work you have already done here.", "Are you sure?", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
             if (answer == DialogResult.OK)
             {
@@ -889,7 +899,13 @@ namespace WAX_converter
             }
             else
             {
-                // If load successful, load everything into the UI
+                // If load successful, dispose any previous images, then load everything into the UI
+                foreach (var image in ImageList)
+                {
+                    image.Dispose();
+                }
+
+                ImageList.Clear();
                 ImageList = loadedBitmaps;
                 FrameList = loadedFrames;
                 SequenceList = loadedSeqs;
