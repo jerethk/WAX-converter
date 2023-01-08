@@ -113,21 +113,13 @@ namespace WAX_converter
             if (listBoxFrames.SelectedIndex >= 0)
             {
                 // find the first empty frame in sequence
-                int startPosition = 0;
-                
-                for (int sf = 0; sf < 32; sf++)
+                int startPosition = Array.IndexOf(this.Sequence.frameIndexes, -1);
+                if (startPosition == -1)
                 {
-                    if (this.Sequence.frameIndexes[sf] == -1)
-                    {
-                        startPosition = sf;
-                        break;
-                    }
-                    else if (sf == 31)  // every frame is filled
-                    {
-                        return;
-                    }
+                    MessageBox.Show("Your sequence already has the maximum number of frames (32).", "Unable to add frames", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
                 }
-
+                    
                 // Add the selected frames
                 int nextPosition = startPosition;
                 foreach (int i in listBoxFrames.SelectedIndices)
