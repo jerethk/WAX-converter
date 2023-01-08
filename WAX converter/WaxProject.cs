@@ -111,22 +111,25 @@ namespace WAX_converter
                     // Check the images exist; abort if they don't (support leading zeroes and no leading zeroes for compatibility, argh...)
                     for (int i = 0; i < numCells; i++)
                     {
+                        Image loadedBitmap;
+
                         var fileNum = Waxfile.GetExportFileNumber(i);
                         if (File.Exists(cellImageDirectory + "/" + fileNum + ".png"))
                         {
-                            var loadedBMP = new Bitmap(cellImageDirectory + "/" + fileNum + ".png");
-                            Images.Add(loadedBMP);
+                            loadedBitmap = Bitmap.FromFile(cellImageDirectory + "/" + fileNum + ".png");
                         }
                         else if (File.Exists(cellImageDirectory + "/" + i + ".png"))
                         {
-                            var loadedBMP = new Bitmap(cellImageDirectory + "/" + i + ".png");
-                            Images.Add(loadedBMP);
+                            loadedBitmap = Bitmap.FromFile(cellImageDirectory + "/" + i + ".png");
                         }
                         else
                         {
                             MessageBox.Show("Error: Image file(s) not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return false;
                         }
+
+                        Images.Add(new Bitmap(loadedBitmap));
+                        loadedBitmap.Dispose();
                     }
 
                     // frames
