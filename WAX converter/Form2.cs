@@ -428,7 +428,6 @@ namespace WAX_converter
 
                 listboxSeqFrames.Enabled = true;
                 buttonEditSequence.Enabled = true;
-                buttonClearFrame.Enabled = true;
                 labelNSeqs.Text = "n = " + SequenceList.Count;
 
                 dataGridViews.Enabled = true;
@@ -514,92 +513,6 @@ namespace WAX_converter
                 SeqWindow.ShowDialog();
                 listboxSeqFrames.DataSource = new BindingSource(SequenceList[listboxSeqs.SelectedIndex].frameIndexes, "");
             }
-
-            /*
-            if (listboxSeqs.SelectedIndex >= 0)
-            {
-                MessageBox.Show("Select the frames to assign to this sequence, then press DONE. Multiselect using CTRL and SHIFT keys. To cancel, press DONE with no frames selected.");
-                btnDoneSettingFrames.Visible = true;
-                listboxFrames.SelectionMode = SelectionMode.MultiExtended;    // allow multiselection
-
-                buttonAddFrame.Enabled = false;
-                buttonRemoveFrame.Enabled = false;
-                InsertX.Enabled = false;
-                InsertY.Enabled = false;
-                checkBoxFlip.Enabled = false;
-                panel1.Enabled = false;
-                panel2.Enabled = false;
-                panel5.Enabled = false;
-                panel6.Enabled = false;
-                panel7.Enabled = false;
-            } */
-        }
-
-        private void btnDoneSettingFrames_Click(object sender, EventArgs e)
-        {
-            // NO LONGER USED
-            /*
-
-            int nFrames = listboxFrames.SelectedItems.Count;
-            
-            if (nFrames > 0)
-            {
-                int selectedSequence = listboxSeqs.SelectedIndex;
-                if (nFrames > 32) nFrames = 32;
-
-                for (int f = 0; f < nFrames; f++)
-                {
-                    Object o = listboxFrames.SelectedItems[f];
-                    int selectedFrame = listboxFrames.Items.IndexOf(o);
-                    SequenceList[selectedSequence].frameIndexes[f] = selectedFrame;
-                }
-                
-                for  (int f = nFrames; f < 32; f++)
-                {
-                    SequenceList[selectedSequence].frameIndexes[f] = -1;
-                }
-
-                listboxSeqFrames.DataSource = new BindingSource(SequenceList[listboxSeqs.SelectedIndex].frameIndexes, "");
-                listboxSeqFrames.SelectedIndex = 0;
-                
-            }
-
-            btnDoneSettingFrames.Visible = false;
-            listboxFrames.SelectionMode = SelectionMode.One;
-
-            buttonAddFrame.Enabled = true;
-            buttonRemoveFrame.Enabled = true;
-            InsertX.Enabled = true;
-            InsertY.Enabled = true;
-            checkBoxFlip.Enabled = true;
-            panel1.Enabled = true;
-            panel2.Enabled = true;
-            panel5.Enabled = true;
-            panel6.Enabled = true;
-            panel7.Enabled = true;
-
-            */
-        }
-
-        private void buttonClearFrame_Click(object sender, EventArgs e)
-        {
-            // NO LONGER USED
-            /*
-            int selectedSequence = listboxSeqs.SelectedIndex;
-
-            if (selectedSequence >= 0)
-            {
-                for (int i = 31; i >= 0; i--)   // count backwards until the last frame in sequence
-                {
-                    if (SequenceList[selectedSequence].frameIndexes[i] != -1)
-                    {
-                        SequenceList[selectedSequence].frameIndexes[i] = -1;
-                        listboxSeqFrames.DataSource = new BindingSource(SequenceList[listboxSeqs.SelectedIndex].frameIndexes, "");
-                        break;
-                    }
-                }
-            }
-            */
         }
 
 // --- ACTIONS AREA --------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -654,26 +567,6 @@ namespace WAX_converter
             }
 
         }
-
-        /*
-        private void ViewNumber_ValueChanged(object sender, EventArgs e)
-        {
-            int action = comboBoxAction.SelectedIndex;
-            int view = (int) ViewNumber.Value;
-            int seq = ActionList[action].seqIndexes[view];
-
-            ViewSequence.Value = seq;
-        }
-
-        private void ViewSequence_ValueChanged(object sender, EventArgs e)
-        {
-            int action = comboBoxAction.SelectedIndex;
-            int view = (int)ViewNumber.Value;
-            int viewSeq = (int) ViewSequence.Value;
-
-            ActionList[action].seqIndexes[view] = viewSeq;
-            listboxSeqs.SelectedIndex = viewSeq;
-        }*/
 
         private void dataGridViews_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {

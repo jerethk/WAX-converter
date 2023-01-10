@@ -53,7 +53,6 @@ namespace WAX_converter
             this.ButtonMoveUp = new System.Windows.Forms.Button();
             this.ButtonMoveDown = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.btnDoneSettingFrames = new System.Windows.Forms.Button();
             this.labelNFrames = new System.Windows.Forms.Label();
             this.InsertY = new System.Windows.Forms.NumericUpDown();
             this.InsertX = new System.Windows.Forms.NumericUpDown();
@@ -68,7 +67,6 @@ namespace WAX_converter
             this.label1 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.buttonClearFrame = new System.Windows.Forms.Button();
             this.buttonEditSequence = new System.Windows.Forms.Button();
             this.listboxSeqFrames = new System.Windows.Forms.ListBox();
             this.labelNSeqs = new System.Windows.Forms.Label();
@@ -358,7 +356,6 @@ namespace WAX_converter
             // panel3
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel3.Controls.Add(this.btnDoneSettingFrames);
             this.panel3.Controls.Add(this.labelNFrames);
             this.panel3.Controls.Add(this.InsertY);
             this.panel3.Controls.Add(this.InsertX);
@@ -376,18 +373,6 @@ namespace WAX_converter
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(360, 400);
             this.panel3.TabIndex = 8;
-            // 
-            // btnDoneSettingFrames
-            // 
-            this.btnDoneSettingFrames.Font = new System.Drawing.Font("Segoe UI", 6F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnDoneSettingFrames.Location = new System.Drawing.Point(264, 364);
-            this.btnDoneSettingFrames.Name = "btnDoneSettingFrames";
-            this.btnDoneSettingFrames.Size = new System.Drawing.Size(88, 28);
-            this.btnDoneSettingFrames.TabIndex = 11;
-            this.btnDoneSettingFrames.Text = "DONE (defunct)";
-            this.btnDoneSettingFrames.UseVisualStyleBackColor = true;
-            this.btnDoneSettingFrames.Visible = false;
-            this.btnDoneSettingFrames.Click += new System.EventHandler(this.btnDoneSettingFrames_Click);
             // 
             // labelNFrames
             // 
@@ -537,7 +522,6 @@ namespace WAX_converter
             // panel5
             // 
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel5.Controls.Add(this.buttonClearFrame);
             this.panel5.Controls.Add(this.buttonEditSequence);
             this.panel5.Controls.Add(this.listboxSeqFrames);
             this.panel5.Controls.Add(this.labelNSeqs);
@@ -551,19 +535,6 @@ namespace WAX_converter
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(360, 497);
             this.panel5.TabIndex = 9;
-            // 
-            // buttonClearFrame
-            // 
-            this.buttonClearFrame.Enabled = false;
-            this.buttonClearFrame.Font = new System.Drawing.Font("Segoe UI", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonClearFrame.Location = new System.Drawing.Point(220, 436);
-            this.buttonClearFrame.Name = "buttonClearFrame";
-            this.buttonClearFrame.Size = new System.Drawing.Size(132, 27);
-            this.buttonClearFrame.TabIndex = 19;
-            this.buttonClearFrame.Text = "Clear Last Frame (defunct)";
-            this.buttonClearFrame.UseVisualStyleBackColor = true;
-            this.buttonClearFrame.Visible = false;
-            this.buttonClearFrame.Click += new System.EventHandler(this.buttonClearFrame_Click);
             // 
             // buttonEditSequence
             // 
@@ -1026,7 +997,6 @@ namespace WAX_converter
         private System.Windows.Forms.Label labelNFrames;
         private System.Windows.Forms.Label labelNSeqs;
         private System.Windows.Forms.ListBox listboxSeqFrames;
-        private System.Windows.Forms.Button buttonClearFrame;
         private System.Windows.Forms.Button buttonEditSequence;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label label9;
@@ -1057,7 +1027,6 @@ namespace WAX_converter
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.CheckBox checkBoxCompress;
         private System.Windows.Forms.Button btnDoneAddingFrames;
-        private System.Windows.Forms.Button btnDoneSettingFrames;
         private System.Windows.Forms.Button btnHelp;
         private System.Windows.Forms.CheckBox checkBoxCommonColours;
         private System.Windows.Forms.DataGridViewTextBoxColumn ViewColumn;
