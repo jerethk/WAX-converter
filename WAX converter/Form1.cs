@@ -447,7 +447,12 @@ namespace WAX_converter
             //strings[6] = $"ADDRESS: 0x{Convert.ToString(wax.Cells[thisCell].address, 16)}";
             CellInfo.Lines = strings;
 
-            displayBox.Image = wax.Cells[thisCell].bitmap;
+            var displayedImage = new Bitmap(wax.Cells[thisCell].bitmap); 
+            if (!radioCell.Checked && wax.Frames[(int) FrameNumber.Value].Flip == 1)
+            {
+                displayedImage.RotateFlip(RotateFlipType.RotateNoneFlipX);
+            }
+            displayBox.Image = displayedImage;
         }
 
         // ---------------------------------------------------------------------------------------------------------
