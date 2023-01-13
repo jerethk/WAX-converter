@@ -35,7 +35,7 @@ namespace WAX_converter
             this.ButtonPal = new System.Windows.Forms.Button();
             this.openPalDialog = new System.Windows.Forms.OpenFileDialog();
             this.loadImageDialog = new System.Windows.Forms.OpenFileDialog();
-            this.displayBox2 = new System.Windows.Forms.PictureBox();
+            this.cellDisplayBox = new System.Windows.Forms.PictureBox();
             this.ButtonExit = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.checkBoxCommonColours = new System.Windows.Forms.CheckBox();
@@ -52,7 +52,9 @@ namespace WAX_converter
             this.ButtonRemoveImage = new System.Windows.Forms.Button();
             this.ButtonMoveUp = new System.Windows.Forms.Button();
             this.ButtonMoveDown = new System.Windows.Forms.Button();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.frameDisplayBox = new System.Windows.Forms.PictureBox();
             this.labelNFrames = new System.Windows.Forms.Label();
             this.InsertY = new System.Windows.Forms.NumericUpDown();
             this.InsertX = new System.Windows.Forms.NumericUpDown();
@@ -65,7 +67,7 @@ namespace WAX_converter
             this.buttonAddFrame = new System.Windows.Forms.Button();
             this.listboxFrames = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.buttonEditSequence = new System.Windows.Forms.Button();
             this.listboxSeqFrames = new System.Windows.Forms.ListBox();
@@ -101,14 +103,15 @@ namespace WAX_converter
             this.saveWIPDialog = new System.Windows.Forms.SaveFileDialog();
             this.openWIPDialog = new System.Windows.Forms.OpenFileDialog();
             this.panel8 = new System.Windows.Forms.Panel();
-            ((System.ComponentModel.ISupportInitialize)(this.displayBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cellDisplayBox)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.transpColourBox)).BeginInit();
             this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.frameDisplayBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.InsertY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.InsertX)).BeginInit();
-            this.panel4.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViews)).BeginInit();
@@ -163,15 +166,16 @@ namespace WAX_converter
             this.loadImageDialog.Title = "Add Image(s)";
             this.loadImageDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.loadImageDialog_FileOk);
             // 
-            // displayBox2
+            // cellDisplayBox
             // 
-            this.displayBox2.BackColor = System.Drawing.Color.Gray;
-            this.displayBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.displayBox2.Location = new System.Drawing.Point(167, 307);
-            this.displayBox2.Name = "displayBox2";
-            this.displayBox2.Size = new System.Drawing.Size(480, 480);
-            this.displayBox2.TabIndex = 4;
-            this.displayBox2.TabStop = false;
+            this.cellDisplayBox.BackColor = System.Drawing.Color.Gray;
+            this.cellDisplayBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.cellDisplayBox.Location = new System.Drawing.Point(167, 307);
+            this.cellDisplayBox.Name = "cellDisplayBox";
+            this.cellDisplayBox.Size = new System.Drawing.Size(400, 420);
+            this.cellDisplayBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.cellDisplayBox.TabIndex = 4;
+            this.cellDisplayBox.TabStop = false;
             // 
             // ButtonExit
             // 
@@ -285,11 +289,11 @@ namespace WAX_converter
             this.panel2.Controls.Add(this.ButtonMoveDown);
             this.panel2.Controls.Add(this.ButtonAddImage);
             this.panel2.Controls.Add(this.listboxImages);
-            this.panel2.Controls.Add(this.displayBox2);
+            this.panel2.Controls.Add(this.cellDisplayBox);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 84);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(704, 897);
+            this.panel2.Size = new System.Drawing.Size(534, 877);
             this.panel2.TabIndex = 7;
             // 
             // btnDoneAddingFrames
@@ -353,26 +357,49 @@ namespace WAX_converter
             this.ButtonMoveDown.UseVisualStyleBackColor = true;
             this.ButtonMoveDown.Click += new System.EventHandler(this.ButtonMoveDown_Click);
             // 
-            // panel3
+            // panel4
             // 
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel3.Controls.Add(this.labelNFrames);
-            this.panel3.Controls.Add(this.InsertY);
-            this.panel3.Controls.Add(this.InsertX);
-            this.panel3.Controls.Add(this.checkBoxFlip);
-            this.panel3.Controls.Add(this.label5);
-            this.panel3.Controls.Add(this.label4);
-            this.panel3.Controls.Add(this.label3);
-            this.panel3.Controls.Add(this.textBoxCell);
-            this.panel3.Controls.Add(this.buttonRemoveFrame);
-            this.panel3.Controls.Add(this.buttonAddFrame);
-            this.panel3.Controls.Add(this.listboxFrames);
-            this.panel3.Controls.Add(this.label1);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(360, 400);
-            this.panel3.TabIndex = 8;
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel4.Controls.Add(this.button1);
+            this.panel4.Controls.Add(this.frameDisplayBox);
+            this.panel4.Controls.Add(this.labelNFrames);
+            this.panel4.Controls.Add(this.InsertY);
+            this.panel4.Controls.Add(this.InsertX);
+            this.panel4.Controls.Add(this.checkBoxFlip);
+            this.panel4.Controls.Add(this.label5);
+            this.panel4.Controls.Add(this.label4);
+            this.panel4.Controls.Add(this.label3);
+            this.panel4.Controls.Add(this.textBoxCell);
+            this.panel4.Controls.Add(this.buttonRemoveFrame);
+            this.panel4.Controls.Add(this.buttonAddFrame);
+            this.panel4.Controls.Add(this.listboxFrames);
+            this.panel4.Controls.Add(this.label1);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel4.Location = new System.Drawing.Point(0, 0);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(546, 418);
+            this.panel4.TabIndex = 8;
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button1.Location = new System.Drawing.Point(353, 355);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(148, 37);
+            this.button1.TabIndex = 12;
+            this.button1.Text = "Position frames";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
+            // 
+            // frameDisplayBox
+            // 
+            this.frameDisplayBox.BackColor = System.Drawing.Color.Gray;
+            this.frameDisplayBox.Location = new System.Drawing.Point(329, 43);
+            this.frameDisplayBox.Name = "frameDisplayBox";
+            this.frameDisplayBox.Size = new System.Drawing.Size(188, 240);
+            this.frameDisplayBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.frameDisplayBox.TabIndex = 11;
+            this.frameDisplayBox.TabStop = false;
             // 
             // labelNFrames
             // 
@@ -495,7 +522,7 @@ namespace WAX_converter
             this.listboxFrames.ItemHeight = 15;
             this.listboxFrames.Location = new System.Drawing.Point(30, 43);
             this.listboxFrames.Name = "listboxFrames";
-            this.listboxFrames.Size = new System.Drawing.Size(69, 334);
+            this.listboxFrames.Size = new System.Drawing.Size(69, 349);
             this.listboxFrames.TabIndex = 1;
             this.listboxFrames.SelectedIndexChanged += new System.EventHandler(this.listboxFrames_SelectedIndexChanged);
             // 
@@ -509,15 +536,15 @@ namespace WAX_converter
             this.label1.TabIndex = 0;
             this.label1.Text = "FRAMES";
             // 
-            // panel4
+            // panel3
             // 
-            this.panel4.Controls.Add(this.panel5);
-            this.panel4.Controls.Add(this.panel3);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(0, 0);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(360, 897);
-            this.panel4.TabIndex = 9;
+            this.panel3.Controls.Add(this.panel5);
+            this.panel3.Controls.Add(this.panel4);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(546, 877);
+            this.panel3.TabIndex = 9;
             // 
             // panel5
             // 
@@ -531,16 +558,17 @@ namespace WAX_converter
             this.panel5.Controls.Add(this.buttonRemoveSequence);
             this.panel5.Controls.Add(this.buttonAddSequence);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Location = new System.Drawing.Point(0, 400);
+            this.panel5.Location = new System.Drawing.Point(0, 418);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(360, 497);
+            this.panel5.Size = new System.Drawing.Size(546, 459);
             this.panel5.TabIndex = 9;
             // 
             // buttonEditSequence
             // 
-            this.buttonEditSequence.Location = new System.Drawing.Point(129, 82);
+            this.buttonEditSequence.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttonEditSequence.Location = new System.Drawing.Point(262, 168);
             this.buttonEditSequence.Name = "buttonEditSequence";
-            this.buttonEditSequence.Size = new System.Drawing.Size(167, 32);
+            this.buttonEditSequence.Size = new System.Drawing.Size(167, 40);
             this.buttonEditSequence.TabIndex = 18;
             this.buttonEditSequence.Text = "Edit Sequence";
             this.buttonEditSequence.UseVisualStyleBackColor = true;
@@ -551,16 +579,16 @@ namespace WAX_converter
             this.listboxSeqFrames.Enabled = false;
             this.listboxSeqFrames.FormattingEnabled = true;
             this.listboxSeqFrames.ItemHeight = 15;
-            this.listboxSeqFrames.Location = new System.Drawing.Point(129, 207);
+            this.listboxSeqFrames.Location = new System.Drawing.Point(129, 168);
             this.listboxSeqFrames.Name = "listboxSeqFrames";
-            this.listboxSeqFrames.Size = new System.Drawing.Size(106, 244);
+            this.listboxSeqFrames.Size = new System.Drawing.Size(106, 274);
             this.listboxSeqFrames.TabIndex = 17;
             this.listboxSeqFrames.SelectedIndexChanged += new System.EventHandler(this.listboxSeqFrames_SelectedIndexChanged);
             // 
             // labelNSeqs
             // 
             this.labelNSeqs.AutoSize = true;
-            this.labelNSeqs.Location = new System.Drawing.Point(126, 12);
+            this.labelNSeqs.Location = new System.Drawing.Point(129, 19);
             this.labelNSeqs.Name = "labelNSeqs";
             this.labelNSeqs.Size = new System.Drawing.Size(34, 15);
             this.labelNSeqs.TabIndex = 11;
@@ -569,7 +597,7 @@ namespace WAX_converter
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(129, 184);
+            this.label6.Location = new System.Drawing.Point(129, 144);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(94, 15);
             this.label6.TabIndex = 16;
@@ -579,9 +607,9 @@ namespace WAX_converter
             // 
             this.listboxSeqs.FormattingEnabled = true;
             this.listboxSeqs.ItemHeight = 15;
-            this.listboxSeqs.Location = new System.Drawing.Point(30, 42);
+            this.listboxSeqs.Location = new System.Drawing.Point(30, 52);
             this.listboxSeqs.Name = "listboxSeqs";
-            this.listboxSeqs.Size = new System.Drawing.Size(69, 409);
+            this.listboxSeqs.Size = new System.Drawing.Size(69, 394);
             this.listboxSeqs.TabIndex = 12;
             this.listboxSeqs.SelectedIndexChanged += new System.EventHandler(this.listboxSeqs_SelectedIndexChanged);
             // 
@@ -589,7 +617,7 @@ namespace WAX_converter
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(26, 12);
+            this.label7.Location = new System.Drawing.Point(30, 19);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(73, 15);
             this.label7.TabIndex = 11;
@@ -597,7 +625,7 @@ namespace WAX_converter
             // 
             // buttonRemoveSequence
             // 
-            this.buttonRemoveSequence.Location = new System.Drawing.Point(129, 123);
+            this.buttonRemoveSequence.Location = new System.Drawing.Point(129, 94);
             this.buttonRemoveSequence.Name = "buttonRemoveSequence";
             this.buttonRemoveSequence.Size = new System.Drawing.Size(167, 32);
             this.buttonRemoveSequence.TabIndex = 14;
@@ -607,7 +635,7 @@ namespace WAX_converter
             // 
             // buttonAddSequence
             // 
-            this.buttonAddSequence.Location = new System.Drawing.Point(129, 42);
+            this.buttonAddSequence.Location = new System.Drawing.Point(129, 52);
             this.buttonAddSequence.Name = "buttonAddSequence";
             this.buttonAddSequence.Size = new System.Drawing.Size(167, 32);
             this.buttonAddSequence.TabIndex = 13;
@@ -634,7 +662,7 @@ namespace WAX_converter
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(0, 0);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(360, 645);
+            this.panel6.Size = new System.Drawing.Size(344, 645);
             this.panel6.TabIndex = 10;
             // 
             // dataGridViews
@@ -837,9 +865,9 @@ namespace WAX_converter
             this.panel7.Controls.Add(this.labelNotes);
             this.panel7.Controls.Add(this.buttonCreateWAX);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel7.Location = new System.Drawing.Point(360, 0);
+            this.panel7.Location = new System.Drawing.Point(546, 0);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(360, 897);
+            this.panel7.Size = new System.Drawing.Size(344, 877);
             this.panel7.TabIndex = 11;
             // 
             // checkBoxCompress
@@ -913,17 +941,17 @@ namespace WAX_converter
             // 
             // panel8
             // 
-            this.panel8.Controls.Add(this.panel4);
+            this.panel8.Controls.Add(this.panel3);
             this.panel8.Controls.Add(this.panel7);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel8.Location = new System.Drawing.Point(704, 84);
+            this.panel8.Location = new System.Drawing.Point(534, 84);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(720, 897);
+            this.panel8.Size = new System.Drawing.Size(890, 877);
             this.panel8.TabIndex = 0;
             // 
             // BuildWindow
             // 
-            this.ClientSize = new System.Drawing.Size(1424, 981);
+            this.ClientSize = new System.Drawing.Size(1424, 961);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel8);
             this.Controls.Add(this.panel1);
@@ -934,17 +962,18 @@ namespace WAX_converter
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BuildWindow_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.BuildWindow_FormClosed);
             this.Load += new System.EventHandler(this.BuildWindow_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.displayBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cellDisplayBox)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.transpColourBox)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.frameDisplayBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.InsertY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.InsertX)).EndInit();
-            this.panel4.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.panel6.ResumeLayout(false);
@@ -965,7 +994,7 @@ namespace WAX_converter
         private System.Windows.Forms.Button ButtonPal;
         private System.Windows.Forms.OpenFileDialog openPalDialog;
         private System.Windows.Forms.OpenFileDialog loadImageDialog;
-        private System.Windows.Forms.PictureBox displayBox2;
+        private System.Windows.Forms.PictureBox cellDisplayBox;
         private System.Windows.Forms.Button ButtonExit;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
@@ -973,13 +1002,13 @@ namespace WAX_converter
         private System.Windows.Forms.Button ButtonMoveDown;
         private System.Windows.Forms.Button ButtonRemoveImage;
         private System.Windows.Forms.Button buttonTransparent;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListBox listboxFrames;
         private System.Windows.Forms.Button buttonAddFrame;
         private System.Windows.Forms.Button buttonRemoveFrame;
-        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBoxCell;
@@ -1031,5 +1060,7 @@ namespace WAX_converter
         private System.Windows.Forms.CheckBox checkBoxCommonColours;
         private System.Windows.Forms.DataGridViewTextBoxColumn ViewColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Sequence;
+        private System.Windows.Forms.PictureBox frameDisplayBox;
+        private System.Windows.Forms.Button button1;
     }
 }

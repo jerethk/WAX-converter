@@ -144,7 +144,7 @@ namespace WAX_converter
         {
             if (ImageList.Count >= 1 && listboxImages.SelectedIndex >= 0)
             {
-                displayBox2.Image = ImageList[listboxImages.SelectedIndex];
+                cellDisplayBox.Image = ImageList[listboxImages.SelectedIndex];
             }
         }
 
@@ -215,11 +215,11 @@ namespace WAX_converter
 
                         if (ImageList.Count == 0)
                         {
-                            displayBox2.Image = null;
+                            cellDisplayBox.Image = null;
                         }
                         else
                         {
-                            displayBox2.Image = ImageList[listboxImages.SelectedIndex];
+                            cellDisplayBox.Image = ImageList[listboxImages.SelectedIndex];
                         }
                     }
                 }
@@ -254,19 +254,20 @@ namespace WAX_converter
         {
             if (listboxFrames.SelectedIndex >= 0)
             {
-                listboxImages.SelectedIndex = FrameList[listboxFrames.SelectedIndex].CellIndex;
-                textBoxCell.Text = FrameList[listboxFrames.SelectedIndex].CellIndex.ToString();
-                InsertX.Value = FrameList[listboxFrames.SelectedIndex].InsertX;
-                InsertY.Value = FrameList[listboxFrames.SelectedIndex].InsertY;
+                var selectedFrame = FrameList[listboxFrames.SelectedIndex];
 
-                if (FrameList[listboxFrames.SelectedIndex].Flip == 1)
+                listboxImages.SelectedIndex = selectedFrame.CellIndex;
+                textBoxCell.Text = selectedFrame.CellIndex.ToString();
+                InsertX.Value = selectedFrame.InsertX;
+                InsertY.Value = selectedFrame.InsertY;
+                checkBoxFlip.Checked = selectedFrame.Flip == 1;
+
+                var frameImage = new Bitmap(this.ImageList[selectedFrame.CellIndex]);
+                if (selectedFrame.Flip == 1)
                 {
-                    checkBoxFlip.Checked = true;
+                    frameImage.RotateFlip(RotateFlipType.RotateNoneFlipX);
                 }
-                else
-                {
-                    checkBoxFlip.Checked = false;
-                }
+                frameDisplayBox.Image = frameImage;
             }
         }
 
@@ -283,7 +284,7 @@ namespace WAX_converter
                 ButtonRemoveImage.Enabled = false;
                 ButtonAddImage.Enabled = false;
                 panel1.Enabled = false;
-                panel3.Enabled = false;
+                panel4.Enabled = false;
                 panel5.Enabled = false;
                 panel6.Enabled = false;
                 panel7.Enabled = false;
@@ -328,7 +329,7 @@ namespace WAX_converter
             ButtonAddImage.Enabled = true;
             ButtonRemoveImage.Enabled = true;
             panel1.Enabled = true;
-            panel3.Enabled = true;
+            panel4.Enabled = true;
             panel5.Enabled = true;
             panel6.Enabled = true;
             panel7.Enabled = true;
