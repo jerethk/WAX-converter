@@ -33,7 +33,7 @@ namespace WAX_converter
             helpText[19] = "You can save a project, which creates a text file (extension WPROJ) and subdirectory containing images, containing the work you've done so far. You can then load a project later to continue working.";
             helpText[20] = "Exporting a WAX also generates a project (WPROJ) file. This allows you to more easily create a mod from an existing WAX.";
             helpText[23] = "TECHNICAL NOTES";
-            helpText[24] = "Using compression for cells that are larger than 256 pixels in height seems to cause problems in-game (???)";
+            helpText[24] = "Using compression for cells that are larger than 256 pixels in height will crash original (vanilla) Dark Forces but is okay in The Force Engine";
             this.text.Lines = helpText;
         }
         
