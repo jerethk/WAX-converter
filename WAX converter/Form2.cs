@@ -407,6 +407,13 @@ namespace WAX_converter
         {
             int selectedFrame = listboxFrames.SelectedIndex;
             FrameList[selectedFrame].Flip = checkBoxFlip.Checked ? 1 : 0;
+
+            var frameImage = new Bitmap(this.ImageList[this.FrameList[selectedFrame].CellIndex]);
+            if (checkBoxFlip.Checked)
+            {
+                frameImage.RotateFlip(RotateFlipType.RotateNoneFlipX);
+            }
+            frameDisplayBox.Image = frameImage;
         }
 
 // --- SEQUENCE AREA --------------------------------------------------------------------------------------------------------------------------------------------------------------------
