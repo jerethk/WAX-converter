@@ -53,7 +53,7 @@ namespace WAX_converter
             this.ButtonMoveUp = new System.Windows.Forms.Button();
             this.ButtonMoveDown = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnPositionFrames = new System.Windows.Forms.Button();
             this.frameDisplayBox = new System.Windows.Forms.PictureBox();
             this.labelNFrames = new System.Windows.Forms.Label();
             this.InsertY = new System.Windows.Forms.NumericUpDown();
@@ -360,7 +360,7 @@ namespace WAX_converter
             // panel4
             // 
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel4.Controls.Add(this.button1);
+            this.panel4.Controls.Add(this.btnPositionFrames);
             this.panel4.Controls.Add(this.frameDisplayBox);
             this.panel4.Controls.Add(this.labelNFrames);
             this.panel4.Controls.Add(this.InsertY);
@@ -380,16 +380,16 @@ namespace WAX_converter
             this.panel4.Size = new System.Drawing.Size(546, 418);
             this.panel4.TabIndex = 8;
             // 
-            // button1
+            // btnPositionFrames
             // 
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(353, 355);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(148, 37);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "Position frames";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Visible = false;
+            this.btnPositionFrames.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnPositionFrames.Location = new System.Drawing.Point(345, 338);
+            this.btnPositionFrames.Name = "btnPositionFrames";
+            this.btnPositionFrames.Size = new System.Drawing.Size(155, 42);
+            this.btnPositionFrames.TabIndex = 12;
+            this.btnPositionFrames.Text = "Position frames";
+            this.btnPositionFrames.UseVisualStyleBackColor = true;
+            this.btnPositionFrames.Click += new System.EventHandler(this.btnPositionFrames_Click);
             // 
             // frameDisplayBox
             // 
@@ -1061,6 +1061,6 @@ namespace WAX_converter
         private System.Windows.Forms.DataGridViewTextBoxColumn ViewColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Sequence;
         private System.Windows.Forms.PictureBox frameDisplayBox;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnPositionFrames;
     }
 }

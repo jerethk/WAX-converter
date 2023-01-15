@@ -416,7 +416,16 @@ namespace WAX_converter
             frameDisplayBox.Image = frameImage;
         }
 
-// --- SEQUENCE AREA --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        private void btnPositionFrames_Click(object sender, EventArgs e)
+        {
+            if (this.FrameList.Count > 0)
+            {
+                var window = new FramePositioningWindow(this.FrameList, this.ImageList, this.transparentColour);
+                window.ShowDialog();
+            }
+        }
+
+        // --- SEQUENCE AREA --------------------------------------------------------------------------------------------------------------------------------------------------------------------
         private void listboxSeqs_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (SequenceList.Count > 0)
