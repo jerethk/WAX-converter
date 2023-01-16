@@ -420,8 +420,16 @@ namespace WAX_converter
         {
             if (this.FrameList.Count > 0)
             {
+                var index = listboxFrames.SelectedIndex;
+
                 var window = new FramePositioningWindow(this.FrameList, this.ImageList, this.transparentColour);
                 window.ShowDialog();
+
+                if (index >= 0)
+                {
+                    InsertX.Value = this.FrameList[index].InsertX;
+                    InsertY.Value = this.FrameList[index].InsertY;
+                }
             }
         }
 

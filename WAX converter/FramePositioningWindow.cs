@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -12,7 +13,7 @@ namespace WAX_converter
     {
         private List<Bitmap> cells;
         private List<Frame> frameList;
-        private Color transparentColour;
+        private List<Frame> backupFrameList;
         private Graphics graphics;
         private int centreX;
         private int centreY;
@@ -22,43 +23,52 @@ namespace WAX_converter
             InitializeComponent();
 
             this.frameList = frames;
-            this.cells = images;
-            this.transparentColour = transparentColour;
+            this.cells = makeCellsTransparent(images, transparentColour).ToList();
             this.centreX = this.pictureBox.Width / 2;
             this.centreY = this.pictureBox.Height / 2;
+
+            this.backupFrameList = new List<Frame>();
+            for (int f = 0; f < frames.Count; f++)
+            {
+                backupFrameList.Add(new Frame()
+                {
+                    InsertX = frames[f].InsertX,
+                    InsertY = frames[f].InsertY,
+                    Flip = frames[f].Flip,
+                    CellIndex = frames[f].CellIndex,
+                    CellAddress = frames[f].CellAddress,
+                });
+            }
         }
 
         private void FramePositioningWindow_Load(object sender, EventArgs e)
         {
-            makeCellsTransparent();
             this.graphics = pictureBox.CreateGraphics();
 
             for (int f = 0; f < this.frameList.Count; f++)
             {
                 listBoxFrames.Items.Add(f.ToString());
             }
-
-            if (this.frameList.Count > 0)
-            {
-                listBoxFrames.SelectedIndex = 0;
-                drawCurrentFrame();
-            }
         }
 
-        private void makeCellsTransparent()
+        private IEnumerable<Bitmap> makeCellsTransparent(List<Bitmap> images, Color transparentColour)
         {
-            foreach (var cell in this.cells)
+            foreach (var image in images)
             {
-                for (var x = 0; x < cell.Width; x++)
+                var newImage = new Bitmap(image);
+
+                for (var x = 0; x < newImage.Width; x++)
                 {
-                    for (var y = 0; y < cell.Height; y++)
+                    for (var y = 0; y < newImage.Height; y++)
                     {
-                        if (cell.GetPixel(x, y) == this.transparentColour)
+                        if (newImage.GetPixel(x, y) == transparentColour)
                         {
-                            cell.SetPixel(x, y, Color.FromArgb(0, 0, 0, 0));
+                            newImage.SetPixel(x, y, Color.FromArgb(0, 0, 0, 0));
                         }
                     }
                 }
+
+                yield return newImage;
             }
         }
 
@@ -68,11 +78,35 @@ namespace WAX_converter
             
             if (i >= 0)
             {
-                drawCurrentFrame();
+                numericInsertX.Value = this.frameList[i].InsertX;
+                numericInsertY.Value = this.frameList[i].InsertY;
+                drawFrame();
             }
         }
 
-        private void drawCurrentFrame()
+        private void numericInsertX_ValueChanged(object sender, EventArgs e)
+        {
+            var i = listBoxFrames.SelectedIndex;
+
+            if (i >= 0)
+            {
+                this.frameList[i].InsertX = (int)numericInsertX.Value;
+                drawFrame();
+            }
+        }
+
+        private void numericInsertY_ValueChanged(object sender, EventArgs e)
+        {
+            var i = listBoxFrames.SelectedIndex;
+
+            if (i >= 0)
+            {
+                this.frameList[i].InsertY = (int)numericInsertY.Value;
+                drawFrame();
+            }
+        }
+
+        private void drawFrame()
         {
             this.graphics.Clear(Color.LightGray);
 
@@ -94,6 +128,31 @@ namespace WAX_converter
             var yAxisBot = new Point(this.centreX, pictureBox.Height);
             this.graphics.DrawLine(redPen, xAxisLeft, XAxisRight);
             this.graphics.DrawLine(redPen, yAxisTop, yAxisBot);
+        }
+
+        private void btnAccept_Click(object sender, EventArgs e)
+        {
+            disposeBitmaps();
+            this.Close();
+        }
+
+        private void btnDiscard_Click(object sender, EventArgs e)
+        {
+            for (int f = 0; f < this.frameList.Count; f++)
+            {
+                this.frameList[f] = this.backupFrameList[f];
+            }
+            
+            disposeBitmaps();
+            this.Close();
+        }
+
+        private void disposeBitmaps()
+        {
+            foreach (var img in this.cells)
+            {
+                img.Dispose();
+            }
         }
     }
 }
