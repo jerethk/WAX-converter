@@ -88,7 +88,12 @@ namespace WAX_converter
             {
                 int cellIndex = FrameList[index].CellIndex;
 
-                displayBox.Image = ImageList[cellIndex];
+                var img = new Bitmap(ImageList[cellIndex]);
+                if (FrameList[index].Flip == 1)
+                {
+                    img.RotateFlip(RotateFlipType.RotateNoneFlipX);
+                }
+                displayBox.Image = img;
             }
             else
             {
