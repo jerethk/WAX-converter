@@ -644,7 +644,7 @@ namespace WAX_converter
                     {
                         Frame newFrame = new Frame();
                         newFrame.InsertX = -(this.sourceImages[imageIndex].Image.Width / 2);
-                        newFrame.InsertY = -this.sourceImages[imageIndex].Image.Height;
+                        newFrame.InsertY = -this.sourceImages[imageIndex].Image.Height + (int) (0.06 * this.sourceImages[imageIndex].Image.Height);
                         newFrame.Flip = ws.isFlipped ? 1 : 0;          // check
                         newFrame.CellIndex = imageIndex;
 

@@ -303,7 +303,7 @@ namespace WAX_converter
                     Frame newFrame = new Frame();
                     newFrame.CellIndex = selectedCell;
                     newFrame.InsertX = ImageList[selectedCell].Width / 2 * -1;      // set sensible default values based on size of image
-                    newFrame.InsertY = ImageList[selectedCell].Height * -1;
+                    newFrame.InsertY = ImageList[selectedCell].Height * -1 + (int) (0.06 * ImageList[selectedCell].Height);
                     newFrame.Flip = 0;
 
                     FrameList.Add(newFrame);
