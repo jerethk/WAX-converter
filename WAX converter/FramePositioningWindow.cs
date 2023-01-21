@@ -24,8 +24,6 @@ namespace WAX_converter
 
             this.frameList = frames;
             this.cells = makeCellsTransparent(images, transparentColour).ToList();
-            this.centreX = this.pictureBox.Width / 2;
-            this.centreY = this.pictureBox.Height / 2;
 
             this.backupFrameList = new List<Frame>();
             for (int f = 0; f < frames.Count; f++)
@@ -44,6 +42,8 @@ namespace WAX_converter
         private void FramePositioningWindow_Load(object sender, EventArgs e)
         {
             this.graphics = pictureBox.CreateGraphics();
+            this.centreX = this.pictureBox.Width / 2;
+            this.centreY = this.pictureBox.Height / 2;
 
             for (int f = 0; f < this.frameList.Count; f++)
             {
@@ -153,6 +153,16 @@ namespace WAX_converter
             {
                 img.Dispose();
             }
+        }
+
+        private void pictureBox_Resize(object sender, EventArgs e)
+        {
+            this.centreX = this.pictureBox.Width / 2;
+            this.centreY = this.pictureBox.Height / 2;
+            this.graphics.Dispose();
+            this.graphics = pictureBox.CreateGraphics();
+
+            drawFrame();
         }
     }
 }
