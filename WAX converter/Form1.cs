@@ -481,7 +481,7 @@ namespace WAX_converter
 
         private void exportDialog_FileOk(object sender, CancelEventArgs e)
         {
-            if (wax.ExportToPNG(exportDialog.FileName))
+            if (wax.ExportToPNG(exportDialog.FileName, this.transparencyOption))
             {
                 MessageBox.Show("Successfully exported images to PNGs, and created a project file.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }

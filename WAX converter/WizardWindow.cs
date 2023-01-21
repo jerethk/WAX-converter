@@ -591,7 +591,7 @@ namespace WAX_converter
 
                 try
                 {
-                    bool success = WaxProject.Save(this.saveProjDialog.FileName, 3, actionList, sequenceList, frameList, this.sourceImages.Count);
+                    bool success = WaxProject.Save(this.saveProjDialog.FileName, 3, actionList, sequenceList, frameList, this.sourceImages.Count, Color.FromArgb(255,0,0,0));
                     Directory.CreateDirectory(imageDirectory);
 
                     for (int i = 0; i < this.sourceImages.Count; i++)

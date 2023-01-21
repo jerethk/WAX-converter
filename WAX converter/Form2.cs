@@ -774,7 +774,7 @@ namespace WAX_converter
                 }
 
                 // save project file
-                if (!WaxProject.Save(saveWIPDialog.FileName, comboBoxLogic.SelectedIndex, ActionList, SequenceList, FrameList, ImageList.Count))
+                if (!WaxProject.Save(saveWIPDialog.FileName, comboBoxLogic.SelectedIndex, ActionList, SequenceList, FrameList, ImageList.Count, this.transparentColour))
                 {
                     success = false;
                 }
@@ -806,12 +806,13 @@ namespace WAX_converter
         private void openWIPDialog_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
         {
             int logicType = 0;
-            List<Frame> loadedFrames = new List<Frame>();
-            List<Sequence> loadedSeqs = new List<Sequence>();
-            List<Action> loadedActions = new List<Action>();
-            List<Bitmap> loadedBitmaps = new List<Bitmap>();
+            var loadedFrames = new List<Frame>();
+            var loadedSeqs = new List<Sequence>();
+            var loadedActions = new List<Action>();
+            var loadedBitmaps = new List<Bitmap>();
+            var transparentColour = new Color();
 
-            if (!WaxProject.Load(openWIPDialog.FileName, out logicType, loadedActions, loadedSeqs, loadedFrames, loadedBitmaps))
+            if (!WaxProject.Load(openWIPDialog.FileName, out logicType, loadedActions, loadedSeqs, loadedFrames, loadedBitmaps, out transparentColour))
             {
                 MessageBox.Show("Failed to load. The project file(s) may have been corrupted.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -823,11 +824,12 @@ namespace WAX_converter
                     image.Dispose();
                 }
 
-                ImageList.Clear();
-                ImageList = loadedBitmaps;
-                FrameList = loadedFrames;
-                SequenceList = loadedSeqs;
-                ActionList = loadedActions;
+                this.ImageList.Clear();
+                this.ImageList = loadedBitmaps;
+                this.FrameList = loadedFrames;
+                this.SequenceList = loadedSeqs;
+                this.ActionList = loadedActions;
+                this.transparentColour = transparentColour;
 
                 this.PopulateUI();
                 this.SetComboBoxLogic(logicType);
@@ -836,6 +838,7 @@ namespace WAX_converter
 
         public void PopulateUI()
         {
+            transpColourBox.BackColor = this.transparentColour;
             listboxImages.Items.Clear();
             for (int i = 0; i < ImageList.Count; i++)
             {

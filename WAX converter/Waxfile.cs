@@ -4,6 +4,7 @@ using System.IO;
 using System.Drawing.Imaging;
 using System.Text;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace WAX_converter
 {
@@ -219,7 +220,7 @@ namespace WAX_converter
             return true;
         }
 
-        public bool ExportToPNG(string filename)
+        public bool ExportToPNG(string filename, BitmapTransparencyOption transparencyOption)
         {
             string dir = Path.GetDirectoryName(filename);
             string baseFilename = Path.GetFileNameWithoutExtension(filename);
@@ -246,6 +247,27 @@ namespace WAX_converter
                     break;
             }
 
+            // Transparency colour
+            Color transparencyColour = new Color();
+            switch (transparencyOption)
+            {
+                case BitmapTransparencyOption.AlphaTransparent:
+                    transparencyColour = Color.FromArgb(0, 0, 0, 0);
+                    break;
+
+                case BitmapTransparencyOption.White:
+                    transparencyColour = Color.FromArgb(255, 255, 255, 255);
+                    break;
+
+                case BitmapTransparencyOption.Magenta:
+                    transparencyColour = Color.FromArgb(255, 255, 0, 255);
+                    break;
+
+                default:
+                    transparencyColour = Color.FromArgb(255, 0, 0, 0);
+                    break;
+            }
+
             try
             {
                 /* save images in subdirectory */
@@ -265,7 +287,7 @@ namespace WAX_converter
             }
 
             // Save a project file
-            if (!WaxProject.Save($"{dir}/{baseFilename}.wproj", logicType, this.Actions, this.Sequences, this.Frames, this.Cells.Count))
+            if (!WaxProject.Save($"{dir}/{baseFilename}.wproj", logicType, this.Actions, this.Sequences, this.Frames, this.Cells.Count, transparencyColour))
             {
                 return false;
             }

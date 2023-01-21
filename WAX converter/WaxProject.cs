@@ -12,7 +12,7 @@ namespace WAX_converter
     // Class for saving and loading project files
     static class WaxProject
     {
-        public static bool Save(string fileName, int logicType, List<Action> Actions, List<Sequence> Sequences, List<Frame> Frames, int numImages)
+        public static bool Save(string fileName, int logicType, List<Action> Actions, List<Sequence> Sequences, List<Frame> Frames, int numImages, Color transparentColour)
         {
             try
             {
@@ -29,6 +29,7 @@ namespace WAX_converter
                     writer.WriteLine($"Frames {Frames.Count}");
                     for (int f = 0; f < Frames.Count; f++)
                     {
+                        writer.WriteLine($"#{f}");
                         writer.WriteLine($"{Frames[f].CellIndex} {Frames[f].InsertX} {Frames[f].InsertY} {Frames[f].Flip}");
                     }
                     writer.WriteLine("");
@@ -42,6 +43,7 @@ namespace WAX_converter
                         {
                             str += Sequences[s].frameIndexes[f] + " ";
                         }
+                        writer.WriteLine($"#{s}");
                         writer.WriteLine(str);
                     }
                     writer.WriteLine("");
@@ -52,6 +54,7 @@ namespace WAX_converter
 
                     for (int a = 0; a < Actions.Count; a++)
                     {
+                        writer.WriteLine($"#{a}");
                         writer.WriteLine($"{Actions[a].Wwidth} {Actions[a].Wheight} {Actions[a].FrameRate}");
 
                         string str = "";
@@ -65,10 +68,14 @@ namespace WAX_converter
                     // write blank actions as necessary (always put 14 actions in a project file)
                     for (int a = Actions.Count; a < 14; a++) 
                     {
+                        writer.WriteLine($"#{a}");
                         writer.WriteLine("70000 70000 1");
                         writer.WriteLine("0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0");
                     }
+                    writer.WriteLine("");
 
+                    // Transparent colour
+                    writer.WriteLine($"TransparentColour {transparentColour.A} {transparentColour.R} {transparentColour.G} {transparentColour.B}");
                     writer.WriteLine("");
                 }
             }
@@ -81,13 +88,14 @@ namespace WAX_converter
             return true;
         }
 
-        public static bool Load(string fileName, out int logicType, List<Action> Actions, List<Sequence> Sequences, List<Frame> Frames, List<Bitmap> Images)
+        public static bool Load(string fileName, out int logicType, List<Action> Actions, List<Sequence> Sequences, List<Frame> Frames, List<Bitmap> Images, out Color transparentColour)
         {
             string fileNameNoExtension = Path.GetFileNameWithoutExtension(fileName);
             string dir = Path.GetDirectoryName(fileName);
             string cellImageDirectory = dir + "/" + fileNameNoExtension + ".cells";
 
             logicType = 0;
+            transparentColour = new Color();
             int numCells = 0;
             int numFrames = 0;
             int numSeqs = 0;
@@ -209,6 +217,31 @@ namespace WAX_converter
                             nextAction.seqIndexes[v] = Int32.Parse(nextLine[v]);
                         }
                         Actions.Add(nextAction);
+                    }
+
+                    // transparent colour (if it exists)
+                    bool foundTransparentColour = false;
+                    while (!foundTransparentColour)
+                    {
+                        nextLine = getNextLine(fileReader);
+                        if (nextLine == null)
+                        {
+                            transparentColour = Color.FromArgb(255, 0, 0, 0); // black by default
+                            break;
+                        }
+                        else
+                        {
+                            if (nextLine[0] == "TransparentColour" && nextLine.Length == 5)
+                            {
+                                int a = Int32.Parse(nextLine[1]);
+                                int r = Int32.Parse(nextLine[2]);
+                                int g = Int32.Parse(nextLine[3]);
+                                int b = Int32.Parse(nextLine[4]);
+
+                                transparentColour = Color.FromArgb(a, r, g, b);
+                                foundTransparentColour = true;
+                            }
+                        }
                     }
                 }
             }
