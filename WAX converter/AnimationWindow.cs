@@ -21,8 +21,8 @@ namespace WAX_converter
         private Graphics graphics;
         private int centreX;
         private int centreY;
-        private bool isPlaying;
-        private bool isLooping;
+        private bool isPlaying = false;
+        private bool isLooping = false;
 
         public AnimationWindow(Action action, List<Sequence> sequences, List<Frame> frames, List<Bitmap> images, Color transparentColour)
         {
@@ -82,7 +82,12 @@ namespace WAX_converter
         
         private async void btnPlay_Click(object sender, EventArgs e)
         {
-            await PlayAnimation();
+            if (!isPlaying && !isLooping)
+            {
+                isPlaying = true;
+                await PlayAnimation();
+                isPlaying = false;
+            }
         }
 
         private async Task PlayAnimation()
@@ -95,23 +100,69 @@ namespace WAX_converter
             {
                 for (int f = 0; f < numFrames; f++)
                 {
-                    var frame = this.frames[sequence.frameIndexes[f]];
-                    var positionX = this.centreX + frame.InsertX;
-                    var positionY = this.centreY + frame.InsertY;
-                    var imageToDraw = new Bitmap(this.images[frame.CellIndex]);
-                    if (frame.Flip == 1) imageToDraw.RotateFlip(RotateFlipType.RotateNoneFlipX);
-
-                    graphics.Clear(Color.LightGray);
-                    graphics.DrawImage(imageToDraw, new Point(positionX, positionY));
-                    Thread.Sleep(1000 / frameRate);
+                    updateFrame(sequence.frameIndexes[f], frameRate);
                 }
             });
         }
 
-        private void btnLoop_Click(object sender, EventArgs e)
+        private void updateFrame(int frameIndex, int frameRate)
         {
+            var frame = this.frames[frameIndex];
+            var positionX = this.centreX + frame.InsertX;
+            var positionY = this.centreY + frame.InsertY;
+            var imageToDraw = new Bitmap(this.images[frame.CellIndex]);
+            if (frame.Flip == 1) imageToDraw.RotateFlip(RotateFlipType.RotateNoneFlipX);
+
+            graphics.Clear(Color.LightGray);
+            graphics.DrawImage(imageToDraw, new Point(positionX, positionY));
+            Thread.Sleep(1000 / frameRate);
+        }
+
+        private async void btnLoop_Click(object sender, EventArgs e)
+        {
+            if (!isPlaying)
+            {
+                if (!isLooping)
+                {
+                    isLooping = true;
+                    btnLoop.Text = "Stop";
+                    btnPlay.Enabled = false;
+                    numericView.Enabled = false;
+                    numericFrameRate.Enabled = false;
+                    await LoopAnimation();
+                }
+                else
+                {
+                    isLooping = false;
+                    btnLoop.Text = "Loop";
+                    btnPlay.Enabled = true;
+                    numericView.Enabled = true;
+                    numericFrameRate.Enabled = true;
+                }
+            }
+        }
+
+        private async Task LoopAnimation()
+        {
+            var sequence = this.sequences[this.action.seqIndexes[(int)numericView.Value]];
+            var numFrames = Array.FindIndex(sequence.frameIndexes, i => i == -1);
+            var frameRate = this.action.FrameRate;
+
+            await Task.Run(() =>
+            {
+                int f = 0;
+                
+                while (isLooping)
+                {
+                    updateFrame(sequence.frameIndexes[f], frameRate);
+                    f++;
+                    if (f == numFrames) f = 0;
+                }
+            });
 
         }
+
+        // ------------------------------------------------------------------------------------------------------------------------------
 
         private void numericFrameRate_ValueChanged(object sender, EventArgs e)
         {
