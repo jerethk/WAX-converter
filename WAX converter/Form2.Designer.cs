@@ -103,6 +103,7 @@ namespace WAX_converter
             this.saveWIPDialog = new System.Windows.Forms.SaveFileDialog();
             this.openWIPDialog = new System.Windows.Forms.OpenFileDialog();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.btnAnimate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.cellDisplayBox)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.transpColourBox)).BeginInit();
@@ -553,6 +554,7 @@ namespace WAX_converter
             this.panel5.Controls.Add(this.listboxSeqFrames);
             this.panel5.Controls.Add(this.labelNSeqs);
             this.panel5.Controls.Add(this.label6);
+            this.panel5.Controls.Add(this.labelNotes);
             this.panel5.Controls.Add(this.listboxSeqs);
             this.panel5.Controls.Add(this.label7);
             this.panel5.Controls.Add(this.buttonRemoveSequence);
@@ -646,6 +648,7 @@ namespace WAX_converter
             // panel6
             // 
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel6.Controls.Add(this.btnAnimate);
             this.panel6.Controls.Add(this.dataGridViews);
             this.panel6.Controls.Add(this.buttonSetAllViews);
             this.panel6.Controls.Add(this.FRate);
@@ -662,7 +665,7 @@ namespace WAX_converter
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(0, 0);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(344, 645);
+            this.panel6.Size = new System.Drawing.Size(344, 693);
             this.panel6.TabIndex = 10;
             // 
             // dataGridViews
@@ -725,7 +728,7 @@ namespace WAX_converter
             // buttonSetAllViews
             // 
             this.buttonSetAllViews.Enabled = false;
-            this.buttonSetAllViews.Location = new System.Drawing.Point(100, 441);
+            this.buttonSetAllViews.Location = new System.Drawing.Point(89, 444);
             this.buttonSetAllViews.Name = "buttonSetAllViews";
             this.buttonSetAllViews.Size = new System.Drawing.Size(143, 36);
             this.buttonSetAllViews.TabIndex = 23;
@@ -736,7 +739,7 @@ namespace WAX_converter
             // FRate
             // 
             this.FRate.Enabled = false;
-            this.FRate.Location = new System.Drawing.Point(160, 584);
+            this.FRate.Location = new System.Drawing.Point(160, 579);
             this.FRate.Maximum = new decimal(new int[] {
             30,
             0,
@@ -750,7 +753,7 @@ namespace WAX_converter
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(34, 586);
+            this.label15.Location = new System.Drawing.Point(34, 581);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(63, 15);
             this.label15.TabIndex = 22;
@@ -759,7 +762,7 @@ namespace WAX_converter
             // Wheight
             // 
             this.Wheight.Enabled = false;
-            this.Wheight.Location = new System.Drawing.Point(160, 544);
+            this.Wheight.Location = new System.Drawing.Point(160, 539);
             this.Wheight.Maximum = new decimal(new int[] {
             200000,
             0,
@@ -773,7 +776,7 @@ namespace WAX_converter
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(34, 546);
+            this.label14.Location = new System.Drawing.Point(34, 541);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(76, 15);
             this.label14.TabIndex = 20;
@@ -782,7 +785,7 @@ namespace WAX_converter
             // Wwidth
             // 
             this.Wwidth.Enabled = false;
-            this.Wwidth.Location = new System.Drawing.Point(160, 502);
+            this.Wwidth.Location = new System.Drawing.Point(160, 497);
             this.Wwidth.Maximum = new decimal(new int[] {
             200000,
             0,
@@ -796,7 +799,7 @@ namespace WAX_converter
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(34, 504);
+            this.label13.Location = new System.Drawing.Point(34, 499);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(72, 15);
             this.label13.TabIndex = 19;
@@ -862,7 +865,6 @@ namespace WAX_converter
             this.panel7.Controls.Add(this.panel6);
             this.panel7.Controls.Add(this.labelPal);
             this.panel7.Controls.Add(this.label17);
-            this.panel7.Controls.Add(this.labelNotes);
             this.panel7.Controls.Add(this.buttonCreateWAX);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel7.Location = new System.Drawing.Point(546, 0);
@@ -873,7 +875,7 @@ namespace WAX_converter
             // checkBoxCompress
             // 
             this.checkBoxCompress.AutoSize = true;
-            this.checkBoxCompress.Location = new System.Drawing.Point(118, 669);
+            this.checkBoxCompress.Location = new System.Drawing.Point(112, 721);
             this.checkBoxCompress.Name = "checkBoxCompress";
             this.checkBoxCompress.Size = new System.Drawing.Size(105, 19);
             this.checkBoxCompress.TabIndex = 11;
@@ -883,7 +885,7 @@ namespace WAX_converter
             // labelPal
             // 
             this.labelPal.AutoSize = true;
-            this.labelPal.Location = new System.Drawing.Point(122, 787);
+            this.labelPal.Location = new System.Drawing.Point(116, 839);
             this.labelPal.Name = "labelPal";
             this.labelPal.Size = new System.Drawing.Size(120, 15);
             this.labelPal.TabIndex = 3;
@@ -892,7 +894,7 @@ namespace WAX_converter
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(60, 787);
+            this.label17.Location = new System.Drawing.Point(54, 839);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(46, 15);
             this.label17.TabIndex = 2;
@@ -901,7 +903,7 @@ namespace WAX_converter
             // labelNotes
             // 
             this.labelNotes.AutoSize = true;
-            this.labelNotes.Location = new System.Drawing.Point(60, 820);
+            this.labelNotes.Location = new System.Drawing.Point(279, 377);
             this.labelNotes.Name = "labelNotes";
             this.labelNotes.Size = new System.Drawing.Size(41, 15);
             this.labelNotes.TabIndex = 1;
@@ -911,7 +913,7 @@ namespace WAX_converter
             // buttonCreateWAX
             // 
             this.buttonCreateWAX.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttonCreateWAX.Location = new System.Drawing.Point(108, 704);
+            this.buttonCreateWAX.Location = new System.Drawing.Point(102, 756);
             this.buttonCreateWAX.Name = "buttonCreateWAX";
             this.buttonCreateWAX.Size = new System.Drawing.Size(115, 56);
             this.buttonCreateWAX.TabIndex = 0;
@@ -948,6 +950,17 @@ namespace WAX_converter
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(890, 877);
             this.panel8.TabIndex = 0;
+            // 
+            // btnAnimate
+            // 
+            this.btnAnimate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnAnimate.Location = new System.Drawing.Point(89, 627);
+            this.btnAnimate.Name = "btnAnimate";
+            this.btnAnimate.Size = new System.Drawing.Size(155, 42);
+            this.btnAnimate.TabIndex = 25;
+            this.btnAnimate.Text = "Animation Preview";
+            this.btnAnimate.UseVisualStyleBackColor = true;
+            this.btnAnimate.Click += new System.EventHandler(this.btnAnimate_Click);
             // 
             // BuildWindow
             // 
@@ -1062,5 +1075,6 @@ namespace WAX_converter
         private System.Windows.Forms.DataGridViewTextBoxColumn Sequence;
         private System.Windows.Forms.PictureBox frameDisplayBox;
         private System.Windows.Forms.Button btnPositionFrames;
+        private System.Windows.Forms.Button btnAnimate;
     }
 }

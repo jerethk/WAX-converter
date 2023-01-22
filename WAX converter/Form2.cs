@@ -675,6 +675,11 @@ namespace WAX_converter
             ActionList[comboBoxAction.SelectedIndex].FrameRate = (int)FRate.Value;
         }
 
+        private void btnAnimate_Click(object sender, EventArgs e)
+        {
+            var animationWindow = new AnimationWindow(this.ActionList, this.SequenceList, this.FrameList, this.ImageList, this.transparentColour);
+            animationWindow.ShowDialog();
+        }
 
 // --- CREATE WAX ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
