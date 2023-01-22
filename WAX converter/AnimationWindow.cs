@@ -14,19 +14,21 @@ namespace WAX_converter
 {
     public partial class AnimationWindow : Form
     {
-        private List<Action> actions;
+        private Action action;
         private List<Sequence> sequences;
         private List<Frame> frames;
         private List<Bitmap> images;
         private Graphics graphics;
         private int centreX;
         private int centreY;
+        private bool isPlaying;
+        private bool isLooping;
 
-        public AnimationWindow(List<Action> actions, List<Sequence> sequences, List<Frame> frames, List<Bitmap> images, Color transparentColour)
+        public AnimationWindow(Action action, List<Sequence> sequences, List<Frame> frames, List<Bitmap> images, Color transparentColour)
         {
             InitializeComponent();
 
-            this.actions = actions;
+            this.action = action;
             this.sequences = sequences;
             this.frames = frames;
             this.images = FramePositioningWindow.makeCellsTransparent(images, transparentColour).ToList();
@@ -37,8 +39,47 @@ namespace WAX_converter
             this.graphics = pictureBox.CreateGraphics();
             this.centreX = this.pictureBox.Width / 2;
             this.centreY = this.pictureBox.Height / 2;
+            numericFrameRate.Value = this.action.FrameRate;
+
+            drawFirstFrame();
         }
 
+        private void pictureBox_SizeChanged(object sender, EventArgs e)
+        {
+            this.graphics.Dispose();
+            this.graphics = pictureBox.CreateGraphics();
+            this.centreX = this.pictureBox.Width / 2;
+            this.centreY = this.pictureBox.Height / 2;
+
+            drawFirstFrame();
+        }
+
+        private void numericView_ValueChanged(object sender, EventArgs e)
+        {
+            drawFirstFrame();
+        }
+
+        private void drawFirstFrame()
+        {
+            var sequence = this.sequences[this.action.seqIndexes[(int)numericView.Value]];
+            var frameIndex = sequence.frameIndexes[0];
+
+            if (frameIndex >= 0)
+            {
+                var frame = this.frames[frameIndex];
+                var positionX = this.centreX + frame.InsertX;
+                var positionY = this.centreY + frame.InsertY;
+                var imageToDraw = new Bitmap(this.images[frame.CellIndex]);
+                if (frame.Flip == 1) imageToDraw.RotateFlip(RotateFlipType.RotateNoneFlipX);
+
+                graphics.Clear(Color.LightGray);
+                graphics.DrawImage(imageToDraw, new Point(positionX, positionY));
+            }
+
+        }
+
+        // ------------------------------------------------------------------------------------------------------------------------------
+        
         private async void btnPlay_Click(object sender, EventArgs e)
         {
             await PlayAnimation();
@@ -46,20 +87,36 @@ namespace WAX_converter
 
         private async Task PlayAnimation()
         {
-            // trial
-            var sequence = this.sequences[this.actions[0].seqIndexes[0]];
+            var sequence = this.sequences[this.action.seqIndexes[(int)numericView.Value]];
             var numFrames = Array.FindIndex(sequence.frameIndexes, i => i == -1);
-            MessageBox.Show($"{numFrames}");
+            var frameRate = this.action.FrameRate;
 
             await Task.Run(() =>
             {
                 for (int f = 0; f < numFrames; f++)
                 {
                     var frame = this.frames[sequence.frameIndexes[f]];
-                    pictureBox.Image = new Bitmap(this.images[frame.CellIndex]);
-                    Thread.Sleep(500);
+                    var positionX = this.centreX + frame.InsertX;
+                    var positionY = this.centreY + frame.InsertY;
+                    var imageToDraw = new Bitmap(this.images[frame.CellIndex]);
+                    if (frame.Flip == 1) imageToDraw.RotateFlip(RotateFlipType.RotateNoneFlipX);
+
+                    graphics.Clear(Color.LightGray);
+                    graphics.DrawImage(imageToDraw, new Point(positionX, positionY));
+                    Thread.Sleep(1000 / frameRate);
                 }
             });
         }
+
+        private void btnLoop_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numericFrameRate_ValueChanged(object sender, EventArgs e)
+        {
+            this.action.FrameRate = (int)numericFrameRate.Value;
+        }
+
     }
 }

@@ -73,11 +73,13 @@ namespace WAX_converter
             this.listboxSeqFrames = new System.Windows.Forms.ListBox();
             this.labelNSeqs = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.labelNotes = new System.Windows.Forms.Label();
             this.listboxSeqs = new System.Windows.Forms.ListBox();
             this.label7 = new System.Windows.Forms.Label();
             this.buttonRemoveSequence = new System.Windows.Forms.Button();
             this.buttonAddSequence = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.btnAnimate = new System.Windows.Forms.Button();
             this.dataGridViews = new System.Windows.Forms.DataGridView();
             this.ViewColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Sequence = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -97,13 +99,11 @@ namespace WAX_converter
             this.checkBoxCompress = new System.Windows.Forms.CheckBox();
             this.labelPal = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.labelNotes = new System.Windows.Forms.Label();
             this.buttonCreateWAX = new System.Windows.Forms.Button();
             this.saveWaxDialog = new System.Windows.Forms.SaveFileDialog();
             this.saveWIPDialog = new System.Windows.Forms.SaveFileDialog();
             this.openWIPDialog = new System.Windows.Forms.OpenFileDialog();
             this.panel8 = new System.Windows.Forms.Panel();
-            this.btnAnimate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.cellDisplayBox)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.transpColourBox)).BeginInit();
@@ -605,6 +605,16 @@ namespace WAX_converter
             this.label6.TabIndex = 16;
             this.label6.Text = "Frames (max 32)";
             // 
+            // labelNotes
+            // 
+            this.labelNotes.AutoSize = true;
+            this.labelNotes.Location = new System.Drawing.Point(279, 377);
+            this.labelNotes.Name = "labelNotes";
+            this.labelNotes.Size = new System.Drawing.Size(41, 15);
+            this.labelNotes.TabIndex = 1;
+            this.labelNotes.Text = "Notes:";
+            this.labelNotes.Visible = false;
+            // 
             // listboxSeqs
             // 
             this.listboxSeqs.FormattingEnabled = true;
@@ -667,6 +677,17 @@ namespace WAX_converter
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(344, 693);
             this.panel6.TabIndex = 10;
+            // 
+            // btnAnimate
+            // 
+            this.btnAnimate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnAnimate.Location = new System.Drawing.Point(89, 627);
+            this.btnAnimate.Name = "btnAnimate";
+            this.btnAnimate.Size = new System.Drawing.Size(155, 42);
+            this.btnAnimate.TabIndex = 25;
+            this.btnAnimate.Text = "Animation Preview";
+            this.btnAnimate.UseVisualStyleBackColor = true;
+            this.btnAnimate.Click += new System.EventHandler(this.btnAnimate_Click);
             // 
             // dataGridViews
             // 
@@ -741,13 +762,23 @@ namespace WAX_converter
             this.FRate.Enabled = false;
             this.FRate.Location = new System.Drawing.Point(160, 579);
             this.FRate.Maximum = new decimal(new int[] {
-            30,
+            50,
+            0,
+            0,
+            0});
+            this.FRate.Minimum = new decimal(new int[] {
+            1,
             0,
             0,
             0});
             this.FRate.Name = "FRate";
             this.FRate.Size = new System.Drawing.Size(121, 23);
             this.FRate.TabIndex = 21;
+            this.FRate.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.FRate.ValueChanged += new System.EventHandler(this.FRate_ValueChanged);
             // 
             // label15
@@ -768,9 +799,19 @@ namespace WAX_converter
             0,
             0,
             0});
+            this.Wheight.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.Wheight.Name = "Wheight";
             this.Wheight.Size = new System.Drawing.Size(121, 23);
             this.Wheight.TabIndex = 12;
+            this.Wheight.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.Wheight.ValueChanged += new System.EventHandler(this.Wheight_ValueChanged);
             // 
             // label14
@@ -791,9 +832,19 @@ namespace WAX_converter
             0,
             0,
             0});
+            this.Wwidth.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.Wwidth.Name = "Wwidth";
             this.Wwidth.Size = new System.Drawing.Size(121, 23);
             this.Wwidth.TabIndex = 11;
+            this.Wwidth.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.Wwidth.ValueChanged += new System.EventHandler(this.Wwidth_ValueChanged);
             // 
             // label13
@@ -900,16 +951,6 @@ namespace WAX_converter
             this.label17.TabIndex = 2;
             this.label17.Text = "Palette:";
             // 
-            // labelNotes
-            // 
-            this.labelNotes.AutoSize = true;
-            this.labelNotes.Location = new System.Drawing.Point(279, 377);
-            this.labelNotes.Name = "labelNotes";
-            this.labelNotes.Size = new System.Drawing.Size(41, 15);
-            this.labelNotes.TabIndex = 1;
-            this.labelNotes.Text = "Notes:";
-            this.labelNotes.Visible = false;
-            // 
             // buttonCreateWAX
             // 
             this.buttonCreateWAX.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -950,17 +991,6 @@ namespace WAX_converter
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(890, 877);
             this.panel8.TabIndex = 0;
-            // 
-            // btnAnimate
-            // 
-            this.btnAnimate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnAnimate.Location = new System.Drawing.Point(89, 627);
-            this.btnAnimate.Name = "btnAnimate";
-            this.btnAnimate.Size = new System.Drawing.Size(155, 42);
-            this.btnAnimate.TabIndex = 25;
-            this.btnAnimate.Text = "Animation Preview";
-            this.btnAnimate.UseVisualStyleBackColor = true;
-            this.btnAnimate.Click += new System.EventHandler(this.btnAnimate_Click);
             // 
             // BuildWindow
             // 
