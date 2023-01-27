@@ -57,7 +57,7 @@ namespace WAX_converter
             }
         }
 
-        private IEnumerable<Bitmap> makeCellsTransparent(List<Bitmap> images, Color transparentColour)
+        public static IEnumerable<Bitmap> makeCellsTransparent(List<Bitmap> images, Color transparentColour)
         {
             foreach (var image in images)
             {

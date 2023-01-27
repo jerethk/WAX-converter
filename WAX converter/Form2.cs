@@ -433,7 +433,7 @@ namespace WAX_converter
             }
         }
 
-        // --- SEQUENCE AREA --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --- SEQUENCE AREA --------------------------------------------------------------------------------------------------------------------------------------------------------------------
         private void listboxSeqs_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (SequenceList.Count > 0)
@@ -675,6 +675,19 @@ namespace WAX_converter
             ActionList[comboBoxAction.SelectedIndex].FrameRate = (int)FRate.Value;
         }
 
+        private void btnAnimate_Click(object sender, EventArgs e)
+        {
+            var actionNumber = comboBoxAction.SelectedIndex;
+            
+            if (actionNumber >= 0 && this.FrameList.Count > 0 && this.SequenceList.Count > 0)
+            {
+                var animationWindow = new AnimationWindow(this.ActionList[actionNumber], this.SequenceList, this.FrameList, this.ImageList, this.transparentColour);
+                animationWindow.Text = $"Animation Preview: Action {actionNumber}";
+                animationWindow.ShowDialog();
+
+                this.FRate.Value = this.ActionList[actionNumber].FrameRate;
+            }
+        }
 
 // --- CREATE WAX ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
