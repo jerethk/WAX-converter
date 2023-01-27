@@ -49,6 +49,12 @@ namespace WAX_converter
             {
                 listBoxFrames.Items.Add(f.ToString());
             }
+
+            if (listBoxFrames.Items.Count > 0)
+            {
+                listBoxFrames.SelectedIndex = 0;
+                drawFrame();
+            }
         }
 
         private IEnumerable<Bitmap> makeCellsTransparent(List<Bitmap> images, Color transparentColour)

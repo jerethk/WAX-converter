@@ -41,14 +41,20 @@ namespace WAX_converter
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnClearSeq = new System.Windows.Forms.Button();
             this.checkBoxZoom = new System.Windows.Forms.CheckBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.displayBox)).BeginInit();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(18, 18);
+            this.label1.Location = new System.Drawing.Point(14, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(76, 15);
             this.label1.TabIndex = 0;
@@ -56,9 +62,11 @@ namespace WAX_converter
             // 
             // listBoxFrames
             // 
+            this.listBoxFrames.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.listBoxFrames.FormattingEnabled = true;
             this.listBoxFrames.ItemHeight = 15;
-            this.listBoxFrames.Location = new System.Drawing.Point(18, 36);
+            this.listBoxFrames.Location = new System.Drawing.Point(14, 34);
             this.listBoxFrames.Name = "listBoxFrames";
             this.listBoxFrames.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.listBoxFrames.Size = new System.Drawing.Size(85, 499);
@@ -68,9 +76,11 @@ namespace WAX_converter
             // 
             // listBoxSeqFrames
             // 
+            this.listBoxSeqFrames.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.listBoxSeqFrames.FormattingEnabled = true;
             this.listBoxSeqFrames.ItemHeight = 15;
-            this.listBoxSeqFrames.Location = new System.Drawing.Point(226, 36);
+            this.listBoxSeqFrames.Location = new System.Drawing.Point(222, 34);
             this.listBoxSeqFrames.Name = "listBoxSeqFrames";
             this.listBoxSeqFrames.Size = new System.Drawing.Size(85, 499);
             this.listBoxSeqFrames.TabIndex = 3;
@@ -82,7 +92,7 @@ namespace WAX_converter
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label2.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label2.Location = new System.Drawing.Point(189, 18);
+            this.label2.Location = new System.Drawing.Point(185, 16);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(131, 15);
             this.label2.TabIndex = 2;
@@ -90,61 +100,66 @@ namespace WAX_converter
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(128, 128);
+            this.btnAdd.Location = new System.Drawing.Point(124, 120);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(77, 65);
+            this.btnAdd.Size = new System.Drawing.Size(77, 82);
             this.btnAdd.TabIndex = 4;
-            this.btnAdd.Text = "Add to Sequence";
+            this.btnAdd.Text = "Add to Sequence >>>>>";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnRemove
             // 
-            this.btnRemove.Location = new System.Drawing.Point(128, 210);
+            this.btnRemove.Location = new System.Drawing.Point(124, 215);
             this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(77, 65);
+            this.btnRemove.Size = new System.Drawing.Size(77, 82);
             this.btnRemove.TabIndex = 5;
-            this.btnRemove.Text = "Remove from  Sequence";
+            this.btnRemove.Text = "Remove from  Sequence <<<<<";
             this.btnRemove.UseVisualStyleBackColor = true;
             this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
             // displayBox
             // 
+            this.displayBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.displayBox.BackColor = System.Drawing.Color.Gray;
             this.displayBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.displayBox.Location = new System.Drawing.Point(343, 61);
+            this.displayBox.Location = new System.Drawing.Point(19, 56);
             this.displayBox.Name = "displayBox";
-            this.displayBox.Size = new System.Drawing.Size(416, 415);
+            this.displayBox.Size = new System.Drawing.Size(412, 418);
             this.displayBox.TabIndex = 6;
             this.displayBox.TabStop = false;
             // 
             // btnDone
             // 
             this.btnDone.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnDone.Location = new System.Drawing.Point(460, 498);
+            this.btnDone.Location = new System.Drawing.Point(122, 15);
             this.btnDone.Name = "btnDone";
-            this.btnDone.Size = new System.Drawing.Size(75, 37);
+            this.btnDone.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnDone.Size = new System.Drawing.Size(89, 37);
             this.btnDone.TabIndex = 7;
-            this.btnDone.Text = "DONE";
+            this.btnDone.Text = "Accept";
             this.btnDone.UseVisualStyleBackColor = true;
             this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
             // 
             // btnCancel
             // 
             this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnCancel.Location = new System.Drawing.Point(561, 498);
+            this.btnCancel.Location = new System.Drawing.Point(240, 15);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 37);
+            this.btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnCancel.Size = new System.Drawing.Size(89, 37);
             this.btnCancel.TabIndex = 8;
-            this.btnCancel.Text = "CANCEL";
+            this.btnCancel.Text = "Discard";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnClearSeq
             // 
-            this.btnClearSeq.Location = new System.Drawing.Point(128, 291);
+            this.btnClearSeq.Location = new System.Drawing.Point(124, 311);
             this.btnClearSeq.Name = "btnClearSeq";
-            this.btnClearSeq.Size = new System.Drawing.Size(77, 65);
+            this.btnClearSeq.Size = new System.Drawing.Size(77, 82);
             this.btnClearSeq.TabIndex = 9;
             this.btnClearSeq.Text = "CLEAR  Sequence";
             this.btnClearSeq.UseVisualStyleBackColor = true;
@@ -153,7 +168,7 @@ namespace WAX_converter
             // checkBoxZoom
             // 
             this.checkBoxZoom.AutoSize = true;
-            this.checkBoxZoom.Location = new System.Drawing.Point(343, 36);
+            this.checkBoxZoom.Location = new System.Drawing.Point(19, 16);
             this.checkBoxZoom.Name = "checkBoxZoom";
             this.checkBoxZoom.Size = new System.Drawing.Size(58, 19);
             this.checkBoxZoom.TabIndex = 10;
@@ -161,31 +176,62 @@ namespace WAX_converter
             this.checkBoxZoom.UseVisualStyleBackColor = true;
             this.checkBoxZoom.CheckedChanged += new System.EventHandler(this.checkBoxZoom_CheckedChanged);
             // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.listBoxFrames);
+            this.panel2.Controls.Add(this.btnClearSeq);
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Controls.Add(this.btnRemove);
+            this.panel2.Controls.Add(this.listBoxSeqFrames);
+            this.panel2.Controls.Add(this.btnAdd);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(327, 561);
+            this.panel2.TabIndex = 12;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.btnDone);
+            this.panel3.Controls.Add(this.btnCancel);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel3.Location = new System.Drawing.Point(327, 481);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(457, 80);
+            this.panel3.TabIndex = 11;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.checkBoxZoom);
+            this.panel1.Controls.Add(this.displayBox);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(327, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(457, 481);
+            this.panel1.TabIndex = 13;
+            // 
             // SequenceBuilderWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 584);
+            this.ClientSize = new System.Drawing.Size(784, 561);
             this.ControlBox = false;
-            this.Controls.Add(this.checkBoxZoom);
-            this.Controls.Add(this.btnClearSeq);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnDone);
-            this.Controls.Add(this.displayBox);
-            this.Controls.Add(this.btnRemove);
-            this.Controls.Add(this.btnAdd);
-            this.Controls.Add(this.listBoxSeqFrames);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.listBoxFrames);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.panel2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "SequenceBuilderWindow";
             this.Text = "SequenceBuilderWindow";
             this.Load += new System.EventHandler(this.SequenceBuilderWindow_Load);
             ((System.ComponentModel.ISupportInitialize)(this.displayBox)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -202,5 +248,8 @@ namespace WAX_converter
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnClearSeq;
         private System.Windows.Forms.CheckBox checkBoxZoom;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel1;
     }
 }
