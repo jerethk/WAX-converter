@@ -18,6 +18,7 @@ namespace WAX_converter
         private List<Sequence> sequences;
         private List<Frame> frames;
         private List<Bitmap> images;
+        private int frameRate = 1;
         private Graphics graphics;
         private int centreX;
         private int centreY;
@@ -36,6 +37,7 @@ namespace WAX_converter
 
         private void AnimationWindow_Load(object sender, EventArgs e)
         {
+            this.frameRate = action.FrameRate;
             this.graphics = pictureBox.CreateGraphics();
             this.centreX = this.pictureBox.Width / 2;
             this.centreY = this.pictureBox.Height / 2;
@@ -94,7 +96,7 @@ namespace WAX_converter
         {
             var sequence = this.sequences[this.action.seqIndexes[(int)numericView.Value]];
             var numFrames = Array.FindIndex(sequence.frameIndexes, i => i == -1);
-            var frameRate = this.action.FrameRate;
+            var frameRate = this.frameRate;
 
             await Task.Run(() =>
             {
@@ -146,7 +148,7 @@ namespace WAX_converter
         {
             var sequence = this.sequences[this.action.seqIndexes[(int)numericView.Value]];
             var numFrames = Array.FindIndex(sequence.frameIndexes, i => i == -1);
-            var frameRate = this.action.FrameRate;
+            var frameRate = this.frameRate;
 
             await Task.Run(() =>
             {
@@ -166,8 +168,18 @@ namespace WAX_converter
 
         private void numericFrameRate_ValueChanged(object sender, EventArgs e)
         {
-            this.action.FrameRate = (int)numericFrameRate.Value;
+            this.frameRate = (int)numericFrameRate.Value;
         }
 
+        private void btnAccept_Click(object sender, EventArgs e)
+        {
+            this.action.FrameRate = this.frameRate;
+            this.Close();
+        }
+
+        private void btnDiscard_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

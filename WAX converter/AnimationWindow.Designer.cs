@@ -169,6 +169,7 @@
             this.btnAccept.TabIndex = 5;
             this.btnAccept.Text = "Accept changes";
             this.btnAccept.UseVisualStyleBackColor = true;
+            this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
             // 
             // btnDiscard
             // 
@@ -179,6 +180,7 @@
             this.btnDiscard.TabIndex = 6;
             this.btnDiscard.Text = "Discard changes";
             this.btnDiscard.UseVisualStyleBackColor = true;
+            this.btnDiscard.Click += new System.EventHandler(this.btnDiscard_Click);
             // 
             // panel3
             // 

@@ -684,6 +684,8 @@ namespace WAX_converter
                 var animationWindow = new AnimationWindow(this.ActionList[actionNumber], this.SequenceList, this.FrameList, this.ImageList, this.transparentColour);
                 animationWindow.Text = $"Animation Preview: Action {actionNumber}";
                 animationWindow.ShowDialog();
+
+                this.FRate.Value = this.ActionList[actionNumber].FrameRate;
             }
         }
 
