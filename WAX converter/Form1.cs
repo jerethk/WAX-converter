@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WAX_converter
@@ -36,7 +34,7 @@ namespace WAX_converter
                         break;
 
                     default:
-                        MessageBox.Show("Not a valid file type.", "Error", MessageBoxButtons.OK,MessageBoxIcon.Error);
+                        MessageBox.Show("Not a valid file type.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                 }
             }
@@ -46,6 +44,11 @@ namespace WAX_converter
         private DFPal palette;
         private int SeqFrame = 0;       // the sequence frame currently being viewed
         private BitmapTransparencyOption transparencyOption = BitmapTransparencyOption.AlphaTransparent;
+        private string remasterFilesPath;
+        private string currentOpenedFilename;
+        private List<Bitmap> remasterImages = new();
+
+        #region Menu
 
         // MENU 
         private void MenuLoadPal_Click(object sender, EventArgs e)
@@ -90,6 +93,11 @@ namespace WAX_converter
             WizardWindow.ShowDialog();
         }
 
+        private void MenuRemasterDirectory_Click(object sender, EventArgs e)
+        {
+            this.openRemasterDirectoryDialog.ShowDialog(this);
+        }
+
         private void menuHelp_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             if (e.ClickedItem == MenuAbout)
@@ -104,6 +112,8 @@ namespace WAX_converter
                 helpwin.Dispose();
             }
         }
+
+        #endregion
 
         // -------------------------------------------------------------------------------------
 
@@ -137,7 +147,9 @@ namespace WAX_converter
             {
                 this.wax = tryOpenWax;
                 this.wax.GenerateAllCellBitmaps(this.palette, this.transparencyOption);
+                this.currentOpenedFilename = Path.GetFileName(path);
                 exportDialog.FileName = Path.GetFileNameWithoutExtension(path);
+                this.loadRemasterImages();
 
                 // remove event handlers (to prevent exceptions when resetting values)
                 this.ActionNumber.ValueChanged -= this.ActionNumber_ValueChanged;
@@ -358,12 +370,12 @@ namespace WAX_converter
         private void SeqNextFrame_Click(object sender, EventArgs e)
         {
             int thisSequence = (int)SeqNumber.Value;
-            
+
             if (wax.Sequences[thisSequence].numFrames < 1)
             {
                 return;     // empty sequence
             }
-            
+
             int maxFrame = wax.Sequences[thisSequence].numFrames - 1;
             if (SeqFrame < maxFrame)
             {
@@ -447,8 +459,8 @@ namespace WAX_converter
             //strings[6] = $"ADDRESS: 0x{Convert.ToString(wax.Cells[thisCell].address, 16)}";
             CellInfo.Lines = strings;
 
-            var displayedImage = new Bitmap(wax.Cells[thisCell].bitmap); 
-            if (!radioCell.Checked && wax.Frames[(int) FrameNumber.Value].Flip == 1)
+            var displayedImage = new Bitmap(wax.Cells[thisCell].bitmap);
+            if (!radioCell.Checked && wax.Frames[(int)FrameNumber.Value].Flip == 1)
             {
                 displayedImage.RotateFlip(RotateFlipType.RotateNoneFlipX);
             }
@@ -459,7 +471,9 @@ namespace WAX_converter
 
         private void closeWax()
         {
-            wax = null;
+            this.wax = null;
+            this.remasterImages.Clear();
+            this.currentOpenedFilename = "";
             labelWax.Text = "";
             RadioGroup.Enabled = false;
             ActionNumber.Enabled = false;
@@ -511,7 +525,9 @@ namespace WAX_converter
             {
                 this.wax = tryOpenFme;
                 this.wax.GenerateAllCellBitmaps(this.palette, this.transparencyOption);
+                this.currentOpenedFilename = Path.GetFileName(path);
                 exportDialog.FileName = Path.GetFileNameWithoutExtension(path);
+                this.loadRemasterImages();
 
                 // remove event handlers (to prevent exceptions when resetting values)
                 this.ActionNumber.ValueChanged -= this.ActionNumber_ValueChanged;
@@ -541,7 +557,59 @@ namespace WAX_converter
                 MessageBox.Show("Error loading FME file.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        // ------------------------------------------------------------------------------------------------------
+
+        #region Remaster
+
+        private void openRemasterDirectoryDialog_FileOk(object sender, CancelEventArgs e)
+        {
+            this.remasterFilesPath = Path.GetDirectoryName(this.openRemasterDirectoryDialog.FileName);
+            this.loadRemasterImages();
+        }
+
+        private void loadRemasterImages()
+        {
+            if (this.wax == null || this.wax.Ncells == 0 || string.IsNullOrEmpty(this.currentOpenedFilename))
+            {
+                return;
+            }
+
+            if (string.IsNullOrEmpty(this.remasterFilesPath))
+            {
+                return;
+            }
+
+            var remasterFilePath = "";
+            var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(this.currentOpenedFilename);
+            var currentFileExtension = Path.GetExtension(this.currentOpenedFilename);
+            if (currentFileExtension.Equals(".FME", StringComparison.OrdinalIgnoreCase))
+            {
+                remasterFilePath = $"{this.remasterFilesPath}\\{fileNameWithoutExtension}.FXX";
+            }
+            else if (currentFileExtension.Equals(".WAX", StringComparison.OrdinalIgnoreCase))
+            {
+                remasterFilePath = $"{this.remasterFilesPath}\\{fileNameWithoutExtension}.WXX";
+            }
+            else
+            {
+                return;
+            }
+
+            if (!File.Exists(remasterFilePath))
+            {
+                return;
+            }
+
+            var data = RemasterImagesImporter.LoadDataFromFile(remasterFilePath);
+            if (data == null || data.Count == 0)
+            {
+                return;
+            }
+
+            var (bitmaps, alphaBitmaps) = RemasterImagesImporter.CreateBitmapsFromData(this.wax.Cells, data);
+        }
+
+        #endregion
     }
 }
-
-
