@@ -39,82 +39,95 @@ namespace WAX_converter
             }
         }
 
-        public static (List<Bitmap>, List<Bitmap>) CreateBitmapsFromData(List<Cell> cells, List<byte[]> data)
+        public static (List<Bitmap>, List<Bitmap>) CreateBitmapsFromData(Waxfile wax, List<byte[]> data)
         {
             var bitmaps = new List<Bitmap>();
             var alphaBitmaps = new List<Bitmap>();
 
-            var imageDataTable = data.Select(d => (Id: Guid.NewGuid(), ImageData: d)).ToList();
-            var usedIds = new List<Guid>();
+            var processedCells = new List<int>();
+            var imageCount = 0;
 
-            foreach (var cell in cells)
+            // Cells are processed in the order in which they are referenced in the WAX hierarchy
+            for (var a = 0; a < wax.numActions; a++)
             {
-                var imageWidth = cell.SizeX * 2;
-                var imageHeight = cell.SizeY * 2;
-
-                // Find the corresponding image
-                var item = imageDataTable.FirstOrDefault(
-                    dt => !usedIds.Contains(dt.Id) && dt.ImageData.Length == imageWidth * imageHeight * 4);
-
-                if (item == default)
+                var action = wax.Actions[a];
+                for (var view = 0; view < 32; view++)
                 {
-                    continue;   // not found, so continue to next cell
-                }
-
-                usedIds.Add(item.Id);
-
-                // Put the raw data into an array of pixels
-                var pixelArray = new Pixel[imageWidth, imageHeight];
-                var pixelCount = 0;
-                for (var y = 0; y < imageHeight; y++)
-                {
-                    for (var x = imageWidth - 1; x >= 0; x--)
+                    var sequence = wax.Sequences[action.seqIndexes[view]];
+                    for (var f = 0; f < sequence.numFrames; f++)
                     {
-                        var pxl = new Pixel();
-                        pxl.Red = item.ImageData[pixelCount * 4];
-                        pxl.Green = item.ImageData[pixelCount * 4 + 1];
-                        pxl.Blue = item.ImageData[pixelCount * 4 + 2];
-                        pxl.Alpha = item.ImageData[pixelCount * 4 + 3];
-                        pixelArray[(x), y] = pxl;
+                        var frame = wax.Frames[sequence.frameIndexes[f]];
+                        
+                        if (processedCells.Contains(frame.CellIndex))
+                        {
+                            continue;
+                        }
 
-                        pixelCount++;
+                        var cell = wax.Cells[frame.CellIndex];
+                        var imageWidth = cell.SizeX * 2;
+                        var imageHeight = cell.SizeY * 2;
+
+                        if (imageWidth * imageHeight * 4 != data[imageCount].Length)
+                        {
+                            continue;   // The image in the data doesn't match the cell so pull out
+                        }
+                        
+                        // Put the raw data into an array of pixels
+                        var pixelArray = new Pixel[imageWidth, imageHeight];
+                        var pixelCount = 0;
+                        for (var y = 0; y < imageHeight; y++)
+                        {
+                            for (var x = imageWidth - 1; x >= 0; x--)
+                            {
+                                var pxl = new Pixel();
+                                pxl.Red = data[imageCount][pixelCount * 4];
+                                pxl.Green = data[imageCount][pixelCount * 4 + 1];
+                                pxl.Blue = data[imageCount][pixelCount * 4 + 2];
+                                pxl.Alpha = data[imageCount][pixelCount * 4 + 3];
+                                pixelArray[(x), y] = pxl;
+
+                                pixelCount++;
+                            }
+                        }
+
+                        // Create image bitmap
+                        var bitmap = new Bitmap(imageWidth, imageHeight);
+                        for (var x = 0; x < imageWidth; x++)
+                        {
+                            for (var y = 0; y < imageHeight; y++)
+                            {
+                                var colour = Color.FromArgb(
+                                    255,
+                                    pixelArray[x, y].Red,
+                                    pixelArray[x, y].Green,
+                                    pixelArray[x, y].Blue);
+                                bitmap.SetPixel(x, y, colour);
+                            }
+                        }
+
+                        // Create the alpha bitmap (greyscale)
+                        var alphaBitmap = new Bitmap(imageWidth, imageHeight);
+                        for (var x = 0; x < imageWidth; x++)
+                        {
+                            for (var y = 0; y < imageHeight; y++)
+                            {
+                                var colour = Color.FromArgb(
+                                    255,
+                                    pixelArray[x, y].Alpha,
+                                    pixelArray[x, y].Alpha,
+                                    pixelArray[x, y].Alpha);
+                                alphaBitmap.SetPixel(x, y, colour);
+                            }
+                        }
+
+                        bitmaps.Add(bitmap);
+                        alphaBitmaps.Add(alphaBitmap);
+                        processedCells.Add(frame.CellIndex);
+                        imageCount++;
                     }
                 }
-
-                // Create image bitmap
-                var bitmap = new Bitmap(imageWidth, imageHeight);
-                for (var x = 0; x < imageWidth; x++)
-                {
-                    for (var y = 0; y < imageHeight; y++)
-                    {
-                        var colour = Color.FromArgb(
-                            255,
-                            pixelArray[x, y].Red,
-                            pixelArray[x, y].Green,
-                            pixelArray[x, y].Blue);
-                        bitmap.SetPixel(x, y, colour);
-                    }
-                }
-
-                // Create the alpha bitmap (greyscale)
-                var alphaBitmap = new Bitmap(imageWidth, imageHeight);
-                for (var x = 0; x < imageWidth; x++)
-                {
-                    for (var y = 0; y < imageHeight; y++)
-                    {
-                        var colour = Color.FromArgb(
-                            255,
-                            pixelArray[x, y].Alpha,
-                            pixelArray[x, y].Alpha,
-                            pixelArray[x, y].Alpha);
-                        alphaBitmap.SetPixel(x, y, colour);
-                    }
-                }
-
-                bitmaps.Add(bitmap);
-                alphaBitmaps.Add(alphaBitmap);
             }
-
+            
             return (bitmaps, alphaBitmaps);
         }
     }

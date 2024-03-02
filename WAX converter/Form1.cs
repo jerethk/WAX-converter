@@ -607,7 +607,7 @@ namespace WAX_converter
                 return;
             }
 
-            var (bitmaps, alphaBitmaps) = RemasterImagesImporter.CreateBitmapsFromData(this.wax.Cells, data);
+            var (bitmaps, alphaBitmaps) = RemasterImagesImporter.CreateBitmapsFromData(this.wax, data);
         }
 
         #endregion
