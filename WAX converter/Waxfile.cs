@@ -509,6 +509,13 @@ namespace WAX_converter
                 return false;
             }
 
+            // Create a pseudo Action and Sequence (needed for the WXX/FXX import code)
+            this.numActions = 1;
+            this.Nseqs = 1;
+            this.Actions.Add(new Action());
+            this.Sequences.Add(new Sequence());
+            this.Sequences[0].numFrames = 1;
+            this.Sequences[0].frameIndexes[0] = 0;
             return true;
         }
 
