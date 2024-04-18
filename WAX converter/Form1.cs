@@ -11,6 +11,15 @@ namespace WAX_converter
 {
     public partial class MainWindow : Form
     {
+        private Waxfile wax;
+        private DFPal palette;
+        private int SeqFrame = 0;       // the sequence frame currently being viewed
+        private BitmapTransparencyOption transparencyOption = BitmapTransparencyOption.AlphaTransparent;
+        private string remasterFilesPath;
+        private string currentOpenedFilename;
+        private List<Bitmap> remasterImages = new();
+
+
         public MainWindow(string[] args)
         {
             InitializeComponent();
@@ -39,14 +48,6 @@ namespace WAX_converter
                 }
             }
         }
-
-        private Waxfile wax;
-        private DFPal palette;
-        private int SeqFrame = 0;       // the sequence frame currently being viewed
-        private BitmapTransparencyOption transparencyOption = BitmapTransparencyOption.AlphaTransparent;
-        private string remasterFilesPath;
-        private string currentOpenedFilename;
-        private List<Bitmap> remasterImages = new();
 
         #region Menu
 
