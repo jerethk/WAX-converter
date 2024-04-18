@@ -114,23 +114,23 @@ namespace WAX_converter
             panel2.Dock = System.Windows.Forms.DockStyle.Top;
             panel2.Location = new System.Drawing.Point(0, 24);
             panel2.Name = "panel2";
-            panel2.Size = new System.Drawing.Size(944, 171);
+            panel2.Size = new System.Drawing.Size(1184, 171);
             panel2.TabIndex = 1;
             // 
             // comboBoxTransparencyOptions
             // 
             comboBoxTransparencyOptions.FormattingEnabled = true;
             comboBoxTransparencyOptions.Items.AddRange(new object[] { "Transparent (alpha 0)", "Black", "White", "Magenta" });
-            comboBoxTransparencyOptions.Location = new System.Drawing.Point(589, 27);
+            comboBoxTransparencyOptions.Location = new System.Drawing.Point(571, 27);
             comboBoxTransparencyOptions.Name = "comboBoxTransparencyOptions";
-            comboBoxTransparencyOptions.Size = new System.Drawing.Size(166, 23);
+            comboBoxTransparencyOptions.Size = new System.Drawing.Size(179, 23);
             comboBoxTransparencyOptions.TabIndex = 10;
             comboBoxTransparencyOptions.SelectedIndexChanged += comboBoxTransparencyOptions_SelectedIndexChanged;
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new System.Drawing.Point(428, 30);
+            label7.Location = new System.Drawing.Point(410, 30);
             label7.Name = "label7";
             label7.Size = new System.Drawing.Size(136, 15);
             label7.TabIndex = 9;
@@ -253,7 +253,7 @@ namespace WAX_converter
             menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { MenuFile, MenuBuildWax, MenuHelp });
             menuStrip1.Location = new System.Drawing.Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new System.Drawing.Size(944, 24);
+            menuStrip1.Size = new System.Drawing.Size(1184, 24);
             menuStrip1.TabIndex = 2;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -395,7 +395,7 @@ namespace WAX_converter
             panel1.Dock = System.Windows.Forms.DockStyle.Left;
             panel1.Location = new System.Drawing.Point(0, 195);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(193, 486);
+            panel1.Size = new System.Drawing.Size(193, 686);
             panel1.TabIndex = 3;
             // 
             // labelSeqFrame
@@ -514,7 +514,7 @@ namespace WAX_converter
             panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             panel3.Location = new System.Drawing.Point(193, 195);
             panel3.Name = "panel3";
-            panel3.Size = new System.Drawing.Size(751, 486);
+            panel3.Size = new System.Drawing.Size(991, 686);
             panel3.TabIndex = 4;
             // 
             // checkBoxZoom
@@ -563,7 +563,7 @@ namespace WAX_converter
             displayBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             displayBox.Location = new System.Drawing.Point(216, 11);
             displayBox.Name = "displayBox";
-            displayBox.Size = new System.Drawing.Size(523, 463);
+            displayBox.Size = new System.Drawing.Size(763, 663);
             displayBox.TabIndex = 6;
             displayBox.TabStop = false;
             // 
@@ -616,7 +616,7 @@ namespace WAX_converter
             // 
             // openRemasterDirectoryDialog
             // 
-            openRemasterDirectoryDialog.Filter = "Hires FME|*.FXX|Hires WAX|*.WXX";
+            openRemasterDirectoryDialog.Filter = "Hires WAX|*.WXX|Hires FME|*.FXX";
             openRemasterDirectoryDialog.Title = "Select folder containing remaster files";
             openRemasterDirectoryDialog.FileOk += openRemasterDirectoryDialog_FileOk;
             // 
@@ -624,14 +624,14 @@ namespace WAX_converter
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(944, 681);
+            ClientSize = new System.Drawing.Size(1184, 881);
             Controls.Add(panel3);
             Controls.Add(panel1);
             Controls.Add(panel2);
             Controls.Add(menuStrip1);
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;
-            MinimumSize = new System.Drawing.Size(960, 720);
+            MinimumSize = new System.Drawing.Size(1200, 920);
             Name = "MainWindow";
             Text = "WAX Converter (version 3.0)";
             panel2.ResumeLayout(false);

@@ -15,6 +15,7 @@ namespace WAX_converter
         private DFPal palette;
         private int SeqFrame = 0;       // the sequence frame currently being viewed
         private BitmapTransparencyOption transparencyOption = BitmapTransparencyOption.AlphaTransparent;
+        private string waxDialogPath;
         private string remasterFilesPath;
         private string currentOpenedFilename;
         private List<Bitmap> remasterImages = new();
@@ -64,6 +65,7 @@ namespace WAX_converter
 
         private void MenuOpenWax_Click(object sender, EventArgs e)
         {
+            openWaxDialog.InitialDirectory = !string.IsNullOrWhiteSpace(this.waxDialogPath) ? this.waxDialogPath : openWaxDialog.InitialDirectory;
             openWaxDialog.ShowDialog();
         }
 
@@ -96,6 +98,7 @@ namespace WAX_converter
 
         private void MenuRemasterDirectory_Click(object sender, EventArgs e)
         {
+            this.openRemasterDirectoryDialog.InitialDirectory = !string.IsNullOrWhiteSpace(this.remasterFilesPath) ? this.remasterFilesPath : openRemasterDirectoryDialog.InitialDirectory;
             this.openRemasterDirectoryDialog.ShowDialog(this);
         }
 
@@ -148,6 +151,7 @@ namespace WAX_converter
             {
                 this.wax = tryOpenWax;
                 this.wax.GenerateAllCellBitmaps(this.palette, this.transparencyOption);
+                this.waxDialogPath = Path.GetDirectoryName(path);
                 this.currentOpenedFilename = Path.GetFileName(path);
                 exportDialog.FileName = Path.GetFileNameWithoutExtension(path);
                 this.loadRemasterImages();
