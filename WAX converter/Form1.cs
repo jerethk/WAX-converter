@@ -18,7 +18,8 @@ namespace WAX_converter
         private string waxDialogPath;
         private string remasterFilesPath;
         private string currentOpenedFilename;
-        private List<Bitmap> remasterImages = new();
+        private List<(int CellAddress, Bitmap Image)> remasterImages = new();
+        private List<(int CellAddress, Bitmap Image)> remasterAlphaImages = new();
 
 
         public MainWindow(string[] args)
@@ -60,7 +61,7 @@ namespace WAX_converter
 
         private void MenuCloseWax_Click(object sender, EventArgs e)
         {
-            closeWax();
+            CloseWax();
         }
 
         private void MenuOpenWax_Click(object sender, EventArgs e)
@@ -149,6 +150,10 @@ namespace WAX_converter
             Waxfile tryOpenWax = new Waxfile();
             if (tryOpenWax.LoadFromFile(path))
             {
+                this.remasterImages.Clear();
+                this.remasterAlphaImages.Clear();
+                this.comboBoxImageCategory.Enabled = false;
+
                 this.wax = tryOpenWax;
                 this.wax.GenerateAllCellBitmaps(this.palette, this.transparencyOption);
                 this.waxDialogPath = Path.GetDirectoryName(path);
@@ -455,17 +460,38 @@ namespace WAX_converter
             int thisCell = (int)CellNumber.Value;
 
             string[] strings = new string[8];
-            strings[0] = $"SizeX: {wax.Cells[thisCell].SizeX}";
-            strings[1] = $"SizeY: {wax.Cells[thisCell].SizeY}";
-            strings[2] = $"Compressed: {wax.Cells[thisCell].Compressed}";
-            strings[3] = $"DataSize: {wax.Cells[thisCell].DataSize}";
-            //strings[4] = $"ColOffs: {wax.Cells[thisCell].ColOffs}";
-            //strings[5] = $"{wax.Cells[thisCell].pad1}";
-            //strings[6] = $"ADDRESS: 0x{Convert.ToString(wax.Cells[thisCell].address, 16)}";
+            strings[0] = $"SizeX: {this.wax.Cells[thisCell].SizeX}";
+            strings[1] = $"SizeY: {this.wax.Cells[thisCell].SizeY}";
+            strings[2] = $"Compressed: {this.wax.Cells[thisCell].Compressed}";
+            strings[3] = $"DataSize: {this.wax.Cells[thisCell].DataSize}";
+            //strings[4] = $"ColOffs: {this.wax.Cells[thisCell].ColOffs}";
+            //strings[5] = $"{this.wax.Cells[thisCell].pad1}";
+            //strings[6] = $"ADDRESS: 0x{Convert.ToString(this.wax.Cells[thisCell].address, 16)}";
             CellInfo.Lines = strings;
 
-            var displayedImage = new Bitmap(wax.Cells[thisCell].bitmap);
-            if (!radioCell.Checked && wax.Frames[(int)FrameNumber.Value].Flip == 1)
+            Bitmap displayedImage;
+            if (this.comboBoxImageCategory.SelectedIndex == 1
+                && this.remasterImages.Count > 0)
+            {
+                // Remaster image
+                var img = this.remasterImages.FirstOrDefault(r => r.CellAddress == this.wax.Cells[thisCell].address).Image;
+                displayedImage = img != null ? new Bitmap(img) : new Bitmap(1, 1);
+            }
+            else if (this.comboBoxImageCategory.SelectedIndex == 2
+                && this.remasterAlphaImages.Count > 0)
+            {
+                // Remaster alpha
+                var img = this.remasterAlphaImages.FirstOrDefault(r => r.CellAddress == this.wax.Cells[thisCell].address).Image;
+                displayedImage = img != null ? new Bitmap(img) : new Bitmap(1, 1);
+            }
+            else
+            {
+                // Original wax image
+                this.comboBoxImageCategory.SelectedIndex = 0;
+                displayedImage = new Bitmap(this.wax.Cells[thisCell].bitmap);
+            }
+            
+            if (!radioCell.Checked && this.wax.Frames[(int)FrameNumber.Value].Flip == 1)
             {
                 displayedImage.RotateFlip(RotateFlipType.RotateNoneFlipX);
             }
@@ -474,10 +500,11 @@ namespace WAX_converter
 
         // ---------------------------------------------------------------------------------------------------------
 
-        private void closeWax()
+        private void CloseWax()
         {
             this.wax = null;
             this.remasterImages.Clear();
+            this.remasterAlphaImages.Clear();
             this.currentOpenedFilename = "";
             labelWax.Text = "";
             RadioGroup.Enabled = false;
@@ -496,6 +523,7 @@ namespace WAX_converter
             displayBox.Image = null;
             MenuCloseWax.Enabled = false;
             MenuSaveBMP.Enabled = false;
+            this.comboBoxImageCategory.Enabled = false;
         }
 
         private void exportDialog_FileOk(object sender, CancelEventArgs e)
@@ -528,6 +556,10 @@ namespace WAX_converter
 
             if (tryOpenFme.LoadFromFME(path))
             {
+                this.remasterImages.Clear();
+                this.remasterAlphaImages.Clear();
+                this.comboBoxImageCategory.Enabled = false;
+
                 this.wax = tryOpenFme;
                 this.wax.GenerateAllCellBitmaps(this.palette, this.transparencyOption);
                 this.currentOpenedFilename = Path.GetFileName(path);
@@ -575,6 +607,8 @@ namespace WAX_converter
 
         private void loadRemasterImages()
         {
+            this.comboBoxImageCategory.Enabled = false;
+
             if (this.wax == null || this.wax.Ncells == 0 || string.IsNullOrEmpty(this.currentOpenedFilename))
             {
                 return;
@@ -613,6 +647,17 @@ namespace WAX_converter
             }
 
             var (bitmaps, alphaBitmaps) = RemasterImagesImporter.CreateBitmapsFromData(this.wax, data);
+            this.remasterImages = bitmaps;
+            this.remasterAlphaImages = alphaBitmaps;
+            this.comboBoxImageCategory.Enabled = true;
+        }
+
+        private void comboBoxImageCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.wax != null)
+            {
+                UpdateCell();
+            }
         }
 
         #endregion

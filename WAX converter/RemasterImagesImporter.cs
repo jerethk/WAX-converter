@@ -39,10 +39,10 @@ namespace WAX_converter
             }
         }
 
-        public static (List<Bitmap>, List<Bitmap>) CreateBitmapsFromData(Waxfile wax, List<byte[]> data)
+        public static (List<(int, Bitmap)>, List<(int, Bitmap)>) CreateBitmapsFromData(Waxfile wax, List<byte[]> data)
         {
-            var bitmaps = new List<Bitmap>();
-            var alphaBitmaps = new List<Bitmap>();
+            var bitmaps = new List<(int CellAddress, Bitmap Image)>();
+            var alphaBitmaps = new List<(int CellAddress, Bitmap Image)>();
 
             var processedCells = new List<int>();
             var imageCount = 0;
@@ -120,8 +120,8 @@ namespace WAX_converter
                             }
                         }
 
-                        bitmaps.Add(bitmap);
-                        alphaBitmaps.Add(alphaBitmap);
+                        bitmaps.Add((cell.address, bitmap));
+                        alphaBitmaps.Add((cell.address, alphaBitmap));
                         processedCells.Add(frame.CellIndex);
                         imageCount++;
                     }

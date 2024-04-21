@@ -31,6 +31,7 @@ namespace WAX_converter
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             panel2 = new System.Windows.Forms.Panel();
+            comboBoxImageCategory = new System.Windows.Forms.ComboBox();
             comboBoxTransparencyOptions = new System.Windows.Forms.ComboBox();
             label7 = new System.Windows.Forms.Label();
             label6 = new System.Windows.Forms.Label();
@@ -103,6 +104,7 @@ namespace WAX_converter
             // panel2
             // 
             panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            panel2.Controls.Add(comboBoxImageCategory);
             panel2.Controls.Add(comboBoxTransparencyOptions);
             panel2.Controls.Add(label7);
             panel2.Controls.Add(label6);
@@ -116,6 +118,17 @@ namespace WAX_converter
             panel2.Name = "panel2";
             panel2.Size = new System.Drawing.Size(1184, 171);
             panel2.TabIndex = 1;
+            // 
+            // comboBoxImageCategory
+            // 
+            comboBoxImageCategory.Enabled = false;
+            comboBoxImageCategory.FormattingEnabled = true;
+            comboBoxImageCategory.Items.AddRange(new object[] { "Original sprite", "Remastered sprite", "Remaster - alpha channel" });
+            comboBoxImageCategory.Location = new System.Drawing.Point(845, 27);
+            comboBoxImageCategory.Name = "comboBoxImageCategory";
+            comboBoxImageCategory.Size = new System.Drawing.Size(203, 23);
+            comboBoxImageCategory.TabIndex = 11;
+            comboBoxImageCategory.SelectedIndexChanged += comboBoxImageCategory_SelectedIndexChanged;
             // 
             // comboBoxTransparencyOptions
             // 
@@ -713,6 +726,7 @@ namespace WAX_converter
         private System.Windows.Forms.ToolStripMenuItem MenuRemasterDirectory;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.OpenFileDialog openRemasterDirectoryDialog;
+        private System.Windows.Forms.ComboBox comboBoxImageCategory;
     }
 }
 
