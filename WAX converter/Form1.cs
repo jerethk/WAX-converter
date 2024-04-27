@@ -17,9 +17,12 @@ namespace WAX_converter
         private BitmapTransparencyOption transparencyOption = BitmapTransparencyOption.AlphaTransparent;
         private string waxDialogPath;
         private string remasterFilesPath;
+        private string exportDialogPath;
+        private string exportType;
         private string currentOpenedFilename;
         private List<(int CellAddress, Bitmap Image)> remasterImages = new();
         private List<(int CellAddress, Bitmap Image)> remasterAlphaImages = new();
+        private List<(int CellAddress, Bitmap Image)> remasterCombinedImages = new();
 
 
         public MainWindow(string[] args)
@@ -72,6 +75,7 @@ namespace WAX_converter
 
         private void MenuOpenFme_Click(object sender, EventArgs e)
         {
+            openFmeDialog.InitialDirectory = !string.IsNullOrWhiteSpace(this.waxDialogPath) ? this.waxDialogPath : openFmeDialog.InitialDirectory;
             openFmeDialog.ShowDialog();
         }
 
@@ -80,8 +84,17 @@ namespace WAX_converter
             Application.Exit();
         }
 
-        private void MenuSaveBMP_Click(object sender, EventArgs e)
+        private void MenuExportWax_Click(object sender, EventArgs e)
         {
+            this.exportType = "LO";
+            exportDialog.InitialDirectory = !string.IsNullOrWhiteSpace(this.exportDialogPath) ? this.exportDialogPath : exportDialog.InitialDirectory;
+            exportDialog.ShowDialog();
+        }
+
+        private void MenuExportWXX_Click(object sender, EventArgs e)
+        {
+            this.exportType = "HI";
+            exportDialog.InitialDirectory = !string.IsNullOrWhiteSpace(this.exportDialogPath) ? this.exportDialogPath : exportDialog.InitialDirectory;
             exportDialog.ShowDialog();
         }
 
@@ -152,6 +165,7 @@ namespace WAX_converter
             {
                 this.remasterImages.Clear();
                 this.remasterAlphaImages.Clear();
+                this.remasterCombinedImages.Clear();
                 this.comboBoxImageCategory.Enabled = false;
 
                 this.wax = tryOpenWax;
@@ -471,13 +485,21 @@ namespace WAX_converter
 
             Bitmap displayedImage;
             if (this.comboBoxImageCategory.SelectedIndex == 1
+                && this.remasterCombinedImages.Count > 0)
+            {
+                // Remaster image - combined
+                var img = this.remasterCombinedImages.FirstOrDefault(r => r.CellAddress == this.wax.Cells[thisCell].address).Image;
+                displayedImage = img != null ? new Bitmap(img) : new Bitmap(1, 1);
+            }
+
+            else if (this.comboBoxImageCategory.SelectedIndex == 2
                 && this.remasterImages.Count > 0)
             {
-                // Remaster image
+                // Remaster image - no alpha
                 var img = this.remasterImages.FirstOrDefault(r => r.CellAddress == this.wax.Cells[thisCell].address).Image;
                 displayedImage = img != null ? new Bitmap(img) : new Bitmap(1, 1);
             }
-            else if (this.comboBoxImageCategory.SelectedIndex == 2
+            else if (this.comboBoxImageCategory.SelectedIndex == 3
                 && this.remasterAlphaImages.Count > 0)
             {
                 // Remaster alpha
@@ -490,7 +512,7 @@ namespace WAX_converter
                 this.comboBoxImageCategory.SelectedIndex = 0;
                 displayedImage = new Bitmap(this.wax.Cells[thisCell].bitmap);
             }
-            
+
             if (!radioCell.Checked && this.wax.Frames[(int)FrameNumber.Value].Flip == 1)
             {
                 displayedImage.RotateFlip(RotateFlipType.RotateNoneFlipX);
@@ -505,6 +527,7 @@ namespace WAX_converter
             this.wax = null;
             this.remasterImages.Clear();
             this.remasterAlphaImages.Clear();
+            this.remasterCombinedImages.Clear();
             this.currentOpenedFilename = "";
             labelWax.Text = "";
             RadioGroup.Enabled = false;
@@ -523,18 +546,73 @@ namespace WAX_converter
             displayBox.Image = null;
             MenuCloseWax.Enabled = false;
             MenuSaveBMP.Enabled = false;
+            MenuExportWXX.Enabled = false;
             this.comboBoxImageCategory.Enabled = false;
         }
 
         private void exportDialog_FileOk(object sender, CancelEventArgs e)
         {
-            if (wax.ExportToPNG(exportDialog.FileName, this.transparencyOption))
+            var exportDirectory = Path.GetDirectoryName(exportDialog.FileName);
+            this.exportDialogPath = exportDirectory;
+            
+            switch (this.exportType)
             {
-                MessageBox.Show("Successfully exported images to PNGs, and created a project file.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                MessageBox.Show("Error exporting.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                case "LO":
+                    if (wax.ExportToPNG(exportDialog.FileName, this.transparencyOption))
+                    {
+                        MessageBox.Show("Successfully exported images to PNGs, and created a project file.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error exporting.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                    break;
+
+                case "HI":
+                    var response = MessageBox.Show("Do you wish to save the alpha channel separately? The alpha data will be saved as a greyscale image.", "Question", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+                    if (response == DialogResult.Cancel)
+                    {
+                        break;
+                    }
+
+                    var baseFileName = Path.GetFileNameWithoutExtension(exportDialog.FileName);
+
+                    if (response == DialogResult.Yes)
+                    {
+                        var imageGroup1FileName = $"{baseFileName}_remaster";
+                        var imageGroup2FileName = $"{baseFileName}_remaster_alpha";
+                        var success =
+                            RemasterImagesImporter.SaveBitmapsAsPngs(this.remasterImages, exportDirectory, imageGroup1FileName) &&
+                            RemasterImagesImporter.SaveBitmapsAsPngs(this.remasterAlphaImages, exportDirectory, imageGroup2FileName);
+                        
+                        if (success)
+                        {
+                            MessageBox.Show("Successfully exported remaster images to PNGs.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Error exporting.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        break;
+                    }
+
+                    if (response == DialogResult.No)
+                    {
+                        var imageGroupFileName = $"{baseFileName}_remaster";
+                        if (RemasterImagesImporter.SaveBitmapsAsPngs(this.remasterCombinedImages, exportDirectory, imageGroupFileName))
+                        {
+                            MessageBox.Show("Successfully exported remaster images to PNGs.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Error exporting.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        break;
+                    }
+
+                    break;
             }
         }
 
@@ -558,10 +636,12 @@ namespace WAX_converter
             {
                 this.remasterImages.Clear();
                 this.remasterAlphaImages.Clear();
+                this.remasterCombinedImages.Clear();
                 this.comboBoxImageCategory.Enabled = false;
 
                 this.wax = tryOpenFme;
                 this.wax.GenerateAllCellBitmaps(this.palette, this.transparencyOption);
+                this.waxDialogPath = Path.GetDirectoryName(path);
                 this.currentOpenedFilename = Path.GetFileName(path);
                 exportDialog.FileName = Path.GetFileNameWithoutExtension(path);
                 this.loadRemasterImages();
@@ -608,6 +688,7 @@ namespace WAX_converter
         private void loadRemasterImages()
         {
             this.comboBoxImageCategory.Enabled = false;
+            this.MenuExportWXX.Enabled = false;
 
             if (this.wax == null || this.wax.Ncells == 0 || string.IsNullOrEmpty(this.currentOpenedFilename))
             {
@@ -646,10 +727,12 @@ namespace WAX_converter
                 return;
             }
 
-            var (bitmaps, alphaBitmaps) = RemasterImagesImporter.CreateBitmapsFromData(this.wax, data);
+            var (bitmaps, alphaBitmaps, combinedBitmaps) = RemasterImagesImporter.CreateBitmapsFromData(this.wax, data);
             this.remasterImages = bitmaps;
             this.remasterAlphaImages = alphaBitmaps;
+            this.remasterCombinedImages = combinedBitmaps;
             this.comboBoxImageCategory.Enabled = true;
+            this.MenuExportWXX.Enabled = true;
         }
 
         private void comboBoxImageCategory_SelectedIndexChanged(object sender, EventArgs e)

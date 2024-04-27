@@ -50,10 +50,11 @@ namespace WAX_converter
             MenuRemasterDirectory = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             MenuOpenWax = new System.Windows.Forms.ToolStripMenuItem();
-            MenuCloseWax = new System.Windows.Forms.ToolStripMenuItem();
-            MenuSaveBMP = new System.Windows.Forms.ToolStripMenuItem();
-            toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             MenuOpenFme = new System.Windows.Forms.ToolStripMenuItem();
+            MenuCloseWax = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            MenuSaveBMP = new System.Windows.Forms.ToolStripMenuItem();
+            MenuExportWXX = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             MenuQuit = new System.Windows.Forms.ToolStripMenuItem();
             MenuBuildWax = new System.Windows.Forms.ToolStripMenuItem();
@@ -123,7 +124,7 @@ namespace WAX_converter
             // 
             comboBoxImageCategory.Enabled = false;
             comboBoxImageCategory.FormattingEnabled = true;
-            comboBoxImageCategory.Items.AddRange(new object[] { "Original sprite", "Remastered sprite", "Remaster - alpha channel" });
+            comboBoxImageCategory.Items.AddRange(new object[] { "Original sprite", "Remastered sprite", "Remastered - no alpha", "Remastered - alpha channel" });
             comboBoxImageCategory.Location = new System.Drawing.Point(845, 27);
             comboBoxImageCategory.Name = "comboBoxImageCategory";
             comboBoxImageCategory.Size = new System.Drawing.Size(203, 23);
@@ -272,7 +273,7 @@ namespace WAX_converter
             // 
             // MenuFile
             // 
-            MenuFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { MenuLoadPal, MenuRemasterDirectory, toolStripSeparator3, MenuOpenWax, MenuCloseWax, MenuSaveBMP, toolStripSeparator6, MenuOpenFme, toolStripSeparator2, MenuQuit });
+            MenuFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { MenuLoadPal, MenuRemasterDirectory, toolStripSeparator3, MenuOpenWax, MenuOpenFme, MenuCloseWax, toolStripSeparator6, MenuSaveBMP, MenuExportWXX, toolStripSeparator2, MenuQuit });
             MenuFile.Name = "MenuFile";
             MenuFile.Size = new System.Drawing.Size(37, 20);
             MenuFile.Text = "File";
@@ -280,66 +281,74 @@ namespace WAX_converter
             // MenuLoadPal
             // 
             MenuLoadPal.Name = "MenuLoadPal";
-            MenuLoadPal.Size = new System.Drawing.Size(149, 22);
+            MenuLoadPal.Size = new System.Drawing.Size(223, 22);
             MenuLoadPal.Text = "Load PAL";
             MenuLoadPal.Click += MenuLoadPal_Click;
             // 
             // MenuRemasterDirectory
             // 
             MenuRemasterDirectory.Name = "MenuRemasterDirectory";
-            MenuRemasterDirectory.Size = new System.Drawing.Size(149, 22);
+            MenuRemasterDirectory.Size = new System.Drawing.Size(223, 22);
             MenuRemasterDirectory.Text = "Remaster files";
             MenuRemasterDirectory.Click += MenuRemasterDirectory_Click;
             // 
             // toolStripSeparator3
             // 
             toolStripSeparator3.Name = "toolStripSeparator3";
-            toolStripSeparator3.Size = new System.Drawing.Size(146, 6);
+            toolStripSeparator3.Size = new System.Drawing.Size(220, 6);
             // 
             // MenuOpenWax
             // 
             MenuOpenWax.Name = "MenuOpenWax";
-            MenuOpenWax.Size = new System.Drawing.Size(149, 22);
+            MenuOpenWax.Size = new System.Drawing.Size(223, 22);
             MenuOpenWax.Text = "Open WAX";
             MenuOpenWax.Click += MenuOpenWax_Click;
+            // 
+            // MenuOpenFme
+            // 
+            MenuOpenFme.Name = "MenuOpenFme";
+            MenuOpenFme.Size = new System.Drawing.Size(223, 22);
+            MenuOpenFme.Text = "Open FME";
+            MenuOpenFme.Click += MenuOpenFme_Click;
             // 
             // MenuCloseWax
             // 
             MenuCloseWax.Enabled = false;
             MenuCloseWax.Name = "MenuCloseWax";
-            MenuCloseWax.Size = new System.Drawing.Size(149, 22);
+            MenuCloseWax.Size = new System.Drawing.Size(223, 22);
             MenuCloseWax.Text = "Close WAX";
             MenuCloseWax.Click += MenuCloseWax_Click;
+            // 
+            // toolStripSeparator6
+            // 
+            toolStripSeparator6.Name = "toolStripSeparator6";
+            toolStripSeparator6.Size = new System.Drawing.Size(220, 6);
             // 
             // MenuSaveBMP
             // 
             MenuSaveBMP.Enabled = false;
             MenuSaveBMP.Name = "MenuSaveBMP";
-            MenuSaveBMP.Size = new System.Drawing.Size(149, 22);
-            MenuSaveBMP.Text = "Export to PNG";
-            MenuSaveBMP.Click += MenuSaveBMP_Click;
+            MenuSaveBMP.Size = new System.Drawing.Size(223, 22);
+            MenuSaveBMP.Text = "Export images to PNG";
+            MenuSaveBMP.Click += MenuExportWax_Click;
             // 
-            // toolStripSeparator6
+            // MenuExportWXX
             // 
-            toolStripSeparator6.Name = "toolStripSeparator6";
-            toolStripSeparator6.Size = new System.Drawing.Size(146, 6);
-            // 
-            // MenuOpenFme
-            // 
-            MenuOpenFme.Name = "MenuOpenFme";
-            MenuOpenFme.Size = new System.Drawing.Size(149, 22);
-            MenuOpenFme.Text = "Open FME";
-            MenuOpenFme.Click += MenuOpenFme_Click;
+            MenuExportWXX.Enabled = false;
+            MenuExportWXX.Name = "MenuExportWXX";
+            MenuExportWXX.Size = new System.Drawing.Size(223, 22);
+            MenuExportWXX.Text = "Export hi-res images to PNG";
+            MenuExportWXX.Click += MenuExportWXX_Click;
             // 
             // toolStripSeparator2
             // 
             toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new System.Drawing.Size(146, 6);
+            toolStripSeparator2.Size = new System.Drawing.Size(220, 6);
             // 
             // MenuQuit
             // 
             MenuQuit.Name = "MenuQuit";
-            MenuQuit.Size = new System.Drawing.Size(149, 22);
+            MenuQuit.Size = new System.Drawing.Size(223, 22);
             MenuQuit.Text = "Quit";
             MenuQuit.Click += MenuQuit_Click;
             // 
@@ -574,7 +583,7 @@ namespace WAX_converter
             displayBox.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             displayBox.BackColor = System.Drawing.Color.Gray;
             displayBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            displayBox.Location = new System.Drawing.Point(216, 11);
+            displayBox.Location = new System.Drawing.Point(216, 6);
             displayBox.Name = "displayBox";
             displayBox.Size = new System.Drawing.Size(763, 663);
             displayBox.TabIndex = 6;
@@ -727,6 +736,7 @@ namespace WAX_converter
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.OpenFileDialog openRemasterDirectoryDialog;
         private System.Windows.Forms.ComboBox comboBoxImageCategory;
+        private System.Windows.Forms.ToolStripMenuItem MenuExportWXX;
     }
 }
 

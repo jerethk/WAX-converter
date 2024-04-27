@@ -39,10 +39,11 @@ namespace WAX_converter
             }
         }
 
-        public static (List<(int, Bitmap)>, List<(int, Bitmap)>) CreateBitmapsFromData(Waxfile wax, List<byte[]> data)
+        public static (List<(int, Bitmap)>, List<(int, Bitmap)>, List<(int, Bitmap)>) CreateBitmapsFromData(Waxfile wax, List<byte[]> data)
         {
             var bitmaps = new List<(int CellAddress, Bitmap Image)>();
             var alphaBitmaps = new List<(int CellAddress, Bitmap Image)>();
+            var combinedBitmaps = new List<(int CellAddress, Bitmap Image)>();
 
             var processedCells = new List<int>();
             var imageCount = 0;
@@ -90,7 +91,7 @@ namespace WAX_converter
                             }
                         }
 
-                        // Create image bitmap
+                        // Create image bitmap without alpha
                         var bitmap = new Bitmap(imageWidth, imageHeight);
                         for (var x = 0; x < imageWidth; x++)
                         {
@@ -120,15 +121,49 @@ namespace WAX_converter
                             }
                         }
 
+                        // Create combined bitmap
+                        var combinedBitmap = new Bitmap(imageWidth, imageHeight);
+                        for (var x = 0; x < imageWidth; x++)
+                        {
+                            for (var y = 0; y < imageHeight; y++)
+                            {
+                                var colour = Color.FromArgb(
+                                    pixelArray[x, y].Alpha,
+                                    pixelArray[x, y].Red,
+                                    pixelArray[x, y].Green,
+                                    pixelArray[x, y].Blue);
+                                combinedBitmap.SetPixel(x, y, colour);                                    
+                            }
+                        }
+                                
                         bitmaps.Add((cell.address, bitmap));
                         alphaBitmaps.Add((cell.address, alphaBitmap));
+                        combinedBitmaps.Add((cell.address, combinedBitmap));
                         processedCells.Add(frame.CellIndex);
                         imageCount++;
                     }
                 }
             }
             
-            return (bitmaps, alphaBitmaps);
+            return (bitmaps, alphaBitmaps, combinedBitmaps);
+        }
+
+        public static bool SaveBitmapsAsPngs(List<(int cellAddress, Bitmap bitmap)> bitmaps, string directory, string baseSaveName)
+        {
+            try
+            {
+                for (int b = 0; b < bitmaps.Count; b++)
+                {
+                    var saveName = $"{directory}\\{baseSaveName}_{b}.PNG";
+                    bitmaps[b].bitmap.Save(saveName, System.Drawing.Imaging.ImageFormat.Png);
+                }
+            }
+            catch
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
