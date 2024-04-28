@@ -270,6 +270,7 @@ namespace WAX_converter
             SeqPrevFrame.Enabled = true;
             FrameNumber.Enabled = false;
             CellNumber.Enabled = false;
+            btnAnimate.Enabled = true;
         }
 
         private void radioSequence_CheckedChanged(object sender, EventArgs e)
@@ -285,6 +286,7 @@ namespace WAX_converter
             SeqPrevFrame.Enabled = true;
             FrameNumber.Enabled = false;
             CellNumber.Enabled = false;
+            btnAnimate.Enabled = false;
         }
 
         private void radioFrame_CheckedChanged(object sender, EventArgs e)
@@ -301,6 +303,7 @@ namespace WAX_converter
             SeqPrevFrame.Enabled = false;
             FrameNumber.Enabled = true;
             CellNumber.Enabled = false;
+            btnAnimate.Enabled = false;
         }
 
         private void radioCell_CheckedChanged(object sender, EventArgs e)
@@ -316,6 +319,7 @@ namespace WAX_converter
             SeqNumber.Enabled = false;
             FrameNumber.Enabled = false;
             CellNumber.Enabled = true;
+            btnAnimate.Enabled = false;
         }
 
 
@@ -554,7 +558,7 @@ namespace WAX_converter
         {
             var exportDirectory = Path.GetDirectoryName(exportDialog.FileName);
             this.exportDialogPath = exportDirectory;
-            
+
             switch (this.exportType)
             {
                 case "LO":
@@ -586,7 +590,7 @@ namespace WAX_converter
                         var success =
                             RemasterImagesImporter.SaveBitmapsAsPngs(this.remasterImages, exportDirectory, imageGroup1FileName) &&
                             RemasterImagesImporter.SaveBitmapsAsPngs(this.remasterAlphaImages, exportDirectory, imageGroup2FileName);
-                        
+
                         if (success)
                         {
                             MessageBox.Show("Successfully exported remaster images to PNGs.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -744,5 +748,25 @@ namespace WAX_converter
         }
 
         #endregion
+
+        // ------------------------------------------------------------------------------------------------------
+
+        private void btnAnimate_Click(object sender, EventArgs e)
+        {
+            if (this.wax == null || this.wax.Sequences.Count == 0)
+            {
+                return;
+            }
+            
+            var bitmaps = new List<Bitmap>();
+            for (int c = 0; c < this.wax.Cells.Count; c++)
+            {
+                bitmaps.Add(this.wax.Cells[c].bitmap);
+            }
+
+            var animationWindow = new AnimationWindow(true, this.wax.Actions[(int)this.ActionNumber.Value], this.wax.Sequences, this.wax.Frames, bitmaps, Color.FromArgb(0, 0, 0, 0));
+            animationWindow.ShowDialog();
+            animationWindow.Dispose();
+        }
     }
 }

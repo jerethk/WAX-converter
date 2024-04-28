@@ -430,6 +430,8 @@ namespace WAX_converter
                     InsertX.Value = this.FrameList[index].InsertX;
                     InsertY.Value = this.FrameList[index].InsertY;
                 }
+
+                window.Dispose();
             }
         }
 
@@ -681,11 +683,12 @@ namespace WAX_converter
             
             if (actionNumber >= 0 && this.FrameList.Count > 0 && this.SequenceList.Count > 0)
             {
-                var animationWindow = new AnimationWindow(this.ActionList[actionNumber], this.SequenceList, this.FrameList, this.ImageList, this.transparentColour);
+                var animationWindow = new AnimationWindow(false, this.ActionList[actionNumber], this.SequenceList, this.FrameList, this.ImageList, this.transparentColour);
                 animationWindow.Text = $"Animation Preview: Action {actionNumber}";
                 animationWindow.ShowDialog();
 
                 this.FRate.Value = this.ActionList[actionNumber].FrameRate;
+                animationWindow.Dispose();
             }
         }
 

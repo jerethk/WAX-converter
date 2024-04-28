@@ -31,6 +31,7 @@ namespace WAX_converter
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             panel2 = new System.Windows.Forms.Panel();
+            btnAnimate = new System.Windows.Forms.Button();
             comboBoxImageCategory = new System.Windows.Forms.ComboBox();
             comboBoxTransparencyOptions = new System.Windows.Forms.ComboBox();
             label7 = new System.Windows.Forms.Label();
@@ -105,6 +106,7 @@ namespace WAX_converter
             // panel2
             // 
             panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            panel2.Controls.Add(btnAnimate);
             panel2.Controls.Add(comboBoxImageCategory);
             panel2.Controls.Add(comboBoxTransparencyOptions);
             panel2.Controls.Add(label7);
@@ -119,6 +121,16 @@ namespace WAX_converter
             panel2.Name = "panel2";
             panel2.Size = new System.Drawing.Size(1184, 171);
             panel2.TabIndex = 1;
+            // 
+            // btnAnimate
+            // 
+            btnAnimate.Location = new System.Drawing.Point(785, 81);
+            btnAnimate.Name = "btnAnimate";
+            btnAnimate.Size = new System.Drawing.Size(248, 31);
+            btnAnimate.TabIndex = 12;
+            btnAnimate.Text = "Animate selected action";
+            btnAnimate.UseVisualStyleBackColor = true;
+            btnAnimate.Click += btnAnimate_Click;
             // 
             // comboBoxImageCategory
             // 
@@ -737,6 +749,7 @@ namespace WAX_converter
         private System.Windows.Forms.OpenFileDialog openRemasterDirectoryDialog;
         private System.Windows.Forms.ComboBox comboBoxImageCategory;
         private System.Windows.Forms.ToolStripMenuItem MenuExportWXX;
+        private System.Windows.Forms.Button btnAnimate;
     }
 }
 

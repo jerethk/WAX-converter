@@ -14,6 +14,7 @@ namespace WAX_converter
 {
     public partial class AnimationWindow : Form
     {
+        private bool isReadOnlyMode;
         private Action action;
         private List<Sequence> sequences;
         private List<Frame> frames;
@@ -25,7 +26,7 @@ namespace WAX_converter
         private bool isPlaying = false;
         private bool isLooping = false;
 
-        public AnimationWindow(Action action, List<Sequence> sequences, List<Frame> frames, List<Bitmap> images, Color transparentColour)
+        public AnimationWindow(bool isReadOnlyMode, Action action, List<Sequence> sequences, List<Frame> frames, List<Bitmap> images, Color transparentColour)
         {
             InitializeComponent();
 
@@ -33,6 +34,11 @@ namespace WAX_converter
             this.sequences = sequences;
             this.frames = frames;
             this.images = FramePositioningWindow.makeCellsTransparent(images, transparentColour).ToList();
+
+            this.numericFrameRate.Enabled = !isReadOnlyMode;
+            this.btnAccept.Visible = !isReadOnlyMode;
+            this.btnDiscard.Text = isReadOnlyMode ? "Close" : "Discard";
+            this.isReadOnlyMode = isReadOnlyMode;
         }
 
         private void AnimationWindow_Load(object sender, EventArgs e)
@@ -139,7 +145,7 @@ namespace WAX_converter
                     btnLoop.Text = "Loop";
                     btnPlay.Enabled = true;
                     numericView.Enabled = true;
-                    numericFrameRate.Enabled = true;
+                    numericFrameRate.Enabled = !this.isReadOnlyMode;
                 }
             }
         }
@@ -168,6 +174,11 @@ namespace WAX_converter
 
         private void numericFrameRate_ValueChanged(object sender, EventArgs e)
         {
+            if (this.isReadOnlyMode)
+            {
+                return;
+            }
+            
             this.frameRate = (int)numericFrameRate.Value;
         }
 
