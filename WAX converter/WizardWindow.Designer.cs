@@ -29,538 +29,548 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WizardWindow));
-            this.comboBoxAction = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.folderBrowser2 = new System.Windows.Forms.FolderBrowserDialog();
-            this.btnSourceFolder = new System.Windows.Forms.Button();
-            this.listBoxImages = new System.Windows.Forms.ListBox();
-            this.pictureBoxPreview = new System.Windows.Forms.PictureBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.viewingAngleDiagram = new System.Windows.Forms.PictureBox();
-            this.btnFront = new System.Windows.Forms.Button();
-            this.btnBack = new System.Windows.Forms.Button();
-            this.btnLeft = new System.Windows.Forms.Button();
-            this.btnRight = new System.Windows.Forms.Button();
-            this.btnBackRight = new System.Windows.Forms.Button();
-            this.btnFrontRight = new System.Windows.Forms.Button();
-            this.btnFrontLeft = new System.Windows.Forms.Button();
-            this.btnBackLeft = new System.Windows.Forms.Button();
-            this.btnApplyImages = new System.Windows.Forms.Button();
-            this.output = new System.Windows.Forms.Label();
-            this.checkBoxFlip = new System.Windows.Forms.CheckBox();
-            this.checkBoxZoom = new System.Windows.Forms.CheckBox();
-            this.listBoxSeq = new System.Windows.Forms.ListBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.btnDone = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.sprite7Img = new System.Windows.Forms.PictureBox();
-            this.sprite6Img = new System.Windows.Forms.PictureBox();
-            this.sprite5Img = new System.Windows.Forms.PictureBox();
-            this.sprite4Img = new System.Windows.Forms.PictureBox();
-            this.sprite3Img = new System.Windows.Forms.PictureBox();
-            this.sprite2Img = new System.Windows.Forms.PictureBox();
-            this.sprite1Img = new System.Windows.Forms.PictureBox();
-            this.sprite0Img = new System.Windows.Forms.PictureBox();
-            this.btnQuit = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.btnApplyAllFacings = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.folderBrowser = new System.Windows.Forms.OpenFileDialog();
-            this.saveProjDialog = new System.Windows.Forms.SaveFileDialog();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.viewingAngleDiagram)).BeginInit();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.sprite7Img)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sprite6Img)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sprite5Img)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sprite4Img)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sprite3Img)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sprite2Img)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sprite1Img)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sprite0Img)).BeginInit();
-            this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.SuspendLayout();
+            comboBoxAction = new System.Windows.Forms.ComboBox();
+            label1 = new System.Windows.Forms.Label();
+            folderBrowser2 = new System.Windows.Forms.FolderBrowserDialog();
+            btnSourceFolder = new System.Windows.Forms.Button();
+            listBoxImages = new System.Windows.Forms.ListBox();
+            pictureBoxPreview = new System.Windows.Forms.PictureBox();
+            label2 = new System.Windows.Forms.Label();
+            viewingAngleDiagram = new System.Windows.Forms.PictureBox();
+            btnFront = new System.Windows.Forms.Button();
+            btnBack = new System.Windows.Forms.Button();
+            btnLeft = new System.Windows.Forms.Button();
+            btnRight = new System.Windows.Forms.Button();
+            btnBackRight = new System.Windows.Forms.Button();
+            btnFrontRight = new System.Windows.Forms.Button();
+            btnFrontLeft = new System.Windows.Forms.Button();
+            btnBackLeft = new System.Windows.Forms.Button();
+            btnApplyImages = new System.Windows.Forms.Button();
+            output = new System.Windows.Forms.Label();
+            checkBoxFlip = new System.Windows.Forms.CheckBox();
+            checkBoxZoom = new System.Windows.Forms.CheckBox();
+            listBoxSeq = new System.Windows.Forms.ListBox();
+            label3 = new System.Windows.Forms.Label();
+            label4 = new System.Windows.Forms.Label();
+            btnDone = new System.Windows.Forms.Button();
+            panel1 = new System.Windows.Forms.Panel();
+            label6 = new System.Windows.Forms.Label();
+            sprite7Img = new System.Windows.Forms.PictureBox();
+            sprite6Img = new System.Windows.Forms.PictureBox();
+            sprite5Img = new System.Windows.Forms.PictureBox();
+            sprite4Img = new System.Windows.Forms.PictureBox();
+            sprite3Img = new System.Windows.Forms.PictureBox();
+            sprite2Img = new System.Windows.Forms.PictureBox();
+            sprite1Img = new System.Windows.Forms.PictureBox();
+            sprite0Img = new System.Windows.Forms.PictureBox();
+            btnQuit = new System.Windows.Forms.Button();
+            panel2 = new System.Windows.Forms.Panel();
+            panel3 = new System.Windows.Forms.Panel();
+            btnApplyAllFacings = new System.Windows.Forms.Button();
+            label5 = new System.Windows.Forms.Label();
+            folderBrowser = new System.Windows.Forms.OpenFileDialog();
+            saveProjDialog = new System.Windows.Forms.SaveFileDialog();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxPreview).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)viewingAngleDiagram).BeginInit();
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)sprite7Img).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)sprite6Img).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)sprite5Img).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)sprite4Img).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)sprite3Img).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)sprite2Img).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)sprite1Img).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)sprite0Img).BeginInit();
+            panel2.SuspendLayout();
+            panel3.SuspendLayout();
+            SuspendLayout();
             // 
             // comboBoxAction
             // 
-            this.comboBoxAction.FormattingEnabled = true;
-            this.comboBoxAction.Location = new System.Drawing.Point(21, 38);
-            this.comboBoxAction.Name = "comboBoxAction";
-            this.comboBoxAction.Size = new System.Drawing.Size(205, 23);
-            this.comboBoxAction.TabIndex = 0;
-            this.comboBoxAction.SelectedIndexChanged += new System.EventHandler(this.comboBoxAction_SelectedIndexChanged);
+            comboBoxAction.FormattingEnabled = true;
+            comboBoxAction.Location = new System.Drawing.Point(21, 38);
+            comboBoxAction.Name = "comboBoxAction";
+            comboBoxAction.Size = new System.Drawing.Size(205, 23);
+            comboBoxAction.TabIndex = 0;
+            comboBoxAction.SelectedIndexChanged += comboBoxAction_SelectedIndexChanged;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(21, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(71, 15);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "WAX Action";
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(21, 20);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(71, 15);
+            label1.TabIndex = 1;
+            label1.Text = "WAX Action";
             // 
             // folderBrowser2
             // 
-            this.folderBrowser2.Description = "Select folder containing images";
-            this.folderBrowser2.RootFolder = System.Environment.SpecialFolder.DesktopDirectory;
-            this.folderBrowser2.ShowNewFolderButton = false;
-            this.folderBrowser2.UseDescriptionForTitle = true;
+            folderBrowser2.Description = "Select folder containing images";
+            folderBrowser2.RootFolder = System.Environment.SpecialFolder.DesktopDirectory;
+            folderBrowser2.ShowNewFolderButton = false;
+            folderBrowser2.UseDescriptionForTitle = true;
             // 
             // btnSourceFolder
             // 
-            this.btnSourceFolder.Location = new System.Drawing.Point(260, 20);
-            this.btnSourceFolder.Name = "btnSourceFolder";
-            this.btnSourceFolder.Size = new System.Drawing.Size(108, 41);
-            this.btnSourceFolder.TabIndex = 3;
-            this.btnSourceFolder.Text = "*Source images*";
-            this.btnSourceFolder.UseVisualStyleBackColor = true;
-            this.btnSourceFolder.Visible = false;
-            this.btnSourceFolder.Click += new System.EventHandler(this.btnSourceFolder_Click);
+            btnSourceFolder.Location = new System.Drawing.Point(260, 20);
+            btnSourceFolder.Name = "btnSourceFolder";
+            btnSourceFolder.Size = new System.Drawing.Size(108, 41);
+            btnSourceFolder.TabIndex = 3;
+            btnSourceFolder.Text = "*Source images*";
+            btnSourceFolder.UseVisualStyleBackColor = true;
+            btnSourceFolder.Visible = false;
+            btnSourceFolder.Click += btnSourceFolder_Click;
             // 
             // listBoxImages
             // 
-            this.listBoxImages.FormattingEnabled = true;
-            this.listBoxImages.ItemHeight = 15;
-            this.listBoxImages.Location = new System.Drawing.Point(410, 80);
-            this.listBoxImages.Name = "listBoxImages";
-            this.listBoxImages.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.listBoxImages.Size = new System.Drawing.Size(189, 319);
-            this.listBoxImages.TabIndex = 4;
-            this.listBoxImages.SelectedIndexChanged += new System.EventHandler(this.listBoxImages_SelectedIndexChanged);
+            listBoxImages.FormattingEnabled = true;
+            listBoxImages.ItemHeight = 15;
+            listBoxImages.Location = new System.Drawing.Point(410, 80);
+            listBoxImages.Name = "listBoxImages";
+            listBoxImages.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            listBoxImages.Size = new System.Drawing.Size(189, 319);
+            listBoxImages.TabIndex = 4;
+            listBoxImages.SelectedIndexChanged += listBoxImages_SelectedIndexChanged;
             // 
             // pictureBoxPreview
             // 
-            this.pictureBoxPreview.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBoxPreview.BackColor = System.Drawing.Color.Gray;
-            this.pictureBoxPreview.Location = new System.Drawing.Point(856, 56);
-            this.pictureBoxPreview.Name = "pictureBoxPreview";
-            this.pictureBoxPreview.Size = new System.Drawing.Size(405, 525);
-            this.pictureBoxPreview.TabIndex = 5;
-            this.pictureBoxPreview.TabStop = false;
+            pictureBoxPreview.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            pictureBoxPreview.BackColor = System.Drawing.Color.Gray;
+            pictureBoxPreview.Location = new System.Drawing.Point(856, 56);
+            pictureBoxPreview.Name = "pictureBoxPreview";
+            pictureBoxPreview.Size = new System.Drawing.Size(405, 525);
+            pictureBoxPreview.TabIndex = 5;
+            pictureBoxPreview.TabStop = false;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(21, 103);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(96, 17);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Viewing angle";
+            label2.AutoSize = true;
+            label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label2.Location = new System.Drawing.Point(21, 103);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(96, 17);
+            label2.TabIndex = 6;
+            label2.Text = "Viewing angle";
             // 
             // viewingAngleDiagram
             // 
-            this.viewingAngleDiagram.BackColor = System.Drawing.SystemColors.Control;
-            this.viewingAngleDiagram.Image = ((System.Drawing.Image)(resources.GetObject("viewingAngleDiagram.Image")));
-            this.viewingAngleDiagram.InitialImage = ((System.Drawing.Image)(resources.GetObject("viewingAngleDiagram.InitialImage")));
-            this.viewingAngleDiagram.Location = new System.Drawing.Point(145, 215);
-            this.viewingAngleDiagram.Name = "viewingAngleDiagram";
-            this.viewingAngleDiagram.Size = new System.Drawing.Size(100, 130);
-            this.viewingAngleDiagram.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.viewingAngleDiagram.TabIndex = 7;
-            this.viewingAngleDiagram.TabStop = false;
+            viewingAngleDiagram.BackColor = System.Drawing.SystemColors.Control;
+            viewingAngleDiagram.Image = (System.Drawing.Image)resources.GetObject("viewingAngleDiagram.Image");
+            viewingAngleDiagram.InitialImage = (System.Drawing.Image)resources.GetObject("viewingAngleDiagram.InitialImage");
+            viewingAngleDiagram.Location = new System.Drawing.Point(145, 215);
+            viewingAngleDiagram.Name = "viewingAngleDiagram";
+            viewingAngleDiagram.Size = new System.Drawing.Size(100, 130);
+            viewingAngleDiagram.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            viewingAngleDiagram.TabIndex = 7;
+            viewingAngleDiagram.TabStop = false;
             // 
             // btnFront
             // 
-            this.btnFront.BackColor = System.Drawing.Color.Gold;
-            this.btnFront.Location = new System.Drawing.Point(155, 396);
-            this.btnFront.Name = "btnFront";
-            this.btnFront.Size = new System.Drawing.Size(84, 32);
-            this.btnFront.TabIndex = 8;
-            this.btnFront.Text = "front";
-            this.btnFront.UseVisualStyleBackColor = false;
-            this.btnFront.Click += new System.EventHandler(this.btnFront_Click);
+            btnFront.BackColor = System.Drawing.Color.Gold;
+            btnFront.Location = new System.Drawing.Point(155, 396);
+            btnFront.Name = "btnFront";
+            btnFront.Size = new System.Drawing.Size(84, 32);
+            btnFront.TabIndex = 8;
+            btnFront.Text = "front";
+            btnFront.UseVisualStyleBackColor = false;
+            btnFront.Click += btnFront_Click;
             // 
             // btnBack
             // 
-            this.btnBack.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnBack.Location = new System.Drawing.Point(155, 134);
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(84, 32);
-            this.btnBack.TabIndex = 9;
-            this.btnBack.Text = "back";
-            this.btnBack.UseVisualStyleBackColor = false;
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            btnBack.BackColor = System.Drawing.SystemColors.ControlLight;
+            btnBack.Location = new System.Drawing.Point(155, 134);
+            btnBack.Name = "btnBack";
+            btnBack.Size = new System.Drawing.Size(84, 32);
+            btnBack.TabIndex = 9;
+            btnBack.Text = "back";
+            btnBack.UseVisualStyleBackColor = false;
+            btnBack.Click += btnBack_Click;
             // 
             // btnLeft
             // 
-            this.btnLeft.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnLeft.Location = new System.Drawing.Point(284, 259);
-            this.btnLeft.Name = "btnLeft";
-            this.btnLeft.Size = new System.Drawing.Size(84, 32);
-            this.btnLeft.TabIndex = 10;
-            this.btnLeft.Text = "left";
-            this.btnLeft.UseVisualStyleBackColor = false;
-            this.btnLeft.Click += new System.EventHandler(this.btnLeft_Click);
+            btnLeft.BackColor = System.Drawing.SystemColors.ControlLight;
+            btnLeft.Location = new System.Drawing.Point(284, 259);
+            btnLeft.Name = "btnLeft";
+            btnLeft.Size = new System.Drawing.Size(84, 32);
+            btnLeft.TabIndex = 10;
+            btnLeft.Text = "left";
+            btnLeft.UseVisualStyleBackColor = false;
+            btnLeft.Click += btnLeft_Click;
             // 
             // btnRight
             // 
-            this.btnRight.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnRight.Location = new System.Drawing.Point(21, 259);
-            this.btnRight.Name = "btnRight";
-            this.btnRight.Size = new System.Drawing.Size(84, 32);
-            this.btnRight.TabIndex = 11;
-            this.btnRight.Text = "right";
-            this.btnRight.UseVisualStyleBackColor = false;
-            this.btnRight.Click += new System.EventHandler(this.btnRight_Click);
+            btnRight.BackColor = System.Drawing.SystemColors.ControlLight;
+            btnRight.Location = new System.Drawing.Point(21, 259);
+            btnRight.Name = "btnRight";
+            btnRight.Size = new System.Drawing.Size(84, 32);
+            btnRight.TabIndex = 11;
+            btnRight.Text = "right";
+            btnRight.UseVisualStyleBackColor = false;
+            btnRight.Click += btnRight_Click;
             // 
             // btnBackRight
             // 
-            this.btnBackRight.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnBackRight.Location = new System.Drawing.Point(47, 182);
-            this.btnBackRight.Name = "btnBackRight";
-            this.btnBackRight.Size = new System.Drawing.Size(84, 42);
-            this.btnBackRight.TabIndex = 12;
-            this.btnBackRight.Text = "back - right";
-            this.btnBackRight.UseVisualStyleBackColor = false;
-            this.btnBackRight.Click += new System.EventHandler(this.btnBackRight_Click);
+            btnBackRight.BackColor = System.Drawing.SystemColors.ControlLight;
+            btnBackRight.Location = new System.Drawing.Point(47, 182);
+            btnBackRight.Name = "btnBackRight";
+            btnBackRight.Size = new System.Drawing.Size(84, 42);
+            btnBackRight.TabIndex = 12;
+            btnBackRight.Text = "back - right";
+            btnBackRight.UseVisualStyleBackColor = false;
+            btnBackRight.Click += btnBackRight_Click;
             // 
             // btnFrontRight
             // 
-            this.btnFrontRight.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnFrontRight.Location = new System.Drawing.Point(47, 333);
-            this.btnFrontRight.Name = "btnFrontRight";
-            this.btnFrontRight.Size = new System.Drawing.Size(84, 42);
-            this.btnFrontRight.TabIndex = 13;
-            this.btnFrontRight.Text = "front - right";
-            this.btnFrontRight.UseVisualStyleBackColor = false;
-            this.btnFrontRight.Click += new System.EventHandler(this.btnFrontRight_Click);
+            btnFrontRight.BackColor = System.Drawing.SystemColors.ControlLight;
+            btnFrontRight.Location = new System.Drawing.Point(47, 333);
+            btnFrontRight.Name = "btnFrontRight";
+            btnFrontRight.Size = new System.Drawing.Size(84, 42);
+            btnFrontRight.TabIndex = 13;
+            btnFrontRight.Text = "front - right";
+            btnFrontRight.UseVisualStyleBackColor = false;
+            btnFrontRight.Click += btnFrontRight_Click;
             // 
             // btnFrontLeft
             // 
-            this.btnFrontLeft.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnFrontLeft.Location = new System.Drawing.Point(260, 333);
-            this.btnFrontLeft.Name = "btnFrontLeft";
-            this.btnFrontLeft.Size = new System.Drawing.Size(84, 42);
-            this.btnFrontLeft.TabIndex = 15;
-            this.btnFrontLeft.Text = "front - left";
-            this.btnFrontLeft.UseVisualStyleBackColor = false;
-            this.btnFrontLeft.Click += new System.EventHandler(this.btnFrontLeft_Click);
+            btnFrontLeft.BackColor = System.Drawing.SystemColors.ControlLight;
+            btnFrontLeft.Location = new System.Drawing.Point(260, 333);
+            btnFrontLeft.Name = "btnFrontLeft";
+            btnFrontLeft.Size = new System.Drawing.Size(84, 42);
+            btnFrontLeft.TabIndex = 15;
+            btnFrontLeft.Text = "front - left";
+            btnFrontLeft.UseVisualStyleBackColor = false;
+            btnFrontLeft.Click += btnFrontLeft_Click;
             // 
             // btnBackLeft
             // 
-            this.btnBackLeft.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnBackLeft.Location = new System.Drawing.Point(260, 182);
-            this.btnBackLeft.Name = "btnBackLeft";
-            this.btnBackLeft.Size = new System.Drawing.Size(84, 42);
-            this.btnBackLeft.TabIndex = 14;
-            this.btnBackLeft.Text = "back - left";
-            this.btnBackLeft.UseVisualStyleBackColor = false;
-            this.btnBackLeft.Click += new System.EventHandler(this.btnBackLeft_Click);
+            btnBackLeft.BackColor = System.Drawing.SystemColors.ControlLight;
+            btnBackLeft.Location = new System.Drawing.Point(260, 182);
+            btnBackLeft.Name = "btnBackLeft";
+            btnBackLeft.Size = new System.Drawing.Size(84, 42);
+            btnBackLeft.TabIndex = 14;
+            btnBackLeft.Text = "back - left";
+            btnBackLeft.UseVisualStyleBackColor = false;
+            btnBackLeft.Click += btnBackLeft_Click;
             // 
             // btnApplyImages
             // 
-            this.btnApplyImages.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnApplyImages.Location = new System.Drawing.Point(260, 54);
-            this.btnApplyImages.Name = "btnApplyImages";
-            this.btnApplyImages.Size = new System.Drawing.Size(161, 44);
-            this.btnApplyImages.TabIndex = 16;
-            this.btnApplyImages.Text = "To Selected Angle";
-            this.btnApplyImages.UseVisualStyleBackColor = true;
-            this.btnApplyImages.Click += new System.EventHandler(this.btnApplyImages_Click);
+            btnApplyImages.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            btnApplyImages.Location = new System.Drawing.Point(260, 54);
+            btnApplyImages.Name = "btnApplyImages";
+            btnApplyImages.Size = new System.Drawing.Size(161, 44);
+            btnApplyImages.TabIndex = 16;
+            btnApplyImages.Text = "To Selected Angle";
+            btnApplyImages.UseVisualStyleBackColor = true;
+            btnApplyImages.Click += btnApplyImages_Click;
             // 
             // output
             // 
-            this.output.AutoSize = true;
-            this.output.Location = new System.Drawing.Point(33, 453);
-            this.output.Name = "output";
-            this.output.Size = new System.Drawing.Size(38, 15);
-            this.output.TabIndex = 17;
-            this.output.Text = "label3";
-            this.output.Visible = false;
+            output.AutoSize = true;
+            output.Location = new System.Drawing.Point(33, 453);
+            output.Name = "output";
+            output.Size = new System.Drawing.Size(38, 15);
+            output.TabIndex = 17;
+            output.Text = "label3";
+            output.Visible = false;
             // 
             // checkBoxFlip
             // 
-            this.checkBoxFlip.AutoSize = true;
-            this.checkBoxFlip.Location = new System.Drawing.Point(410, 425);
-            this.checkBoxFlip.Name = "checkBoxFlip";
-            this.checkBoxFlip.Size = new System.Drawing.Size(81, 19);
-            this.checkBoxFlip.TabIndex = 18;
-            this.checkBoxFlip.Text = "Flip image";
-            this.checkBoxFlip.UseVisualStyleBackColor = true;
-            this.checkBoxFlip.CheckedChanged += new System.EventHandler(this.checkBoxFlip_CheckedChanged);
+            checkBoxFlip.AutoSize = true;
+            checkBoxFlip.Location = new System.Drawing.Point(410, 425);
+            checkBoxFlip.Name = "checkBoxFlip";
+            checkBoxFlip.Size = new System.Drawing.Size(81, 19);
+            checkBoxFlip.TabIndex = 18;
+            checkBoxFlip.Text = "Flip image";
+            checkBoxFlip.UseVisualStyleBackColor = true;
+            checkBoxFlip.CheckedChanged += checkBoxFlip_CheckedChanged;
             // 
             // checkBoxZoom
             // 
-            this.checkBoxZoom.AutoSize = true;
-            this.checkBoxZoom.Location = new System.Drawing.Point(856, 19);
-            this.checkBoxZoom.Name = "checkBoxZoom";
-            this.checkBoxZoom.Size = new System.Drawing.Size(58, 19);
-            this.checkBoxZoom.TabIndex = 19;
-            this.checkBoxZoom.Text = "Zoom";
-            this.checkBoxZoom.UseVisualStyleBackColor = true;
-            this.checkBoxZoom.CheckedChanged += new System.EventHandler(this.checkBoxZoom_CheckedChanged);
+            checkBoxZoom.AutoSize = true;
+            checkBoxZoom.Location = new System.Drawing.Point(856, 19);
+            checkBoxZoom.Name = "checkBoxZoom";
+            checkBoxZoom.Size = new System.Drawing.Size(58, 19);
+            checkBoxZoom.TabIndex = 19;
+            checkBoxZoom.Text = "Zoom";
+            checkBoxZoom.UseVisualStyleBackColor = true;
+            checkBoxZoom.CheckedChanged += checkBoxZoom_CheckedChanged;
             // 
             // listBoxSeq
             // 
-            this.listBoxSeq.FormattingEnabled = true;
-            this.listBoxSeq.ItemHeight = 15;
-            this.listBoxSeq.Location = new System.Drawing.Point(629, 80);
-            this.listBoxSeq.Name = "listBoxSeq";
-            this.listBoxSeq.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.listBoxSeq.Size = new System.Drawing.Size(189, 319);
-            this.listBoxSeq.TabIndex = 20;
-            this.listBoxSeq.SelectedIndexChanged += new System.EventHandler(this.listBoxSeq_SelectedIndexChanged);
+            listBoxSeq.FormattingEnabled = true;
+            listBoxSeq.ItemHeight = 15;
+            listBoxSeq.Location = new System.Drawing.Point(629, 80);
+            listBoxSeq.Name = "listBoxSeq";
+            listBoxSeq.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            listBoxSeq.Size = new System.Drawing.Size(189, 319);
+            listBoxSeq.TabIndex = 20;
+            listBoxSeq.SelectedIndexChanged += listBoxSeq_SelectedIndexChanged;
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(629, 57);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(111, 15);
-            this.label3.TabIndex = 21;
-            this.label3.Text = "Images in sequence";
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(629, 57);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(111, 15);
+            label3.TabIndex = 21;
+            label3.Text = "Images in sequence";
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(410, 57);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(84, 15);
-            this.label4.TabIndex = 22;
-            this.label4.Text = "Source images";
+            label4.AutoSize = true;
+            label4.Location = new System.Drawing.Point(410, 57);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(84, 15);
+            label4.TabIndex = 22;
+            label4.Text = "Source images";
             // 
             // btnDone
             // 
-            this.btnDone.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnDone.Location = new System.Drawing.Point(518, 23);
-            this.btnDone.Name = "btnDone";
-            this.btnDone.Size = new System.Drawing.Size(111, 36);
-            this.btnDone.TabIndex = 23;
-            this.btnDone.Text = "DONE";
-            this.btnDone.UseVisualStyleBackColor = true;
-            this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
+            btnDone.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            btnDone.Location = new System.Drawing.Point(518, 23);
+            btnDone.Name = "btnDone";
+            btnDone.Size = new System.Drawing.Size(111, 36);
+            btnDone.TabIndex = 23;
+            btnDone.Text = "DONE";
+            btnDone.UseVisualStyleBackColor = true;
+            btnDone.Click += btnDone_Click;
             // 
             // panel1
             // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.sprite7Img);
-            this.panel1.Controls.Add(this.sprite6Img);
-            this.panel1.Controls.Add(this.sprite5Img);
-            this.panel1.Controls.Add(this.sprite4Img);
-            this.panel1.Controls.Add(this.sprite3Img);
-            this.panel1.Controls.Add(this.sprite2Img);
-            this.panel1.Controls.Add(this.sprite1Img);
-            this.panel1.Controls.Add(this.sprite0Img);
-            this.panel1.Controls.Add(this.btnQuit);
-            this.panel1.Controls.Add(this.btnDone);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 610);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1284, 71);
-            this.panel1.TabIndex = 24;
+            panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            panel1.Controls.Add(label6);
+            panel1.Controls.Add(sprite7Img);
+            panel1.Controls.Add(sprite6Img);
+            panel1.Controls.Add(sprite5Img);
+            panel1.Controls.Add(sprite4Img);
+            panel1.Controls.Add(sprite3Img);
+            panel1.Controls.Add(sprite2Img);
+            panel1.Controls.Add(sprite1Img);
+            panel1.Controls.Add(sprite0Img);
+            panel1.Controls.Add(btnQuit);
+            panel1.Controls.Add(btnDone);
+            panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            panel1.Location = new System.Drawing.Point(0, 610);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(1284, 71);
+            panel1.TabIndex = 24;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label6.Location = new System.Drawing.Point(73, 23);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(336, 15);
+            label6.TabIndex = 20;
+            label6.Text = "Note: This tool is usable, but further optimisation is planned";
             // 
             // sprite7Img
             // 
-            this.sprite7Img.Image = ((System.Drawing.Image)(resources.GetObject("sprite7Img.Image")));
-            this.sprite7Img.Location = new System.Drawing.Point(209, 9);
-            this.sprite7Img.Name = "sprite7Img";
-            this.sprite7Img.Size = new System.Drawing.Size(22, 50);
-            this.sprite7Img.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.sprite7Img.TabIndex = 32;
-            this.sprite7Img.TabStop = false;
-            this.sprite7Img.Visible = false;
+            sprite7Img.Image = (System.Drawing.Image)resources.GetObject("sprite7Img.Image");
+            sprite7Img.Location = new System.Drawing.Point(1117, 9);
+            sprite7Img.Name = "sprite7Img";
+            sprite7Img.Size = new System.Drawing.Size(22, 50);
+            sprite7Img.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            sprite7Img.TabIndex = 32;
+            sprite7Img.TabStop = false;
+            sprite7Img.Visible = false;
             // 
             // sprite6Img
             // 
-            this.sprite6Img.Image = ((System.Drawing.Image)(resources.GetObject("sprite6Img.Image")));
-            this.sprite6Img.Location = new System.Drawing.Point(181, 9);
-            this.sprite6Img.Name = "sprite6Img";
-            this.sprite6Img.Size = new System.Drawing.Size(22, 50);
-            this.sprite6Img.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.sprite6Img.TabIndex = 31;
-            this.sprite6Img.TabStop = false;
-            this.sprite6Img.Visible = false;
+            sprite6Img.Image = (System.Drawing.Image)resources.GetObject("sprite6Img.Image");
+            sprite6Img.Location = new System.Drawing.Point(1089, 9);
+            sprite6Img.Name = "sprite6Img";
+            sprite6Img.Size = new System.Drawing.Size(22, 50);
+            sprite6Img.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            sprite6Img.TabIndex = 31;
+            sprite6Img.TabStop = false;
+            sprite6Img.Visible = false;
             // 
             // sprite5Img
             // 
-            this.sprite5Img.Image = ((System.Drawing.Image)(resources.GetObject("sprite5Img.Image")));
-            this.sprite5Img.Location = new System.Drawing.Point(153, 8);
-            this.sprite5Img.Name = "sprite5Img";
-            this.sprite5Img.Size = new System.Drawing.Size(22, 50);
-            this.sprite5Img.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.sprite5Img.TabIndex = 30;
-            this.sprite5Img.TabStop = false;
-            this.sprite5Img.Visible = false;
+            sprite5Img.Image = (System.Drawing.Image)resources.GetObject("sprite5Img.Image");
+            sprite5Img.Location = new System.Drawing.Point(1061, 8);
+            sprite5Img.Name = "sprite5Img";
+            sprite5Img.Size = new System.Drawing.Size(22, 50);
+            sprite5Img.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            sprite5Img.TabIndex = 30;
+            sprite5Img.TabStop = false;
+            sprite5Img.Visible = false;
             // 
             // sprite4Img
             // 
-            this.sprite4Img.Image = ((System.Drawing.Image)(resources.GetObject("sprite4Img.Image")));
-            this.sprite4Img.Location = new System.Drawing.Point(125, 9);
-            this.sprite4Img.Name = "sprite4Img";
-            this.sprite4Img.Size = new System.Drawing.Size(22, 50);
-            this.sprite4Img.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.sprite4Img.TabIndex = 29;
-            this.sprite4Img.TabStop = false;
-            this.sprite4Img.Visible = false;
+            sprite4Img.Image = (System.Drawing.Image)resources.GetObject("sprite4Img.Image");
+            sprite4Img.Location = new System.Drawing.Point(1033, 9);
+            sprite4Img.Name = "sprite4Img";
+            sprite4Img.Size = new System.Drawing.Size(22, 50);
+            sprite4Img.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            sprite4Img.TabIndex = 29;
+            sprite4Img.TabStop = false;
+            sprite4Img.Visible = false;
             // 
             // sprite3Img
             // 
-            this.sprite3Img.Image = ((System.Drawing.Image)(resources.GetObject("sprite3Img.Image")));
-            this.sprite3Img.Location = new System.Drawing.Point(97, 8);
-            this.sprite3Img.Name = "sprite3Img";
-            this.sprite3Img.Size = new System.Drawing.Size(22, 50);
-            this.sprite3Img.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.sprite3Img.TabIndex = 28;
-            this.sprite3Img.TabStop = false;
-            this.sprite3Img.Visible = false;
+            sprite3Img.Image = (System.Drawing.Image)resources.GetObject("sprite3Img.Image");
+            sprite3Img.Location = new System.Drawing.Point(1005, 8);
+            sprite3Img.Name = "sprite3Img";
+            sprite3Img.Size = new System.Drawing.Size(22, 50);
+            sprite3Img.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            sprite3Img.TabIndex = 28;
+            sprite3Img.TabStop = false;
+            sprite3Img.Visible = false;
             // 
             // sprite2Img
             // 
-            this.sprite2Img.Image = ((System.Drawing.Image)(resources.GetObject("sprite2Img.Image")));
-            this.sprite2Img.Location = new System.Drawing.Point(69, 9);
-            this.sprite2Img.Name = "sprite2Img";
-            this.sprite2Img.Size = new System.Drawing.Size(22, 50);
-            this.sprite2Img.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.sprite2Img.TabIndex = 27;
-            this.sprite2Img.TabStop = false;
-            this.sprite2Img.Visible = false;
+            sprite2Img.Image = (System.Drawing.Image)resources.GetObject("sprite2Img.Image");
+            sprite2Img.Location = new System.Drawing.Point(977, 9);
+            sprite2Img.Name = "sprite2Img";
+            sprite2Img.Size = new System.Drawing.Size(22, 50);
+            sprite2Img.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            sprite2Img.TabIndex = 27;
+            sprite2Img.TabStop = false;
+            sprite2Img.Visible = false;
             // 
             // sprite1Img
             // 
-            this.sprite1Img.Image = ((System.Drawing.Image)(resources.GetObject("sprite1Img.Image")));
-            this.sprite1Img.Location = new System.Drawing.Point(39, 9);
-            this.sprite1Img.Name = "sprite1Img";
-            this.sprite1Img.Size = new System.Drawing.Size(22, 50);
-            this.sprite1Img.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.sprite1Img.TabIndex = 26;
-            this.sprite1Img.TabStop = false;
-            this.sprite1Img.Visible = false;
+            sprite1Img.Image = (System.Drawing.Image)resources.GetObject("sprite1Img.Image");
+            sprite1Img.Location = new System.Drawing.Point(947, 9);
+            sprite1Img.Name = "sprite1Img";
+            sprite1Img.Size = new System.Drawing.Size(22, 50);
+            sprite1Img.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            sprite1Img.TabIndex = 26;
+            sprite1Img.TabStop = false;
+            sprite1Img.Visible = false;
             // 
             // sprite0Img
             // 
-            this.sprite0Img.Image = ((System.Drawing.Image)(resources.GetObject("sprite0Img.Image")));
-            this.sprite0Img.InitialImage = ((System.Drawing.Image)(resources.GetObject("sprite0Img.InitialImage")));
-            this.sprite0Img.Location = new System.Drawing.Point(11, 9);
-            this.sprite0Img.Name = "sprite0Img";
-            this.sprite0Img.Size = new System.Drawing.Size(22, 50);
-            this.sprite0Img.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.sprite0Img.TabIndex = 25;
-            this.sprite0Img.TabStop = false;
-            this.sprite0Img.Visible = false;
+            sprite0Img.Image = (System.Drawing.Image)resources.GetObject("sprite0Img.Image");
+            sprite0Img.InitialImage = (System.Drawing.Image)resources.GetObject("sprite0Img.InitialImage");
+            sprite0Img.Location = new System.Drawing.Point(919, 9);
+            sprite0Img.Name = "sprite0Img";
+            sprite0Img.Size = new System.Drawing.Size(22, 50);
+            sprite0Img.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            sprite0Img.TabIndex = 25;
+            sprite0Img.TabStop = false;
+            sprite0Img.Visible = false;
             // 
             // btnQuit
             // 
-            this.btnQuit.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnQuit.Location = new System.Drawing.Point(653, 23);
-            this.btnQuit.Name = "btnQuit";
-            this.btnQuit.Size = new System.Drawing.Size(111, 36);
-            this.btnQuit.TabIndex = 24;
-            this.btnQuit.Text = "QUIT";
-            this.btnQuit.UseVisualStyleBackColor = true;
-            this.btnQuit.Click += new System.EventHandler(this.btnQuit_Click);
+            btnQuit.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            btnQuit.Location = new System.Drawing.Point(653, 23);
+            btnQuit.Name = "btnQuit";
+            btnQuit.Size = new System.Drawing.Size(111, 36);
+            btnQuit.TabIndex = 24;
+            btnQuit.Text = "QUIT";
+            btnQuit.UseVisualStyleBackColor = true;
+            btnQuit.Click += btnQuit_Click;
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.panel3);
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.comboBoxAction);
-            this.panel2.Controls.Add(this.label3);
-            this.panel2.Controls.Add(this.btnSourceFolder);
-            this.panel2.Controls.Add(this.listBoxSeq);
-            this.panel2.Controls.Add(this.listBoxImages);
-            this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.checkBoxFlip);
-            this.panel2.Controls.Add(this.viewingAngleDiagram);
-            this.panel2.Controls.Add(this.output);
-            this.panel2.Controls.Add(this.btnFront);
-            this.panel2.Controls.Add(this.btnBack);
-            this.panel2.Controls.Add(this.btnFrontLeft);
-            this.panel2.Controls.Add(this.btnLeft);
-            this.panel2.Controls.Add(this.btnBackLeft);
-            this.panel2.Controls.Add(this.btnRight);
-            this.panel2.Controls.Add(this.btnFrontRight);
-            this.panel2.Controls.Add(this.btnBackRight);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(837, 610);
-            this.panel2.TabIndex = 25;
+            panel2.Controls.Add(panel3);
+            panel2.Controls.Add(label1);
+            panel2.Controls.Add(label4);
+            panel2.Controls.Add(comboBoxAction);
+            panel2.Controls.Add(label3);
+            panel2.Controls.Add(btnSourceFolder);
+            panel2.Controls.Add(listBoxSeq);
+            panel2.Controls.Add(listBoxImages);
+            panel2.Controls.Add(label2);
+            panel2.Controls.Add(checkBoxFlip);
+            panel2.Controls.Add(viewingAngleDiagram);
+            panel2.Controls.Add(output);
+            panel2.Controls.Add(btnFront);
+            panel2.Controls.Add(btnBack);
+            panel2.Controls.Add(btnFrontLeft);
+            panel2.Controls.Add(btnLeft);
+            panel2.Controls.Add(btnBackLeft);
+            panel2.Controls.Add(btnRight);
+            panel2.Controls.Add(btnFrontRight);
+            panel2.Controls.Add(btnBackRight);
+            panel2.Dock = System.Windows.Forms.DockStyle.Left;
+            panel2.Location = new System.Drawing.Point(0, 0);
+            panel2.Name = "panel2";
+            panel2.Size = new System.Drawing.Size(837, 610);
+            panel2.TabIndex = 25;
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.btnApplyAllFacings);
-            this.panel3.Controls.Add(this.label5);
-            this.panel3.Controls.Add(this.btnApplyImages);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 483);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(837, 127);
-            this.panel3.TabIndex = 23;
+            panel3.Controls.Add(btnApplyAllFacings);
+            panel3.Controls.Add(label5);
+            panel3.Controls.Add(btnApplyImages);
+            panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            panel3.Location = new System.Drawing.Point(0, 483);
+            panel3.Name = "panel3";
+            panel3.Size = new System.Drawing.Size(837, 127);
+            panel3.TabIndex = 23;
             // 
             // btnApplyAllFacings
             // 
-            this.btnApplyAllFacings.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnApplyAllFacings.Location = new System.Drawing.Point(444, 54);
-            this.btnApplyAllFacings.Name = "btnApplyAllFacings";
-            this.btnApplyAllFacings.Size = new System.Drawing.Size(161, 44);
-            this.btnApplyAllFacings.TabIndex = 19;
-            this.btnApplyAllFacings.Text = "To All 8 Angles";
-            this.btnApplyAllFacings.UseVisualStyleBackColor = true;
-            this.btnApplyAllFacings.Click += new System.EventHandler(this.btnApplyAllFacings_Click);
+            btnApplyAllFacings.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            btnApplyAllFacings.Location = new System.Drawing.Point(444, 54);
+            btnApplyAllFacings.Name = "btnApplyAllFacings";
+            btnApplyAllFacings.Size = new System.Drawing.Size(161, 44);
+            btnApplyAllFacings.TabIndex = 19;
+            btnApplyAllFacings.Text = "To All 8 Angles";
+            btnApplyAllFacings.UseVisualStyleBackColor = true;
+            btnApplyAllFacings.Click += btnApplyAllFacings_Click;
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(260, 15);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(151, 17);
-            this.label5.TabIndex = 18;
-            this.label5.Text = "Apply Selected Images:";
+            label5.AutoSize = true;
+            label5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label5.Location = new System.Drawing.Point(260, 15);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(151, 17);
+            label5.TabIndex = 18;
+            label5.Text = "Apply Selected Images:";
             // 
             // folderBrowser
             // 
-            this.folderBrowser.AddExtension = false;
-            this.folderBrowser.Filter = "All files|*.*|PNG images|*.PNG|BMP images|*.BMP|GIF images|*.GIF|JPEG images|*.JPG";
-            this.folderBrowser.Title = "Select folder containing images";
+            folderBrowser.AddExtension = false;
+            folderBrowser.Filter = "All files|*.*|PNG images|*.PNG|BMP images|*.BMP|GIF images|*.GIF|JPEG images|*.JPG";
+            folderBrowser.Title = "Select folder containing images";
             // 
             // saveProjDialog
             // 
-            this.saveProjDialog.DefaultExt = "wproj";
-            this.saveProjDialog.Filter = "WAX project files|*.wproj";
-            this.saveProjDialog.Title = "Save WAX Project";
+            saveProjDialog.DefaultExt = "wproj";
+            saveProjDialog.Filter = "WAX project files|*.wproj";
+            saveProjDialog.Title = "Save WAX Project";
             // 
             // WizardWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1284, 681);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.checkBoxZoom);
-            this.Controls.Add(this.pictureBoxPreview);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(1300, 720);
-            this.Name = "WizardWindow";
-            this.Text = "Enemy WAX Wizard";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.WizardWindow_FormClosing);
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.WizardWindow_FormClosed);
-            this.Load += new System.EventHandler(this.WizardWindow_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.viewingAngleDiagram)).EndInit();
-            this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.sprite7Img)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sprite6Img)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sprite5Img)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sprite4Img)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sprite3Img)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sprite2Img)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sprite1Img)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sprite0Img)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(1284, 681);
+            Controls.Add(panel2);
+            Controls.Add(panel1);
+            Controls.Add(checkBoxZoom);
+            Controls.Add(pictureBoxPreview);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            MinimumSize = new System.Drawing.Size(1300, 720);
+            Name = "WizardWindow";
+            Text = "Enemy WAX Wizard";
+            FormClosing += WizardWindow_FormClosing;
+            FormClosed += WizardWindow_FormClosed;
+            Load += WizardWindow_Load;
+            ((System.ComponentModel.ISupportInitialize)pictureBoxPreview).EndInit();
+            ((System.ComponentModel.ISupportInitialize)viewingAngleDiagram).EndInit();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)sprite7Img).EndInit();
+            ((System.ComponentModel.ISupportInitialize)sprite6Img).EndInit();
+            ((System.ComponentModel.ISupportInitialize)sprite5Img).EndInit();
+            ((System.ComponentModel.ISupportInitialize)sprite4Img).EndInit();
+            ((System.ComponentModel.ISupportInitialize)sprite3Img).EndInit();
+            ((System.ComponentModel.ISupportInitialize)sprite2Img).EndInit();
+            ((System.ComponentModel.ISupportInitialize)sprite1Img).EndInit();
+            ((System.ComponentModel.ISupportInitialize)sprite0Img).EndInit();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -605,5 +615,6 @@
         private System.Windows.Forms.PictureBox sprite2Img;
         private System.Windows.Forms.PictureBox sprite1Img;
         private System.Windows.Forms.PictureBox sprite0Img;
+        private System.Windows.Forms.Label label6;
     }
 }
