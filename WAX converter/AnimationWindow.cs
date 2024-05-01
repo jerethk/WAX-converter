@@ -15,6 +15,7 @@ namespace WAX_converter
     public partial class AnimationWindow : Form
     {
         private bool isReadOnlyMode;
+        private bool isHiRes;
         private Action action;
         private List<Sequence> sequences;
         private List<Frame> frames;
@@ -26,7 +27,7 @@ namespace WAX_converter
         private bool isPlaying = false;
         private bool isLooping = false;
 
-        public AnimationWindow(bool isReadOnlyMode, Action action, List<Sequence> sequences, List<Frame> frames, List<Bitmap> images, Color transparentColour)
+        public AnimationWindow(bool isReadOnlyMode, bool hiresMode, Action action, List<Sequence> sequences, List<Frame> frames, List<Bitmap> images, Color transparentColour)
         {
             InitializeComponent();
 
@@ -39,6 +40,7 @@ namespace WAX_converter
             this.btnAccept.Visible = !isReadOnlyMode;
             this.btnDiscard.Text = isReadOnlyMode ? "Close" : "Discard";
             this.isReadOnlyMode = isReadOnlyMode;
+            this.isHiRes = hiresMode;
         }
 
         private void AnimationWindow_Load(object sender, EventArgs e)
@@ -71,12 +73,13 @@ namespace WAX_converter
         {
             var sequence = this.sequences[this.action.seqIndexes[(int)numericView.Value]];
             var frameIndex = sequence.frameIndexes[0];
+            var scaleFactor = this.isHiRes ? 2 : 1;
 
             if (frameIndex >= 0)
             {
                 var frame = this.frames[frameIndex];
-                var positionX = this.centreX + frame.InsertX;
-                var positionY = this.centreY + frame.InsertY;
+                var positionX = this.centreX + frame.InsertX * scaleFactor;
+                var positionY = this.centreY + frame.InsertY * scaleFactor;
                 var imageToDraw = new Bitmap(this.images[frame.CellIndex]);
                 if (frame.Flip == 1) imageToDraw.RotateFlip(RotateFlipType.RotateNoneFlipX);
 
@@ -116,8 +119,9 @@ namespace WAX_converter
         private void updateFrame(int frameIndex, int frameRate)
         {
             var frame = this.frames[frameIndex];
-            var positionX = this.centreX + frame.InsertX;
-            var positionY = this.centreY + frame.InsertY;
+            var scaleFactor = this.isHiRes ? 2 : 1;
+            var positionX = this.centreX + frame.InsertX * scaleFactor;
+            var positionY = this.centreY + frame.InsertY * scaleFactor;
             var imageToDraw = new Bitmap(this.images[frame.CellIndex]);
             if (frame.Flip == 1) imageToDraw.RotateFlip(RotateFlipType.RotateNoneFlipX);
 

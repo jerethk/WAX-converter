@@ -759,12 +759,32 @@ namespace WAX_converter
             }
             
             var bitmaps = new List<Bitmap>();
-            for (int c = 0; c < this.wax.Cells.Count; c++)
+            var hiresMode = this.comboBoxImageCategory.SelectedIndex > 0 && this.remasterCombinedImages.Any();
+
+            if (hiresMode)
             {
-                bitmaps.Add(this.wax.Cells[c].bitmap);
+                for (int c = 0; c < this.wax.Cells.Count; c++)
+                {
+                    var img = this.remasterCombinedImages.FirstOrDefault(i => i.CellAddress == this.wax.Cells[c].address).Image;
+                    if (img != null)
+                    {
+                        bitmaps.Add(img);
+                    }
+                    else
+                    {
+                        bitmaps.Add(new Bitmap(1,1));
+                    }
+                }
+            }
+            else
+            {
+                for (int c = 0; c < this.wax.Cells.Count; c++)
+                {
+                    bitmaps.Add(this.wax.Cells[c].bitmap);
+                }
             }
 
-            var animationWindow = new AnimationWindow(true, this.wax.Actions[(int)this.ActionNumber.Value], this.wax.Sequences, this.wax.Frames, bitmaps, Color.FromArgb(0, 0, 0, 0));
+            var animationWindow = new AnimationWindow(true, hiresMode, this.wax.Actions[(int)this.ActionNumber.Value], this.wax.Sequences, this.wax.Frames, bitmaps, Color.FromArgb(0, 0, 0, 0));
             animationWindow.ShowDialog();
             animationWindow.Dispose();
         }
