@@ -91,51 +91,40 @@ namespace WAX_converter
                             }
                         }
 
-                        // Create image bitmap without alpha
+                        // Create bitmaps
                         var bitmap = new Bitmap(imageWidth, imageHeight);
-                        for (var x = 0; x < imageWidth; x++)
-                        {
-                            for (var y = 0; y < imageHeight; y++)
-                            {
-                                var colour = Color.FromArgb(
-                                    255,
-                                    pixelArray[x, y].Red,
-                                    pixelArray[x, y].Green,
-                                    pixelArray[x, y].Blue);
-                                bitmap.SetPixel(x, y, colour);
-                            }
-                        }
-
-                        // Create the alpha bitmap (greyscale)
                         var alphaBitmap = new Bitmap(imageWidth, imageHeight);
-                        for (var x = 0; x < imageWidth; x++)
-                        {
-                            for (var y = 0; y < imageHeight; y++)
-                            {
-                                var colour = Color.FromArgb(
-                                    255,
-                                    pixelArray[x, y].Alpha,
-                                    pixelArray[x, y].Alpha,
-                                    pixelArray[x, y].Alpha);
-                                alphaBitmap.SetPixel(x, y, colour);
-                            }
-                        }
-
-                        // Create combined bitmap
                         var combinedBitmap = new Bitmap(imageWidth, imageHeight);
                         for (var x = 0; x < imageWidth; x++)
                         {
                             for (var y = 0; y < imageHeight; y++)
                             {
-                                var colour = Color.FromArgb(
+                                // RGB only
+                                var colourRgb = Color.FromArgb(
+                                    255,
+                                    pixelArray[x, y].Red,
+                                    pixelArray[x, y].Green,
+                                    pixelArray[x, y].Blue);
+                                bitmap.SetPixel(x, y, colourRgb);
+
+                                // alpha (as greyscale)
+                                var colourAlpha = Color.FromArgb(
+                                        255,
+                                        pixelArray[x, y].Alpha,
+                                        pixelArray[x, y].Alpha,
+                                        pixelArray[x, y].Alpha);
+                                alphaBitmap.SetPixel(x, y, colourAlpha);
+
+                                // combined
+                                var colourCombined = Color.FromArgb(
                                     pixelArray[x, y].Alpha,
                                     pixelArray[x, y].Red,
                                     pixelArray[x, y].Green,
                                     pixelArray[x, y].Blue);
-                                combinedBitmap.SetPixel(x, y, colour);                                    
+                                combinedBitmap.SetPixel(x, y, colourCombined);
                             }
                         }
-                                
+
                         bitmaps.Add((cell.address, bitmap));
                         alphaBitmaps.Add((cell.address, alphaBitmap));
                         combinedBitmaps.Add((cell.address, combinedBitmap));
