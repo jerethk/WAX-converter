@@ -528,6 +528,43 @@ namespace WAX_converter
         }
     }
 
+    public static class WaxExtensions
+    {
+        /// <summary>
+        /// Iterate through Wax cells in order of their reference in the Wax (walking through the
+        /// actions, sequences and frames), and perform a function on them.
+        /// </summary>
+        public static void ProcessCellsInOrderOfReference(this Waxfile wax, Action<Cell, int> process)
+        {
+            var processedCells = new List<int>();
+            var imageCount = 0;
+
+            // Cells are processed in the order in which they are referenced in the WAX hierarchy
+            for (var a = 0; a < wax.numActions; a++)
+            {
+                var action = wax.Actions[a];
+                for (var view = 0; view < 32; view++)
+                {
+                    var sequence = wax.Sequences[action.seqIndexes[view]];
+                    for (var f = 0; f < sequence.numFrames; f++)
+                    {
+                        var frame = wax.Frames[sequence.frameIndexes[f]];
+
+                        if (processedCells.Contains(frame.CellIndex))
+                        {
+                            continue;
+                        }
+
+                        var cell = wax.Cells[frame.CellIndex];
+                        process(cell, imageCount);
+
+                        processedCells.Add(frame.CellIndex);
+                        imageCount++;
+                    }
+                }
+            }
+        }
+    }
 
     public class Action
     {

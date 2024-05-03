@@ -104,10 +104,21 @@ namespace WAX_converter
             buildWindow.Show();
         }
 
-        private void enemyWizardToolStripMenuItem_Click(object sender, EventArgs e)
+        private void MenuEnemyWizard_Click(object sender, EventArgs e)
         {
             WizardWindow WizardWindow = new WizardWindow();
             WizardWindow.ShowDialog();
+        }
+
+        private void MenuBuildWxx_Click(object sender, EventArgs e)
+        {
+            if (this.wax == null)
+            {
+                return;
+            }
+
+            var wxxBuilderWindow = new WxxBuilderWindow(this.wax);
+            wxxBuilderWindow.Show();
         }
 
         private void MenuRemasterDirectory_Click(object sender, EventArgs e)
@@ -757,7 +768,7 @@ namespace WAX_converter
             {
                 return;
             }
-            
+
             var bitmaps = new List<Bitmap>();
             var hiresMode = this.comboBoxImageCategory.SelectedIndex > 0 && this.remasterCombinedImages.Any();
 
@@ -772,7 +783,7 @@ namespace WAX_converter
                     }
                     else
                     {
-                        bitmaps.Add(new Bitmap(1,1));
+                        bitmaps.Add(new Bitmap(1, 1));
                     }
                 }
             }
