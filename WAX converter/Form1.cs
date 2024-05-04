@@ -112,11 +112,6 @@ namespace WAX_converter
 
         private void MenuBuildWxx_Click(object sender, EventArgs e)
         {
-            if (this.wax == null)
-            {
-                return;
-            }
-
             var wxxBuilderWindow = new WxxBuilderWindow(this.wax);
             wxxBuilderWindow.Show();
         }
