@@ -44,6 +44,8 @@
             labelWaxImageSize = new System.Windows.Forms.Label();
             labelSourceImageSize = new System.Windows.Forms.Label();
             btnAutoSet = new System.Windows.Forms.Button();
+            btnCreateWxx = new System.Windows.Forms.Button();
+            saveWxxDialog = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)pictureBoxWaxImage).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxSourceImages).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxHighRes).BeginInit();
@@ -73,7 +75,7 @@
             // 
             // btnQuit
             // 
-            btnQuit.Location = new System.Drawing.Point(939, 851);
+            btnQuit.Location = new System.Drawing.Point(939, 722);
             btnQuit.Name = "btnQuit";
             btnQuit.Size = new System.Drawing.Size(126, 40);
             btnQuit.TabIndex = 1;
@@ -199,12 +201,30 @@
             btnAutoSet.UseVisualStyleBackColor = true;
             btnAutoSet.Click += btnAutoSet_Click;
             // 
+            // btnCreateWxx
+            // 
+            btnCreateWxx.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            btnCreateWxx.Location = new System.Drawing.Point(939, 603);
+            btnCreateWxx.Name = "btnCreateWxx";
+            btnCreateWxx.Size = new System.Drawing.Size(126, 96);
+            btnCreateWxx.TabIndex = 14;
+            btnCreateWxx.Text = "Create WXX";
+            btnCreateWxx.UseVisualStyleBackColor = true;
+            btnCreateWxx.Click += btnCreateWxx_Click;
+            // 
+            // saveWxxDialog
+            // 
+            saveWxxDialog.DefaultExt = "WXX";
+            saveWxxDialog.Filter = "WXX high res WAX|*.WXX|FXX high res FME|*.FME";
+            saveWxxDialog.Title = "Save WXX";
+            // 
             // WxxBuilderWindow
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1224, 984);
             ControlBox = false;
+            Controls.Add(btnCreateWxx);
             Controls.Add(btnAutoSet);
             Controls.Add(labelSourceImageSize);
             Controls.Add(labelWaxImageSize);
@@ -248,5 +268,7 @@
         private System.Windows.Forms.Label labelWaxImageSize;
         private System.Windows.Forms.Label labelSourceImageSize;
         private System.Windows.Forms.Button btnAutoSet;
+        private System.Windows.Forms.Button btnCreateWxx;
+        private System.Windows.Forms.SaveFileDialog saveWxxDialog;
     }
 }

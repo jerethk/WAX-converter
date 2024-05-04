@@ -5,9 +5,9 @@ using System.IO;
 
 namespace WAX_converter
 {
-    internal static class RemasterImagesImporter
+    internal static class RemasterImagesImporterExporter
     {
-        public static List<byte[]> LoadDataFromFile(string filename)
+        public static List<byte[]> LoadDataFromWxx(string filename)
         {
             var result = new List<byte[]>();
 
@@ -124,6 +124,54 @@ namespace WAX_converter
                 {
                     var saveName = $"{directory}\\{baseSaveName}_{b}.PNG";
                     bitmaps[b].bitmap.Save(saveName, System.Drawing.Imaging.ImageFormat.Png);
+                }
+            }
+            catch
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public static bool CreateWxx(Bitmap[] images, string filename)
+        {
+            try
+            {
+                using (var fileWriter = new BinaryWriter(File.Open(filename, FileMode.Create)))
+                {
+                    fileWriter.Write((Int32)images.Length);
+
+                    // Table of image sizes
+                    for (var i = 0; i < images.Length; i++)
+                    {
+                        Int32 imageSize = images[i].Width * images[i].Height;
+                        fileWriter.Write(imageSize);
+                    }
+
+                    // Image data
+                    for (var i = 0; i < images.Length; i++)
+                    {
+                        images[i].RotateFlip(RotateFlipType.RotateNoneFlipX);     // WXX images are flipped horizontally
+
+                        for (var y = 0; y < images[i].Height; y++)
+                        {
+                            for (var x = 0; x < images[i].Width; x++)
+                            {
+                                var red = images[i].GetPixel(x, y).R;
+                                var green = images[i].GetPixel(x, y).G;
+                                var blue = images[i].GetPixel(x, y).B;
+                                var alpha = images[i].GetPixel(x, y).A;
+
+                                fileWriter.Write(red);
+                                fileWriter.Write(green);
+                                fileWriter.Write(blue);
+                                fileWriter.Write(alpha);
+                            }
+                        }
+
+                        images[i].RotateFlip(RotateFlipType.RotateNoneFlipX);
+                    }
                 }
             }
             catch

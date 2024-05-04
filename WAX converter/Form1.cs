@@ -113,7 +113,11 @@ namespace WAX_converter
         private void MenuBuildWxx_Click(object sender, EventArgs e)
         {
             var wxxBuilderWindow = new WxxBuilderWindow(this.wax);
-            wxxBuilderWindow.Show();
+            
+            if (!wxxBuilderWindow.IsDisposed)
+            {
+                wxxBuilderWindow.Show();
+            }
         }
 
         private void MenuRemasterDirectory_Click(object sender, EventArgs e)
@@ -594,8 +598,8 @@ namespace WAX_converter
                         var imageGroup1FileName = $"{baseFileName}_remaster";
                         var imageGroup2FileName = $"{baseFileName}_remaster_alpha";
                         var success =
-                            RemasterImagesImporter.SaveBitmapsAsPngs(this.remasterImages, exportDirectory, imageGroup1FileName) &&
-                            RemasterImagesImporter.SaveBitmapsAsPngs(this.remasterAlphaImages, exportDirectory, imageGroup2FileName);
+                            RemasterImagesImporterExporter.SaveBitmapsAsPngs(this.remasterImages, exportDirectory, imageGroup1FileName) &&
+                            RemasterImagesImporterExporter.SaveBitmapsAsPngs(this.remasterAlphaImages, exportDirectory, imageGroup2FileName);
 
                         if (success)
                         {
@@ -611,7 +615,7 @@ namespace WAX_converter
                     if (response == DialogResult.No)
                     {
                         var imageGroupFileName = $"{baseFileName}_remaster";
-                        if (RemasterImagesImporter.SaveBitmapsAsPngs(this.remasterCombinedImages, exportDirectory, imageGroupFileName))
+                        if (RemasterImagesImporterExporter.SaveBitmapsAsPngs(this.remasterCombinedImages, exportDirectory, imageGroupFileName))
                         {
                             MessageBox.Show("Successfully exported remaster images to PNGs.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
@@ -731,13 +735,13 @@ namespace WAX_converter
                 return;
             }
 
-            var data = RemasterImagesImporter.LoadDataFromFile(remasterFilePath);
+            var data = RemasterImagesImporterExporter.LoadDataFromWxx(remasterFilePath);
             if (data == null || data.Count == 0)
             {
                 return;
             }
 
-            var (bitmaps, alphaBitmaps, combinedBitmaps) = RemasterImagesImporter.CreateBitmapsFromData(this.wax, data);
+            var (bitmaps, alphaBitmaps, combinedBitmaps) = RemasterImagesImporterExporter.CreateBitmapsFromData(this.wax, data);
             this.remasterImages = bitmaps;
             this.remasterAlphaImages = alphaBitmaps;
             this.remasterCombinedImages = combinedBitmaps;

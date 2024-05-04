@@ -57,6 +57,10 @@ namespace WAX_converter
                 this.Close();
                 this.Dispose();
             }
+            else
+            {
+                this.listBoxWaxImages.SelectedIndex = 0;
+            }
         }
 
         private void Setup(Waxfile wax)
@@ -144,8 +148,12 @@ namespace WAX_converter
                 this.pictureBoxSourceImages.Image = this.sourceDirectoryImages[listBoxSourceImages.SelectedIndex];
 
                 this.labelSourceImageSize.Text = $"Size = {this.pictureBoxSourceImages.Image.Width} x {this.pictureBoxSourceImages.Image.Height}";
-                var isCorrectSize = this.IsCorrectSize(this.waxImages[this.listBoxWaxImages.SelectedIndex], this.sourceDirectoryImages[listBoxSourceImages.SelectedIndex]);
-                this.labelSourceImageSize.ForeColor = isCorrectSize ? Color.Green : Color.Red;
+                
+                if (this.listBoxWaxImages.SelectedIndex >= 0)
+                {
+                    var isCorrectSize = IsCorrectSize(this.waxImages[this.listBoxWaxImages.SelectedIndex], this.sourceDirectoryImages[listBoxSourceImages.SelectedIndex]);
+                    this.labelSourceImageSize.ForeColor = isCorrectSize ? Color.Green : Color.Red;
+                }
             }
         }
 
@@ -156,7 +164,7 @@ namespace WAX_converter
                 var waxImage = this.waxImages[listBoxWaxImages.SelectedIndex];
                 var hiResImage = this.sourceDirectoryImages[listBoxSourceImages.SelectedIndex];
 
-                if (!this.IsCorrectSize(waxImage, hiResImage))
+                if (!IsCorrectSize(waxImage, hiResImage))
                 {
                     MessageBox.Show("Selected source image has incorrect dimensions", "Invalid image", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
@@ -185,29 +193,63 @@ namespace WAX_converter
             }
 
             var matchedCount = 0;
-            for (var wi = 0; wi < this.waxImages.Count; wi ++)
+            var unmatchedCount = 0;
+            for (var wi = 0; wi < this.waxImages.Count; wi++)
             {
                 var waxImage = this.waxImages[wi];
-                
+
                 var matchingHiresImage = this.sourceDirectoryImages
-                    .FirstOrDefault(i => this.IsCorrectSize(waxImage, i));
+                    .FirstOrDefault(i => IsCorrectSize(waxImage, i));
 
                 if (matchingHiresImage != null)
                 {
                     this.highResImages[wi] = matchingHiresImage;
                     matchedCount++;
                 }
+                else
+                {
+                    unmatchedCount++;
+                }
             }
 
-            MessageBox.Show($"{matchedCount} images set.", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show($"{matchedCount} images set. {unmatchedCount} images could not be matched.", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.pictureBoxHighRes.Image = this.highResImages[listBoxWaxImages.SelectedIndex];
         }
-        
+
         #endregion
 
         // ---------------------------------------------------------------------------------------------------------------------
 
-        private bool IsCorrectSize(Bitmap lowRes, Bitmap highRes)
+        private void btnCreateWxx_Click(object sender, EventArgs e)
+        {
+            // Run a check of the images
+            for (var i = 0; i < this.waxImages.Count; i++)
+            {
+                var waxImage = this.waxImages[i];
+                var hiresImage = this.highResImages[i];
+
+                if (hiresImage == null || !IsCorrectSize(waxImage, hiresImage))
+                {
+                    MessageBox.Show("The high res images have not been properly populated.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+            }
+
+            var response = this.saveWxxDialog.ShowDialog();
+            if (response == DialogResult.OK)
+            {
+                if (RemasterImagesImporterExporter.CreateWxx(this.highResImages, this.saveWxxDialog.FileName))
+                {
+                    MessageBox.Show("WXX successfully created.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Failed to create WXX.", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private static bool IsCorrectSize(Bitmap lowRes, Bitmap highRes)
         {
             if (lowRes == null || highRes == null)
             {
@@ -219,7 +261,5 @@ namespace WAX_converter
 
             return isWidthCorrect && isHeightCorrect;
         }
-
-
     }
 }
