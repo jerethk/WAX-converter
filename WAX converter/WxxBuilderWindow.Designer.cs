@@ -215,7 +215,7 @@
             // saveWxxDialog
             // 
             saveWxxDialog.DefaultExt = "WXX";
-            saveWxxDialog.Filter = "WXX high res WAX|*.WXX|FXX high res FME|*.FME";
+            saveWxxDialog.Filter = "WXX high res WAX|*.WXX|FXX high res FME|*.FXX";
             saveWxxDialog.Title = "Save WXX";
             // 
             // WxxBuilderWindow

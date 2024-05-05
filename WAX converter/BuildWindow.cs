@@ -774,7 +774,7 @@ namespace WAX_converter
                 // Save images as PNG in subfolder. Clear out subfolder if it already exists (from a previous project save)
                 if (Directory.Exists(cellImageDirectory))
                 {
-                    var files = Directory.EnumerateFiles(cellImageDirectory, "*.png");
+                    var files = Directory.EnumerateFiles(cellImageDirectory, "*.png").ToList();
                     foreach (var f in files)
                     {
                         File.Delete(f);

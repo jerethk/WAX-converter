@@ -120,7 +120,7 @@ namespace WAX_converter
             if (result == DialogResult.OK)
             {
                 var dir = Path.GetDirectoryName(folderBrowser.FileName);
-                var files = Directory.EnumerateFiles(dir);
+                var files = Directory.EnumerateFiles(dir).ToList();
                 
                 if (files != null)
                 {
