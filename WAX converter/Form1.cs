@@ -696,6 +696,7 @@ namespace WAX_converter
         private void openRemasterDirectoryDialog_FileOk(object sender, CancelEventArgs e)
         {
             this.remasterFilesPath = Path.GetDirectoryName(this.openRemasterDirectoryDialog.FileName);
+            MessageBox.Show($"High res (DF Remaster) images will automatically be loaded from [{this.remasterFilesPath}] when you open a WAX or FME.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.loadRemasterImages();
         }
 
