@@ -92,6 +92,8 @@ namespace WAX_converter
             exportDialog = new System.Windows.Forms.SaveFileDialog();
             openFmeDialog = new System.Windows.Forms.OpenFileDialog();
             openRemasterDirectoryDialog = new System.Windows.Forms.OpenFileDialog();
+            toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            MenuCreateFme = new System.Windows.Forms.ToolStripMenuItem();
             panel2.SuspendLayout();
             RadioGroup.SuspendLayout();
             menuStrip1.SuspendLayout();
@@ -368,7 +370,7 @@ namespace WAX_converter
             // 
             // MenuBuildWax
             // 
-            MenuBuildWax.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { MenuBuild, MenuEnemyWizard, toolStripSeparator1, MenuBuildWxx });
+            MenuBuildWax.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { MenuBuild, MenuEnemyWizard, toolStripSeparator1, MenuCreateFme, toolStripSeparator4, MenuBuildWxx });
             MenuBuildWax.Name = "MenuBuildWax";
             MenuBuildWax.Size = new System.Drawing.Size(53, 20);
             MenuBuildWax.Text = "Create";
@@ -668,6 +670,18 @@ namespace WAX_converter
             openRemasterDirectoryDialog.Title = "Select folder containing remaster files";
             openRemasterDirectoryDialog.FileOk += openRemasterDirectoryDialog_FileOk;
             // 
+            // toolStripSeparator4
+            // 
+            toolStripSeparator4.Name = "toolStripSeparator4";
+            toolStripSeparator4.Size = new System.Drawing.Size(179, 6);
+            // 
+            // MenuCreateFme
+            // 
+            MenuCreateFme.Name = "MenuCreateFme";
+            MenuCreateFme.Size = new System.Drawing.Size(182, 22);
+            MenuCreateFme.Text = "Create FME";
+            MenuCreateFme.Click += MenuCreateFme_Click;
+            // 
             // MainWindow
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -766,6 +780,8 @@ namespace WAX_converter
         private System.Windows.Forms.Button btnAnimate;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem MenuBuildWxx;
+        private System.Windows.Forms.ToolStripMenuItem MenuCreateFme;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
     }
 }
 

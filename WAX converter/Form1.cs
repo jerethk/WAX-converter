@@ -110,10 +110,16 @@ namespace WAX_converter
             WizardWindow.ShowDialog();
         }
 
+        private void MenuCreateFme_Click(object sender, EventArgs e)
+        {
+            var createFmeWindow = new CreateFmeWindow();
+            createFmeWindow.Show();
+        }
+
         private void MenuBuildWxx_Click(object sender, EventArgs e)
         {
             var wxxBuilderWindow = new WxxBuilderWindow(this.wax);
-            
+
             if (!wxxBuilderWindow.IsDisposed)
             {
                 wxxBuilderWindow.Show();
