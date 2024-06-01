@@ -17,7 +17,7 @@ namespace WAX_converter
         private Graphics graphics;
         private int centreX;
         private int centreY;
-        
+
         public FramePositioningWindow(List<Frame> frames, List<Bitmap> images, Color transparentColour)
         {
             InitializeComponent();
@@ -41,19 +41,13 @@ namespace WAX_converter
 
         private void FramePositioningWindow_Load(object sender, EventArgs e)
         {
-            this.graphics = pictureBox.CreateGraphics();
+            this.graphics = this.pictureBox.CreateGraphics();
             this.centreX = this.pictureBox.Width / 2;
             this.centreY = this.pictureBox.Height / 2;
 
             for (int f = 0; f < this.frameList.Count; f++)
             {
                 listBoxFrames.Items.Add(f.ToString());
-            }
-
-            if (listBoxFrames.Items.Count > 0)
-            {
-                listBoxFrames.SelectedIndex = 0;
-                drawFrame();
             }
         }
 
@@ -81,7 +75,7 @@ namespace WAX_converter
         private void listBoxFrames_SelectedIndexChanged(object sender, EventArgs e)
         {
             var i = listBoxFrames.SelectedIndex;
-            
+
             if (i >= 0)
             {
                 numericInsertX.Value = this.frameList[i].InsertX;
@@ -114,6 +108,11 @@ namespace WAX_converter
 
         private void drawFrame()
         {
+            if (this.listBoxFrames.SelectedIndex < 0)
+            {
+                return;
+            }
+            
             this.graphics.Clear(Color.LightGray);
 
             var frame = this.frameList[listBoxFrames.SelectedIndex];
@@ -148,7 +147,7 @@ namespace WAX_converter
             {
                 this.frameList[f] = this.backupFrameList[f];
             }
-            
+
             disposeBitmaps();
             this.Close();
         }
@@ -168,7 +167,10 @@ namespace WAX_converter
             this.graphics.Dispose();
             this.graphics = pictureBox.CreateGraphics();
 
-            drawFrame();
+            if (this.listBoxFrames.SelectedIndex >= 0)
+            {
+                drawFrame();
+            }
         }
     }
 }

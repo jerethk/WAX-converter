@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -23,12 +21,14 @@ namespace WAX_converter
 
         private DFPal pal = new DFPal();
         private Color transparentColour;
+        private Frame frame = new Frame();
         private Bitmap sourceImage;
 
         private void CreateFmeWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
-            this.sourceImage.Dispose();
+            this.sourceImage?.Dispose();
         }
+        
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -68,7 +68,7 @@ namespace WAX_converter
                 MessageBox.Show("Only common palette colours (up to index 207) will be used for colour matching.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-        
+
         private void buttonTransparent_Click(object sender, EventArgs e)
         {
             var transparentDialog = new ColourChooser(this.sourceImage, this.transparentColour);
@@ -77,6 +77,9 @@ namespace WAX_converter
             transpColourBox.BackColor = this.transparentColour;
             transparentDialog.Dispose();
         }
+
+
+    // --- Main editing area -----------------------------------------------------------------------------------------
 
         private void btnLoadImage_Click(object sender, EventArgs e)
         {
@@ -92,13 +95,63 @@ namespace WAX_converter
                 this.sourceImageDisplayBox.Image = this.sourceImage;
 
                 // Set default offsets
-                this.InsertX.Value = bitmap.Width / 2 * -1;
-                this.InsertY.Value = bitmap.Height * -1 + (int)(0.06 * bitmap.Height);
+                this.frame.InsertX = bitmap.Width / 2 * -1;
+                this.frame.InsertY = bitmap.Height * -1 + (int)(0.06 * bitmap.Height);
+                this.frame.Flip = 0;
+
+                this.InsertX.Value = this.frame.InsertX;
+                this.InsertY.Value = this.frame.InsertY;
+                this.checkBoxFlip.Checked = this.frame.Flip == 1;
+
+                bitmap.Dispose();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error loading image.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void checkBoxFlip_CheckedChanged(object sender, EventArgs e)
+        {
+            this.frame.Flip = this.checkBoxFlip.Checked ? 1 : 0;
+
+            var img = new Bitmap(this.sourceImage);
+            if (this.frame.Flip == 1)
+            {
+                img.RotateFlip(RotateFlipType.RotateNoneFlipX);
+            }
+            this.sourceImageDisplayBox.Image = img;
+        }
+
+        private void InsertX_ValueChanged(object sender, EventArgs e)
+        {
+            this.frame.InsertX = (int)this.InsertX.Value;
+        }
+
+        private void InsertY_ValueChanged(object sender, EventArgs e)
+        {
+            this.frame.InsertY = (int)this.InsertY.Value;
+        }
+
+        private void btnPositionFrame_Click(object sender, EventArgs e)
+        {
+            if (this.sourceImage == null)
+            {
+                return;
+            }
+            
+            var frameList = new List<Frame>() { this.frame };
+
+            var framePositioningWindow = new FramePositioningWindow(
+                frameList,
+                new List<Bitmap>() { this.sourceImage },
+                this.transparentColour);
+
+            framePositioningWindow.ShowDialog(this);
+
+            this.frame = frameList[0];
+            this.InsertX.Value = this.frame.InsertX;
+            this.InsertY.Value = this.frame.InsertY;
         }
     }
 }

@@ -176,6 +176,7 @@
             btnPositionFrame.TabIndex = 18;
             btnPositionFrame.Text = "Position frame";
             btnPositionFrame.UseVisualStyleBackColor = true;
+            btnPositionFrame.Click += btnPositionFrame_Click;
             // 
             // InsertY
             // 
@@ -185,6 +186,7 @@
             InsertY.Name = "InsertY";
             InsertY.Size = new System.Drawing.Size(101, 23);
             InsertY.TabIndex = 17;
+            InsertY.ValueChanged += InsertY_ValueChanged;
             // 
             // InsertX
             // 
@@ -194,6 +196,7 @@
             InsertX.Name = "InsertX";
             InsertX.Size = new System.Drawing.Size(101, 23);
             InsertX.TabIndex = 16;
+            InsertX.ValueChanged += InsertX_ValueChanged;
             // 
             // checkBoxFlip
             // 
@@ -204,6 +207,7 @@
             checkBoxFlip.TabIndex = 15;
             checkBoxFlip.Text = "Flip";
             checkBoxFlip.UseVisualStyleBackColor = true;
+            checkBoxFlip.CheckedChanged += checkBoxFlip_CheckedChanged;
             // 
             // label5
             // 
