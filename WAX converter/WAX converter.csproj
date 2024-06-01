@@ -7,8 +7,8 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ApplicationIcon>phase2_jv0_icon.ico</ApplicationIcon>
     <NoWin32Manifest>true</NoWin32Manifest>
-    <VersionPrefix>3.0.2</VersionPrefix>
-    <FileVersion>3.0.2</FileVersion>
+    <VersionPrefix>3.1.0</VersionPrefix>
+    <FileVersion>3.1.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
