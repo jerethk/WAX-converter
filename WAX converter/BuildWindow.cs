@@ -159,8 +159,9 @@ namespace WAX_converter
             {
                 foreach (string fname in loadImageDialog.FileNames)
                 {
-                    Bitmap newImage = new Bitmap(fname);
-                    ImageList.Add(newImage);
+                    var loadedImage = Image.FromFile(fname);
+                    ImageList.Add(new Bitmap(loadedImage));
+                    loadedImage.Dispose();
 
                     listboxImages.Items.Add("Cell " + listboxImages.Items.Count);
                 }
