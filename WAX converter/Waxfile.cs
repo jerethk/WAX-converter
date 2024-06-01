@@ -380,46 +380,7 @@ namespace WAX_converter
                     // write the cells
                     for (int c = 0; c < this.Ncells; c++)
                     {
-                        fileWriter.Write(this.Cells[c].SizeX);
-                        fileWriter.Write(this.Cells[c].SizeY);
-                        fileWriter.Write(this.Cells[c].Compressed);
-                        fileWriter.Write(this.Cells[c].DataSize);
-                        fileWriter.Write(this.Cells[c].ColOffs);
-                        fileWriter.Write(this.Cells[c].pad1);
-
-
-                        if (compress)
-                        {
-                            foreach (int i in this.Cells[c].columnOffsets)
-                            {
-                                fileWriter.Write(i);
-                            }
-
-                            foreach (byte b in this.Cells[c].compressedData)
-                            {
-                                fileWriter.Write(b);
-                            }
-                        }
-                        else    // uncompressed
-                        {
-                            for (int x = 0; x < this.Cells[c].SizeX; x++)
-                            {
-                                for (int y = 0; y < this.Cells[c].SizeY; y++)
-                                {
-                                    byte b;
-                                    if (this.Cells[c].Pixels[x, y] == -1)
-                                    {
-                                        b = 0;  // transparent = index 0
-                                    }
-                                    else
-                                    {
-                                        b = (byte)this.Cells[c].Pixels[x, y];
-                                    }
-
-                                    fileWriter.Write(b);
-                                }
-                            }
-                        }
+                        this.Cells[c].WriteToFile(fileWriter, compress);
                     }
                 }
             }

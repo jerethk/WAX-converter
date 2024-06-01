@@ -36,6 +36,7 @@
             buttonTransparent = new System.Windows.Forms.Button();
             ButtonPal = new System.Windows.Forms.Button();
             panel2 = new System.Windows.Forms.Panel();
+            btnCreateFme = new System.Windows.Forms.Button();
             checkBoxCompress = new System.Windows.Forms.CheckBox();
             sourceImageDisplayBox = new System.Windows.Forms.PictureBox();
             btnPositionFrame = new System.Windows.Forms.Button();
@@ -47,7 +48,7 @@
             btnLoadImage = new System.Windows.Forms.Button();
             loadImageDialog = new System.Windows.Forms.OpenFileDialog();
             loadPalDialog = new System.Windows.Forms.OpenFileDialog();
-            saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            saveFmeDialog = new System.Windows.Forms.SaveFileDialog();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)transpColourBox).BeginInit();
             panel2.SuspendLayout();
@@ -133,6 +134,7 @@
             // panel2
             // 
             panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            panel2.Controls.Add(btnCreateFme);
             panel2.Controls.Add(checkBoxCompress);
             panel2.Controls.Add(sourceImageDisplayBox);
             panel2.Controls.Add(btnPositionFrame);
@@ -147,6 +149,17 @@
             panel2.Name = "panel2";
             panel2.Size = new System.Drawing.Size(972, 692);
             panel2.TabIndex = 3;
+            // 
+            // btnCreateFme
+            // 
+            btnCreateFme.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            btnCreateFme.Location = new System.Drawing.Point(772, 325);
+            btnCreateFme.Name = "btnCreateFme";
+            btnCreateFme.Size = new System.Drawing.Size(155, 42);
+            btnCreateFme.TabIndex = 21;
+            btnCreateFme.Text = "Create FME";
+            btnCreateFme.UseVisualStyleBackColor = true;
+            btnCreateFme.Click += btnCreateFme_Click;
             // 
             // checkBoxCompress
             // 
@@ -249,6 +262,12 @@
             loadPalDialog.Title = "Load PAL";
             loadPalDialog.FileOk += loadPalDialog_FileOk;
             // 
+            // saveFmeDialog
+            // 
+            saveFmeDialog.Filter = "FME file|*.fme";
+            saveFmeDialog.Title = "Create FME";
+            saveFmeDialog.FileOk += saveFmeDialog_FileOk;
+            // 
             // CreateFmeWindow
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -292,7 +311,8 @@
         private System.Windows.Forms.PictureBox sourceImageDisplayBox;
         private System.Windows.Forms.OpenFileDialog loadImageDialog;
         private System.Windows.Forms.OpenFileDialog loadPalDialog;
-        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.SaveFileDialog saveFmeDialog;
         private System.Windows.Forms.CheckBox checkBoxCompress;
+        private System.Windows.Forms.Button btnCreateFme;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Text;
 
 namespace WAX_converter
@@ -211,6 +212,53 @@ namespace WAX_converter
                 foreach (byte b in col)
                 {
                     this.compressedData.Add(b);
+                }
+            }
+
+            // Set Compressed and DataSize
+            this.Compressed = 1;
+            this.DataSize = 24 + (4 * this.SizeX) + this.compressedData.Count;
+        }
+
+        public void WriteToFile(BinaryWriter fileWriter, bool compress)
+        {
+            fileWriter.Write(this.SizeX);
+            fileWriter.Write(this.SizeY);
+            fileWriter.Write(this.Compressed);
+            fileWriter.Write(this.DataSize);
+            fileWriter.Write(this.ColOffs);
+            fileWriter.Write(this.pad1);
+
+            if (compress)
+            {
+                foreach (int i in this.columnOffsets)
+                {
+                    fileWriter.Write(i);
+                }
+
+                foreach (byte b in this.compressedData)
+                {
+                    fileWriter.Write(b);
+                }
+            }
+            else    // uncompressed
+            {
+                for (int x = 0; x < this.SizeX; x++)
+                {
+                    for (int y = 0; y < this.SizeY; y++)
+                    {
+                        byte b;
+                        if (this.Pixels[x, y] == -1)
+                        {
+                            b = 0;  // transparent = index 0
+                        }
+                        else
+                        {
+                            b = (byte)this.Pixels[x, y];
+                        }
+
+                        fileWriter.Write(b);
+                    }
                 }
             }
         }

@@ -15,8 +15,9 @@ namespace WAX_converter
         {
             InitializeComponent();
 
-            transparentColour = Color.FromArgb(255, 0, 0, 0);
-            transpColourBox.BackColor = transparentColour;
+            this.frame.CellAddress = 0x20;
+            this.transparentColour = Color.FromArgb(255, 0, 0, 0);
+            this.transpColourBox.BackColor = transparentColour;
         }
 
         private DFPal pal = new DFPal();
@@ -28,7 +29,7 @@ namespace WAX_converter
         {
             this.sourceImage?.Dispose();
         }
-        
+
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -115,12 +116,15 @@ namespace WAX_converter
         {
             this.frame.Flip = this.checkBoxFlip.Checked ? 1 : 0;
 
-            var img = new Bitmap(this.sourceImage);
-            if (this.frame.Flip == 1)
+            if (this.sourceImage != null)
             {
-                img.RotateFlip(RotateFlipType.RotateNoneFlipX);
+                var img = new Bitmap(this.sourceImage);
+                if (this.frame.Flip == 1)
+                {
+                    img.RotateFlip(RotateFlipType.RotateNoneFlipX);
+                }
+                this.sourceImageDisplayBox.Image = img;
             }
-            this.sourceImageDisplayBox.Image = img;
         }
 
         private void InsertX_ValueChanged(object sender, EventArgs e)
@@ -139,7 +143,7 @@ namespace WAX_converter
             {
                 return;
             }
-            
+
             var frameList = new List<Frame>() { this.frame };
 
             var framePositioningWindow = new FramePositioningWindow(
@@ -152,6 +156,68 @@ namespace WAX_converter
             this.frame = frameList[0];
             this.InsertX.Value = this.frame.InsertX;
             this.InsertY.Value = this.frame.InsertY;
+        }
+
+        private void btnCreateFme_Click(object sender, EventArgs e)
+        {
+            if (this.sourceImage != null)
+            {
+                this.saveFmeDialog.ShowDialog(this);
+            }
+        }
+
+        private void saveFmeDialog_FileOk(object sender, CancelEventArgs e)
+        {
+            // Create a cell from the source image
+            var cell = new Cell()
+            { 
+                SizeX = this.sourceImage.Width,
+                SizeY = this.sourceImage.Height,
+                ColOffs = 0,
+            };
+
+            cell.Pixels = new short[cell.SizeX, cell.SizeY];
+            cell.CreateCellImage(this.sourceImage, this.pal, this.transparentColour, this.checkBoxIlluminated.Checked, this.checkBoxCommonColours.Checked);
+            if (this.checkBoxCompress.Checked)
+            {
+                cell.CompressCell();
+            }
+            
+            // Save the FME
+            if (this.SaveFme(this.saveFmeDialog.FileName, this.frame, cell, this.checkBoxCompress.Checked))
+            {
+                MessageBox.Show("Successfully saved FME.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Error while saving FME.", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private bool SaveFme(string filename, Frame frame, Cell cell, bool compressed)
+        {
+            try
+            {
+                using (var fmeWriter = new BinaryWriter(File.Open(filename, FileMode.Create)))
+                {
+                    fmeWriter.Write(frame.InsertX);
+                    fmeWriter.Write(frame.InsertY);
+                    fmeWriter.Write(frame.Flip);
+                    fmeWriter.Write(frame.CellAddress);
+                    fmeWriter.Write(frame.UnitWidth);
+                    fmeWriter.Write(frame.UnitHeight);
+                    fmeWriter.Write(frame.pad3);
+                    fmeWriter.Write(frame.pad4);
+
+                    cell.WriteToFile(fmeWriter, compressed);
+                }
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

@@ -62,6 +62,8 @@ namespace WAX_converter
             MenuBuild = new System.Windows.Forms.ToolStripMenuItem();
             MenuEnemyWizard = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            MenuCreateFme = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             MenuBuildWxx = new System.Windows.Forms.ToolStripMenuItem();
             MenuHelp = new System.Windows.Forms.ToolStripMenuItem();
             MenuHelphelp = new System.Windows.Forms.ToolStripMenuItem();
@@ -92,8 +94,6 @@ namespace WAX_converter
             exportDialog = new System.Windows.Forms.SaveFileDialog();
             openFmeDialog = new System.Windows.Forms.OpenFileDialog();
             openRemasterDirectoryDialog = new System.Windows.Forms.OpenFileDialog();
-            toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            MenuCreateFme = new System.Windows.Forms.ToolStripMenuItem();
             panel2.SuspendLayout();
             RadioGroup.SuspendLayout();
             menuStrip1.SuspendLayout();
@@ -384,7 +384,7 @@ namespace WAX_converter
             // 
             // MenuEnemyWizard
             // 
-            MenuEnemyWizard.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            MenuEnemyWizard.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             MenuEnemyWizard.Name = "MenuEnemyWizard";
             MenuEnemyWizard.Size = new System.Drawing.Size(182, 22);
             MenuEnemyWizard.Text = "Enemy Wizard";
@@ -394,6 +394,18 @@ namespace WAX_converter
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
             toolStripSeparator1.Size = new System.Drawing.Size(179, 6);
+            // 
+            // MenuCreateFme
+            // 
+            MenuCreateFme.Name = "MenuCreateFme";
+            MenuCreateFme.Size = new System.Drawing.Size(182, 22);
+            MenuCreateFme.Text = "Create FME";
+            MenuCreateFme.Click += MenuCreateFme_Click;
+            // 
+            // toolStripSeparator4
+            // 
+            toolStripSeparator4.Name = "toolStripSeparator4";
+            toolStripSeparator4.Size = new System.Drawing.Size(179, 6);
             // 
             // MenuBuildWxx
             // 
@@ -669,18 +681,6 @@ namespace WAX_converter
             openRemasterDirectoryDialog.Filter = "Hires WAX|*.WXX|Hires FME|*.FXX";
             openRemasterDirectoryDialog.Title = "Select folder containing remaster files";
             openRemasterDirectoryDialog.FileOk += openRemasterDirectoryDialog_FileOk;
-            // 
-            // toolStripSeparator4
-            // 
-            toolStripSeparator4.Name = "toolStripSeparator4";
-            toolStripSeparator4.Size = new System.Drawing.Size(179, 6);
-            // 
-            // MenuCreateFme
-            // 
-            MenuCreateFme.Name = "MenuCreateFme";
-            MenuCreateFme.Size = new System.Drawing.Size(182, 22);
-            MenuCreateFme.Text = "Create FME";
-            MenuCreateFme.Click += MenuCreateFme_Click;
             // 
             // MainWindow
             // 

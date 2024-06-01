@@ -106,8 +106,6 @@ namespace WAX_converter
                 if (compress)
                 {
                     newCell.CompressCell();     // result is stored in the cell object's compressedData property (List of bytes)
-                    newCell.Compressed = 1;
-                    newCell.DataSize = 24 + (4 * newCell.SizeX) + newCell.compressedData.Count;
                 }
                 else
                 {
