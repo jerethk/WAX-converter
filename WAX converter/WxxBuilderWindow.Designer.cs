@@ -208,7 +208,7 @@
             btnCreateWxx.Name = "btnCreateWxx";
             btnCreateWxx.Size = new System.Drawing.Size(126, 96);
             btnCreateWxx.TabIndex = 14;
-            btnCreateWxx.Text = "Create WXX";
+            btnCreateWxx.Text = "Create WXX / FXX";
             btnCreateWxx.UseVisualStyleBackColor = true;
             btnCreateWxx.Click += btnCreateWxx_Click;
             // 
@@ -241,7 +241,7 @@
             Controls.Add(btnSourceImages);
             MinimumSize = new System.Drawing.Size(1240, 1000);
             Name = "WxxBuilderWindow";
-            Text = "WxxBuilderWindow";
+            Text = "Create WXX";
             Shown += WxxBuilderWindow_Shown;
             ((System.ComponentModel.ISupportInitialize)pictureBoxWaxImage).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxSourceImages).EndInit();
