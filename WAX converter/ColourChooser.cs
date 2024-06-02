@@ -22,161 +22,157 @@ namespace WAX_converter
         private PictureBox colourBox;
         private Button btnDone;
         private Button btnCancel;
+        private Label label4;
         private PictureBox pictureBox1;
 
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ColourChooser));
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.numRed = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.numGreen = new System.Windows.Forms.NumericUpDown();
-            this.numBlue = new System.Windows.Forms.NumericUpDown();
-            this.label3 = new System.Windows.Forms.Label();
-            this.colourBox = new System.Windows.Forms.PictureBox();
-            this.btnDone = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numRed)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numGreen)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numBlue)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.colourBox)).BeginInit();
-            this.SuspendLayout();
+            pictureBox1 = new PictureBox();
+            numRed = new NumericUpDown();
+            label1 = new Label();
+            label2 = new Label();
+            numGreen = new NumericUpDown();
+            numBlue = new NumericUpDown();
+            label3 = new Label();
+            colourBox = new PictureBox();
+            btnDone = new Button();
+            btnCancel = new Button();
+            label4 = new Label();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numRed).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numGreen).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numBlue).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)colourBox).BeginInit();
+            SuspendLayout();
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.BackColor = System.Drawing.Color.Gray;
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox1.Location = new System.Drawing.Point(13, 109);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(436, 360);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
+            pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            pictureBox1.BackColor = Color.Gray;
+            pictureBox1.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox1.Cursor = Cursors.Hand;
+            pictureBox1.Location = new Point(13, 167);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(436, 376);
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
+            pictureBox1.MouseClick += pictureBox1_MouseClick;
             // 
             // numRed
             // 
-            this.numRed.Location = new System.Drawing.Point(33, 16);
-            this.numRed.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.numRed.Name = "numRed";
-            this.numRed.Size = new System.Drawing.Size(65, 23);
-            this.numRed.TabIndex = 1;
+            numRed.Location = new Point(33, 68);
+            numRed.Maximum = new decimal(new int[] { 255, 0, 0, 0 });
+            numRed.Name = "numRed";
+            numRed.Size = new Size(65, 23);
+            numRed.TabIndex = 1;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 18);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(14, 15);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "R";
+            label1.AutoSize = true;
+            label1.Location = new Point(13, 70);
+            label1.Name = "label1";
+            label1.Size = new Size(14, 15);
+            label1.TabIndex = 2;
+            label1.Text = "R";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(119, 18);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(15, 15);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "G";
+            label2.AutoSize = true;
+            label2.Location = new Point(119, 70);
+            label2.Name = "label2";
+            label2.Size = new Size(15, 15);
+            label2.TabIndex = 3;
+            label2.Text = "G";
             // 
             // numGreen
             // 
-            this.numGreen.Location = new System.Drawing.Point(140, 18);
-            this.numGreen.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.numGreen.Name = "numGreen";
-            this.numGreen.Size = new System.Drawing.Size(65, 23);
-            this.numGreen.TabIndex = 4;
+            numGreen.Location = new Point(140, 70);
+            numGreen.Maximum = new decimal(new int[] { 255, 0, 0, 0 });
+            numGreen.Name = "numGreen";
+            numGreen.Size = new Size(65, 23);
+            numGreen.TabIndex = 4;
             // 
             // numBlue
             // 
-            this.numBlue.Location = new System.Drawing.Point(252, 16);
-            this.numBlue.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.numBlue.Name = "numBlue";
-            this.numBlue.Size = new System.Drawing.Size(65, 23);
-            this.numBlue.TabIndex = 6;
+            numBlue.Location = new Point(252, 68);
+            numBlue.Maximum = new decimal(new int[] { 255, 0, 0, 0 });
+            numBlue.Name = "numBlue";
+            numBlue.Size = new Size(65, 23);
+            numBlue.TabIndex = 6;
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(231, 18);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(14, 15);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "B";
+            label3.AutoSize = true;
+            label3.Location = new Point(231, 70);
+            label3.Name = "label3";
+            label3.Size = new Size(14, 15);
+            label3.TabIndex = 5;
+            label3.Text = "B";
             // 
             // colourBox
             // 
-            this.colourBox.Location = new System.Drawing.Point(354, 16);
-            this.colourBox.Name = "colourBox";
-            this.colourBox.Size = new System.Drawing.Size(40, 40);
-            this.colourBox.TabIndex = 7;
-            this.colourBox.TabStop = false;
+            colourBox.Location = new Point(354, 68);
+            colourBox.Name = "colourBox";
+            colourBox.Size = new Size(40, 40);
+            colourBox.TabIndex = 7;
+            colourBox.TabStop = false;
             // 
             // btnDone
             // 
-            this.btnDone.Location = new System.Drawing.Point(140, 61);
-            this.btnDone.Name = "btnDone";
-            this.btnDone.Size = new System.Drawing.Size(77, 33);
-            this.btnDone.TabIndex = 8;
-            this.btnDone.Text = "Done";
-            this.btnDone.UseVisualStyleBackColor = true;
-            this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
+            btnDone.Location = new Point(140, 113);
+            btnDone.Name = "btnDone";
+            btnDone.Size = new Size(77, 33);
+            btnDone.TabIndex = 8;
+            btnDone.Text = "Done";
+            btnDone.UseVisualStyleBackColor = true;
+            btnDone.Click += btnDone_Click;
             // 
             // btnCancel
             // 
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnCancel.Location = new System.Drawing.Point(240, 61);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(77, 33);
-            this.btnCancel.TabIndex = 9;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            btnCancel.DialogResult = DialogResult.OK;
+            btnCancel.Location = new Point(240, 113);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new Size(77, 33);
+            btnCancel.TabIndex = 9;
+            btnCancel.Text = "Cancel";
+            btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.Click += btnCancel_Click;
+            // 
+            // label4
+            // 
+            label4.Location = new Point(13, 16);
+            label4.Name = "label4";
+            label4.Size = new Size(436, 41);
+            label4.TabIndex = 10;
+            label4.Text = "Any pixels set to this colour will be made transparent. Note: All pixels with alpha 0 will also be made transparent.";
             // 
             // ColourChooser
             // 
-            this.ClientSize = new System.Drawing.Size(464, 481);
-            this.ControlBox = false;
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnDone);
-            this.Controls.Add(this.colourBox);
-            this.Controls.Add(this.numBlue);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.numGreen);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.numRed);
-            this.Controls.Add(this.pictureBox1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(480, 520);
-            this.Name = "ColourChooser";
-            this.Text = "Choose transparent colour";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numRed)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numGreen)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numBlue)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.colourBox)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            ClientSize = new Size(464, 561);
+            ControlBox = false;
+            Controls.Add(label4);
+            Controls.Add(btnCancel);
+            Controls.Add(btnDone);
+            Controls.Add(colourBox);
+            Controls.Add(numBlue);
+            Controls.Add(label3);
+            Controls.Add(numGreen);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Controls.Add(numRed);
+            Controls.Add(pictureBox1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            MinimumSize = new Size(480, 600);
+            Name = "ColourChooser";
+            Text = "Choose transparent colour";
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numRed).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numGreen).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numBlue).EndInit();
+            ((System.ComponentModel.ISupportInitialize)colourBox).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         //-------------------------------------------------------------------------
