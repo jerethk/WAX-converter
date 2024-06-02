@@ -130,17 +130,7 @@ namespace WAX_converter
                     fileReader.BaseStream.Seek(160 + this.numActions * 156 + this.Nseqs * 144, SeekOrigin.Begin);
                     for (int f = 0; f < this.Nframes; f++)
                     {
-                        Frame frame = new Frame();
-                        frame.InsertX = fileReader.ReadInt32();
-                        frame.InsertY = fileReader.ReadInt32();
-                        frame.Flip = fileReader.ReadInt32();
-                        frame.CellAddress = fileReader.ReadInt32();
-                        frame.UnitWidth = fileReader.ReadInt32();
-                        frame.UnitHeight = fileReader.ReadInt32();
-                        frame.pad3 = fileReader.ReadInt32();
-                        frame.pad4 = fileReader.ReadInt32();
-
-                        this.Frames.Add(frame);
+                        this.ReadFrame(fileReader);
                     }
 
                     // Read the cells
@@ -148,53 +138,7 @@ namespace WAX_converter
 
                     for (int c = 0; c < this.Ncells; c++)
                     {
-                        Cell Cell = new Cell();
-                        Cell.address = (int)fileReader.BaseStream.Position;
-                        Cell.SizeX = fileReader.ReadInt32();
-                        Cell.SizeY = fileReader.ReadInt32();
-                        Cell.Compressed = fileReader.ReadInt32();
-                        Cell.DataSize = fileReader.ReadInt32();
-                        Cell.ColOffs = fileReader.ReadInt32();
-                        Cell.pad1 = fileReader.ReadInt32();
-
-                        Cell.Pixels = new short[Cell.SizeX, Cell.SizeY];
-
-                        // Read the image data
-                        if (Cell.Compressed == 0)
-                        {
-                            // uncompressed
-                            for (int x = 0; x < Cell.SizeX; x++)
-                            {
-                                for (int y = 0; y < Cell.SizeY; y++)
-                                {
-                                    var colour = fileReader.ReadByte();
-                                    Cell.Pixels[x, y] = colour == 0 ? (short) -1 : colour;      // colour 0 is transparent
-                                }
-                            }
-                        }
-                        else if (Cell.Compressed == 1)
-                        {
-                            // read column offsets
-                            Cell.columnOffsets = new int[Cell.SizeX];
-                            for (int x = 0; x < Cell.SizeX; x++)
-                            {
-                                Cell.columnOffsets[x] = fileReader.ReadInt32();
-                            }
-
-                            // read compressed data
-                            int compressedDataLength = Cell.DataSize - 24 - (Cell.SizeX * 4);   // DataSize minus header minus offset table
-                            Cell.compressedData = new List<byte>();
-
-                            for (int i = 0; i < compressedDataLength; i++)
-                            {
-                                Cell.compressedData.Add(fileReader.ReadByte());
-                            }
-
-                            // uncompress data
-                            Cell.UncompressImage();
-                        }
-
-                        this.Cells.Add(Cell);
+                        this.ReadCell(fileReader);
                     }
 
                     // Assign cell index to each frame by matching to cell addresses
@@ -405,63 +349,8 @@ namespace WAX_converter
             {
                 using (FMEReader = new BinaryReader(File.Open(filename, FileMode.Open)))
                 {
-                    Frame frame = new Frame();
-                    frame.InsertX = FMEReader.ReadInt32();
-                    frame.InsertY = FMEReader.ReadInt32();
-                    frame.Flip = FMEReader.ReadInt32();
-                    frame.CellAddress = FMEReader.ReadInt32();
-                    frame.UnitWidth = FMEReader.ReadInt32();
-                    frame.UnitHeight = FMEReader.ReadInt32();
-                    frame.pad3 = FMEReader.ReadInt32();
-                    frame.pad4 = FMEReader.ReadInt32();
-                    this.Frames.Add(frame);
-
-                    Cell Cell = new Cell();
-                    Cell.SizeX = FMEReader.ReadInt32();
-                    Cell.SizeY = FMEReader.ReadInt32();
-                    Cell.Compressed = FMEReader.ReadInt32();
-                    Cell.DataSize = FMEReader.ReadInt32();
-                    Cell.ColOffs = FMEReader.ReadInt32();
-                    Cell.pad1 = FMEReader.ReadInt32();
-
-                    Cell.Pixels = new short[Cell.SizeX, Cell.SizeY];
-
-                    // Read the image data
-                    if (Cell.Compressed == 0)
-                    {
-                        // uncompressed
-                        for (int x = 0; x < Cell.SizeX; x++)
-                        {
-                            for (int y = 0; y < Cell.SizeY; y++)
-                            {
-                                var colour = FMEReader.ReadByte();
-                                Cell.Pixels[x, y] = colour == 0 ? (short) -1 : colour;
-                            }
-                        }
-                    }
-                    else if (Cell.Compressed == 1)
-                    {
-                        // read column offsets
-                        Cell.columnOffsets = new int[Cell.SizeX];
-                        for (int x = 0; x < Cell.SizeX; x++)
-                        {
-                            Cell.columnOffsets[x] = FMEReader.ReadInt32();
-                        }
-
-                        // read compressed data
-                        int compressedDataLength = Cell.DataSize - 24 - (Cell.SizeX * 4);   // DataSize minus header minus offset table
-                        Cell.compressedData = new List<byte>();
-
-                        for (int i = 0; i < compressedDataLength; i++)
-                        {
-                            Cell.compressedData.Add(FMEReader.ReadByte());
-                        }
-
-                        // uncompress data
-                        Cell.UncompressImage();
-                    }
-
-                    this.Cells.Add(Cell);
+                    this.ReadFrame(FMEReader);
+                    this.ReadCell(FMEReader);
                 }
             }
             catch (IOException e)
@@ -486,6 +375,72 @@ namespace WAX_converter
             {
                 cell.CreateBitmap(pal, transparencyOption);
             }
+        }
+
+        private void ReadFrame(BinaryReader fileReader)
+        {
+            Frame frame = new Frame();
+            frame.InsertX = fileReader.ReadInt32();
+            frame.InsertY = fileReader.ReadInt32();
+            frame.Flip = fileReader.ReadInt32();
+            frame.CellAddress = fileReader.ReadInt32();
+            frame.UnitWidth = fileReader.ReadInt32();
+            frame.UnitHeight = fileReader.ReadInt32();
+            frame.pad3 = fileReader.ReadInt32();
+            frame.pad4 = fileReader.ReadInt32();
+
+            this.Frames.Add(frame);
+        }
+
+        private void ReadCell(BinaryReader fileReader)
+        {
+            Cell Cell = new Cell();
+            Cell.address = (int)fileReader.BaseStream.Position;
+            Cell.SizeX = fileReader.ReadInt32();
+            Cell.SizeY = fileReader.ReadInt32();
+            Cell.Compressed = fileReader.ReadInt32();
+            Cell.DataSize = fileReader.ReadInt32();
+            Cell.ColOffs = fileReader.ReadInt32();
+            Cell.pad1 = fileReader.ReadInt32();
+
+            Cell.Pixels = new short[Cell.SizeX, Cell.SizeY];
+
+            // Read the image data
+            if (Cell.Compressed == 0)
+            {
+                // uncompressed
+                for (int x = 0; x < Cell.SizeX; x++)
+                {
+                    for (int y = 0; y < Cell.SizeY; y++)
+                    {
+                        var colour = fileReader.ReadByte();
+                        Cell.Pixels[x, y] = colour == 0 ? (short)-1 : colour;      // colour 0 is transparent
+                    }
+                }
+            }
+            else if (Cell.Compressed == 1)
+            {
+                // read column offsets
+                Cell.columnOffsets = new int[Cell.SizeX];
+                for (int x = 0; x < Cell.SizeX; x++)
+                {
+                    Cell.columnOffsets[x] = fileReader.ReadInt32();
+                }
+
+                // read compressed data
+                int compressedDataLength = Cell.DataSize - 24 - (Cell.SizeX * 4);   // DataSize minus header minus offset table
+                Cell.compressedData = new List<byte>();
+
+                for (int i = 0; i < compressedDataLength; i++)
+                {
+                    Cell.compressedData.Add(fileReader.ReadByte());
+                }
+
+                // uncompress data
+                Cell.UncompressImage();
+            }
+
+            this.Cells.Add(Cell);
         }
     }
 
