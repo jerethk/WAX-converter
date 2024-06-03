@@ -678,8 +678,8 @@ namespace WAX_converter
             // 
             // openRemasterDirectoryDialog
             // 
-            openRemasterDirectoryDialog.Filter = "Hires WAX|*.WXX|Hires FME|*.FXX";
-            openRemasterDirectoryDialog.Title = "Select folder containing remaster files";
+            openRemasterDirectoryDialog.Filter = "GOB, WXX, FXX|*.GOB; *.WXX; *.FXX";
+            openRemasterDirectoryDialog.Title = "Select folder or GOB containing remaster files";
             openRemasterDirectoryDialog.FileOk += openRemasterDirectoryDialog_FileOk;
             // 
             // MainWindow
@@ -695,7 +695,7 @@ namespace WAX_converter
             MainMenuStrip = menuStrip1;
             MinimumSize = new System.Drawing.Size(1200, 920);
             Name = "MainWindow";
-            Text = "WAX Converter (version 3.1)";
+            Text = "WAX Converter (version 3.2)";
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             RadioGroup.ResumeLayout(false);

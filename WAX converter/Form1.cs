@@ -697,11 +697,19 @@ namespace WAX_converter
 
         // ------------------------------------------------------------------------------------------------------
 
-        #region Remaster
+        #region Remaster / High Res Assets
 
         private void openRemasterDirectoryDialog_FileOk(object sender, CancelEventArgs e)
         {
-            this.remasterFilesPath = Path.GetDirectoryName(this.openRemasterDirectoryDialog.FileName);
+            if (Path.GetExtension(this.openRemasterDirectoryDialog.FileName).Equals(".gob", StringComparison.OrdinalIgnoreCase))
+            {
+                this.remasterFilesPath = this.openRemasterDirectoryDialog.FileName;
+            }
+            else
+            {
+                this.remasterFilesPath = Path.GetDirectoryName(this.openRemasterDirectoryDialog.FileName);
+            }
+            
             MessageBox.Show($"High res (DF Remaster) images will automatically be loaded from [{this.remasterFilesPath}] when you open a WAX or FME.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.loadRemasterImages();
         }
@@ -709,6 +717,7 @@ namespace WAX_converter
         private void loadRemasterImages()
         {
             this.comboBoxImageCategory.Enabled = false;
+            this.comboBoxImageCategory.SelectedIndex = 0;
             this.MenuExportWXX.Enabled = false;
 
             if (this.wax == null || this.wax.Ncells == 0 || string.IsNullOrEmpty(this.currentOpenedFilename))
@@ -721,28 +730,45 @@ namespace WAX_converter
                 return;
             }
 
-            var remasterFilePath = "";
+            var remasterFileName = "";
             var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(this.currentOpenedFilename);
             var currentFileExtension = Path.GetExtension(this.currentOpenedFilename);
             if (currentFileExtension.Equals(".FME", StringComparison.OrdinalIgnoreCase))
             {
-                remasterFilePath = $"{this.remasterFilesPath}\\{fileNameWithoutExtension}.FXX";
+                remasterFileName = $"{fileNameWithoutExtension}.FXX";
             }
             else if (currentFileExtension.Equals(".WAX", StringComparison.OrdinalIgnoreCase))
             {
-                remasterFilePath = $"{this.remasterFilesPath}\\{fileNameWithoutExtension}.WXX";
+                remasterFileName = $"{fileNameWithoutExtension}.WXX";
             }
             else
             {
                 return;
             }
 
-            if (!File.Exists(remasterFilePath))
+            List<byte[]> data;
+            if (Path.GetExtension(this.remasterFilesPath).Equals(".gob", StringComparison.OrdinalIgnoreCase))
             {
-                return;
+                // Path is a GOB
+                if (!Gob.GobContainsFile(this.remasterFilesPath, remasterFileName))
+                {
+                    return;
+                }
+
+                data = RemasterImagesImporterExporter.LoadDataFromWxxInsideGob(this.remasterFilesPath, remasterFileName);
+            }
+            else
+            {
+                // Path a directory
+                var remasterFilePath = $"{this.remasterFilesPath}\\{remasterFileName}";
+                if (!File.Exists(remasterFilePath))
+                {
+                    return;
+                }
+
+                data = RemasterImagesImporterExporter.LoadDataFromWxxFile(remasterFilePath);
             }
 
-            var data = RemasterImagesImporterExporter.LoadDataFromWxx(remasterFilePath);
             if (data == null || data.Count == 0)
             {
                 return;

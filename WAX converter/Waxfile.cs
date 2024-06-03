@@ -15,7 +15,7 @@ namespace WAX_converter
      * WAX cell = 24 bytes + data
      * */
 
-    public class Waxfile : Object
+    public class Waxfile : object
     {
         // Constructor -------------------------
         public Waxfile()
@@ -28,6 +28,7 @@ namespace WAX_converter
             this.Cells = new List<Cell>();
         }
 
+        #region Properties
         // Properties  ---------------------------
         public int Version { get; set; }
         public int Nseqs { get; set; }
@@ -45,6 +46,9 @@ namespace WAX_converter
         public List<Frame> Frames { get; set; }
         public List<Cell> Cells { get; set; }
 
+        #endregion
+
+        #region Public Methods        
         // Methods ----------------------------------------------------
         public bool LoadFromFile(string filename)
         {
@@ -377,6 +381,9 @@ namespace WAX_converter
             }
         }
 
+        #endregion
+
+        #region Private Methods
         private void ReadFrame(BinaryReader fileReader)
         {
             Frame frame = new Frame();
@@ -442,6 +449,8 @@ namespace WAX_converter
 
             this.Cells.Add(Cell);
         }
+
+        #endregion
     }
 
     public static class WaxExtensions

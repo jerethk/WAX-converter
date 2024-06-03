@@ -7,35 +7,54 @@ namespace WAX_converter
 {
     internal static class RemasterImagesImporterExporter
     {
-        public static List<byte[]> LoadDataFromWxx(string filename)
+        public static List<byte[]> LoadDataFromWxxFile(string filename)
         {
-            var result = new List<byte[]>();
-
             try
             {
-                using (var fileReader = new BinaryReader(File.Open(filename, FileMode.Open)))
-                {
-                    var numImages = fileReader.ReadInt32();
-                    var imageSizesinPixels = new int[numImages];
-
-                    for (var i = 0; i < numImages; i++)
-                    {
-                        imageSizesinPixels[i] = fileReader.ReadInt32();
-                    }
-
-                    for (var i = 0; i < numImages; i++)
-                    {
-                        var imageData = fileReader.ReadBytes(imageSizesinPixels[i] * 4);
-                        result.Add(imageData);
-                    }
-                }
-                
-                return result;
+                var stream = File.Open(filename, FileMode.Open);
+                return ReadDataFromStream(stream);
             }
             catch
             {
                 return null;
             }
+        }
+
+        public static List<byte[]> LoadDataFromWxxInsideGob(string gobName, string fileName)
+        {
+            try
+            {
+                var stream = new MemoryStream(Gob.GetFileFromGob(gobName, fileName));
+                return ReadDataFromStream(stream);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        private static List<byte[]> ReadDataFromStream(Stream stream)
+        {
+            var result = new List<byte[]>();
+
+            using (var fileReader = new BinaryReader(stream))
+            {
+                var numImages = fileReader.ReadInt32();
+                var imageSizesinPixels = new int[numImages];
+
+                for (var i = 0; i < numImages; i++)
+                {
+                    imageSizesinPixels[i] = fileReader.ReadInt32();
+                }
+
+                for (var i = 0; i < numImages; i++)
+                {
+                    var imageData = fileReader.ReadBytes(imageSizesinPixels[i] * 4);
+                    result.Add(imageData);
+                }
+            }
+
+            return result;
         }
 
         public static (List<(int, Bitmap)>, List<(int, Bitmap)>, List<(int, Bitmap)>) CreateBitmapsFromData(Waxfile wax, List<byte[]> data)
