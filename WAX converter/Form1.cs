@@ -128,7 +128,7 @@ namespace WAX_converter
 
         private void MenuRemasterDirectory_Click(object sender, EventArgs e)
         {
-            this.openRemasterDirectoryDialog.InitialDirectory = !string.IsNullOrWhiteSpace(this.remasterFilesPath) ? this.remasterFilesPath : openRemasterDirectoryDialog.InitialDirectory;
+            this.openRemasterDirectoryDialog.InitialDirectory = !string.IsNullOrWhiteSpace(this.remasterFilesPath) ? Path.GetDirectoryName(this.remasterFilesPath) : openRemasterDirectoryDialog.InitialDirectory;
             this.openRemasterDirectoryDialog.ShowDialog(this);
         }
 
