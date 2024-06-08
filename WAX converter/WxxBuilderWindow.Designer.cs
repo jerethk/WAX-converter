@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WxxBuilderWindow));
             openWaxDialog = new System.Windows.Forms.OpenFileDialog();
             sourceImagesDialog = new System.Windows.Forms.OpenFileDialog();
             btnSourceImages = new System.Windows.Forms.Button();
@@ -239,6 +240,7 @@
             Controls.Add(listBoxWaxImages);
             Controls.Add(btnQuit);
             Controls.Add(btnSourceImages);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             MinimumSize = new System.Drawing.Size(1240, 1000);
             Name = "WxxBuilderWindow";
             Text = "Create WXX";

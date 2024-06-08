@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateFmeWindow));
             btnExit = new System.Windows.Forms.Button();
             panel1 = new System.Windows.Forms.Panel();
             checkBoxCommonColours = new System.Windows.Forms.CheckBox();
@@ -276,6 +277,7 @@
             ControlBox = false;
             Controls.Add(panel2);
             Controls.Add(panel1);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             MinimumSize = new System.Drawing.Size(988, 800);
             Name = "CreateFmeWindow";
             ShowIcon = false;
