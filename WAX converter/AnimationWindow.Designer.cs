@@ -186,6 +186,7 @@
             Name = "AnimationWindow";
             Text = "Animation preview";
             Load += AnimationWindow_Load;
+            Shown += AnimationWindow_Shown;
             ((System.ComponentModel.ISupportInitialize)pictureBox).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericView).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericFrameRate).EndInit();

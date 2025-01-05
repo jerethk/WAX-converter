@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.Design;
-using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -50,8 +47,12 @@ namespace WAX_converter
             this.centreX = this.pictureBox.Width / 2;
             this.centreY = this.pictureBox.Height / 2;
             numericFrameRate.Value = this.action.FrameRate;
+        }
 
-            drawFirstFrame();
+        private async void AnimationWindow_Shown(object sender, EventArgs e)
+        {
+            await Task.Delay(100);  // a small delay is needed to make the initial draw happen
+            DrawFirstFrame();
         }
 
         private void pictureBox_SizeChanged(object sender, EventArgs e)
@@ -61,15 +62,15 @@ namespace WAX_converter
             this.centreX = this.pictureBox.Width / 2;
             this.centreY = this.pictureBox.Height / 2;
 
-            drawFirstFrame();
+            DrawFirstFrame();
         }
 
         private void numericView_ValueChanged(object sender, EventArgs e)
         {
-            drawFirstFrame();
+            DrawFirstFrame();
         }
 
-        private void drawFirstFrame()
+        private void DrawFirstFrame()
         {
             var sequence = this.sequences[this.action.seqIndexes[(int)numericView.Value]];
             var frameIndex = sequence.frameIndexes[0];
@@ -90,7 +91,7 @@ namespace WAX_converter
         }
 
         // ------------------------------------------------------------------------------------------------------------------------------
-        
+
         private async void btnPlay_Click(object sender, EventArgs e)
         {
             if (!isPlaying && !isLooping)
@@ -111,12 +112,12 @@ namespace WAX_converter
             {
                 for (int f = 0; f < numFrames; f++)
                 {
-                    updateFrame(sequence.frameIndexes[f], frameRate);
+                    UpdateFrame(sequence.frameIndexes[f], frameRate);
                 }
             });
         }
 
-        private void updateFrame(int frameIndex, int frameRate)
+        private void UpdateFrame(int frameIndex, int frameRate)
         {
             var frame = this.frames[frameIndex];
             var scaleFactor = this.isHiRes ? 2 : 1;
@@ -163,10 +164,10 @@ namespace WAX_converter
             await Task.Run(() =>
             {
                 int f = 0;
-                
+
                 while (isLooping)
                 {
-                    updateFrame(sequence.frameIndexes[f], frameRate);
+                    UpdateFrame(sequence.frameIndexes[f], frameRate);
                     f++;
                     if (f == numFrames) f = 0;
                 }
@@ -182,7 +183,7 @@ namespace WAX_converter
             {
                 return;
             }
-            
+
             this.frameRate = (int)numericFrameRate.Value;
         }
 

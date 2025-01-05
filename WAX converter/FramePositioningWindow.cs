@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WAX_converter
@@ -48,6 +46,15 @@ namespace WAX_converter
             for (int f = 0; f < this.frameList.Count; f++)
             {
                 listBoxFrames.Items.Add(f.ToString());
+            }
+        }
+
+        private async void FramePositioningWindow_Shown(object sender, EventArgs e)
+        {
+            if (this.frameList.Count > 0)
+            {
+                await Task.Delay(100);  // a small delay is needed to make the initial draw happen
+                this.listBoxFrames.SelectedIndex = 0;
             }
         }
 
@@ -112,7 +119,7 @@ namespace WAX_converter
             {
                 return;
             }
-            
+
             this.graphics.Clear(Color.LightGray);
 
             var frame = this.frameList[listBoxFrames.SelectedIndex];

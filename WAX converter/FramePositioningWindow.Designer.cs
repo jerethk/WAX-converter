@@ -186,6 +186,7 @@
             Name = "FramePositioningWindow";
             Text = "Position frames";
             Load += FramePositioningWindow_Load;
+            Shown += FramePositioningWindow_Shown;
             ((System.ComponentModel.ISupportInitialize)pictureBox).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericInsertX).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericInsertY).EndInit();
