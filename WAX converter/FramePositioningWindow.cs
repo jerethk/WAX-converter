@@ -47,6 +47,14 @@ namespace WAX_converter
             {
                 listBoxFrames.Items.Add(f.ToString());
             }
+
+            if (this.frameList.Count == 1)
+            {
+                btnSetAll.Enabled = false;
+            }
+
+            ToolTip tooltip = new ToolTip();
+            tooltip.SetToolTip(groupBoxAutoPosition, "Automatically calculate offsets based on image dimensions.");
         }
 
         private async void FramePositioningWindow_Shown(object sender, EventArgs e)
@@ -142,6 +150,70 @@ namespace WAX_converter
             this.graphics.DrawLine(redPen, yAxisTop, yAxisBot);
         }
 
+        private void checkBoxAutoX_CheckedChanged(object sender, EventArgs e)
+        {
+            this.numXOff.Enabled = checkBoxAutoX.Checked;
+        }
+
+        private void checkBoxAutoY_CheckedChanged(object sender, EventArgs e)
+        {
+            this.numYOff.Enabled = checkBoxAutoY.Checked;
+        }
+
+        private void btnSetCurrent_Click(object sender, EventArgs e)
+        {
+            if (listBoxFrames.SelectedIndex < 0)
+            {
+                return;
+            }
+            
+            var frame = this.frameList[listBoxFrames.SelectedIndex];
+            var cell = this.cells[frame.CellIndex];
+            var (insertX, insertY) = this.GetAutoPosition(cell.Width, cell.Height, this.numXOff.Value, this.numYOff.Value);
+
+            if (checkBoxAutoX.Checked)
+            {
+                frame.InsertX = insertX;
+                this.numericInsertX.Value = frame.InsertX;
+            }
+
+            if (checkBoxAutoY.Checked)
+            {
+                frame.InsertY = insertY;
+                this.numericInsertY.Value = frame.InsertY;
+            }
+        }
+
+        private void btnSetAll_Click(object sender, EventArgs e)
+        {
+            if (this.frameList.Count == 0)
+            {
+                return;
+            }
+            
+            foreach (var frame in frameList)
+            {
+                var cell = this.cells[frame.CellIndex];
+                var (insertX, insertY) = this.GetAutoPosition(cell.Width, cell.Height, this.numXOff.Value, this.numYOff.Value);
+
+                if (checkBoxAutoX.Checked)
+                {
+                    frame.InsertX = insertX;
+                }
+
+                if (checkBoxAutoY.Checked)
+                {
+                    frame.InsertY = insertY;
+                }
+            }
+
+            if (listBoxFrames.SelectedIndex >= 0)
+            {
+                this.numericInsertX.Value = this.frameList[listBoxFrames.SelectedIndex].InsertX;
+                this.numericInsertY.Value = this.frameList[listBoxFrames.SelectedIndex].InsertY;
+            }
+        }
+
         private void btnAccept_Click(object sender, EventArgs e)
         {
             disposeBitmaps();
@@ -178,6 +250,13 @@ namespace WAX_converter
             {
                 drawFrame();
             }
+        }
+
+        private (int, int) GetAutoPosition(int frameWidth, int frameHeight, decimal xOffsetPercent, decimal yOffsetPercent)
+        {
+            var x = Convert.ToInt32(frameWidth * -(xOffsetPercent / 100));
+            var y = Convert.ToInt32(frameHeight * (yOffsetPercent / 100 - 1));
+            return (x, y);
         }
     }
 }

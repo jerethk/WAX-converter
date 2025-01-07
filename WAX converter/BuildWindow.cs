@@ -39,6 +39,7 @@ namespace WAX_converter
         public List<Sequence> SequenceList;
         public List<Action> ActionList;
         private Color transparentColour;
+        private decimal xOffsetPercent, yOffsetPercent;
 
         private string[] logicAnim = new string[1] {"0 Animation"};
         private string[] logicScenery = new string[2] { "0 Start", "1 Destroyed" };
@@ -56,6 +57,8 @@ namespace WAX_converter
             }
 
             comboBoxLogic.SelectedIndex = 0;
+            this.xOffsetPercent = 50;
+            this.yOffsetPercent = 6;
         }
 
         private void BuildWindow_FormClosing(object sender, FormClosingEventArgs e)
@@ -138,6 +141,7 @@ namespace WAX_converter
             TransparentDialog.Dispose();
         }
 
+        # region CELLAREA
         // --- CELL AREA --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
         private void listboxImages_SelectedIndexChanged(object sender, EventArgs e)
@@ -249,7 +253,10 @@ namespace WAX_converter
             }
         }
 
-// --- FRAME AREA --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        #endregion
+
+        #region FRAMEAREA
+        // --- FRAME AREA --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
         private void listboxFrames_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -303,8 +310,8 @@ namespace WAX_converter
 
                     Frame newFrame = new Frame();
                     newFrame.CellIndex = selectedCell;
-                    newFrame.InsertX = ImageList[selectedCell].Width / 2 * -1;      // set sensible default values based on size of image
-                    newFrame.InsertY = ImageList[selectedCell].Height * -1 + (int) (0.06 * ImageList[selectedCell].Height);
+                    newFrame.InsertX = Convert.ToInt32(ImageList[selectedCell].Width * -(this.xOffsetPercent / 100));
+                    newFrame.InsertY = Convert.ToInt32(ImageList[selectedCell].Height * (this.yOffsetPercent / 100 - 1));
                     newFrame.Flip = 0;
 
                     FrameList.Add(newFrame);
@@ -436,7 +443,10 @@ namespace WAX_converter
             }
         }
 
-// --- SEQUENCE AREA --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        #endregion
+
+        #region SEQUENCEAREA
+        // --- SEQUENCE AREA --------------------------------------------------------------------------------------------------------------------------------------------------------------------
         private void listboxSeqs_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (SequenceList.Count > 0)
@@ -543,7 +553,10 @@ namespace WAX_converter
             }
         }
 
-// --- ACTIONS AREA --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        #endregion
+
+        #region ACTIONSAREA
+        // --- ACTIONS AREA --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
         private void comboBoxLogic_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -693,7 +706,9 @@ namespace WAX_converter
             }
         }
 
-// --- CREATE WAX ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        #endregion
+
+        // --- CREATE WAX ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
         private void buttonCreateWAX_Click(object sender, EventArgs e)
         {
