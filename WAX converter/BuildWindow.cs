@@ -591,9 +591,11 @@ namespace WAX_converter
         private void comboBoxAction_SelectedIndexChanged(object sender, EventArgs e)
         {
             int index = comboBoxAction.SelectedIndex;
-            
-            Wwidth.Value = ActionList[index].Wwidth;
-            Wheight.Value = ActionList[index].Wheight;
+            var wWidthPercent = Math.Round(ActionList[index].Wwidth / 65536m * 100m);
+            var wHeightPercent = Math.Round(ActionList[index].Wheight / 65536m * 100m);
+
+            Wwidth.Value = wWidthPercent <= 0 ? 1 : wWidthPercent;
+            Wheight.Value = wHeightPercent <= 0 ? 1 : wHeightPercent;
             FRate.Value = ActionList[index].FrameRate;
 
             for (int i = 0; i < 32; i++)
@@ -678,12 +680,12 @@ namespace WAX_converter
 
         private void Wwidth_ValueChanged(object sender, EventArgs e)
         {
-            ActionList[comboBoxAction.SelectedIndex].Wwidth = (int) Wwidth.Value;
+            ActionList[comboBoxAction.SelectedIndex].Wwidth = (int) (Wwidth.Value / 100m * 65536m);
         }
 
         private void Wheight_ValueChanged(object sender, EventArgs e)
         {
-            ActionList[comboBoxAction.SelectedIndex].Wheight = (int)Wheight.Value;
+            ActionList[comboBoxAction.SelectedIndex].Wheight = (int) (Wheight.Value / 100m * 65536m);
         }
 
         private void FRate_ValueChanged(object sender, EventArgs e)

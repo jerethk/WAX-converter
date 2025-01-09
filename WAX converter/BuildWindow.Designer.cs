@@ -764,7 +764,7 @@ namespace WAX_converter
             // 
             Wheight.Enabled = false;
             Wheight.Location = new System.Drawing.Point(160, 539);
-            Wheight.Maximum = new decimal(new int[] { 200000, 0, 0, 0 });
+            Wheight.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
             Wheight.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             Wheight.Name = "Wheight";
             Wheight.Size = new System.Drawing.Size(121, 23);
@@ -777,15 +777,15 @@ namespace WAX_converter
             label14.AutoSize = true;
             label14.Location = new System.Drawing.Point(34, 541);
             label14.Name = "label14";
-            label14.Size = new System.Drawing.Size(76, 15);
+            label14.Size = new System.Drawing.Size(96, 15);
             label14.TabIndex = 20;
-            label14.Text = "World height";
+            label14.Text = "WorldHeight (%)";
             // 
             // Wwidth
             // 
             Wwidth.Enabled = false;
             Wwidth.Location = new System.Drawing.Point(160, 497);
-            Wwidth.Maximum = new decimal(new int[] { 200000, 0, 0, 0 });
+            Wwidth.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
             Wwidth.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             Wwidth.Name = "Wwidth";
             Wwidth.Size = new System.Drawing.Size(121, 23);
@@ -798,9 +798,9 @@ namespace WAX_converter
             label13.AutoSize = true;
             label13.Location = new System.Drawing.Point(34, 499);
             label13.Name = "label13";
-            label13.Size = new System.Drawing.Size(72, 15);
+            label13.Size = new System.Drawing.Size(92, 15);
             label13.TabIndex = 19;
-            label13.Text = "World width";
+            label13.Text = "WorldWidth (%)";
             // 
             // label10
             // 

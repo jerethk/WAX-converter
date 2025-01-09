@@ -351,9 +351,12 @@ namespace WAX_converter
             int thisAction = (int)ActionNumber.Value;
 
             // display Action info
+            var wWidth = wax.Actions[thisAction].Wwidth;
+            var wHeight = wax.Actions[thisAction].Wheight;
+
             string[] strings = new string[5];
-            strings[0] = $"Wwidth: {wax.Actions[thisAction].Wwidth}";
-            strings[1] = $"Wheight: {wax.Actions[thisAction].Wheight}";
+            strings[0] = $"Wwidth: {Math.Round(wWidth / 65536m * 100m)}% ({wWidth})";
+            strings[1] = $"Wheight: {Math.Round(wHeight / 65536m * 100m)}% ({wHeight})";
             strings[2] = $"Framerate: {wax.Actions[thisAction].FrameRate}";
             //strings[3] = $"{wax.Actions[thisAction].Nframes}";
             //strings[4] = $"{wax.Actions[thisAction].pad2} {wax.Actions[thisAction].pad3} {wax.Actions[thisAction].pad4}";
@@ -474,7 +477,7 @@ namespace WAX_converter
             string[] strings = new string[7];
             strings[0] = $"InsertX: {wax.Frames[thisFrame].InsertX}";
             strings[1] = $"InsertY: {wax.Frames[thisFrame].InsertY}";
-            strings[2] = $"Flip: {wax.Frames[thisFrame].Flip}";
+            strings[2] = $"Flip: {(wax.Frames[thisFrame].Flip == 1 ? "Yes" : "No")}";
             strings[3] = $"Cell Address: 0x{Convert.ToString(wax.Frames[thisFrame].CellAddress, 16)}";
             //strings[4] = $"{wax.Frames[thisFrame].UnitWidth} {wax.Frames[thisFrame].UnitHeight}";
             //strings[5] = $"{wax.Frames[thisFrame].pad3} {wax.Frames[thisFrame].pad4}";
@@ -496,7 +499,7 @@ namespace WAX_converter
             string[] strings = new string[8];
             strings[0] = $"SizeX: {this.wax.Cells[thisCell].SizeX}";
             strings[1] = $"SizeY: {this.wax.Cells[thisCell].SizeY}";
-            strings[2] = $"Compressed: {this.wax.Cells[thisCell].Compressed}";
+            strings[2] = $"Compressed: {(this.wax.Cells[thisCell].Compressed == 1 ? "Yes" : "No")}";
             strings[3] = $"DataSize: {this.wax.Cells[thisCell].DataSize}";
             //strings[4] = $"ColOffs: {this.wax.Cells[thisCell].ColOffs}";
             //strings[5] = $"{this.wax.Cells[thisCell].pad1}";
