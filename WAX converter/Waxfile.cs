@@ -193,7 +193,10 @@ namespace WAX_converter
                     logicType = 2;  // enemy
                     break;
                 case 14:
-                    logicType = 3;  // dark trooper
+                    logicType = 3;  // dark trooper (but could also be Mohc or Sewer creature)
+                    break;
+                case 32:
+                    logicType = 7;
                     break;
             }
 
