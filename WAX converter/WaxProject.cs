@@ -65,8 +65,8 @@ namespace WAX_converter
                         writer.WriteLine(str);
                     }
 
-                    // write blank actions as necessary (always put 14 actions in a project file)
-                    for (int a = Actions.Count; a < 14; a++) 
+                    // write blank actions as necessary (always put 32 actions in a project file)
+                    for (int a = Actions.Count; a < 32; a++) 
                     {
                         writer.WriteLine($"#{a}");
                         writer.WriteLine("70000 70000 1");
@@ -202,11 +202,15 @@ namespace WAX_converter
                         logicType = Int32.Parse(nextLine[1]);
                     }
 
-                    for (int a = 0; a < 14; a++)
+                    for (int a = 0; a <= 32; a++)
                     {
-                        Action nextAction = new Action();
-
                         nextLine = getNextLine(fileReader);
+                        if (nextLine == null || nextLine[0] == "TransparentColour")
+                        {
+                            break; 
+                        }
+
+                        Action nextAction = new Action();
                         nextAction.Wwidth = Int32.Parse(nextLine[0]);
                         nextAction.Wheight = Int32.Parse(nextLine[1]);
                         nextAction.FrameRate = Int32.Parse(nextLine[2]);
@@ -219,29 +223,24 @@ namespace WAX_converter
                         Actions.Add(nextAction);
                     }
 
-                    // transparent colour (if it exists)
-                    bool foundTransparentColour = false;
-                    while (!foundTransparentColour)
+                    for (int a = Actions.Count; a < 32; a++)
                     {
-                        nextLine = getNextLine(fileReader);
-                        if (nextLine == null)
-                        {
-                            transparentColour = Color.FromArgb(255, 0, 0, 0); // black by default
-                            break;
-                        }
-                        else
-                        {
-                            if (nextLine[0] == "TransparentColour" && nextLine.Length == 5)
-                            {
-                                int a = Int32.Parse(nextLine[1]);
-                                int r = Int32.Parse(nextLine[2]);
-                                int g = Int32.Parse(nextLine[3]);
-                                int b = Int32.Parse(nextLine[4]);
+                        Actions.Add(new Action());  // fill out remaining actions with blanks
+                    }
 
-                                transparentColour = Color.FromArgb(a, r, g, b);
-                                foundTransparentColour = true;
-                            }
-                        }
+                    // transparent colour (if it exists)
+                    if (nextLine != null && nextLine[0] == "TransparentColour" && nextLine.Length == 5)
+                    {
+                        int a = Int32.Parse(nextLine[1]);
+                        int r = Int32.Parse(nextLine[2]);
+                        int g = Int32.Parse(nextLine[3]);
+                        int b = Int32.Parse(nextLine[4]);
+
+                        transparentColour = Color.FromArgb(a, r, g, b);
+                    }
+                    else
+                    {
+                        transparentColour = Color.FromArgb(255, 0, 0, 0); // black by default
                     }
                 }
             }
