@@ -66,14 +66,16 @@ namespace WAX_converter
                     this.XtraLight = fileReader.ReadInt32();
                     this.pad4 = fileReader.ReadInt32();
 
+                    this.numActions = 0;
                     for (int i = 0; i < 32; i++)
                     {
                         this.actionAddresses[i] = fileReader.ReadInt32();
                         if (this.actionAddresses[i] == 0)       // an address of 0 indicates the end of the action list
                         {
-                            this.numActions = i;
                             break;
                         }
+
+                        this.numActions++;
                     }
 
                     // Read the wax actions

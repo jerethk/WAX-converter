@@ -825,7 +825,7 @@ namespace WAX_converter
             // 
             comboBoxLogic.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             comboBoxLogic.FormattingEnabled = true;
-            comboBoxLogic.Items.AddRange(new object[] { "Anim", "Scenery / Barrel", "Enemy", "Dark Trooper", "Remote" });
+            comboBoxLogic.Items.AddRange(new object[] { "Anim", "Scenery / Barrel", "Enemy", "Dark Trooper", "Remote", "Sewer creature", "Mohc", "Custom (32 anims)" });
             comboBoxLogic.Location = new System.Drawing.Point(106, 40);
             comboBoxLogic.Name = "comboBoxLogic";
             comboBoxLogic.Size = new System.Drawing.Size(175, 23);
