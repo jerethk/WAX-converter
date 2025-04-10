@@ -41,17 +41,54 @@ namespace WAX_converter
         private Color transparentColour;
         private decimal xOffsetPercent, yOffsetPercent;
 
-        private string[] logicAnim = new string[1] {"0 Animation"};
-        private string[] logicScenery = new string[2] { "0 Start", "1 Destroyed" };
-        private string[] logicEnemy = new string[13] { "0 Moving", "1 Attack", "2 Dying1", "3 Dying2", "4 Dead", "5 Stationary", "6 Recoil", "7 Attack2", "8 Recoil2", "9 Kell jump", "10 not used", "11 Kell jump attack", "12 Pain" };
-        private string[] logicDT = new string[14] { "0 Moving", "1 Attack", "2 Dying1", "3 Dying2", "4 Dead", "5 Stationary", "6 Recoil", "7 not used", "8 not used", "9 not used", "10 not used", "11 not used", "12 Pain", "13 Blocking / flying" };
-        private string[] logicRemote = new string[4] { "0 Searching", "1 Inactive", "2 Dying1", "3 Dying2" };
+        private readonly string[] logicAnim = new string[1] {"0 Animation"};
+        private readonly string[] logicScenery = new string[2] { "0 Start", "1 Destroyed" };
+        private readonly string[] logicEnemy = new string[13] { "0 Moving", "1 Attack", "2 Dying1", "3 Dying2", "4 Dead", "5 Stationary", "6 Attack end", "7 Attack2", "8 Attack2 end", "9 Kell jump", "10 not used", "11 Kell jump attack", "12 Pain" };
+        private readonly string[] logicDT = new string[14] { "0 Moving", "1 Attack", "2 Dying1", "3 Dying2", "4 Dead", "5 Stationary", "6 Attack end", "7 not used", "8 not used", "9 not used", "10 not used", "11 not used", "12 Pain", "13 Blocking / Flying" };
+        private readonly string[] logicRemote = new string[4] { "0 Alive", "1 not used", "2 Dying1", "3 Dying2" };
+        private readonly string[] logicSewer = new string[14] { "0 unused", "1 Attack", "2 Dying1", "3 Dying2", "4 Dead", "5 Idle", "6 Attack end", "7 unused", "8 unused", "9 unused", "10 unused", "11 unused", "12 Search", "13 unused" };
+        private readonly string[] logicMohc = new string[14] { "0 Walking", "1 Plasma attack", "2 Dying1", "3 Idle", "4 Dead", "5 unused", "6 Attack end", "7 unused", "8 unused", "9 unused", "10 Pain", "11 Missiles start", "12 Missiles end", "13 Flying" };
+        private readonly string[] logic32 = new string[32]
+        {
+            "0 Animation",
+            "1 Animation",
+            "2 Animation",
+            "3 Animation",
+            "4 Animation",
+            "5 Animation",
+            "6 Animation",
+            "7 Animation",
+            "8 Animation",
+            "9 Animation",
+            "10 Animation",
+            "11 Animation",
+            "12 Animation",
+            "13 Animation",
+            "14 Animation",
+            "15 Animation",
+            "16 Animation",
+            "17 Animation",
+            "18 Animation",
+            "19 Animation",
+            "10 Animation",
+            "21 Animation",
+            "22 Animation",
+            "23 Animation",
+            "24 Animation",
+            "25 Animation",
+            "26 Animation",
+            "27 Animation",
+            "28 Animation",
+            "29 Animation",
+            "30 Animation",
+            "31 Animation",
+        };
 
         // -------------------------------------------------------------------
 
         private void BuildWindow_Load(object sender, EventArgs e)
         {
-            for (int i = 0; i < 14; i++)    // create 14 actions, which is the maximum needed
+            for (int i = 0; i < 32; i++)
             {
                 ActionList.Add(new Action());
             }
@@ -580,6 +617,15 @@ namespace WAX_converter
                 case 4:
                     strings = logicRemote;
                     break;
+                case 5:
+                    strings = logicSewer;
+                    break;
+                case 6:
+                    strings = logicMohc;
+                    break;
+                case 7:
+                    strings = logic32;
+                    break;
                 default:
                     strings = new string[1] { "" };
                     break;
@@ -914,7 +960,7 @@ namespace WAX_converter
             labelNFrames.Text = $"n = {FrameList.Count}";
             labelNSeqs.Text = $"n = {SequenceList.Count}";
             comboBoxLogic.SelectedIndex = 0;    //
-            comboBoxLogic.SelectedIndex = 1;    // changing this forces an update of the controls
+            comboBoxLogic.SelectedIndex = 1;    // hack: changing this forces an update of the controls
             dataGridViews.Enabled = true;
             buttonSetAllViews.Enabled = true;
             Wwidth.Enabled = true;

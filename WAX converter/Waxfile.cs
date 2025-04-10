@@ -74,6 +74,10 @@ namespace WAX_converter
                             this.numActions = i;
                             break;
                         }
+                        if (i == 31)                            // all 32 actions are used!
+                        {
+                            this.numActions = 32;
+                        }
                     }
 
                     // Read the wax actions

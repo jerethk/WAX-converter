@@ -26,12 +26,18 @@ namespace WAX_converter
                     break;
                 case 2: // enemy
                     newWax.numActions = 13;
-                    break; 
-                case 3: // dark trooper
-                    newWax.numActions = 14;
                     break;
                 case 4: // remote
                     newWax.numActions = 4;
+                    break;
+                case 3: // dark trooper
+                case 5: // sewer creature
+                case 6: // mohc
+                    newWax.numActions = 14;
+                    break;
+                case 7: // all 32
+                default:
+                    newWax.numActions = 32;
                     break;
             }
 
