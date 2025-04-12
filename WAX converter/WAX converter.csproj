@@ -7,8 +7,9 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ApplicationIcon>phase2_jv0_icon.ico</ApplicationIcon>
     <NoWin32Manifest>true</NoWin32Manifest>
-    <VersionPrefix>3.3.0</VersionPrefix>
-    <FileVersion>3.3.0</FileVersion>
+    <VersionPrefix>3.4.0</VersionPrefix>
+    <FileVersion>3.4.0</FileVersion>
+    <Title>WAX Converter</Title>
   </PropertyGroup>
 
   <ItemGroup>
