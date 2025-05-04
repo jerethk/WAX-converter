@@ -243,7 +243,7 @@ namespace WAX_converter
         {
             this.centreX = this.pictureBox.Width / 2;
             this.centreY = this.pictureBox.Height / 2;
-            this.graphics.Dispose();
+            this.graphics?.Dispose();
             this.graphics = pictureBox.CreateGraphics();
 
             if (this.listBoxFrames.SelectedIndex >= 0)

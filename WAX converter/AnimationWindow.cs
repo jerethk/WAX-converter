@@ -26,12 +26,12 @@ namespace WAX_converter
 
         public AnimationWindow(bool isReadOnlyMode, bool hiresMode, Action action, List<Sequence> sequences, List<Frame> frames, List<Bitmap> images, Color transparentColour)
         {
-            InitializeComponent();
-
             this.action = action;
             this.sequences = sequences;
             this.frames = frames;
             this.images = FramePositioningWindow.makeCellsTransparent(images, transparentColour).ToList();
+
+            InitializeComponent();
 
             this.numericFrameRate.Enabled = !isReadOnlyMode;
             this.btnAccept.Visible = !isReadOnlyMode;
@@ -57,7 +57,7 @@ namespace WAX_converter
 
         private void pictureBox_SizeChanged(object sender, EventArgs e)
         {
-            this.graphics.Dispose();
+            this.graphics?.Dispose();
             this.graphics = pictureBox.CreateGraphics();
             this.centreX = this.pictureBox.Width / 2;
             this.centreY = this.pictureBox.Height / 2;
