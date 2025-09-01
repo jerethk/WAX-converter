@@ -1,5 +1,4 @@
-﻿
-namespace WAX_converter
+﻿namespace WAX_converter.Types
 {
     internal struct Pixel
     {

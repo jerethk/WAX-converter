@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WAX_converter
+namespace WAX_converter.Dialogs
 {
     class ProgressBarWindow : Form
     {
@@ -19,7 +19,7 @@ namespace WAX_converter
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProgressBarWindow));
-            this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.progressBar = new ProgressBar();
             this.SuspendLayout();
             // 
             // progressBar
@@ -34,12 +34,12 @@ namespace WAX_converter
             this.ClientSize = new System.Drawing.Size(284, 61);
             this.ControlBox = false;
             this.Controls.Add(this.progressBar);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             this.Location = new System.Drawing.Point(300, 200);
             this.MaximumSize = new System.Drawing.Size(300, 100);
             this.MinimumSize = new System.Drawing.Size(300, 100);
             this.Name = "ProgressBarWindow";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = FormStartPosition.CenterScreen;
             this.Text = "Working...";
             this.ResumeLayout(false);
 

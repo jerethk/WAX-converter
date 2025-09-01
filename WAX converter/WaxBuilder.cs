@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
+using WAX_converter.Dialogs;
 
 namespace WAX_converter
 {

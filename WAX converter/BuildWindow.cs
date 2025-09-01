@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using WAX_converter.Dialogs;
 
 namespace WAX_converter
 {

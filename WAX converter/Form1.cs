@@ -6,6 +6,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using WAX_converter.Dialogs;
 
 namespace WAX_converter
 {
