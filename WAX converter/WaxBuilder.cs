@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 using WAX_converter.Dialogs;
+using WAX_converter.Types;
 
 namespace WAX_converter
 {
@@ -10,7 +11,7 @@ namespace WAX_converter
     // A static class containing static methods used to create a new WAX file //
     public static class WaxBuilder
     {
-        public static Waxfile BuildWax(int LogicType, List<Action> sourceActionList, List<Sequence> sourceSequenceList, List<Frame> sourceFrameList, List<Bitmap> sourceImageList, DFPal palette, Color transparentColour, bool includeIlluminatedColours, bool onlyCommonColours, bool compress)
+        public static Waxfile BuildWax(int LogicType, List<Action> sourceActionList, List<Sequence> sourceSequenceList, List<Frame> sourceFrameList, List<Bitmap> sourceImageList, DFPal palette, Color transparentColour, PaletteOptions palOptions, bool compress)
         {
             ProgressBarWindow progressMeter = new ProgressBarWindow();
             progressMeter.Show();
@@ -108,7 +109,7 @@ namespace WAX_converter
                 newCell.ColOffs = 0;    // always zero
 
                 newCell.Pixels = new short[newCell.SizeX, newCell.SizeY];
-                newCell.CreateCellImage(sourceImageList[i], palette, transparentColour, includeIlluminatedColours, onlyCommonColours);       // result is stored in the cell object's Pixels property
+                newCell.CreateCellImage(sourceImageList[i], palette, transparentColour, palOptions);       // result is stored in the cell object's Pixels property
 
                 if (compress)
                 {
@@ -154,32 +155,58 @@ namespace WAX_converter
             return newWax;
         }
         
-        public static short MatchPixeltoPal(Color pixelColour, DFPal palette, bool includeIlluminatedColours, bool onlyCommonColours)
+        public static short MatchPixeltoPal(Color pixelColour, DFPal palette, PaletteOptions palOptions)
         {
             // Color quantizes to the DF PAL using Euclidean distance technique
             int sourceRed = pixelColour.R;
             int sourceGreen = pixelColour.G;
             int sourceBlue = pixelColour.B;
-
-            short startColour;
-
-            if (includeIlluminatedColours)
-            {
-                startColour = 1;        // first 32 colours are always bright / illuminated
-            }
-            else
-            {
-                startColour = 32;
-            }
+            int sourceAlpha = pixelColour.A;
 
             double smallestDistance = 500;
             short bestMatch = 0;
 
-            for (short i = startColour; i < 256; i++)    
+            for (short i = 1; i < 256; i++)    
             {
-                if (i >= 24 && i <= 31) continue;                           // skip the special (HUD) colours
-                if (onlyCommonColours && i >= 208 && i <= 254) continue;    // colours 208-254 are different in different PALs
-                
+                if (palOptions.FullbrightByAlpha)
+                {
+                    // Alpha 1-254, skip non-fullbrights
+                    if (sourceAlpha > 0 && sourceAlpha < 255
+                        && (i < 1 || i > 23))
+                    {
+                        continue;
+                    }
+
+                    // Alpha 255, skip fullbrights
+                    if (sourceAlpha == 255
+                        && (i >= 1 && i <= 23))
+                    {
+                        continue;
+                    }
+                }
+                else if (!palOptions.IncludeFullbrights &&
+                    i >= 1 && i <= 23)
+                {
+                    continue;
+                }
+
+                if (!palOptions.IncludeHudColours &&
+                    i >= 24 && i <= 31)
+                {
+                    continue;
+                }
+
+                if (palOptions.CommonColoursOnly &&
+                    i >= 208 && i <= 254)
+                {
+                    continue;      // colours 208-254 are different in different PALs
+                }
+
+                if (palOptions.ColoursToExclude.Contains(i))
+                {
+                    continue;
+                }
+
                 int deltaRed = sourceRed - palette.Colours[i].R;
                 int deltaGreen = sourceGreen - palette.Colours[i].G;
                 int deltaBlue = sourceBlue - palette.Colours[i].B;

@@ -38,9 +38,7 @@ namespace WAX_converter
             cellDisplayBox = new System.Windows.Forms.PictureBox();
             ButtonExit = new System.Windows.Forms.Button();
             panel1 = new System.Windows.Forms.Panel();
-            checkBoxCommonColours = new System.Windows.Forms.CheckBox();
             btnHelp = new System.Windows.Forms.Button();
-            checkBoxIlluminated = new System.Windows.Forms.CheckBox();
             buttonSaveWIP = new System.Windows.Forms.Button();
             buttonLoadWIP = new System.Windows.Forms.Button();
             transpColourBox = new System.Windows.Forms.PictureBox();
@@ -126,10 +124,10 @@ namespace WAX_converter
             // listboxImages
             // 
             listboxImages.FormattingEnabled = true;
-            listboxImages.ItemHeight = 15;
+            listboxImages.ItemHeight = 20;
             listboxImages.Location = new System.Drawing.Point(30, 40);
             listboxImages.Name = "listboxImages";
-            listboxImages.Size = new System.Drawing.Size(100, 799);
+            listboxImages.Size = new System.Drawing.Size(100, 784);
             listboxImages.TabIndex = 1;
             listboxImages.SelectedIndexChanged += listboxImages_SelectedIndexChanged;
             // 
@@ -190,9 +188,7 @@ namespace WAX_converter
             // 
             // panel1
             // 
-            panel1.Controls.Add(checkBoxCommonColours);
             panel1.Controls.Add(btnHelp);
-            panel1.Controls.Add(checkBoxIlluminated);
             panel1.Controls.Add(buttonSaveWIP);
             panel1.Controls.Add(buttonLoadWIP);
             panel1.Controls.Add(transpColourBox);
@@ -205,17 +201,6 @@ namespace WAX_converter
             panel1.Size = new System.Drawing.Size(1424, 84);
             panel1.TabIndex = 6;
             // 
-            // checkBoxCommonColours
-            // 
-            checkBoxCommonColours.AutoSize = true;
-            checkBoxCommonColours.Location = new System.Drawing.Point(143, 47);
-            checkBoxCommonColours.Name = "checkBoxCommonColours";
-            checkBoxCommonColours.Size = new System.Drawing.Size(145, 19);
-            checkBoxCommonColours.TabIndex = 14;
-            checkBoxCommonColours.Text = "Common colours only";
-            checkBoxCommonColours.UseVisualStyleBackColor = true;
-            checkBoxCommonColours.CheckedChanged += checkBoxCommonColours_CheckedChanged;
-            // 
             // btnHelp
             // 
             btnHelp.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -227,23 +212,12 @@ namespace WAX_converter
             btnHelp.UseVisualStyleBackColor = true;
             btnHelp.Click += btnHelp_Click;
             // 
-            // checkBoxIlluminated
-            // 
-            checkBoxIlluminated.AutoSize = true;
-            checkBoxIlluminated.Location = new System.Drawing.Point(143, 12);
-            checkBoxIlluminated.Name = "checkBoxIlluminated";
-            checkBoxIlluminated.Size = new System.Drawing.Size(170, 19);
-            checkBoxIlluminated.TabIndex = 12;
-            checkBoxIlluminated.Text = "Include illuminated colours";
-            checkBoxIlluminated.UseVisualStyleBackColor = true;
-            checkBoxIlluminated.CheckedChanged += checkBoxIlluminated_CheckedChanged;
-            // 
             // buttonSaveWIP
             // 
             buttonSaveWIP.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            buttonSaveWIP.Location = new System.Drawing.Point(682, 12);
+            buttonSaveWIP.Location = new System.Drawing.Point(648, 12);
             buttonSaveWIP.Name = "buttonSaveWIP";
-            buttonSaveWIP.Size = new System.Drawing.Size(100, 54);
+            buttonSaveWIP.Size = new System.Drawing.Size(123, 54);
             buttonSaveWIP.TabIndex = 11;
             buttonSaveWIP.Text = "SAVE PROJECT";
             buttonSaveWIP.UseVisualStyleBackColor = true;
@@ -252,9 +226,9 @@ namespace WAX_converter
             // buttonLoadWIP
             // 
             buttonLoadWIP.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            buttonLoadWIP.Location = new System.Drawing.Point(798, 12);
+            buttonLoadWIP.Location = new System.Drawing.Point(787, 12);
             buttonLoadWIP.Name = "buttonLoadWIP";
-            buttonLoadWIP.Size = new System.Drawing.Size(100, 54);
+            buttonLoadWIP.Size = new System.Drawing.Size(122, 54);
             buttonLoadWIP.TabIndex = 10;
             buttonLoadWIP.Text = "LOAD PROJECT";
             buttonLoadWIP.UseVisualStyleBackColor = true;
@@ -262,7 +236,7 @@ namespace WAX_converter
             // 
             // transpColourBox
             // 
-            transpColourBox.Location = new System.Drawing.Point(508, 12);
+            transpColourBox.Location = new System.Drawing.Point(292, 12);
             transpColourBox.Name = "transpColourBox";
             transpColourBox.Size = new System.Drawing.Size(55, 54);
             transpColourBox.TabIndex = 9;
@@ -270,7 +244,7 @@ namespace WAX_converter
             // 
             // buttonTransparent
             // 
-            buttonTransparent.Location = new System.Drawing.Point(385, 12);
+            buttonTransparent.Location = new System.Drawing.Point(169, 12);
             buttonTransparent.Name = "buttonTransparent";
             buttonTransparent.Size = new System.Drawing.Size(117, 54);
             buttonTransparent.TabIndex = 8;
@@ -314,7 +288,7 @@ namespace WAX_converter
             labelNCells.AutoSize = true;
             labelNCells.Location = new System.Drawing.Point(118, 15);
             labelNCells.Name = "labelNCells";
-            labelNCells.Size = new System.Drawing.Size(34, 15);
+            labelNCells.Size = new System.Drawing.Size(43, 20);
             labelNCells.TabIndex = 9;
             labelNCells.Text = "n = 0";
             // 
@@ -324,7 +298,7 @@ namespace WAX_converter
             label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             label2.Location = new System.Drawing.Point(30, 15);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(39, 15);
+            label2.Size = new System.Drawing.Size(50, 20);
             label2.TabIndex = 8;
             label2.Text = "CELLS";
             // 
@@ -407,7 +381,7 @@ namespace WAX_converter
             labelNFrames.AutoSize = true;
             labelNFrames.Location = new System.Drawing.Point(97, 15);
             labelNFrames.Name = "labelNFrames";
-            labelNFrames.Size = new System.Drawing.Size(34, 15);
+            labelNFrames.Size = new System.Drawing.Size(43, 20);
             labelNFrames.TabIndex = 10;
             labelNFrames.Text = "n = 0";
             // 
@@ -418,7 +392,7 @@ namespace WAX_converter
             InsertY.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
             InsertY.Minimum = new decimal(new int[] { 10000, 0, 0, int.MinValue });
             InsertY.Name = "InsertY";
-            InsertY.Size = new System.Drawing.Size(101, 23);
+            InsertY.Size = new System.Drawing.Size(101, 27);
             InsertY.TabIndex = 10;
             InsertY.ValueChanged += InsertY_ValueChanged;
             // 
@@ -429,7 +403,7 @@ namespace WAX_converter
             InsertX.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
             InsertX.Minimum = new decimal(new int[] { 10000, 0, 0, int.MinValue });
             InsertX.Name = "InsertX";
-            InsertX.Size = new System.Drawing.Size(101, 23);
+            InsertX.Size = new System.Drawing.Size(101, 27);
             InsertX.TabIndex = 9;
             InsertX.ValueChanged += InsertX_ValueChanged;
             // 
@@ -439,7 +413,7 @@ namespace WAX_converter
             checkBoxFlip.Enabled = false;
             checkBoxFlip.Location = new System.Drawing.Point(129, 338);
             checkBoxFlip.Name = "checkBoxFlip";
-            checkBoxFlip.Size = new System.Drawing.Size(45, 19);
+            checkBoxFlip.Size = new System.Drawing.Size(55, 24);
             checkBoxFlip.TabIndex = 8;
             checkBoxFlip.Text = "Flip";
             checkBoxFlip.UseVisualStyleBackColor = true;
@@ -450,7 +424,7 @@ namespace WAX_converter
             label5.AutoSize = true;
             label5.Location = new System.Drawing.Point(129, 296);
             label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(46, 15);
+            label5.Size = new System.Drawing.Size(57, 20);
             label5.TabIndex = 7;
             label5.Text = "Insert Y";
             // 
@@ -459,7 +433,7 @@ namespace WAX_converter
             label4.AutoSize = true;
             label4.Location = new System.Drawing.Point(129, 262);
             label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(46, 15);
+            label4.Size = new System.Drawing.Size(58, 20);
             label4.TabIndex = 6;
             label4.Text = "Insert X";
             // 
@@ -468,7 +442,7 @@ namespace WAX_converter
             label3.AutoSize = true;
             label3.Location = new System.Drawing.Point(129, 224);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(27, 15);
+            label3.Size = new System.Drawing.Size(34, 20);
             label3.TabIndex = 5;
             label3.Text = "Cell";
             // 
@@ -477,7 +451,7 @@ namespace WAX_converter
             textBoxCell.Location = new System.Drawing.Point(204, 221);
             textBoxCell.Name = "textBoxCell";
             textBoxCell.ReadOnly = true;
-            textBoxCell.Size = new System.Drawing.Size(101, 23);
+            textBoxCell.Size = new System.Drawing.Size(101, 27);
             textBoxCell.TabIndex = 4;
             // 
             // buttonRemoveFrame
@@ -504,10 +478,10 @@ namespace WAX_converter
             // listboxFrames
             // 
             listboxFrames.FormattingEnabled = true;
-            listboxFrames.ItemHeight = 15;
+            listboxFrames.ItemHeight = 20;
             listboxFrames.Location = new System.Drawing.Point(30, 43);
             listboxFrames.Name = "listboxFrames";
-            listboxFrames.Size = new System.Drawing.Size(69, 349);
+            listboxFrames.Size = new System.Drawing.Size(69, 344);
             listboxFrames.TabIndex = 1;
             listboxFrames.SelectedIndexChanged += listboxFrames_SelectedIndexChanged;
             // 
@@ -517,7 +491,7 @@ namespace WAX_converter
             label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             label1.Location = new System.Drawing.Point(30, 15);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(53, 15);
+            label1.Size = new System.Drawing.Size(68, 20);
             label1.TabIndex = 0;
             label1.Text = "FRAMES";
             // 
@@ -564,10 +538,10 @@ namespace WAX_converter
             // 
             listboxSeqFrames.Enabled = false;
             listboxSeqFrames.FormattingEnabled = true;
-            listboxSeqFrames.ItemHeight = 15;
+            listboxSeqFrames.ItemHeight = 20;
             listboxSeqFrames.Location = new System.Drawing.Point(129, 168);
             listboxSeqFrames.Name = "listboxSeqFrames";
-            listboxSeqFrames.Size = new System.Drawing.Size(106, 274);
+            listboxSeqFrames.Size = new System.Drawing.Size(106, 264);
             listboxSeqFrames.TabIndex = 17;
             listboxSeqFrames.SelectedIndexChanged += listboxSeqFrames_SelectedIndexChanged;
             // 
@@ -576,7 +550,7 @@ namespace WAX_converter
             labelNSeqs.AutoSize = true;
             labelNSeqs.Location = new System.Drawing.Point(129, 19);
             labelNSeqs.Name = "labelNSeqs";
-            labelNSeqs.Size = new System.Drawing.Size(34, 15);
+            labelNSeqs.Size = new System.Drawing.Size(43, 20);
             labelNSeqs.TabIndex = 11;
             labelNSeqs.Text = "n = 0";
             // 
@@ -585,7 +559,7 @@ namespace WAX_converter
             label6.AutoSize = true;
             label6.Location = new System.Drawing.Point(129, 144);
             label6.Name = "label6";
-            label6.Size = new System.Drawing.Size(94, 15);
+            label6.Size = new System.Drawing.Size(118, 20);
             label6.TabIndex = 16;
             label6.Text = "Frames (max 32)";
             // 
@@ -594,7 +568,7 @@ namespace WAX_converter
             labelNotes.AutoSize = true;
             labelNotes.Location = new System.Drawing.Point(279, 377);
             labelNotes.Name = "labelNotes";
-            labelNotes.Size = new System.Drawing.Size(41, 15);
+            labelNotes.Size = new System.Drawing.Size(51, 20);
             labelNotes.TabIndex = 1;
             labelNotes.Text = "Notes:";
             labelNotes.Visible = false;
@@ -602,10 +576,10 @@ namespace WAX_converter
             // listboxSeqs
             // 
             listboxSeqs.FormattingEnabled = true;
-            listboxSeqs.ItemHeight = 15;
+            listboxSeqs.ItemHeight = 20;
             listboxSeqs.Location = new System.Drawing.Point(30, 52);
             listboxSeqs.Name = "listboxSeqs";
-            listboxSeqs.Size = new System.Drawing.Size(69, 394);
+            listboxSeqs.Size = new System.Drawing.Size(69, 384);
             listboxSeqs.TabIndex = 12;
             listboxSeqs.SelectedIndexChanged += listboxSeqs_SelectedIndexChanged;
             // 
@@ -615,7 +589,7 @@ namespace WAX_converter
             label7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             label7.Location = new System.Drawing.Point(30, 19);
             label7.Name = "label7";
-            label7.Size = new System.Drawing.Size(73, 15);
+            label7.Size = new System.Drawing.Size(92, 20);
             label7.TabIndex = 11;
             label7.Text = "SEQUENCES";
             // 
@@ -704,6 +678,7 @@ namespace WAX_converter
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             dataGridViews.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dataGridViews.RowHeadersVisible = false;
+            dataGridViews.RowHeadersWidth = 51;
             dataGridViews.RowTemplate.Height = 25;
             dataGridViews.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             dataGridViews.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
@@ -716,6 +691,7 @@ namespace WAX_converter
             // ViewColumn
             // 
             ViewColumn.HeaderText = "View";
+            ViewColumn.MinimumWidth = 6;
             ViewColumn.Name = "ViewColumn";
             ViewColumn.ReadOnly = true;
             ViewColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -725,8 +701,10 @@ namespace WAX_converter
             // Sequence
             // 
             Sequence.HeaderText = "Sequence";
+            Sequence.MinimumWidth = 6;
             Sequence.Name = "Sequence";
             Sequence.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            Sequence.Width = 125;
             // 
             // buttonSetAllViews
             // 
@@ -746,7 +724,7 @@ namespace WAX_converter
             FRate.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
             FRate.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             FRate.Name = "FRate";
-            FRate.Size = new System.Drawing.Size(121, 23);
+            FRate.Size = new System.Drawing.Size(121, 27);
             FRate.TabIndex = 21;
             FRate.Value = new decimal(new int[] { 1, 0, 0, 0 });
             FRate.ValueChanged += FRate_ValueChanged;
@@ -756,7 +734,7 @@ namespace WAX_converter
             label15.AutoSize = true;
             label15.Location = new System.Drawing.Point(34, 581);
             label15.Name = "label15";
-            label15.Size = new System.Drawing.Size(63, 15);
+            label15.Size = new System.Drawing.Size(80, 20);
             label15.TabIndex = 22;
             label15.Text = "Frame rate";
             // 
@@ -767,7 +745,7 @@ namespace WAX_converter
             Wheight.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
             Wheight.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             Wheight.Name = "Wheight";
-            Wheight.Size = new System.Drawing.Size(121, 23);
+            Wheight.Size = new System.Drawing.Size(121, 27);
             Wheight.TabIndex = 12;
             Wheight.Value = new decimal(new int[] { 1, 0, 0, 0 });
             Wheight.ValueChanged += Wheight_ValueChanged;
@@ -777,7 +755,7 @@ namespace WAX_converter
             label14.AutoSize = true;
             label14.Location = new System.Drawing.Point(34, 541);
             label14.Name = "label14";
-            label14.Size = new System.Drawing.Size(96, 15);
+            label14.Size = new System.Drawing.Size(120, 20);
             label14.TabIndex = 20;
             label14.Text = "WorldHeight (%)";
             // 
@@ -788,7 +766,7 @@ namespace WAX_converter
             Wwidth.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
             Wwidth.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             Wwidth.Name = "Wwidth";
-            Wwidth.Size = new System.Drawing.Size(121, 23);
+            Wwidth.Size = new System.Drawing.Size(121, 27);
             Wwidth.TabIndex = 11;
             Wwidth.Value = new decimal(new int[] { 1, 0, 0, 0 });
             Wwidth.ValueChanged += Wwidth_ValueChanged;
@@ -798,7 +776,7 @@ namespace WAX_converter
             label13.AutoSize = true;
             label13.Location = new System.Drawing.Point(34, 499);
             label13.Name = "label13";
-            label13.Size = new System.Drawing.Size(92, 15);
+            label13.Size = new System.Drawing.Size(115, 20);
             label13.TabIndex = 19;
             label13.Text = "WorldWidth (%)";
             // 
@@ -807,7 +785,7 @@ namespace WAX_converter
             label10.AutoSize = true;
             label10.Location = new System.Drawing.Point(34, 76);
             label10.Name = "label10";
-            label10.Size = new System.Drawing.Size(42, 15);
+            label10.Size = new System.Drawing.Size(52, 20);
             label10.TabIndex = 14;
             label10.Text = "Action";
             // 
@@ -817,7 +795,7 @@ namespace WAX_converter
             comboBoxAction.FormattingEnabled = true;
             comboBoxAction.Location = new System.Drawing.Point(106, 73);
             comboBoxAction.Name = "comboBoxAction";
-            comboBoxAction.Size = new System.Drawing.Size(175, 23);
+            comboBoxAction.Size = new System.Drawing.Size(175, 28);
             comboBoxAction.TabIndex = 13;
             comboBoxAction.SelectedIndexChanged += comboBoxAction_SelectedIndexChanged;
             // 
@@ -828,7 +806,7 @@ namespace WAX_converter
             comboBoxLogic.Items.AddRange(new object[] { "Anim", "Scenery / Barrel", "Enemy", "Dark Trooper", "Remote", "Sewer creature", "Mohc", "Custom (32 anims)" });
             comboBoxLogic.Location = new System.Drawing.Point(106, 40);
             comboBoxLogic.Name = "comboBoxLogic";
-            comboBoxLogic.Size = new System.Drawing.Size(175, 23);
+            comboBoxLogic.Size = new System.Drawing.Size(175, 28);
             comboBoxLogic.TabIndex = 12;
             comboBoxLogic.SelectedIndexChanged += comboBoxLogic_SelectedIndexChanged;
             // 
@@ -837,7 +815,7 @@ namespace WAX_converter
             label8.AutoSize = true;
             label8.Location = new System.Drawing.Point(34, 43);
             label8.Name = "label8";
-            label8.Size = new System.Drawing.Size(36, 15);
+            label8.Size = new System.Drawing.Size(45, 20);
             label8.TabIndex = 0;
             label8.Text = "Logic";
             // 
@@ -847,7 +825,7 @@ namespace WAX_converter
             label9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             label9.Location = new System.Drawing.Point(34, 15);
             label9.Name = "label9";
-            label9.Size = new System.Drawing.Size(58, 15);
+            label9.Size = new System.Drawing.Size(74, 20);
             label9.TabIndex = 11;
             label9.Text = "ACTIONS";
             // 
@@ -869,7 +847,7 @@ namespace WAX_converter
             checkBoxCompress.AutoSize = true;
             checkBoxCompress.Location = new System.Drawing.Point(112, 721);
             checkBoxCompress.Name = "checkBoxCompress";
-            checkBoxCompress.Size = new System.Drawing.Size(105, 19);
+            checkBoxCompress.Size = new System.Drawing.Size(129, 24);
             checkBoxCompress.TabIndex = 11;
             checkBoxCompress.Text = "Compress cells";
             checkBoxCompress.UseVisualStyleBackColor = true;
@@ -879,7 +857,7 @@ namespace WAX_converter
             labelPal.AutoSize = true;
             labelPal.Location = new System.Drawing.Point(116, 839);
             labelPal.Name = "labelPal";
-            labelPal.Size = new System.Drawing.Size(120, 15);
+            labelPal.Size = new System.Drawing.Size(151, 20);
             labelPal.TabIndex = 3;
             labelPal.Text = "Secbase.PAL (default)";
             // 
@@ -888,7 +866,7 @@ namespace WAX_converter
             label17.AutoSize = true;
             label17.Location = new System.Drawing.Point(54, 839);
             label17.Name = "label17";
-            label17.Size = new System.Drawing.Size(46, 15);
+            label17.Size = new System.Drawing.Size(57, 20);
             label17.TabIndex = 2;
             label17.Text = "Palette:";
             // 
@@ -948,7 +926,6 @@ namespace WAX_converter
             Load += BuildWindow_Load;
             ((System.ComponentModel.ISupportInitialize)cellDisplayBox).EndInit();
             panel1.ResumeLayout(false);
-            panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)transpColourBox).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
@@ -1035,12 +1012,10 @@ namespace WAX_converter
         private System.Windows.Forms.SaveFileDialog saveWIPDialog;
         private System.Windows.Forms.OpenFileDialog openWIPDialog;
         private System.Windows.Forms.DataGridView dataGridViews;
-        private System.Windows.Forms.CheckBox checkBoxIlluminated;
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.CheckBox checkBoxCompress;
         private System.Windows.Forms.Button btnDoneAddingFrames;
         private System.Windows.Forms.Button btnHelp;
-        private System.Windows.Forms.CheckBox checkBoxCommonColours;
         private System.Windows.Forms.DataGridViewTextBoxColumn ViewColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Sequence;
         private System.Windows.Forms.PictureBox frameDisplayBox;

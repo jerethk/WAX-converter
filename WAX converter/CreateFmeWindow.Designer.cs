@@ -31,8 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateFmeWindow));
             btnExit = new System.Windows.Forms.Button();
             panel1 = new System.Windows.Forms.Panel();
-            checkBoxCommonColours = new System.Windows.Forms.CheckBox();
-            checkBoxIlluminated = new System.Windows.Forms.CheckBox();
             transpColourBox = new System.Windows.Forms.PictureBox();
             buttonTransparent = new System.Windows.Forms.Button();
             ButtonPal = new System.Windows.Forms.Button();
@@ -60,9 +58,10 @@
             // 
             // btnExit
             // 
-            btnExit.Location = new System.Drawing.Point(862, 20);
+            btnExit.Location = new System.Drawing.Point(985, 27);
+            btnExit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             btnExit.Name = "btnExit";
-            btnExit.Size = new System.Drawing.Size(88, 54);
+            btnExit.Size = new System.Drawing.Size(101, 72);
             btnExit.TabIndex = 1;
             btnExit.Text = "Exit";
             btnExit.UseVisualStyleBackColor = true;
@@ -70,53 +69,32 @@
             // 
             // panel1
             // 
-            panel1.Controls.Add(checkBoxCommonColours);
-            panel1.Controls.Add(checkBoxIlluminated);
             panel1.Controls.Add(transpColourBox);
             panel1.Controls.Add(buttonTransparent);
             panel1.Controls.Add(ButtonPal);
             panel1.Controls.Add(btnExit);
             panel1.Dock = System.Windows.Forms.DockStyle.Top;
             panel1.Location = new System.Drawing.Point(0, 0);
+            panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(972, 92);
+            panel1.Size = new System.Drawing.Size(1109, 123);
             panel1.TabIndex = 2;
-            // 
-            // checkBoxCommonColours
-            // 
-            checkBoxCommonColours.AutoSize = true;
-            checkBoxCommonColours.Location = new System.Drawing.Point(133, 55);
-            checkBoxCommonColours.Name = "checkBoxCommonColours";
-            checkBoxCommonColours.Size = new System.Drawing.Size(145, 19);
-            checkBoxCommonColours.TabIndex = 19;
-            checkBoxCommonColours.Text = "Common colours only";
-            checkBoxCommonColours.UseVisualStyleBackColor = true;
-            checkBoxCommonColours.CheckedChanged += checkBoxCommonColours_CheckedChanged;
-            // 
-            // checkBoxIlluminated
-            // 
-            checkBoxIlluminated.AutoSize = true;
-            checkBoxIlluminated.Location = new System.Drawing.Point(133, 20);
-            checkBoxIlluminated.Name = "checkBoxIlluminated";
-            checkBoxIlluminated.Size = new System.Drawing.Size(170, 19);
-            checkBoxIlluminated.TabIndex = 18;
-            checkBoxIlluminated.Text = "Include illuminated colours";
-            checkBoxIlluminated.UseVisualStyleBackColor = true;
-            checkBoxIlluminated.CheckedChanged += checkBoxIlluminated_CheckedChanged;
             // 
             // transpColourBox
             // 
-            transpColourBox.Location = new System.Drawing.Point(498, 20);
+            transpColourBox.Location = new System.Drawing.Point(324, 27);
+            transpColourBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             transpColourBox.Name = "transpColourBox";
-            transpColourBox.Size = new System.Drawing.Size(55, 54);
+            transpColourBox.Size = new System.Drawing.Size(63, 72);
             transpColourBox.TabIndex = 17;
             transpColourBox.TabStop = false;
             // 
             // buttonTransparent
             // 
-            buttonTransparent.Location = new System.Drawing.Point(375, 20);
+            buttonTransparent.Location = new System.Drawing.Point(184, 27);
+            buttonTransparent.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             buttonTransparent.Name = "buttonTransparent";
-            buttonTransparent.Size = new System.Drawing.Size(117, 54);
+            buttonTransparent.Size = new System.Drawing.Size(134, 72);
             buttonTransparent.TabIndex = 16;
             buttonTransparent.Text = "Transparent colour";
             buttonTransparent.UseVisualStyleBackColor = true;
@@ -124,9 +102,10 @@
             // 
             // ButtonPal
             // 
-            ButtonPal.Location = new System.Drawing.Point(22, 20);
+            ButtonPal.Location = new System.Drawing.Point(25, 27);
+            ButtonPal.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             ButtonPal.Name = "ButtonPal";
-            ButtonPal.Size = new System.Drawing.Size(87, 54);
+            ButtonPal.Size = new System.Drawing.Size(99, 72);
             ButtonPal.TabIndex = 15;
             ButtonPal.Text = "Load PAL";
             ButtonPal.UseVisualStyleBackColor = true;
@@ -146,17 +125,19 @@
             panel2.Controls.Add(label4);
             panel2.Controls.Add(btnLoadImage);
             panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel2.Location = new System.Drawing.Point(0, 92);
+            panel2.Location = new System.Drawing.Point(0, 123);
+            panel2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             panel2.Name = "panel2";
-            panel2.Size = new System.Drawing.Size(972, 692);
+            panel2.Size = new System.Drawing.Size(1109, 881);
             panel2.TabIndex = 3;
             // 
             // btnCreateFme
             // 
             btnCreateFme.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            btnCreateFme.Location = new System.Drawing.Point(772, 325);
+            btnCreateFme.Location = new System.Drawing.Point(882, 433);
+            btnCreateFme.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             btnCreateFme.Name = "btnCreateFme";
-            btnCreateFme.Size = new System.Drawing.Size(155, 42);
+            btnCreateFme.Size = new System.Drawing.Size(177, 56);
             btnCreateFme.TabIndex = 21;
             btnCreateFme.Text = "Create FME";
             btnCreateFme.UseVisualStyleBackColor = true;
@@ -165,9 +146,10 @@
             // checkBoxCompress
             // 
             checkBoxCompress.AutoSize = true;
-            checkBoxCompress.Location = new System.Drawing.Point(772, 235);
+            checkBoxCompress.Location = new System.Drawing.Point(882, 313);
+            checkBoxCompress.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             checkBoxCompress.Name = "checkBoxCompress";
-            checkBoxCompress.Size = new System.Drawing.Size(79, 19);
+            checkBoxCompress.Size = new System.Drawing.Size(96, 24);
             checkBoxCompress.TabIndex = 20;
             checkBoxCompress.Text = "Compress";
             checkBoxCompress.UseVisualStyleBackColor = true;
@@ -175,18 +157,20 @@
             // sourceImageDisplayBox
             // 
             sourceImageDisplayBox.BackColor = System.Drawing.Color.LightGray;
-            sourceImageDisplayBox.Location = new System.Drawing.Point(159, 27);
+            sourceImageDisplayBox.Location = new System.Drawing.Point(182, 36);
+            sourceImageDisplayBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             sourceImageDisplayBox.Name = "sourceImageDisplayBox";
-            sourceImageDisplayBox.Size = new System.Drawing.Size(579, 594);
+            sourceImageDisplayBox.Size = new System.Drawing.Size(662, 792);
             sourceImageDisplayBox.TabIndex = 19;
             sourceImageDisplayBox.TabStop = false;
             // 
             // btnPositionFrame
             // 
             btnPositionFrame.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            btnPositionFrame.Location = new System.Drawing.Point(772, 107);
+            btnPositionFrame.Location = new System.Drawing.Point(882, 143);
+            btnPositionFrame.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             btnPositionFrame.Name = "btnPositionFrame";
-            btnPositionFrame.Size = new System.Drawing.Size(155, 42);
+            btnPositionFrame.Size = new System.Drawing.Size(177, 56);
             btnPositionFrame.TabIndex = 18;
             btnPositionFrame.Text = "Position frame";
             btnPositionFrame.UseVisualStyleBackColor = true;
@@ -194,30 +178,33 @@
             // 
             // InsertY
             // 
-            InsertY.Location = new System.Drawing.Point(847, 61);
+            InsertY.Location = new System.Drawing.Point(968, 81);
+            InsertY.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             InsertY.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
             InsertY.Minimum = new decimal(new int[] { 10000, 0, 0, int.MinValue });
             InsertY.Name = "InsertY";
-            InsertY.Size = new System.Drawing.Size(101, 23);
+            InsertY.Size = new System.Drawing.Size(115, 27);
             InsertY.TabIndex = 17;
             InsertY.ValueChanged += InsertY_ValueChanged;
             // 
             // InsertX
             // 
-            InsertX.Location = new System.Drawing.Point(847, 27);
+            InsertX.Location = new System.Drawing.Point(968, 36);
+            InsertX.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             InsertX.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
             InsertX.Minimum = new decimal(new int[] { 10000, 0, 0, int.MinValue });
             InsertX.Name = "InsertX";
-            InsertX.Size = new System.Drawing.Size(101, 23);
+            InsertX.Size = new System.Drawing.Size(115, 27);
             InsertX.TabIndex = 16;
             InsertX.ValueChanged += InsertX_ValueChanged;
             // 
             // checkBoxFlip
             // 
             checkBoxFlip.AutoSize = true;
-            checkBoxFlip.Location = new System.Drawing.Point(772, 195);
+            checkBoxFlip.Location = new System.Drawing.Point(882, 260);
+            checkBoxFlip.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             checkBoxFlip.Name = "checkBoxFlip";
-            checkBoxFlip.Size = new System.Drawing.Size(45, 19);
+            checkBoxFlip.Size = new System.Drawing.Size(55, 24);
             checkBoxFlip.TabIndex = 15;
             checkBoxFlip.Text = "Flip";
             checkBoxFlip.UseVisualStyleBackColor = true;
@@ -226,26 +213,27 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(772, 63);
+            label5.Location = new System.Drawing.Point(882, 84);
             label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(46, 15);
+            label5.Size = new System.Drawing.Size(57, 20);
             label5.TabIndex = 14;
             label5.Text = "Insert Y";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(772, 29);
+            label4.Location = new System.Drawing.Point(882, 39);
             label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(46, 15);
+            label4.Size = new System.Drawing.Size(58, 20);
             label4.TabIndex = 13;
             label4.Text = "Insert X";
             // 
             // btnLoadImage
             // 
-            btnLoadImage.Location = new System.Drawing.Point(20, 27);
+            btnLoadImage.Location = new System.Drawing.Point(23, 36);
+            btnLoadImage.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             btnLoadImage.Name = "btnLoadImage";
-            btnLoadImage.Size = new System.Drawing.Size(107, 42);
+            btnLoadImage.Size = new System.Drawing.Size(122, 56);
             btnLoadImage.TabIndex = 0;
             btnLoadImage.Text = "Load Image";
             btnLoadImage.UseVisualStyleBackColor = true;
@@ -271,20 +259,20 @@
             // 
             // CreateFmeWindow
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(972, 784);
+            ClientSize = new System.Drawing.Size(1109, 1004);
             ControlBox = false;
             Controls.Add(panel2);
             Controls.Add(panel1);
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
-            MinimumSize = new System.Drawing.Size(988, 800);
+            Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            MinimumSize = new System.Drawing.Size(1127, 1051);
             Name = "CreateFmeWindow";
             ShowIcon = false;
             Text = "Create FME";
             FormClosed += CreateFmeWindow_FormClosed;
             panel1.ResumeLayout(false);
-            panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)transpColourBox).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
@@ -299,8 +287,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnLoadImage;
-        private System.Windows.Forms.CheckBox checkBoxCommonColours;
-        private System.Windows.Forms.CheckBox checkBoxIlluminated;
         private System.Windows.Forms.PictureBox transpColourBox;
         private System.Windows.Forms.Button buttonTransparent;
         private System.Windows.Forms.Button ButtonPal;

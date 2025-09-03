@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WAX_converter.Dialogs;
+using WAX_converter.Types;
 
 namespace WAX_converter
 {
@@ -21,6 +22,7 @@ namespace WAX_converter
             this.transpColourBox.BackColor = transparentColour;
         }
 
+        private ColourOptionsDialog colourOptionsDialog = new();
         private DFPal pal = new DFPal();
         private Color transparentColour;
         private Frame frame = new Frame();
@@ -51,23 +53,6 @@ namespace WAX_converter
             else
             {
                 MessageBox.Show("Error loading PAL. The file may not have been a valid PAL file.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void checkBoxIlluminated_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBoxIlluminated.Checked)
-            {
-                MessageBox.Show("Full-bright colours (PAL indexes 1-23) will be included when performing colour matching.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-
-        }
-
-        private void checkBoxCommonColours_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBoxCommonColours.Checked)
-            {
-                MessageBox.Show("Only common palette colours (up to index 207) will be used for colour matching.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -161,7 +146,14 @@ namespace WAX_converter
 
         private void btnCreateFme_Click(object sender, EventArgs e)
         {
-            if (this.sourceImage != null)
+            if (this.sourceImage == null)
+            {
+                return;
+            }
+
+            this.colourOptionsDialog.Initialise(this.pal);
+            var dialogResult = this.colourOptionsDialog.ShowDialog(this);
+            if (dialogResult == DialogResult.OK)
             {
                 this.saveFmeDialog.ShowDialog(this);
             }
@@ -169,6 +161,15 @@ namespace WAX_converter
 
         private void saveFmeDialog_FileOk(object sender, CancelEventArgs e)
         {
+            var palOptions = new PaletteOptions()
+            {
+                IncludeFullbrights = this.colourOptionsDialog.UseFullBrightColours,
+                FullbrightByAlpha = this.colourOptionsDialog.FullBrightByAlpha,
+                IncludeHudColours = this.colourOptionsDialog.UseHudColours,
+                CommonColoursOnly = this.colourOptionsDialog.CommonColoursOnly,
+                ColoursToExclude = this.colourOptionsDialog.ColoursToExclude,
+            };
+            
             // Create a cell from the source image
             var cell = new Cell()
             { 
@@ -178,7 +179,7 @@ namespace WAX_converter
             };
 
             cell.Pixels = new short[cell.SizeX, cell.SizeY];
-            cell.CreateCellImage(this.sourceImage, this.pal, this.transparentColour, this.checkBoxIlluminated.Checked, this.checkBoxCommonColours.Checked);
+            cell.CreateCellImage(this.sourceImage, this.pal, this.transparentColour, palOptions);
             if (this.checkBoxCompress.Checked)
             {
                 cell.CompressCell();

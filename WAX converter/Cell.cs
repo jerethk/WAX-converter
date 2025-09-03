@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Text;
+using WAX_converter.Types;
 
 namespace WAX_converter
 {
@@ -113,7 +114,7 @@ namespace WAX_converter
             this.bitmap.RotateFlip(RotateFlipType.RotateNoneFlipY); // need to flip it upside down, because wax stores image data from bottom to top
         }
 
-        public void CreateCellImage(Bitmap bitmap, DFPal palette, Color transparentColour, bool includeIlluminatedColours, bool onlyCommonColours)
+        public void CreateCellImage(Bitmap bitmap, DFPal palette, Color transparentColour, PaletteOptions palOptions)
         {
             
             // flip upside down
@@ -131,7 +132,7 @@ namespace WAX_converter
                     }
                     else
                     {
-                        short colourIndex = WaxBuilder.MatchPixeltoPal(colour, palette, includeIlluminatedColours, onlyCommonColours);
+                        short colourIndex = WaxBuilder.MatchPixeltoPal(colour, palette, palOptions);
                         this.Pixels[x, y] = colourIndex;
                     }
                 }
