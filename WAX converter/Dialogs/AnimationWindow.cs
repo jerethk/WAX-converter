@@ -29,7 +29,7 @@ namespace WAX_converter
             this.action = action;
             this.sequences = sequences;
             this.frames = frames;
-            this.images = FramePositioningWindow.makeCellsTransparent(images, transparentColour).ToList();
+            this.images = FramePositioningWindow.MakeCellsTransparent(images, transparentColour).ToList();
 
             InitializeComponent();
 

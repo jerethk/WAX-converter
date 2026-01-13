@@ -89,7 +89,8 @@
             pictureBox.Size = new System.Drawing.Size(683, 663);
             pictureBox.TabIndex = 2;
             pictureBox.TabStop = false;
-            pictureBox.Resize += pictureBox_Resize;
+            pictureBox.Resize += PictureBox_Resize;
+            pictureBox.Paint += PictureBox_Paint;
             // 
             // label2
             // 

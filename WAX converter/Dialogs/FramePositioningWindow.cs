@@ -12,7 +12,6 @@ namespace WAX_converter
         private List<Bitmap> cells;
         private List<Frame> frameList;
         private List<Frame> backupFrameList;
-        private Graphics graphics;
         private int centreX;
         private int centreY;
 
@@ -21,7 +20,7 @@ namespace WAX_converter
             InitializeComponent();
 
             this.frameList = frames;
-            this.cells = makeCellsTransparent(images, transparentColour).ToList();
+            this.cells = MakeCellsTransparent(images, transparentColour).ToList();
 
             this.backupFrameList = new List<Frame>();
             for (int f = 0; f < frames.Count; f++)
@@ -39,7 +38,6 @@ namespace WAX_converter
 
         private void FramePositioningWindow_Load(object sender, EventArgs e)
         {
-            this.graphics = this.pictureBox.CreateGraphics();
             this.centreX = this.pictureBox.Width / 2;
             this.centreY = this.pictureBox.Height / 2;
 
@@ -57,16 +55,15 @@ namespace WAX_converter
             tooltip.SetToolTip(groupBoxAutoPosition, "Automatically calculate offsets based on image dimensions.");
         }
 
-        private async void FramePositioningWindow_Shown(object sender, EventArgs e)
+        private void FramePositioningWindow_Shown(object sender, EventArgs e)
         {
             if (this.frameList.Count > 0)
             {
-                await Task.Delay(100);  // a small delay is needed to make the initial draw happen
                 this.listBoxFrames.SelectedIndex = 0;
             }
         }
 
-        public static IEnumerable<Bitmap> makeCellsTransparent(List<Bitmap> images, Color transparentColour)
+        public static IEnumerable<Bitmap> MakeCellsTransparent(List<Bitmap> images, Color transparentColour)
         {
             foreach (var image in images)
             {
@@ -95,7 +92,7 @@ namespace WAX_converter
             {
                 numericInsertX.Value = this.frameList[i].InsertX;
                 numericInsertY.Value = this.frameList[i].InsertY;
-                drawFrame();
+                this.pictureBox.Invalidate();
             }
         }
 
@@ -106,7 +103,7 @@ namespace WAX_converter
             if (i >= 0)
             {
                 this.frameList[i].InsertX = (int)numericInsertX.Value;
-                drawFrame();
+                this.pictureBox.Invalidate();
             }
         }
 
@@ -117,18 +114,18 @@ namespace WAX_converter
             if (i >= 0)
             {
                 this.frameList[i].InsertY = (int)numericInsertY.Value;
-                drawFrame();
+                this.pictureBox.Invalidate();
             }
         }
 
-        private void drawFrame()
+        private void DrawFrame(Graphics graphics)
         {
             if (this.listBoxFrames.SelectedIndex < 0)
             {
                 return;
             }
 
-            this.graphics.Clear(Color.LightGray);
+            graphics.Clear(Color.LightGray);
 
             var frame = this.frameList[listBoxFrames.SelectedIndex];
             var image = new Bitmap(this.cells[frame.CellIndex]);
@@ -139,15 +136,15 @@ namespace WAX_converter
 
             var xOrigin = this.centreX + frame.InsertX;
             var yOrigin = this.centreY + frame.InsertY;
-            this.graphics.DrawImage(image, new Point(xOrigin, yOrigin));
+            graphics.DrawImage(image, new Point(xOrigin, yOrigin));
 
             var redPen = new Pen(Color.FromArgb(128, 255, 0, 0));
             var xAxisLeft = new Point(0, this.centreY);
             var XAxisRight = new Point(pictureBox.Width, this.centreY);
             var yAxisTop = new Point(this.centreX, 0);
             var yAxisBot = new Point(this.centreX, pictureBox.Height);
-            this.graphics.DrawLine(redPen, xAxisLeft, XAxisRight);
-            this.graphics.DrawLine(redPen, yAxisTop, yAxisBot);
+            graphics.DrawLine(redPen, xAxisLeft, XAxisRight);
+            graphics.DrawLine(redPen, yAxisTop, yAxisBot);
         }
 
         private void checkBoxAutoX_CheckedChanged(object sender, EventArgs e)
@@ -166,10 +163,10 @@ namespace WAX_converter
             {
                 return;
             }
-            
+
             var frame = this.frameList[listBoxFrames.SelectedIndex];
             var cell = this.cells[frame.CellIndex];
-            var (insertX, insertY) = this.GetAutoPosition(cell.Width, cell.Height, this.numXOff.Value, this.numYOff.Value);
+            var (insertX, insertY) = GetAutoPosition(cell.Width, cell.Height, this.numXOff.Value, this.numYOff.Value);
 
             if (checkBoxAutoX.Checked)
             {
@@ -190,11 +187,11 @@ namespace WAX_converter
             {
                 return;
             }
-            
+
             foreach (var frame in frameList)
             {
                 var cell = this.cells[frame.CellIndex];
-                var (insertX, insertY) = this.GetAutoPosition(cell.Width, cell.Height, this.numXOff.Value, this.numYOff.Value);
+                var (insertX, insertY) = GetAutoPosition(cell.Width, cell.Height, this.numXOff.Value, this.numYOff.Value);
 
                 if (checkBoxAutoX.Checked)
                 {
@@ -216,8 +213,9 @@ namespace WAX_converter
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            disposeBitmaps();
+            DisposeBitmaps();
             this.Close();
+            this.Dispose();
         }
 
         private void btnDiscard_Click(object sender, EventArgs e)
@@ -227,11 +225,12 @@ namespace WAX_converter
                 this.frameList[f] = this.backupFrameList[f];
             }
 
-            disposeBitmaps();
+            DisposeBitmaps();
             this.Close();
+            this.Dispose();
         }
 
-        private void disposeBitmaps()
+        private void DisposeBitmaps()
         {
             foreach (var img in this.cells)
             {
@@ -239,20 +238,22 @@ namespace WAX_converter
             }
         }
 
-        private void pictureBox_Resize(object sender, EventArgs e)
+        private void PictureBox_Resize(object sender, EventArgs e)
         {
             this.centreX = this.pictureBox.Width / 2;
             this.centreY = this.pictureBox.Height / 2;
-            this.graphics?.Dispose();
-            this.graphics = pictureBox.CreateGraphics();
+            this.pictureBox.Invalidate();
+        }
 
+        private void PictureBox_Paint(object sender, PaintEventArgs e)
+        {
             if (this.listBoxFrames.SelectedIndex >= 0)
             {
-                drawFrame();
+                this.DrawFrame(e.Graphics);
             }
         }
 
-        private (int, int) GetAutoPosition(int frameWidth, int frameHeight, decimal xOffsetPercent, decimal yOffsetPercent)
+        private static (int, int) GetAutoPosition(int frameWidth, int frameHeight, decimal xOffsetPercent, decimal yOffsetPercent)
         {
             var x = Convert.ToInt32(frameWidth * -(xOffsetPercent / 100));
             var y = Convert.ToInt32(frameHeight * (yOffsetPercent / 100 - 1));

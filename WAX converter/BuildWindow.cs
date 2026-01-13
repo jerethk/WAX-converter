@@ -464,8 +464,6 @@ namespace WAX_converter
                     InsertX.Value = this.FrameList[index].InsertX;
                     InsertY.Value = this.FrameList[index].InsertY;
                 }
-
-                window.Dispose();
             }
         }
 
