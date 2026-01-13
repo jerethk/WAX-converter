@@ -15,7 +15,9 @@ namespace WAX_converter
         private List<Bitmap> ImageList;
         private List<Frame> FrameList;
         private Sequence Sequence;
-        private int[] backupFrameIndexes;
+        
+        private int[] frameIndexes;
+        private BindingSource seqFramesBindingSource;
         
         public SequenceBuilderWindow(List<Bitmap> images, List<Frame> frames, Sequence seq)
         {
@@ -25,33 +27,36 @@ namespace WAX_converter
             this.FrameList = frames;
             this.Sequence = seq;
 
-            // Assign backup sequence (to be used if 
-            this.backupFrameIndexes = new int[32];
+            this.frameIndexes = new int[32];
             for (int i = 0; i < 32; i++)
             {
-                backupFrameIndexes[i] = this.Sequence.frameIndexes[i];
+                this.frameIndexes[i] = this.Sequence.frameIndexes[i];
             }
+
+            this.seqFramesBindingSource = new BindingSource(this.frameIndexes, "");
         }
 
         private void SequenceBuilderWindow_Load(object sender, EventArgs e)
         {
-            for (int f = 0; f < FrameList.Count; f++)
+            for (int f = 0; f < this.FrameList.Count; f++)
             {
                 listBoxFrames.Items.Add(f.ToString());
             }
 
-            listBoxSeqFrames.DataSource = new BindingSource(Sequence.frameIndexes, "");
+            listBoxSeqFrames.DataSource = this.seqFramesBindingSource;
         }
 
         private void btnDone_Click(object sender, EventArgs e)
         {
+            this.Sequence.frameIndexes = this.frameIndexes;
             this.Close();
+            this.Dispose();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.Sequence.frameIndexes = this.backupFrameIndexes;
             this.Close();
+            this.Dispose();
         }
 
         private void checkBoxZoom_CheckedChanged(object sender, EventArgs e)
@@ -107,7 +112,7 @@ namespace WAX_converter
 
             if (index >= 0)
             {
-                listBoxFrames.SelectedIndex = this.Sequence.frameIndexes[index];
+                listBoxFrames.SelectedIndex = this.frameIndexes[index];
             }
         }
 
@@ -118,7 +123,7 @@ namespace WAX_converter
             if (listBoxFrames.SelectedIndex >= 0)
             {
                 // find the first empty frame in sequence
-                int startPosition = Array.IndexOf(this.Sequence.frameIndexes, -1);
+                int startPosition = Array.IndexOf(this.frameIndexes, -1);
                 if (startPosition == -1)
                 {
                     MessageBox.Show("Your sequence already has the maximum number of frames (32).", "Unable to add frames", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -129,20 +134,20 @@ namespace WAX_converter
                 int nextPosition = startPosition;
                 foreach (int i in listBoxFrames.SelectedIndices)
                 {
-                    this.Sequence.frameIndexes[nextPosition] = i;
+                    this.frameIndexes[nextPosition] = i;
                     nextPosition += 1;
 
                     if (nextPosition == 32) break;
                 }
 
-                listBoxSeqFrames.DataSource = new BindingSource(Sequence.frameIndexes, "");
+                this.seqFramesBindingSource.ResetBindings(false);
             }
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
             int index = listBoxSeqFrames.SelectedIndex;
-            int frameNumber = this.Sequence.frameIndexes[index];
+            int frameNumber = this.frameIndexes[index];
             
             if (frameNumber >= 0)
             {
@@ -154,15 +159,15 @@ namespace WAX_converter
                     {
                         if (i == 31)
                         {
-                            this.Sequence.frameIndexes[i] = -1;
+                            this.frameIndexes[i] = -1;
                         }
                         else
                         {
-                            this.Sequence.frameIndexes[i] = this.Sequence.frameIndexes[i + 1];
+                            this.frameIndexes[i] = this.frameIndexes[i + 1];
                         }
                     }
 
-                    listBoxSeqFrames.DataSource = new BindingSource(Sequence.frameIndexes, "");
+                    this.seqFramesBindingSource.ResetBindings(false);
                 }
             }
         }
@@ -174,10 +179,10 @@ namespace WAX_converter
             {
                 for (int i = 0; i < 32; i++)
                 {
-                    this.Sequence.frameIndexes[i] = -1;
+                    this.frameIndexes[i] = -1;
                 }
 
-                listBoxSeqFrames.DataSource = new BindingSource(Sequence.frameIndexes, "");
+                this.seqFramesBindingSource.ResetBindings(false);
             }
         }
 
