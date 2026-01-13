@@ -25,13 +25,13 @@ namespace WAX_converter
                 dataGridViews.Rows[i].Cells[1].Value = 0;
             }
 
-            palette = new DFPal();
-            ImageList = new List<Bitmap>();
-            FrameList = new List<Frame>();
-            SequenceList = new List<Sequence>();
-            ActionList = new List<Action>();
+            this.palette = new DFPal();
+            this.ImageList = new List<Bitmap>();
+            this.FrameList = new List<Frame>();
+            this.SequenceList = new List<Sequence>();
+            this.ActionList = new List<Action>();
 
-            transparentColour = Color.FromArgb(255, 0, 0, 0);
+            this.transparentColour = Color.FromArgb(255, 0, 0, 0);
             transpColourBox.BackColor = transparentColour;
         }
 
@@ -43,6 +43,8 @@ namespace WAX_converter
         public List<Action> ActionList;
         private Color transparentColour;
         private decimal xOffsetPercent, yOffsetPercent;
+
+        private BindingSource seqFramesBindingSource;
 
         private readonly string[] logicAnim = new string[1] {"0 Animation"};
         private readonly string[] logicScenery = new string[2] { "0 Start", "1 Destroyed" };
@@ -392,12 +394,12 @@ namespace WAX_converter
                             listboxFrames.SelectedIndex -= 1;       // move the selection up 1 unless at position 0
                         }
 
-                        FrameList.RemoveAt(index);
+                        this.FrameList.RemoveAt(index);
                         listboxFrames.Items.RemoveAt(listboxFrames.Items.Count - 1);
-                        labelNFrames.Text = "n = " + FrameList.Count;
+                        labelNFrames.Text = "n = " + this.FrameList.Count;
 
                         // Re-index frame references in sequences
-                        foreach (Sequence s in SequenceList)
+                        foreach (Sequence s in this.SequenceList)
                         {
                             for (int f = 0; f < 32; f++)
                             {
@@ -407,7 +409,7 @@ namespace WAX_converter
 
                         if (listboxSeqs.SelectedIndex >= 0)
                         {
-                            listboxSeqFrames.DataSource = new BindingSource(SequenceList[listboxSeqs.SelectedIndex].frameIndexes, "");
+                            this.seqFramesBindingSource?.ResetBindings(false);
                         }
 
                         if (FrameList.Count == 0)
@@ -475,7 +477,8 @@ namespace WAX_converter
         {
             if (SequenceList.Count > 0)
             {
-                listboxSeqFrames.DataSource = SequenceList[listboxSeqs.SelectedIndex].frameIndexes;
+                this.seqFramesBindingSource = new BindingSource(this.SequenceList[listboxSeqs.SelectedIndex].frameIndexes, "");
+                listboxSeqFrames.DataSource = this.seqFramesBindingSource;
             }
         }
 
@@ -570,10 +573,12 @@ namespace WAX_converter
 
             if (sequenceNumber >= 0 && FrameList.Count > 0)
             {
-                SequenceBuilderWindow SeqWindow = new SequenceBuilderWindow(this.ImageList, this.FrameList, this.SequenceList[sequenceNumber]);
-                SeqWindow.Text = $"Editing Sequence {sequenceNumber}";
-                SeqWindow.ShowDialog();
-                listboxSeqFrames.DataSource = new BindingSource(SequenceList[listboxSeqs.SelectedIndex].frameIndexes, "");
+                var seqWindow = new SequenceBuilderWindow(this.ImageList, this.FrameList, this.SequenceList[sequenceNumber]);
+                seqWindow.Text = $"Editing Sequence {sequenceNumber}";
+                seqWindow.ShowDialog();
+                
+                this.seqFramesBindingSource = new BindingSource(this.SequenceList[listboxSeqs.SelectedIndex].frameIndexes, "");
+                this.listboxSeqFrames.DataSource = this.seqFramesBindingSource;
             }
         }
 
