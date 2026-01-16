@@ -17,8 +17,9 @@ namespace WAX_converter
         private List<Sequence> sequences;
         private List<Frame> frames;
         private List<Bitmap> images;
+
+        private Frame currentFrame;
         private int frameRate = 1;
-        private Graphics graphics;
         private int centreX;
         private int centreY;
         private bool isPlaying = false;
@@ -43,62 +44,56 @@ namespace WAX_converter
         private void AnimationWindow_Load(object sender, EventArgs e)
         {
             this.frameRate = action.FrameRate;
-            this.graphics = pictureBox.CreateGraphics();
             this.centreX = this.pictureBox.Width / 2;
             this.centreY = this.pictureBox.Height / 2;
             numericFrameRate.Value = this.action.FrameRate;
         }
 
-        private async void AnimationWindow_Shown(object sender, EventArgs e)
+        private void AnimationWindow_Shown(object sender, EventArgs e)
         {
-            await Task.Delay(100);  // a small delay is needed to make the initial draw happen
-            DrawFirstFrame();
+            this.DrawFirstFrame();
         }
 
         private void pictureBox_SizeChanged(object sender, EventArgs e)
         {
-            this.graphics?.Dispose();
-            this.graphics = pictureBox.CreateGraphics();
             this.centreX = this.pictureBox.Width / 2;
             this.centreY = this.pictureBox.Height / 2;
 
-            DrawFirstFrame();
+            this.pictureBox.Invalidate();
         }
 
         private void numericView_ValueChanged(object sender, EventArgs e)
         {
-            DrawFirstFrame();
+            if (this.isPlaying || this.isLooping)
+            {
+                return;
+            }
+
+            this.DrawFirstFrame();
         }
 
         private void DrawFirstFrame()
         {
             var sequence = this.sequences[this.action.seqIndexes[(int)numericView.Value]];
             var frameIndex = sequence.frameIndexes[0];
-            var scaleFactor = this.isHiRes ? 2 : 1;
 
             if (frameIndex >= 0)
             {
-                var frame = this.frames[frameIndex];
-                var positionX = this.centreX + frame.InsertX * scaleFactor;
-                var positionY = this.centreY + frame.InsertY * scaleFactor;
-                var imageToDraw = new Bitmap(this.images[frame.CellIndex]);
-                if (frame.Flip == 1) imageToDraw.RotateFlip(RotateFlipType.RotateNoneFlipX);
-
-                graphics.Clear(Color.LightGray);
-                graphics.DrawImage(imageToDraw, new Point(positionX, positionY));
+                this.currentFrame = this.frames[frameIndex];
+                this.pictureBox.Invalidate();
             }
-
         }
 
         // ------------------------------------------------------------------------------------------------------------------------------
 
         private async void btnPlay_Click(object sender, EventArgs e)
         {
-            if (!isPlaying && !isLooping)
+            if (!this.isPlaying && !this.isLooping)
             {
-                isPlaying = true;
-                await PlayAnimation();
-                isPlaying = false;
+                this.isPlaying = true;
+                await this.PlayAnimation();
+                this.isPlaying = false;
+                this.DrawFirstFrame();
             }
         }
 
@@ -106,47 +101,39 @@ namespace WAX_converter
         {
             var sequence = this.sequences[this.action.seqIndexes[(int)numericView.Value]];
             var numFrames = Array.FindIndex(sequence.frameIndexes, i => i == -1);
-            var frameRate = this.frameRate;
 
             await Task.Run(() =>
             {
                 for (int f = 0; f < numFrames; f++)
                 {
-                    UpdateFrame(sequence.frameIndexes[f], frameRate);
+                    this.UpdateFrame(sequence.frameIndexes[f]);
                 }
             });
         }
 
-        private void UpdateFrame(int frameIndex, int frameRate)
+        private void UpdateFrame(int frameIndex)
         {
-            var frame = this.frames[frameIndex];
-            var scaleFactor = this.isHiRes ? 2 : 1;
-            var positionX = this.centreX + frame.InsertX * scaleFactor;
-            var positionY = this.centreY + frame.InsertY * scaleFactor;
-            var imageToDraw = new Bitmap(this.images[frame.CellIndex]);
-            if (frame.Flip == 1) imageToDraw.RotateFlip(RotateFlipType.RotateNoneFlipX);
-
-            graphics.Clear(Color.LightGray);
-            graphics.DrawImage(imageToDraw, new Point(positionX, positionY));
-            Thread.Sleep(1000 / frameRate);
+            this.currentFrame = this.frames[frameIndex];
+            this.pictureBox.Invalidate();
+            Thread.Sleep(1000 / this.frameRate);
         }
 
         private async void btnLoop_Click(object sender, EventArgs e)
         {
-            if (!isPlaying)
+            if (!this.isPlaying)
             {
-                if (!isLooping)
+                if (!this.isLooping)
                 {
-                    isLooping = true;
+                    this.isLooping = true;
                     btnLoop.Text = "Stop";
                     btnPlay.Enabled = false;
                     numericView.Enabled = false;
                     numericFrameRate.Enabled = false;
-                    await LoopAnimation();
+                    await this.LoopAnimation();
                 }
                 else
                 {
-                    isLooping = false;
+                    this.isLooping = false;
                     btnLoop.Text = "Loop";
                     btnPlay.Enabled = true;
                     numericView.Enabled = true;
@@ -159,20 +146,31 @@ namespace WAX_converter
         {
             var sequence = this.sequences[this.action.seqIndexes[(int)numericView.Value]];
             var numFrames = Array.FindIndex(sequence.frameIndexes, i => i == -1);
-            var frameRate = this.frameRate;
 
             await Task.Run(() =>
             {
                 int f = 0;
 
-                while (isLooping)
+                while (this.isLooping)
                 {
-                    UpdateFrame(sequence.frameIndexes[f], frameRate);
+                    this.UpdateFrame(sequence.frameIndexes[f]);
                     f++;
                     if (f == numFrames) f = 0;
                 }
             });
 
+        }
+
+        private void pictureBox_Paint(object sender, PaintEventArgs e)
+        {
+            var scaleFactor = this.isHiRes ? 2 : 1;
+            var positionX = this.centreX + this.currentFrame.InsertX * scaleFactor;
+            var positionY = this.centreY + this.currentFrame.InsertY * scaleFactor;
+            var imageToDraw = new Bitmap(this.images[this.currentFrame.CellIndex]);
+            if (this.currentFrame.Flip == 1) imageToDraw.RotateFlip(RotateFlipType.RotateNoneFlipX);
+
+            e.Graphics.Clear(Color.LightGray);
+            e.Graphics.DrawImage(imageToDraw, new Point(positionX, positionY));
         }
 
         // ------------------------------------------------------------------------------------------------------------------------------
@@ -190,12 +188,24 @@ namespace WAX_converter
         private void btnAccept_Click(object sender, EventArgs e)
         {
             this.action.FrameRate = this.frameRate;
+            this.DisposeBitmaps();
             this.Close();
+            this.Dispose();
         }
 
         private void btnDiscard_Click(object sender, EventArgs e)
         {
+            this.DisposeBitmaps();
             this.Close();
+            this.Dispose();
+        }
+
+        private void DisposeBitmaps()
+        {
+            foreach (var img in this.images)
+            {
+                img.Dispose();
+            }
         }
     }
 }

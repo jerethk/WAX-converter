@@ -833,7 +833,6 @@ namespace WAX_converter
 
             var animationWindow = new AnimationWindow(true, hiresMode, this.wax.Actions[(int)this.ActionNumber.Value], this.wax.Sequences, this.wax.Frames, bitmaps, Color.FromArgb(0, 0, 0, 0));
             animationWindow.ShowDialog();
-            animationWindow.Dispose();
         }
     }
 }

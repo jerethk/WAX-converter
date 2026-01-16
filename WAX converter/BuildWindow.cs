@@ -740,7 +740,6 @@ namespace WAX_converter
                 animationWindow.ShowDialog();
 
                 this.FRate.Value = this.ActionList[actionNumber].FrameRate;
-                animationWindow.Dispose();
             }
         }
 

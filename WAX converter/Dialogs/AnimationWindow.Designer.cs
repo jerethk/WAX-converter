@@ -69,6 +69,7 @@
             pictureBox.TabIndex = 1;
             pictureBox.TabStop = false;
             pictureBox.SizeChanged += pictureBox_SizeChanged;
+            pictureBox.Paint += pictureBox_Paint;
             // 
             // btnLoop
             // 
