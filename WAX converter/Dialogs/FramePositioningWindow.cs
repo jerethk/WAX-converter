@@ -16,6 +16,7 @@ namespace WAX_converter
         private List<Frame> backupFrameList;
         private int centreX;
         private int centreY;
+        private float scaleFactor = 1.0f;
 
         public FramePositioningWindow(List<Frame> frames, List<Bitmap> images, Color transparentColour)
         {
@@ -36,6 +37,8 @@ namespace WAX_converter
                     CellAddress = frames[f].CellAddress,
                 });
             }
+
+            this.comboBoxZoom.SelectedIndex = 0;
         }
 
         private void FramePositioningWindow_Load(object sender, EventArgs e)
@@ -98,6 +101,20 @@ namespace WAX_converter
             }
         }
 
+        private void comboBoxZoom_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.scaleFactor = this.comboBoxZoom.SelectedIndex switch
+            {
+                0 => 1.0f,
+                1 => 2.0f,
+                2 => 3.0f,
+                3 => 4.0f,
+                _ => 1.0f,
+            };
+
+            this.pictureBox.Invalidate();
+        }
+
         private void numericInsertX_ValueChanged(object sender, EventArgs e)
         {
             var i = listBoxFrames.SelectedIndex;
@@ -136,9 +153,9 @@ namespace WAX_converter
                 image.RotateFlip(RotateFlipType.RotateNoneFlipX);
             }
 
-            var xOrigin = this.centreX + frame.InsertX;
-            var yOrigin = this.centreY + frame.InsertY;
-            graphics.DrawImage(image, new Point(xOrigin, yOrigin));
+            var xOrigin = this.centreX + frame.InsertX * this.scaleFactor;
+            var yOrigin = this.centreY + frame.InsertY * this.scaleFactor;
+            graphics.DrawImage(image, xOrigin, yOrigin, image.Width * this.scaleFactor, image.Height * this.scaleFactor);
 
             var xAxisLeft = new Point(0, this.centreY);
             var XAxisRight = new Point(pictureBox.Width, this.centreY);
