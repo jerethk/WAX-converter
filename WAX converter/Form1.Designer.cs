@@ -695,7 +695,7 @@ namespace WAX_converter
             MainMenuStrip = menuStrip1;
             MinimumSize = new System.Drawing.Size(1200, 920);
             Name = "MainWindow";
-            Text = "WAX Converter (version 3.5)";
+            Text = "WAX Converter (version 3.6)";
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             RadioGroup.ResumeLayout(false);

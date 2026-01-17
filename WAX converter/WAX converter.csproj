@@ -2,13 +2,12 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows7.0</TargetFramework>
+    <TargetFramework>net8.0-windows7.0</TargetFramework>
     <RootNamespace>WAX_converter</RootNamespace>
     <UseWindowsForms>true</UseWindowsForms>
     <ApplicationIcon>phase2_jv0_icon.ico</ApplicationIcon>
     <NoWin32Manifest>true</NoWin32Manifest>
-    <VersionPrefix>3.5.0</VersionPrefix>
-    <FileVersion>3.5.0</FileVersion>
+    <Version>3.6.0</Version>
     <Title>WAX Converter</Title>
   </PropertyGroup>
 
