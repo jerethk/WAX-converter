@@ -9,6 +9,8 @@ namespace WAX_converter
 {
     public partial class FramePositioningWindow : Form
     {
+        private static readonly Pen RedPen = new(Color.FromArgb(128, 255, 0, 0));
+
         private List<Bitmap> cells;
         private List<Frame> frameList;
         private List<Frame> backupFrameList;
@@ -138,13 +140,12 @@ namespace WAX_converter
             var yOrigin = this.centreY + frame.InsertY;
             graphics.DrawImage(image, new Point(xOrigin, yOrigin));
 
-            var redPen = new Pen(Color.FromArgb(128, 255, 0, 0));
             var xAxisLeft = new Point(0, this.centreY);
             var XAxisRight = new Point(pictureBox.Width, this.centreY);
             var yAxisTop = new Point(this.centreX, 0);
             var yAxisBot = new Point(this.centreX, pictureBox.Height);
-            graphics.DrawLine(redPen, xAxisLeft, XAxisRight);
-            graphics.DrawLine(redPen, yAxisTop, yAxisBot);
+            graphics.DrawLine(RedPen, xAxisLeft, XAxisRight);
+            graphics.DrawLine(RedPen, yAxisTop, yAxisBot);
         }
 
         private void checkBoxAutoX_CheckedChanged(object sender, EventArgs e)

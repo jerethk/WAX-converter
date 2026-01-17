@@ -21,7 +21,6 @@ namespace WAX_converter.Dialogs
         public List<int> ColoursToExclude { get; set; }
 
         private DFPal pal;
-        private Graphics gra;
         private static readonly int ColourRectSize = 32;
 
         public ColourOptionsDialog()
@@ -30,13 +29,9 @@ namespace WAX_converter.Dialogs
             this.ColoursToExclude = new();
         }
 
-        public async void Initialise(DFPal pal)
+        public void Initialise(DFPal pal)
         {
             this.pal = pal;
-            this.gra = this.pictureBoxPal.CreateGraphics();
-
-            // there needs to be a delay before the graphic can be drawn
-            await Task.Delay(100);
             this.DrawPal();
         }
 
@@ -44,14 +39,16 @@ namespace WAX_converter.Dialogs
         {
             if (this.pal == null) { return; }
 
-            var brush = new SolidBrush(Color.Black);
+            using var brush = new SolidBrush(Color.Black);
+            using var gra = this.pictureBoxPal.CreateGraphics();
+
             for (var y = 0; y < 16; y++)
             {
                 for (var x = 0; x < 16; x++)
                 {
                     var colour = this.pal.Colours[y * 16 + x];
                     brush.Color = Color.FromArgb(255, colour.R, colour.G, colour.B);
-                    this.gra.FillRectangle(brush, x * ColourRectSize, y * ColourRectSize, ColourRectSize, ColourRectSize);
+                    gra.FillRectangle(brush, x * ColourRectSize, y * ColourRectSize, ColourRectSize, ColourRectSize);
                 }
             }
         }
