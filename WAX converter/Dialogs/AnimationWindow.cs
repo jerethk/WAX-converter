@@ -22,6 +22,7 @@ namespace WAX_converter
         private int frameRate = 1;
         private int centreX;
         private int centreY;
+        private float zoomFactor = 1.0f;
         private bool isPlaying = false;
         private bool isLooping = false;
 
@@ -37,6 +38,8 @@ namespace WAX_converter
             this.numericFrameRate.Enabled = !isReadOnlyMode;
             this.btnAccept.Visible = !isReadOnlyMode;
             this.btnDiscard.Text = isReadOnlyMode ? "Close" : "Discard";
+            this.comboBoxZoom.SelectedIndex = 0;
+
             this.isReadOnlyMode = isReadOnlyMode;
             this.isHiRes = hiresMode;
         }
@@ -70,6 +73,20 @@ namespace WAX_converter
             }
 
             this.DrawFirstFrame();
+        }
+
+        private void ComboBoxZoom_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.zoomFactor = this.comboBoxZoom.SelectedIndex switch
+            {
+                0 => 1.0f,
+                1 => 2.0f,
+                2 => 3.0f,
+                3 => 4.0f,
+                _ => 1.0f,
+            };
+
+            this.pictureBox.Invalidate();
         }
 
         private void DrawFirstFrame()
@@ -164,13 +181,18 @@ namespace WAX_converter
         private void pictureBox_Paint(object sender, PaintEventArgs e)
         {
             var scaleFactor = this.isHiRes ? 2 : 1;
-            var positionX = this.centreX + this.currentFrame.InsertX * scaleFactor;
-            var positionY = this.centreY + this.currentFrame.InsertY * scaleFactor;
+            var positionX = this.centreX + this.currentFrame.InsertX * this.zoomFactor;
+            var positionY = this.centreY + this.currentFrame.InsertY * this.zoomFactor;
             var imageToDraw = new Bitmap(this.images[this.currentFrame.CellIndex]);
             if (this.currentFrame.Flip == 1) imageToDraw.RotateFlip(RotateFlipType.RotateNoneFlipX);
 
             e.Graphics.Clear(Color.LightGray);
-            e.Graphics.DrawImage(imageToDraw, new Point(positionX, positionY));
+            e.Graphics.DrawImage(
+                imageToDraw,
+                positionX,
+                positionY,
+                imageToDraw.Width * this.zoomFactor / scaleFactor,
+                imageToDraw.Height * this.zoomFactor / scaleFactor);
         }
 
         // ------------------------------------------------------------------------------------------------------------------------------
