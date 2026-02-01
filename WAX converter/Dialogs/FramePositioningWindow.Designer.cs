@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FramePositioningWindow));
             label1 = new System.Windows.Forms.Label();
             listBoxFrames = new System.Windows.Forms.ListBox();
@@ -49,9 +50,11 @@
             label4 = new System.Windows.Forms.Label();
             numXOff = new System.Windows.Forms.NumericUpDown();
             panel2 = new System.Windows.Forms.Panel();
+            checkBoxOnionSkin = new System.Windows.Forms.CheckBox();
             label6 = new System.Windows.Forms.Label();
             comboBoxZoom = new System.Windows.Forms.ComboBox();
             panel3 = new System.Windows.Forms.Panel();
+            tooltip = new System.Windows.Forms.ToolTip(components);
             ((System.ComponentModel.ISupportInitialize)pictureBox).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericInsertX).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericInsertY).BeginInit();
@@ -66,7 +69,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(34, 123);
+            label1.Location = new System.Drawing.Point(34, 190);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(56, 20);
             label1.TabIndex = 0;
@@ -75,11 +78,10 @@
             // listBoxFrames
             // 
             listBoxFrames.FormattingEnabled = true;
-            listBoxFrames.ItemHeight = 20;
-            listBoxFrames.Location = new System.Drawing.Point(34, 155);
+            listBoxFrames.Location = new System.Drawing.Point(34, 224);
             listBoxFrames.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             listBoxFrames.Name = "listBoxFrames";
-            listBoxFrames.Size = new System.Drawing.Size(107, 724);
+            listBoxFrames.Size = new System.Drawing.Size(107, 684);
             listBoxFrames.TabIndex = 1;
             listBoxFrames.SelectedIndexChanged += listBoxFrames_SelectedIndexChanged;
             // 
@@ -90,7 +92,7 @@
             pictureBox.Location = new System.Drawing.Point(35, 36);
             pictureBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             pictureBox.Name = "pictureBox";
-            pictureBox.Size = new System.Drawing.Size(781, 872);
+            pictureBox.Size = new System.Drawing.Size(781, 901);
             pictureBox.TabIndex = 2;
             pictureBox.TabStop = false;
             pictureBox.Paint += PictureBox_Paint;
@@ -138,7 +140,7 @@
             // 
             // btnAccept
             // 
-            btnAccept.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            btnAccept.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             btnAccept.Location = new System.Drawing.Point(7, 699);
             btnAccept.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             btnAccept.Name = "btnAccept";
@@ -150,7 +152,7 @@
             // 
             // btnDiscard
             // 
-            btnDiscard.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            btnDiscard.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             btnDiscard.Location = new System.Drawing.Point(7, 815);
             btnDiscard.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             btnDiscard.Name = "btnDiscard";
@@ -173,7 +175,7 @@
             panel1.Location = new System.Drawing.Point(1015, 0);
             panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(201, 953);
+            panel1.Size = new System.Drawing.Size(201, 982);
             panel1.TabIndex = 9;
             // 
             // groupBoxAutoPosition
@@ -285,6 +287,7 @@
             // 
             // panel2
             // 
+            panel2.Controls.Add(checkBoxOnionSkin);
             panel2.Controls.Add(label6);
             panel2.Controls.Add(comboBoxZoom);
             panel2.Controls.Add(label1);
@@ -293,8 +296,19 @@
             panel2.Location = new System.Drawing.Point(0, 0);
             panel2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             panel2.Name = "panel2";
-            panel2.Size = new System.Drawing.Size(160, 953);
+            panel2.Size = new System.Drawing.Size(160, 982);
             panel2.TabIndex = 10;
+            // 
+            // checkBoxOnionSkin
+            // 
+            checkBoxOnionSkin.AutoSize = true;
+            checkBoxOnionSkin.Location = new System.Drawing.Point(34, 129);
+            checkBoxOnionSkin.Name = "checkBoxOnionSkin";
+            checkBoxOnionSkin.Size = new System.Drawing.Size(129, 24);
+            checkBoxOnionSkin.TabIndex = 4;
+            checkBoxOnionSkin.Text = "Onion skinning";
+            checkBoxOnionSkin.UseVisualStyleBackColor = true;
+            checkBoxOnionSkin.CheckedChanged += checkBoxOnionSkin_CheckedChanged;
             // 
             // label6
             // 
@@ -323,14 +337,20 @@
             panel3.Location = new System.Drawing.Point(160, 0);
             panel3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             panel3.Name = "panel3";
-            panel3.Size = new System.Drawing.Size(855, 953);
+            panel3.Size = new System.Drawing.Size(855, 982);
             panel3.TabIndex = 11;
+            // 
+            // tooltip
+            // 
+            tooltip.AutoPopDelay = 5000;
+            tooltip.InitialDelay = 150;
+            tooltip.ReshowDelay = 100;
             // 
             // FramePositioningWindow
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1216, 953);
+            ClientSize = new System.Drawing.Size(1216, 982);
             ControlBox = false;
             Controls.Add(panel3);
             Controls.Add(panel2);
@@ -382,5 +402,7 @@
         private System.Windows.Forms.CheckBox checkBoxAutoX;
         private System.Windows.Forms.ComboBox comboBoxZoom;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.CheckBox checkBoxOnionSkin;
+        private System.Windows.Forms.ToolTip tooltip;
     }
 }

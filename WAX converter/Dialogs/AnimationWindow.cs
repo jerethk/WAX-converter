@@ -183,7 +183,7 @@ namespace WAX_converter
             var scaleFactor = this.isHiRes ? 2 : 1;
             var positionX = this.centreX + this.currentFrame.InsertX * this.zoomFactor;
             var positionY = this.centreY + this.currentFrame.InsertY * this.zoomFactor;
-            var imageToDraw = new Bitmap(this.images[this.currentFrame.CellIndex]);
+            using var imageToDraw = new Bitmap(this.images[this.currentFrame.CellIndex]);
             if (this.currentFrame.Flip == 1) imageToDraw.RotateFlip(RotateFlipType.RotateNoneFlipX);
 
             e.Graphics.Clear(Color.LightGray);

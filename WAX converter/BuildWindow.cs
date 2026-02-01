@@ -456,7 +456,7 @@ namespace WAX_converter
             {
                 var index = listboxFrames.SelectedIndex;
 
-                var window = new FramePositioningWindow(this.FrameList, this.ImageList, this.transparentColour);
+                var window = new FramePositioningWindow(this.FrameList, this.ImageList, this.transparentColour, this.SequenceList);
                 window.ShowDialog();
 
                 if (index >= 0)
