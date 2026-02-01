@@ -55,6 +55,8 @@
             comboBoxZoom = new System.Windows.Forms.ComboBox();
             panel3 = new System.Windows.Forms.Panel();
             tooltip = new System.Windows.Forms.ToolTip(components);
+            btnCopyPreviousX = new System.Windows.Forms.Button();
+            btnCopyPreviousY = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericInsertX).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericInsertY).BeginInit();
@@ -92,7 +94,7 @@
             pictureBox.Location = new System.Drawing.Point(35, 36);
             pictureBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             pictureBox.Name = "pictureBox";
-            pictureBox.Size = new System.Drawing.Size(781, 901);
+            pictureBox.Size = new System.Drawing.Size(847, 892);
             pictureBox.TabIndex = 2;
             pictureBox.TabStop = false;
             pictureBox.Paint += PictureBox_Paint;
@@ -164,6 +166,8 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(btnCopyPreviousY);
+            panel1.Controls.Add(btnCopyPreviousX);
             panel1.Controls.Add(groupBoxAutoPosition);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(btnDiscard);
@@ -172,10 +176,10 @@
             panel1.Controls.Add(label3);
             panel1.Controls.Add(numericInsertY);
             panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            panel1.Location = new System.Drawing.Point(1015, 0);
+            panel1.Location = new System.Drawing.Point(1081, 0);
             panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(201, 982);
+            panel1.Size = new System.Drawing.Size(261, 973);
             panel1.TabIndex = 9;
             // 
             // groupBoxAutoPosition
@@ -296,7 +300,7 @@
             panel2.Location = new System.Drawing.Point(0, 0);
             panel2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             panel2.Name = "panel2";
-            panel2.Size = new System.Drawing.Size(160, 982);
+            panel2.Size = new System.Drawing.Size(160, 973);
             panel2.TabIndex = 10;
             // 
             // checkBoxOnionSkin
@@ -337,7 +341,7 @@
             panel3.Location = new System.Drawing.Point(160, 0);
             panel3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             panel3.Name = "panel3";
-            panel3.Size = new System.Drawing.Size(855, 982);
+            panel3.Size = new System.Drawing.Size(921, 973);
             panel3.TabIndex = 11;
             // 
             // tooltip
@@ -346,18 +350,38 @@
             tooltip.InitialDelay = 150;
             tooltip.ReshowDelay = 100;
             // 
+            // btnCopyPreviousX
+            // 
+            btnCopyPreviousX.Location = new System.Drawing.Point(164, 70);
+            btnCopyPreviousX.Name = "btnCopyPreviousX";
+            btnCopyPreviousX.Size = new System.Drawing.Size(45, 29);
+            btnCopyPreviousX.TabIndex = 10;
+            btnCopyPreviousX.Text = "↪";
+            btnCopyPreviousX.UseVisualStyleBackColor = true;
+            btnCopyPreviousX.Click += btnCopyPreviousX_Click;
+            // 
+            // btnCopyPreviousY
+            // 
+            btnCopyPreviousY.Location = new System.Drawing.Point(164, 166);
+            btnCopyPreviousY.Name = "btnCopyPreviousY";
+            btnCopyPreviousY.Size = new System.Drawing.Size(45, 29);
+            btnCopyPreviousY.TabIndex = 11;
+            btnCopyPreviousY.Text = "↪";
+            btnCopyPreviousY.UseVisualStyleBackColor = true;
+            btnCopyPreviousY.Click += btnCopyPreviousY_Click;
+            // 
             // FramePositioningWindow
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1216, 982);
+            ClientSize = new System.Drawing.Size(1342, 973);
             ControlBox = false;
             Controls.Add(panel3);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            MinimumSize = new System.Drawing.Size(1232, 1000);
+            MinimumSize = new System.Drawing.Size(1360, 1000);
             Name = "FramePositioningWindow";
             Text = "Position frames";
             Load += FramePositioningWindow_Load;
@@ -404,5 +428,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.CheckBox checkBoxOnionSkin;
         private System.Windows.Forms.ToolTip tooltip;
+        private System.Windows.Forms.Button btnCopyPreviousY;
+        private System.Windows.Forms.Button btnCopyPreviousX;
     }
 }

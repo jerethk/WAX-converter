@@ -72,10 +72,14 @@ namespace WAX_converter
             if (this.frameList.Count == 1)
             {
                 btnSetAll.Enabled = false;
+                btnCopyPreviousX.Enabled = false;
+                btnCopyPreviousY.Enabled = false;
             }
 
             tooltip.SetToolTip(groupBoxAutoPosition, "Automatically calculate offsets based on image dimensions.");
             tooltip.SetToolTip(checkBoxOnionSkin, "Onion skinning with the previous frame in a sequence.");
+            tooltip.SetToolTip(btnCopyPreviousX, "Copy Insert X from previous frame.");
+            tooltip.SetToolTip(btnCopyPreviousY, "Copy Insert Y from previous frame.");
         }
 
         private void FramePositioningWindow_Shown(object sender, EventArgs e)
@@ -184,6 +188,24 @@ namespace WAX_converter
             {
                 this.frameList[i].InsertY = (int)numericInsertY.Value;
                 this.pictureBox.Invalidate();
+            }
+        }
+
+        private void btnCopyPreviousX_Click(object sender, EventArgs e)
+        {
+            var frameNum = listBoxFrames.SelectedIndex;
+            if (frameNum > 0)
+            {
+                this.numericInsertX.Value = this.frameList[frameNum - 1].InsertX;
+            }
+        }
+
+        private void btnCopyPreviousY_Click(object sender, EventArgs e)
+        {
+            var frameNum = listBoxFrames.SelectedIndex;
+            if (frameNum > 0)
+            {
+                this.numericInsertY.Value = this.frameList[frameNum - 1].InsertY;
             }
         }
 
