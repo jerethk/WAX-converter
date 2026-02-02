@@ -77,7 +77,7 @@ namespace WAX_converter
             }
 
             tooltip.SetToolTip(groupBoxAutoPosition, "Automatically calculate offsets based on image dimensions.");
-            tooltip.SetToolTip(checkBoxOnionSkin, "Onion skinning with the previous frame in a sequence.");
+            tooltip.SetToolTip(checkBoxOnionSkin, "Show previous frame in sequence.");
             tooltip.SetToolTip(btnCopyPreviousX, "Copy Insert X from previous frame.");
             tooltip.SetToolTip(btnCopyPreviousY, "Copy Insert Y from previous frame.");
         }
